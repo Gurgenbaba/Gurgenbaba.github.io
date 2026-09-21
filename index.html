@@ -2,182 +2,389 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#080b10">
-  <meta name="description" content="Gurgenbaba Games — Browsergames, Roguelites, Multiplayer-Systeme und Frameworks.">
-  <meta property="og:title" content="Gurgenbaba Games // Portfolio">
-  <meta property="og:description" content="Persistente Welten. Eigenständige Systeme. Spiele und technische Projekte von Gurgenbaba.">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#05070a">
+  <meta name="description" content="Gurgenbaba Games — wir bauen persistente Welten, Browsergames, Multiplayer-Systeme und Frameworks.">
+  <meta property="og:title" content="Gurgenbaba Games // Worlds that keep running">
+  <meta property="og:description" content="Nicht nur Spiele. Systeme, Welten und Live-Projekte mit eigener DNA.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://gurgenbaba.github.io/">
-  <title>Gurgenbaba Games // Portfolio</title>
+  <title>Gurgenbaba Games // Worlds that keep running</title>
+
   <style>
     :root{
-      --bg:#07090d;--bg2:#0b1016;--panel:#0d131b;--panel2:#101923;--text:#edf4f7;
-      --muted:#8b9aa6;--line:#23303c;--acid:#b9ff37;--cyan:#36d9ff;--orange:#ff9c45;
-      --red:#ff5b6e;--purple:#a878ff;--max:1280px;
+      --bg:#05070a;--bg2:#080d12;--panel:#0b1118;--panel2:#101822;--line:#202d38;
+      --text:#f1f6f8;--muted:#8797a2;--acid:#c2ff3e;--cyan:#33d9ff;--orange:#ff9d43;
+      --red:#ff5d72;--gold:#ffd35a;--blue:#6e9cff;--sand:#c59b70;--purple:#aa7dff;
+      --max:1360px;--mx:50vw;--my:25vh;
     }
+
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;background:
-      radial-gradient(circle at 15% 10%,rgba(54,217,255,.08),transparent 28%),
-      radial-gradient(circle at 82% 0%,rgba(185,255,55,.06),transparent 26%),
-      linear-gradient(180deg,#07090d 0%,#080c11 58%,#05070a 100%);
-      color:var(--text);font:500 15px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      overflow-x:hidden
+    html{scroll-behavior:smooth;background:var(--bg)}
+    body{
+      margin:0;min-height:100%;overflow-x:hidden;color:var(--text);
+      font:500 15px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at var(--mx) var(--my),rgba(51,217,255,.055),transparent 18rem),
+        radial-gradient(circle at 16% 2%,rgba(51,217,255,.07),transparent 32rem),
+        radial-gradient(circle at 86% 8%,rgba(194,255,62,.05),transparent 32rem),
+        linear-gradient(180deg,#05070a 0%,#070b10 46%,#040608 100%);
     }
-    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;background-image:
-      linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
-      background-size:42px 42px;mask-image:linear-gradient(to bottom,black,transparent 70%);z-index:-1
+
+    body:before{
+      content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.22;
+      background-image:
+        linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+      background-size:48px 48px;
+      mask-image:linear-gradient(to bottom,black 0%,rgba(0,0,0,.68) 58%,transparent 92%);
     }
+
+    body:after{
+      content:"";position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.04;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+    }
+
+    #space{position:fixed;inset:0;z-index:0;pointer-events:none}
     a{color:inherit;text-decoration:none}
-    .wrap{width:min(calc(100% - 34px),var(--max));margin:auto}
-    .nav{position:sticky;top:0;z-index:50;background:rgba(7,9,13,.78);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.06)}
-    .nav-inner{height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
-    .sigil{width:31px;height:31px;border:1px solid var(--acid);display:grid;place-items:center;color:var(--acid);font-weight:950;box-shadow:inset 0 0 18px rgba(185,255,55,.12),0 0 22px rgba(185,255,55,.08)}
-    .brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:.18em;margin-top:-3px}
-    .nav-links{display:flex;align-items:center;gap:22px;color:#a9b5bd;font-size:12px;text-transform:uppercase;letter-spacing:.12em}
+    button{font:inherit}
+    .wrap{position:relative;z-index:2;width:min(calc(100% - 36px),var(--max));margin:auto}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+    .accent{color:var(--acid)}
+    .muted{color:var(--muted)}
+
+    .scroll-progress{position:fixed;z-index:1000;left:0;top:0;width:100%;height:2px;background:rgba(255,255,255,.04)}
+    .scroll-progress span{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--cyan),var(--acid));box-shadow:0 0 18px var(--cyan)}
+
+    .boot{
+      position:fixed;inset:0;z-index:2000;display:grid;place-items:center;background:#030506;
+      transition:opacity .65s ease,visibility .65s ease;
+    }
+    .boot.off{opacity:0;visibility:hidden}
+    .bootbox{width:min(560px,calc(100% - 42px));border-left:1px solid #25343f;padding:22px 0 22px 26px}
+    .boot-title{font-weight:950;letter-spacing:.16em;text-transform:uppercase;font-size:13px;margin-bottom:18px}
+    .boot-line{font:700 11px/1.9 ui-monospace,monospace;color:#7d8d98;opacity:0;animation:bootline .35s forwards}
+    .boot-line b{color:var(--acid)}
+    .boot-line:nth-child(3){animation-delay:.18s}.boot-line:nth-child(4){animation-delay:.36s}.boot-line:nth-child(5){animation-delay:.54s}.boot-line:nth-child(6){animation-delay:.72s}
+    @keyframes bootline{to{opacity:1;transform:none}from{opacity:0;transform:translateY(5px)}}
+
+    .nav{
+      position:fixed;top:0;left:0;right:0;z-index:200;
+      background:linear-gradient(180deg,rgba(5,7,10,.94),rgba(5,7,10,.62) 75%,transparent);
+      backdrop-filter:blur(12px);
+    }
+    .nav-inner{height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:950;text-transform:uppercase;letter-spacing:.09em}
+    .sigil{
+      width:34px;height:34px;position:relative;display:grid;place-items:center;border:1px solid var(--acid);
+      color:var(--acid);font-weight:950;box-shadow:0 0 28px rgba(194,255,62,.1),inset 0 0 18px rgba(194,255,62,.09)
+    }
+    .sigil:before,.sigil:after{content:"";position:absolute;background:var(--acid);opacity:.8}
+    .sigil:before{width:7px;height:1px;right:-8px;top:7px}.sigil:after{width:1px;height:7px;right:7px;bottom:-8px}
+    .brand-copy small{display:block;margin-top:-4px;color:#71818c;font:750 8px/1.2 ui-monospace,monospace;letter-spacing:.2em}
+    .nav-links{display:flex;align-items:center;gap:22px;color:#9ba9b2;font-size:10px;font-weight:850;letter-spacing:.15em;text-transform:uppercase}
+    .nav-links a{transition:.18s}
     .nav-links a:hover{color:white}
-    .nav-cta{border:1px solid #334352;padding:9px 12px;color:#dbe7ec}
-    .hero{min-height:calc(100vh - 70px);display:grid;align-items:center;position:relative;padding:84px 0 64px}
-    .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:70px;align-items:center}
-    .eyebrow{display:flex;align-items:center;gap:10px;color:var(--acid);font-weight:850;font-size:11px;letter-spacing:.22em;text-transform:uppercase}
-    .eyebrow:before{content:"";width:34px;height:1px;background:currentColor}
-    h1{font-size:clamp(58px,9vw,126px);line-height:.83;letter-spacing:-.075em;margin:26px 0 30px;font-weight:950;text-transform:uppercase}
-    h1 span{display:block;color:transparent;-webkit-text-stroke:1px #576570}
-    .lede{max-width:760px;font-size:clamp(18px,2vw,24px);line-height:1.45;color:#b7c3ca}
-    .lede b{color:#f4f8fa}
-    .hero-actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:34px}
-    .btn{display:inline-flex;align-items:center;gap:11px;border:1px solid #34414d;padding:13px 17px;text-transform:uppercase;font-size:11px;font-weight:900;letter-spacing:.13em;transition:.2s ease;background:#0d1319}
-    .btn:hover{transform:translateY(-2px);border-color:#647787;background:#121b24}
-    .btn-primary{background:var(--acid);border-color:var(--acid);color:#0a0d08}
-    .btn-primary:hover{background:#d0ff72;border-color:#d0ff72}
-    .arrow{font-size:16px}
-    .hero-console{border:1px solid #25313b;background:linear-gradient(180deg,rgba(16,25,35,.94),rgba(9,14,20,.94));box-shadow:0 30px 80px rgba(0,0,0,.45);position:relative}
-    .hero-console:before,.hero-console:after{content:"";position:absolute;width:32px;height:32px;border-color:var(--cyan)}
-    .hero-console:before{left:-1px;top:-1px;border-left:2px solid;border-top:2px solid}
-    .hero-console:after{right:-1px;bottom:-1px;border-right:2px solid;border-bottom:2px solid}
-    .console-head{padding:14px 17px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;color:#778894;font-size:10px;letter-spacing:.15em;text-transform:uppercase}
-    .console-body{padding:24px}
-    .portrait{height:280px;position:relative;overflow:hidden;border:1px solid #22303b;background:
-      radial-gradient(circle at 50% 32%,rgba(54,217,255,.3),transparent 16%),
-      radial-gradient(circle at 50% 50%,rgba(54,217,255,.08),transparent 42%),
-      linear-gradient(135deg,#0b1219,#070a0e)}
-    .portrait:before{content:"G";position:absolute;inset:0;display:grid;place-items:center;font-size:190px;font-weight:950;letter-spacing:-.1em;color:rgba(255,255,255,.03);text-shadow:0 0 70px rgba(54,217,255,.12)}
-    .orbit{position:absolute;border:1px solid rgba(54,217,255,.18);border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%)}
-    .o1{width:210px;height:210px}.o2{width:300px;height:120px;transform:translate(-50%,-50%) rotate(-16deg)}
-    .core{position:absolute;width:11px;height:11px;background:var(--acid);box-shadow:0 0 28px var(--acid);left:calc(50% - 5px);top:calc(50% - 5px)}
-    .scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);animation:scan 4s linear infinite;opacity:.65}
-    @keyframes scan{from{top:10%}to{top:90%}}
-    .console-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);margin-top:15px;border:1px solid var(--line)}
-    .stat{background:#0b1117;padding:14px}
-    .stat b{display:block;font-size:22px;letter-spacing:-.04em}
-    .stat span{color:#778793;text-transform:uppercase;letter-spacing:.12em;font-size:9px}
-    .ticker{border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);padding:12px 0;overflow:hidden;color:#71808c;text-transform:uppercase;font-size:10px;letter-spacing:.16em;white-space:nowrap}
-    .ticker-track{display:inline-block;animation:ticker 28s linear infinite}
-    .ticker b{color:#cdd8dd;margin:0 20px}
+    .nav-live{padding:9px 12px;border:1px solid #32414c;color:#e3edf1}
+    .nav-live i{display:inline-block;width:6px;height:6px;margin-right:7px;border-radius:50%;background:var(--acid);box-shadow:0 0 12px var(--acid);animation:pulse 1.6s infinite}
+    @keyframes pulse{50%{opacity:.35}}
+
+    .world-rail{
+      position:fixed;z-index:120;right:18px;top:50%;transform:translateY(-50%);
+      display:flex;flex-direction:column;align-items:flex-end;gap:9px;
+    }
+    .world-rail a{display:flex;align-items:center;gap:8px;color:#586873;font:750 8px/1 ui-monospace,monospace;letter-spacing:.13em;text-transform:uppercase}
+    .world-rail i{width:17px;height:1px;background:#34424c;transition:.2s}
+    .world-rail a:hover,.world-rail a.active{color:#dbe7ec}.world-rail a:hover i,.world-rail a.active i{width:30px;background:var(--acid)}
+
+    .hero{min-height:100svh;display:grid;align-items:center;padding:128px 0 70px;position:relative}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(340px,.82fr);gap:70px;align-items:center}
+    .overline{display:flex;align-items:center;gap:12px;color:var(--acid);font:850 10px/1 ui-monospace,monospace;letter-spacing:.23em;text-transform:uppercase}
+    .overline:before{content:"";width:44px;height:1px;background:currentColor}
+    h1{
+      margin:25px 0 26px;text-transform:uppercase;font-weight:980;letter-spacing:-.078em;line-height:.8;
+      font-size:clamp(62px,9.4vw,146px)
+    }
+    h1 .outline{display:block;color:transparent;-webkit-text-stroke:1px #66747f}
+    h1 .tiny{display:block;margin-top:23px;color:#8d9ba5;font:850 clamp(10px,1vw,13px)/1.4 ui-monospace,monospace;letter-spacing:.2em}
+    .hero-copy{max-width:800px;color:#b4c0c7;font-size:clamp(18px,2vw,25px);line-height:1.45}
+    .hero-copy strong{color:white}
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:33px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:11px;padding:13px 17px;border:1px solid #31404b;
+      background:#0a1016;text-transform:uppercase;font-size:10px;font-weight:900;letter-spacing:.14em;transition:.2s;
+    }
+    .btn:hover{transform:translateY(-2px);border-color:#687b88;background:#111b24}
+    .btn.primary{background:var(--acid);border-color:var(--acid);color:#091008}
+    .btn.primary:hover{background:#d2ff7c;border-color:#d2ff7c}
+    .hero-note{margin-top:17px;color:#61717c;font:700 9px/1.6 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}
+
+    .command{
+      position:relative;border:1px solid #283642;background:linear-gradient(180deg,rgba(12,19,26,.92),rgba(7,11,15,.92));
+      box-shadow:0 35px 110px rgba(0,0,0,.52);transform-style:preserve-3d;transition:transform .15s ease-out;
+    }
+    .command:before,.command:after{content:"";position:absolute;width:34px;height:34px;z-index:3}
+    .command:before{left:-1px;top:-1px;border-left:2px solid var(--cyan);border-top:2px solid var(--cyan)}
+    .command:after{right:-1px;bottom:-1px;border-right:2px solid var(--acid);border-bottom:2px solid var(--acid)}
+    .command-head{display:flex;justify-content:space-between;gap:16px;padding:13px 16px;border-bottom:1px solid var(--line);font:750 9px/1 ui-monospace,monospace;letter-spacing:.15em;text-transform:uppercase;color:#6d7e89}
+    .command-body{padding:18px}
+    .radar{
+      height:310px;position:relative;overflow:hidden;border:1px solid #1f2b34;
+      background:
+        radial-gradient(circle at 50% 50%,transparent 0 13%,rgba(51,217,255,.08) 13.5% 14%,transparent 14.5% 28%,rgba(51,217,255,.06) 28.5% 29%,transparent 29.5% 43%,rgba(51,217,255,.04) 43.5% 44%,transparent 44.5%),
+        linear-gradient(90deg,transparent 49.8%,rgba(51,217,255,.09) 50%,transparent 50.2%),
+        linear-gradient(0deg,transparent 49.8%,rgba(51,217,255,.09) 50%,transparent 50.2%),
+        radial-gradient(circle at 50% 50%,rgba(51,217,255,.13),transparent 52%),
+        #070c11;
+    }
+    .radar:before{content:"G";position:absolute;inset:0;display:grid;place-items:center;color:rgba(255,255,255,.03);font-size:220px;font-weight:950;letter-spacing:-.12em}
+    .radar-sweep{position:absolute;left:50%;top:50%;width:145px;height:1px;transform-origin:left center;background:linear-gradient(90deg,var(--cyan),transparent);box-shadow:0 0 20px var(--cyan);animation:sweep 5s linear infinite}
+    .radar-dot{position:absolute;width:6px;height:6px;border:1px solid var(--acid);box-shadow:0 0 12px var(--acid)}
+    .r1{left:25%;top:28%}.r2{right:17%;top:37%}.r3{left:38%;bottom:21%}.r4{right:31%;bottom:14%}
+    .radar-label{position:absolute;color:#70828d;font:700 8px/1 ui-monospace,monospace;letter-spacing:.12em}
+    .l1{left:28%;top:27%}.l2{right:20%;top:34%}.l3{left:41%;bottom:19%}
+    @keyframes sweep{to{transform:rotate(360deg)}}
+    .command-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;margin-top:12px;border:1px solid var(--line);background:var(--line)}
+    .command-stat{padding:13px;background:#091017}
+    .command-stat b{display:block;font-size:20px;letter-spacing:-.04em}
+    .command-stat span{display:block;color:#71818d;font:750 8px/1.4 ui-monospace,monospace;letter-spacing:.13em;text-transform:uppercase}
+    .status-line{display:flex;justify-content:space-between;gap:14px;margin-top:13px;color:#60717d;font:700 8px/1.4 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}
+    .status-line .ok{color:var(--acid)}
+
+    .ticker{position:relative;z-index:3;overflow:hidden;border-block:1px solid rgba(255,255,255,.06);padding:11px 0;background:rgba(4,7,10,.7);white-space:nowrap}
+    .ticker-track{display:inline-block;animation:ticker 32s linear infinite;color:#657680;font:750 9px/1 ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase}
+    .ticker b{color:#d4dde1;margin:0 24px}
     @keyframes ticker{to{transform:translateX(-50%)}}
-    section{padding:110px 0}
-    .section-top{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px;margin-bottom:46px;align-items:end}
-    .kicker{color:var(--acid);font:900 10px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.2em;text-transform:uppercase}
-    h2{font-size:clamp(38px,5vw,70px);line-height:.95;letter-spacing:-.055em;margin:11px 0 0;text-transform:uppercase}
-    .section-copy{color:#98a7b1;font-size:18px;max-width:720px}
-    .projects{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
-    .project{grid-column:span 6;min-height:440px;border:1px solid var(--line);background:linear-gradient(145deg,#0e151d,#0a0e13 68%);position:relative;overflow:hidden;padding:30px;display:flex;flex-direction:column;justify-content:space-between;transition:.25s}
-    .project:hover{transform:translateY(-4px);border-color:#3b4b57;box-shadow:0 22px 60px rgba(0,0,0,.28)}
-    .project.featured{grid-column:span 8;min-height:520px}
-    .project.side{grid-column:span 4;min-height:520px}
-    .project:after{content:"";position:absolute;right:-70px;top:-70px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,var(--glow,rgba(54,217,255,.15)),transparent 70%);pointer-events:none}
-    .project-num{color:#5f6f7b;font:800 10px ui-monospace,monospace;letter-spacing:.16em}
-    .status{display:inline-flex;align-items:center;gap:8px;margin-left:15px;color:#9eabb3}
-    .dot{width:6px;height:6px;background:var(--status,#7d8c97);box-shadow:0 0 12px var(--status,#7d8c97)}
-    .project-visual{height:150px;margin:24px 0;border:1px solid #1f2a33;position:relative;overflow:hidden;background:
-      linear-gradient(120deg,rgba(255,255,255,.035),transparent 45%),
-      repeating-linear-gradient(90deg,transparent 0 34px,rgba(255,255,255,.018) 35px),
-      repeating-linear-gradient(0deg,transparent 0 34px,rgba(255,255,255,.018) 35px)}
-    .project-visual .mark{position:absolute;inset:0;display:grid;place-items:center;font-size:54px;font-weight:950;letter-spacing:-.07em;color:rgba(255,255,255,.10);text-transform:uppercase}
-    .project-visual .beam{position:absolute;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);left:8%;right:8%;top:50%;box-shadow:0 0 22px var(--accent)}
-    .project h3{font-size:clamp(28px,3vw,48px);line-height:.95;letter-spacing:-.045em;margin:0 0 13px;text-transform:uppercase}
-    .project p{color:#93a3ad;max-width:640px;margin:0}
-    .chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:20px}
-    .chip{border:1px solid #26343e;padding:5px 8px;color:#8fa0aa;font:800 9px ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase}
-    .project-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:24px}
-    .mini{padding:10px 12px;border:1px solid #2e3d48;font-size:10px;font-weight:900;letter-spacing:.11em;text-transform:uppercase;background:rgba(255,255,255,.015)}
-    .mini.live{border-color:color-mix(in srgb,var(--accent),#223 55%);color:#eaf1f4}
-    .mini:hover{background:rgba(255,255,255,.06)}
-    .gc{--accent:#36d9ff;--glow:rgba(54,217,255,.18);--status:#b9ff37}
-    .overdrive{--accent:#ff9c45;--glow:rgba(255,156,69,.2);--status:#ff9c45}
-    .sham{--accent:#ff5b6e;--glow:rgba(255,91,110,.19);--status:#b9ff37}
-    .buden{--accent:#ffd15a;--glow:rgba(255,209,90,.16);--status:#a878ff}
-    .rsg{--accent:#73a7ff;--glow:rgba(115,167,255,.18);--status:#73a7ff}
-    .ccrp{--accent:#c49b6c;--glow:rgba(196,155,108,.16);--status:#a878ff}
-    .principles{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);background:var(--line);gap:1px}
-    .principle{background:#0a1016;padding:32px;min-height:250px}
-    .principle .n{color:var(--acid);font:900 10px ui-monospace,monospace;letter-spacing:.2em}
-    .principle h3{font-size:24px;letter-spacing:-.03em;text-transform:uppercase;margin:42px 0 12px}
-    .principle p{color:#8f9da6;margin:0}
-    .stack{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(6,1fr)}
-    .stack div{padding:18px;border-right:1px solid var(--line);text-align:center;color:#83929d;font:800 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}
-    .stack div:last-child{border-right:0}
-    .contact{padding-bottom:70px}
-    .contact-box{border:1px solid var(--line);padding:50px;background:linear-gradient(115deg,rgba(185,255,55,.05),transparent 42%),#0a1016;display:grid;grid-template-columns:1.2fr .8fr;gap:50px;align-items:center}
-    .contact h2{margin:0 0 18px}
-    .contact p{color:#94a2ac;font-size:17px;max-width:680px}
-    .contact-right{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
-    footer{border-top:1px solid rgba(255,255,255,.06);padding:24px 0 40px;color:#65747e;font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}
+
+    .manifesto{padding:105px 0 95px;position:relative}
+    .manifesto-grid{display:grid;grid-template-columns:.68fr 1.32fr;gap:60px;align-items:start}
+    .chapter{color:var(--acid);font:900 9px/1 ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase}
+    .manifesto h2,.world-heading,.client-heading,.dna-heading{
+      margin:10px 0 0;font-size:clamp(42px,6vw,86px);line-height:.92;letter-spacing:-.06em;text-transform:uppercase
+    }
+    .manifesto-copy{font-size:clamp(22px,2.8vw,38px);line-height:1.25;letter-spacing:-.025em;color:#b4c0c7}
+    .manifesto-copy strong{color:white}
+    .manifesto-copy em{color:var(--acid);font-style:normal}
+    .manifesto-sub{margin-top:24px;max-width:780px;color:#7f909a;font-size:16px}
+
+    .worlds{padding:20px 0 120px}
+    .world-intro{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px;align-items:end;margin-bottom:55px}
+    .world-intro p{margin:0;color:#899aa4;font-size:18px;max-width:760px}
+
+    .world{
+      --accent:var(--cyan);--glow:rgba(51,217,255,.15);
+      min-height:680px;margin:0 0 28px;position:relative;overflow:hidden;border:1px solid #22313c;
+      background:
+        radial-gradient(circle at 82% 22%,var(--glow),transparent 30rem),
+        linear-gradient(135deg,#0c141c 0%,#080c11 68%);
+      display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.72fr);
+      isolation:isolate;
+    }
+    .world:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,transparent 0 64%,rgba(255,255,255,.015) 64% 64.1%,transparent 64.1%)}
+    .world-main{padding:54px 54px 48px;display:flex;flex-direction:column;justify-content:space-between}
+    .world-top{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .world-id{color:#60717c;font:800 9px/1 ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase}
+    .world-state{display:flex;align-items:center;gap:8px;color:#9aabb5;font:800 9px/1 ui-monospace,monospace;letter-spacing:.13em;text-transform:uppercase}
+    .world-state i{width:7px;height:7px;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+    .world-title{margin:50px 0 16px;font-size:clamp(48px,6.2vw,94px);line-height:.83;letter-spacing:-.065em;text-transform:uppercase}
+    .world-title span{display:block;color:transparent;-webkit-text-stroke:1px color-mix(in srgb,var(--accent),white 30%)}
+    .world-copy{max-width:780px;color:#9fafb8;font-size:18px;line-height:1.6}
+    .world-copy strong{color:#eaf1f4}
+    .chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:24px}
+    .chip{border:1px solid #293946;padding:6px 9px;color:#82939e;font:800 8px/1 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}
+    .world-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:32px}
+    .action{display:inline-flex;align-items:center;gap:9px;padding:11px 13px;border:1px solid #30414d;background:rgba(5,9,13,.46);font-size:9px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;transition:.2s}
+    .action:hover{border-color:var(--accent);box-shadow:0 0 24px color-mix(in srgb,var(--accent),transparent 82%)}
+    .action.primary{color:white;border-color:color-mix(in srgb,var(--accent),#2b3943 45%)}
+    .world-side{position:relative;min-height:100%;border-left:1px solid #23323d;overflow:hidden;background:#070b0f}
+    .world-side:before{
+      content:"";position:absolute;inset:0;
+      background:
+        linear-gradient(transparent 49.5%,rgba(255,255,255,.04) 50%,transparent 50.5%),
+        linear-gradient(90deg,transparent 49.5%,rgba(255,255,255,.04) 50%,transparent 50.5%),
+        repeating-linear-gradient(0deg,transparent 0 34px,rgba(255,255,255,.018) 35px),
+        repeating-linear-gradient(90deg,transparent 0 34px,rgba(255,255,255,.018) 35px);
+    }
+    .world-symbol{position:absolute;inset:0;display:grid;place-items:center;text-align:center;transform:rotate(-6deg)}
+    .world-symbol b{font-size:clamp(62px,8vw,124px);line-height:.75;letter-spacing:-.08em;color:rgba(255,255,255,.035);text-transform:uppercase}
+    .world-symbol b span{display:block;color:color-mix(in srgb,var(--accent),transparent 80%);-webkit-text-stroke:1px color-mix(in srgb,var(--accent),transparent 45%)}
+    .world-orbit{position:absolute;left:50%;top:50%;width:280px;height:280px;border:1px solid color-mix(in srgb,var(--accent),transparent 77%);border-radius:50%;transform:translate(-50%,-50%)}
+    .world-orbit:before{content:"";position:absolute;left:50%;top:-4px;width:8px;height:8px;background:var(--accent);box-shadow:0 0 18px var(--accent)}
+    .world-orbit.two{width:410px;height:160px;transform:translate(-50%,-50%) rotate(24deg);opacity:.55}
+    .world-corner{position:absolute;right:18px;bottom:18px;text-align:right;color:#566772;font:750 8px/1.6 ui-monospace,monospace;letter-spacing:.13em;text-transform:uppercase}
+    .world-corner b{color:var(--accent)}
+    .world.gc{--accent:#33d9ff;--glow:rgba(51,217,255,.15)}
+    .world.od{--accent:#ff9d43;--glow:rgba(255,157,67,.16)}
+    .world.ms{--accent:#ff5d72;--glow:rgba(255,93,114,.15)}
+    .world.bb{--accent:#ffd35a;--glow:rgba(255,211,90,.13)}
+    .world.cc{--accent:#c59b70;--glow:rgba(197,155,112,.14)}
+
+    .client-zone{padding:100px 0 120px;position:relative}
+    .client-head{display:grid;grid-template-columns:.85fr 1.15fr;gap:50px;align-items:end;margin-bottom:42px}
+    .client-head p{margin:0;color:#8a9aa5;font-size:18px}
+    .commission{
+      position:relative;overflow:hidden;border:1px solid #34404b;background:
+        linear-gradient(110deg,rgba(110,156,255,.11),transparent 48%),
+        #0a0f15;
+      padding:46px;display:grid;grid-template-columns:1.25fr .75fr;gap:40px;
+    }
+    .commission:after{content:"CLIENT COMMISSION";position:absolute;right:-30px;top:35px;transform:rotate(8deg);padding:8px 46px;border:1px solid rgba(110,156,255,.34);color:rgba(160,190,255,.42);font:900 10px/1 ui-monospace,monospace;letter-spacing:.2em}
+    .commission h3{margin:20px 0 14px;font-size:clamp(38px,5vw,72px);line-height:.9;letter-spacing:-.055em;text-transform:uppercase}
+    .commission p{color:#95a5af;max-width:760px;font-size:17px}
+    .client-badge{display:inline-flex;align-items:center;gap:9px;color:#9bbaff;font:900 9px/1 ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase}
+    .client-badge i{width:28px;height:1px;background:#6e9cff}
+    .commission-side{display:flex;flex-direction:column;justify-content:flex-end;border-left:1px solid #293744;padding-left:35px}
+    .commission-side .label{color:#62737f;font:800 8px/1 ui-monospace,monospace;letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px}
+    .commission-side b{font-size:22px}
+    .commission-side p{font-size:13px;color:#71818c}
+    .commission-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+
+    .dna{padding:110px 0}
+    .dna-top{display:grid;grid-template-columns:.75fr 1.25fr;gap:50px;align-items:end;margin-bottom:42px}
+    .dna-top p{margin:0;color:#8999a4;font-size:18px}
+    .dna-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);gap:1px;background:var(--line)}
+    .dna-card{min-height:315px;padding:30px;background:#090f15;display:flex;flex-direction:column;justify-content:space-between}
+    .dna-card .n{color:var(--acid);font:900 9px/1 ui-monospace,monospace;letter-spacing:.18em}
+    .dna-card h3{margin:45px 0 10px;font-size:25px;line-height:1.05;letter-spacing:-.035em;text-transform:uppercase}
+    .dna-card p{margin:0;color:#81919c}
+    .dna-mark{font-size:44px;color:rgba(255,255,255,.035);font-weight:950;letter-spacing:-.08em}
+
+    .ops{padding:100px 0 120px}
+    .ops-shell{border:1px solid var(--line);background:#070c10}
+    .ops-head{display:flex;justify-content:space-between;gap:20px;padding:15px 18px;border-bottom:1px solid var(--line);color:#647681;font:800 9px/1 ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase}
+    .ops-grid{display:grid;grid-template-columns:1fr 1fr}
+    .ops-terminal{padding:28px;border-right:1px solid var(--line)}
+    .ops-terminal h3{font-size:30px;line-height:1;letter-spacing:-.04em;text-transform:uppercase;margin:0 0 24px}
+    .log{display:grid;grid-template-columns:74px 90px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.045);font:700 10px/1.4 ui-monospace,monospace;color:#72838e}
+    .log .time{color:#485a66}.log .state{color:var(--acid)}.log .state.warn{color:var(--orange)}
+    .ops-copy{padding:34px}
+    .ops-copy .big{font-size:clamp(28px,4vw,54px);line-height:1;letter-spacing:-.045em;text-transform:uppercase;font-weight:950}
+    .ops-copy p{color:#85959f;max-width:600px}
+    .ops-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:25px}
+    .ops-pills span{padding:6px 8px;border:1px solid #293842;color:#748590;font:800 8px/1 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}
+
+    .contact{padding:80px 0 70px}
+    .contact-box{position:relative;overflow:hidden;border:1px solid #2b3944;background:linear-gradient(110deg,rgba(194,255,62,.06),transparent 45%),#091017;padding:52px;display:grid;grid-template-columns:1.25fr .75fr;gap:48px;align-items:center}
+    .contact-box:before{content:"G";position:absolute;right:5%;top:50%;transform:translateY(-50%);font-size:240px;font-weight:950;color:rgba(255,255,255,.025);letter-spacing:-.1em}
+    .contact-box h2{position:relative;margin:11px 0 16px;font-size:clamp(42px,6vw,82px);line-height:.88;letter-spacing:-.06em;text-transform:uppercase}
+    .contact-box p{position:relative;color:#8b9ba5;font-size:17px;max-width:700px}
+    .contact-actions{position:relative;display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+
+    footer{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.06);padding:23px 0 38px;color:#5e6e79;font:750 9px/1.4 ui-monospace,monospace;letter-spacing:.13em;text-transform:uppercase}
     footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-    .reveal{opacity:0;transform:translateY(18px);transition:.7s cubic-bezier(.2,.7,.2,1)}
+
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .75s cubic-bezier(.2,.7,.2,1),transform .75s cubic-bezier(.2,.7,.2,1)}
     .reveal.visible{opacity:1;transform:none}
-    @media(max-width:980px){
-      .nav-links a:not(.nav-cta){display:none}.hero-grid,.section-top,.contact-box{grid-template-columns:1fr}
-      .hero{min-height:auto}.hero-console{max-width:620px}.project,.project.featured,.project.side{grid-column:span 12;min-height:430px}
-      .principles{grid-template-columns:1fr}.stack{grid-template-columns:repeat(3,1fr)}.contact-right{justify-content:flex-start}
+
+    @media(max-width:1100px){
+      .world-rail{display:none}
+      .hero-grid{grid-template-columns:1fr}.command{max-width:700px}
+      .manifesto-grid,.world-intro,.client-head,.dna-top{grid-template-columns:1fr}
+      .world{grid-template-columns:1fr;min-height:0}.world-side{min-height:360px;border-left:0;border-top:1px solid #23323d}
+      .dna-grid{grid-template-columns:repeat(2,1fr)}
     }
-    @media(max-width:620px){
-      .wrap{width:min(calc(100% - 22px),var(--max))}.nav-inner{height:62px}.brand small{display:none}
-      .hero{padding-top:58px}h1{font-size:55px}.lede{font-size:17px}.project{padding:20px}.project-visual{height:115px}
-      section{padding:76px 0}.section-copy{font-size:16px}.principle{min-height:auto}.stack{grid-template-columns:repeat(2,1fr)}
-      .contact-box{padding:28px}.console-body{padding:16px}.portrait{height:220px}
+
+    @media(max-width:760px){
+      .wrap{width:min(calc(100% - 22px),var(--max))}
+      .nav-inner{height:64px}.nav-links a:not(.nav-live){display:none}.brand-copy small{display:none}
+      .hero{padding-top:104px}.hero-grid{gap:44px}h1{font-size:clamp(54px,17vw,88px)}
+      .hero-copy{font-size:18px}.radar{height:240px}
+      .manifesto,.dna,.ops,.client-zone{padding:76px 0}.worlds{padding-bottom:80px}
+      .world-main{padding:30px 24px}.world-title{margin-top:36px}.world-copy{font-size:16px}.world-side{min-height:280px}
+      .world-orbit{width:210px;height:210px}.world-orbit.two{width:300px;height:120px}
+      .commission{grid-template-columns:1fr;padding:30px 24px}.commission-side{border-left:0;border-top:1px solid #293744;padding:25px 0 0}
+      .commission:after{display:none}.dna-grid{grid-template-columns:1fr}.dna-card{min-height:250px}
+      .ops-grid{grid-template-columns:1fr}.ops-terminal{border-right:0;border-bottom:1px solid var(--line)}.log{grid-template-columns:65px 70px 1fr;font-size:8px}
+      .contact-box{grid-template-columns:1fr;padding:32px 24px}.contact-actions{justify-content:flex-start}
     }
-    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+    @media(max-width:480px){
+      .command-stats{grid-template-columns:1fr 1fr}.world-title{font-size:45px}
+      .world-symbol b{font-size:58px}.btn{width:100%}.action{width:100%;justify-content:center}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      *{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+      .boot{display:none}.reveal{opacity:1;transform:none}
+    }
   </style>
 </head>
+
 <body>
+  <canvas id="space" aria-hidden="true"></canvas>
+  <div class="scroll-progress" aria-hidden="true"><span id="progress"></span></div>
+
+  <div class="boot" id="boot" aria-hidden="true">
+    <div class="bootbox">
+      <div class="boot-title">GURGENBABA // WORLD SYSTEM</div>
+      <div class="boot-line">[01] CORE SIGNAL................ <b>ONLINE</b></div>
+      <div class="boot-line">[02] PERSISTENT WORLDS......... <b>FOUND</b></div>
+      <div class="boot-line">[03] CLIENT COMMISSIONS........ <b>SEPARATED</b></div>
+      <div class="boot-line">[04] LIVE OPERATIONS........... <b>ACTIVE</b></div>
+      <div class="boot-line">ENTERING PORTFOLIO SHELL...</div>
+    </div>
+  </div>
+
   <nav class="nav">
     <div class="wrap nav-inner">
-      <a class="brand" href="#top" aria-label="Gurgenbaba Games Start">
-        <span class="sigil">G</span><span>Gurgenbaba<small>Games // Systems // Worlds</small></span>
+      <a href="#top" class="brand" aria-label="Gurgenbaba Games Start">
+        <span class="sigil">G</span>
+        <span class="brand-copy">Gurgenbaba<small>GAMES // SYSTEMS // WORLDS</small></span>
       </a>
       <div class="nav-links">
-        <a href="#projects">Projekte</a><a href="#dna">DNA</a><a href="#about">Ansatz</a>
-        <a class="nav-cta" href="https://github.com/Gurgenbaba" target="_blank" rel="noreferrer">GitHub ↗</a>
+        <a href="#worlds">Worlds</a>
+        <a href="#client">Client Work</a>
+        <a href="#dna">DNA</a>
+        <a href="#ops">Ops</a>
+        <a class="nav-live" href="https://genesis-colonies.com/" target="_blank" rel="noreferrer"><i></i>Genesis Live ↗</a>
       </div>
     </div>
   </nav>
 
+  <aside class="world-rail" aria-label="World navigation">
+    <a href="#genesis" data-section="genesis"><span>Genesis</span><i></i></a>
+    <a href="#overdrive" data-section="overdrive"><span>Overdrive</span><i></i></a>
+    <a href="#schamhaar" data-section="schamhaar"><span>Schamhaar</span><i></i></a>
+    <a href="#budenboss" data-section="budenboss"><span>Budenboss</span><i></i></a>
+    <a href="#ccrp" data-section="ccrp"><span>CCRP</span><i></i></a>
+    <a href="#client" data-section="client"><span>Client Work</span><i></i></a>
+  </aside>
+
   <main id="top">
     <section class="hero">
       <div class="wrap hero-grid">
-        <div>
-          <div class="eyebrow">Independent game worlds // Germany</div>
-          <h1>Welten,<span>die bleiben.</span></h1>
-          <p class="lede"><b>Persistente Browsergames, Multiplayer-Systeme und eigenständige Spielideen.</b> Von galaktischer Strategie bis Imbiss-Management, Social-RPG und RedM-Framework — jedes Projekt folgt seiner eigenen Logik.</p>
+        <div class="reveal">
+          <div class="overline">Independent worlds // Germany // since we decided simple wasn't enough</div>
+          <h1>We build<span class="outline">worlds that run.</span><span class="tiny">BUILD // SHIP // OBSERVE // BREAK // FIX // EVOLVE</span></h1>
+          <p class="hero-copy">
+            <strong>Wir bauen keine austauschbaren Game-Demos.</strong> Wir bauen persistente Systeme, kaputte Ökonomien bis sie funktionieren,
+            Multiplayer, LiveOps, Progression, UI, Tools — und Welten, die nach dem Login nicht einfach stehen bleiben.
+          </p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#projects">Projekte ansehen <span class="arrow">↓</span></a>
-            <a class="btn" href="https://genesis-colonies.com/" target="_blank" rel="noreferrer">Genesis live <span class="arrow">↗</span></a>
+            <a class="btn primary" href="#worlds">Enter the worlds ↓</a>
+            <a class="btn" href="https://github.com/Gurgenbaba" target="_blank" rel="noreferrer">GitHub signal ↗</a>
+            <a class="btn" href="https://gurgenbaba.itch.io/" target="_blank" rel="noreferrer">itch.io ↗</a>
           </div>
+          <div class="hero-note">05 OWN WORLDS // 01 CLIENT COMMISSION // MULTIPLE LIVE SYSTEMS // ZERO INTEREST IN GENERIC</div>
         </div>
-        <aside class="hero-console" aria-label="Portfolio Status">
-          <div class="console-head"><span>Portfolio / Active signal</span><span>2026</span></div>
-          <div class="console-body">
-            <div class="portrait"><div class="orbit o1"></div><div class="orbit o2"></div><div class="core"></div><div class="scan"></div></div>
-            <div class="console-stats">
-              <div class="stat"><b>06</b><span>Featured projects</span></div>
-              <div class="stat"><b>04</b><span>Playable / live builds</span></div>
-              <div class="stat"><b>DE / EN</b><span>Product language</span></div>
-              <div class="stat"><b>∞</b><span>Iteration budget</span></div>
+
+        <aside class="command reveal" id="command" aria-label="Gurgenbaba world radar">
+          <div class="command-head"><span>GURGEN NETWORK / WORLD RADAR</span><span>LIVE SIGNAL</span></div>
+          <div class="command-body">
+            <div class="radar">
+              <div class="radar-sweep"></div>
+              <span class="radar-dot r1"></span><span class="radar-label l1">GC-U1/U2</span>
+              <span class="radar-dot r2"></span><span class="radar-label l2">OVERDRIVE</span>
+              <span class="radar-dot r3"></span><span class="radar-label l3">MSR</span>
+              <span class="radar-dot r4"></span>
             </div>
+            <div class="command-stats">
+              <div class="command-stat"><b>05</b><span>Original worlds / systems</span></div>
+              <div class="command-stat"><b>01</b><span>Commissioned client build</span></div>
+              <div class="command-stat"><b>DE / EN</b><span>Player-facing languages</span></div>
+              <div class="command-stat"><b>∞</b><span>Iteration until it feels right</span></div>
+            </div>
+            <div class="status-line"><span>Deployment posture</span><span class="ok">● SHIPPING</span></div>
           </div>
         </aside>
       </div>
@@ -185,114 +392,279 @@
 
     <div class="ticker" aria-hidden="true">
       <div class="ticker-track">
-        <b>GENESIS COLONIES</b> PERSISTENT UNIVERSE <b>OVERDRIVE</b> CO-OP ROGUELITE <b>MY SCHAMHAAR</b> SOCIAL RPG <b>BUDENBOSS</b> MANAGEMENT <b>CCRP-CORE</b> REDM FRAMEWORK <b>RANDOM SPACE GAME</b> CLIENT WORK
-        <b>GENESIS COLONIES</b> PERSISTENT UNIVERSE <b>OVERDRIVE</b> CO-OP ROGUELITE <b>MY SCHAMHAAR</b> SOCIAL RPG <b>BUDENBOSS</b> MANAGEMENT <b>CCRP-CORE</b> REDM FRAMEWORK <b>RANDOM SPACE GAME</b> CLIENT WORK
+        <b>GENESIS COLONIES</b> PERSISTENT UNIVERSE
+        <b>OVERDRIVE</b> GENESIS ONLINE CO-OP
+        <b>MY SCHAMHAAR</b> SOCIAL RPG
+        <b>BUDENBOSS</b> IMBISS MANAGEMENT
+        <b>CCRP-CORE</b> REDM FRAMEWORK
+        <b>RANDOM SPACE GAME</b> CLIENT COMMISSION
+        <b>GENESIS COLONIES</b> PERSISTENT UNIVERSE
+        <b>OVERDRIVE</b> GENESIS ONLINE CO-OP
+        <b>MY SCHAMHAAR</b> SOCIAL RPG
+        <b>BUDENBOSS</b> IMBISS MANAGEMENT
+        <b>CCRP-CORE</b> REDM FRAMEWORK
+        <b>RANDOM SPACE GAME</b> CLIENT COMMISSION
       </div>
     </div>
 
-    <section id="projects">
+    <section class="manifesto">
+      <div class="wrap manifesto-grid reveal">
+        <div>
+          <div class="chapter">00 // WHY THIS EXISTS</div>
+          <h2 class="world-heading">Nicht<br>Portfolio.<br>Beweis.</h2>
+        </div>
+        <div>
+          <div class="manifesto-copy">
+            Wir wollen zeigen, <strong>wie wir denken und bauen.</strong> Nicht nur Screenshots. Nicht nur Logos.
+            <em>Systeme mit Gewicht.</em> Fortschritt, der sichtbar wird. Welten, die operiert, gemessen und weiterentwickelt werden.
+          </div>
+          <p class="manifesto-sub">
+            Gurgenbaba Games ist kein Hochglanz-Studio-Claim. Es ist das Dach über Projekten, die Seite für Seite,
+            Feature für Feature und manchmal mitten im Live-Betrieb besser werden.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="worlds" id="worlds">
       <div class="wrap">
-        <div class="section-top reveal">
-          <div><div class="kicker">01 // Selected work</div><h2>Die Projekte.</h2></div>
-          <p class="section-copy">Nicht als Mockups gedacht, sondern als Systeme: mit Spielschleifen, Persistenz, Balancing, Deployment, Tests und laufender Weiterentwicklung.</p>
+        <div class="world-intro reveal">
+          <div><div class="chapter">01 // ORIGINAL WORLDS</div><h2 class="world-heading">Unsere<br>Systeme.</h2></div>
+          <p>Fünf eigene Projekte. Unterschiedliche Genres, aber dieselbe Grundhaltung: serverseitige Wahrheit, echte Persistenz, lange Progression, starke Identität und kein künstlicher Deckel nur weil es einfacher wäre.</p>
         </div>
 
-        <div class="projects">
-          <article class="project featured gc reveal">
+        <article class="world gc reveal" id="genesis" data-world>
+          <div class="world-main">
             <div>
-              <div class="project-num">PROJECT_001 <span class="status"><span class="dot"></span> LIVE</span></div>
-              <div class="project-visual"><div class="mark">GC // UNIVERSE</div><div class="beam"></div></div>
-              <h3>Genesis Colonies</h3>
-              <p>Persistentes Browser-Strategiespiel für ein wachsendes Imperium: Kolonien, Forschung, Flotten, Allianzen, Handel, Ascension, Commander-Skills und serverweite Systeme in einem langlebigen Universum.</p>
-              <div class="chips"><span class="chip">Space Strategy</span><span class="chip">Persistent Universe</span><span class="chip">Browser</span><span class="chip">Live Ops</span></div>
+              <div class="world-top">
+                <div class="world-id">WORLD_001 // FLAGSHIP</div>
+                <div class="world-state"><i></i> LIVE // MULTI-UNIVERSE</div>
+              </div>
+              <h3 class="world-title">Genesis<span>Colonies</span></h3>
+              <p class="world-copy">
+                Unser langlebigstes Universum. Ein persistentes Browser-Strategiespiel, in dem <strong>Wirtschaft, Flotten, Galaxie,
+                Allianzen, Ascension, Commander-Skills, Events, Weltbosse und Endgame-Systeme</strong> nicht nebeneinander existieren,
+                sondern ineinandergreifen. Kein Max-Level als Designziel. Evolution statt Reset.
+              </p>
+              <div class="chips">
+                <span class="chip">Persistent Universe</span><span class="chip">Space Strategy</span><span class="chip">LiveOps</span>
+                <span class="chip">Ascension</span><span class="chip">Multi Universe</span><span class="chip">Browser</span>
+              </div>
+              <div class="world-actions">
+                <a class="action primary" href="https://genesis-colonies.com/" target="_blank" rel="noreferrer">Enter universe ↗</a>
+                <a class="action" href="https://github.com/Gurgenbaba/genesis-colonies" target="_blank" rel="noreferrer">Public codebase ↗</a>
+              </div>
             </div>
-            <div class="project-actions">
-              <a class="mini live" href="https://genesis-colonies.com/" target="_blank" rel="noreferrer">Jetzt spielen ↗</a>
-              <a class="mini" href="https://github.com/Gurgenbaba/genesis-colonies" target="_blank" rel="noreferrer">Public Repo ↗</a>
-            </div>
-          </article>
+            <div class="world-corner">STATUS <b>LIVE</b><br>OPERATED / BALANCED / EVOLVING</div>
+          </div>
+          <div class="world-side" aria-hidden="true">
+            <div class="world-orbit"></div><div class="world-orbit two"></div>
+            <div class="world-symbol"><b>GENESIS<span>∞</span></b></div>
+          </div>
+        </article>
 
-          <article class="project side overdrive reveal">
+        <article class="world od reveal" id="overdrive" data-world>
+          <div class="world-main">
             <div>
-              <div class="project-num">PROJECT_002 <span class="status"><span class="dot"></span> PLAYABLE</span></div>
-              <div class="project-visual"><div class="mark">OVERDRIVE</div><div class="beam"></div></div>
-              <h3>Genesis Colonies: OVERDRIVE</h3>
-              <p>Top-down Space-Roguelite mit vier Schiffsidentitäten, persistenter Meta-Progression, Ark-Defense und Genesis Online Co-op für bis zu vier Commander.</p>
-              <div class="chips"><span class="chip">Roguelite</span><span class="chip">Co-op</span><span class="chip">HTML5</span></div>
+              <div class="world-top">
+                <div class="world-id">WORLD_002 // GENESIS SIDEVERSE</div>
+                <div class="world-state"><i></i> PLAYABLE // ONLINE</div>
+              </div>
+              <h3 class="world-title">Genesis Colonies:<span>OVERDRIVE</span></h3>
+              <p class="world-copy">
+                Top-down Space-Roguelite mit vier Schiffsidentitäten, Runs, Bossen, Ark-Defense und persistentem Meta-Fortschritt.
+                Der entscheidende Schritt: <strong>Genesis Online</strong> — öffentliche Rooms, Server Browser, Private Rooms,
+                Host-Migration und Co-op für bis zu vier Commander.
+              </p>
+              <div class="chips">
+                <span class="chip">Roguelite</span><span class="chip">Co-op</span><span class="chip">Cloudflare DO</span>
+                <span class="chip">Persistent Meta</span><span class="chip">HTML5</span>
+              </div>
+              <div class="world-actions">
+                <a class="action primary" href="https://gurgenbaba.itch.io/genesis-colonies-overdrive" target="_blank" rel="noreferrer">Play on itch.io ↗</a>
+              </div>
             </div>
-            <div class="project-actions"><a class="mini live" href="https://gurgenbaba.itch.io/genesis-colonies-overdrive" target="_blank" rel="noreferrer">Auf itch.io spielen ↗</a></div>
-          </article>
+            <div class="world-corner">BUILD <b>PLAYABLE</b><br>GENESIS ONLINE // 4 COMMANDERS</div>
+          </div>
+          <div class="world-side" aria-hidden="true">
+            <div class="world-orbit"></div><div class="world-orbit two"></div>
+            <div class="world-symbol"><b>OVER<span>DRIVE</span></b></div>
+          </div>
+        </article>
 
-          <article class="project sham reveal">
+        <article class="world ms reveal" id="schamhaar" data-world>
+          <div class="world-main">
             <div>
-              <div class="project-num">PROJECT_003 <span class="status"><span class="dot"></span> LIVE BUILD</span></div>
-              <div class="project-visual"><div class="mark">MY SCHAMHAAR</div><div class="beam"></div></div>
-              <h3>MySchamhaar Revival</h3>
-              <p>Clean-room Social-Browser-RPG mit einem eigenen Shamhaar: Charakterentwicklung, sichtbares Haarwachstum, Pflege, Jobs, Schule, Supermarkt, Begegnungen, PvP, Gilden, Markt und Seasons.</p>
-              <div class="chips"><span class="chip">Social RPG</span><span class="chip">Persistent</span><span class="chip">PvP</span><span class="chip">Browser</span></div>
+              <div class="world-top">
+                <div class="world-id">WORLD_003 // CLEAN-ROOM REVIVAL</div>
+                <div class="world-state"><i></i> LIVE BUILD</div>
+              </div>
+              <h3 class="world-title">MySchamhaar<span>Revival</span></h3>
+              <p class="world-copy">
+                Ein bewusst schräges Social-Browser-RPG mit einem Charakter, dessen Entwicklung man <strong>direkt am Haar sieht.</strong>
+                Pflege, Jobs, Schule, Supermarkt, Equipment, PvP, Gilden, Markt, Seasons und Begegnungen bilden eine persistente
+                Welt mit 2000er-Browsergame-Energie — aber als eigenständige Clean-Room-Umsetzung.
+              </p>
+              <div class="chips">
+                <span class="chip">Social RPG</span><span class="chip">Visible Progression</span><span class="chip">PvP</span>
+                <span class="chip">Guilds</span><span class="chip">Economy</span><span class="chip">Browser</span>
+              </div>
+              <div class="world-actions">
+                <a class="action primary" href="https://myschamhaar-revival-production.up.railway.app/" target="_blank" rel="noreferrer">Open live build ↗</a>
+              </div>
             </div>
-            <div class="project-actions"><a class="mini live" href="https://myschamhaar-revival-production.up.railway.app/" target="_blank" rel="noreferrer">Live Build öffnen ↗</a></div>
-          </article>
+            <div class="world-corner">STATUS <b>LIVE BUILD</b><br>HAIR GROWS // HAIR CAN SHRINK</div>
+          </div>
+          <div class="world-side" aria-hidden="true">
+            <div class="world-orbit"></div><div class="world-orbit two"></div>
+            <div class="world-symbol"><b>HAIR<span>WORM</span></b></div>
+          </div>
+        </article>
 
-          <article class="project buden reveal">
+        <article class="world bb reveal" id="budenboss" data-world>
+          <div class="world-main">
             <div>
-              <div class="project-num">PROJECT_004 <span class="status"><span class="dot"></span> IN DEVELOPMENT</span></div>
-              <div class="project-visual"><div class="mark">BUDENBOSS</div><div class="beam"></div></div>
-              <h3>BUDENBOSS</h3>
-              <p>Mobile-first Imbiss-Management mit Oldschool-Browsergame-DNA. Schichten, Speisekarten, Weiterbildung, Ausrüstung, Großmarkt und Stadt bilden den Weg vom Klappgrill zum Frittenimperium.</p>
-              <div class="chips"><span class="chip">Management</span><span class="chip">Mobile First</span><span class="chip">Multiplayer DNA</span><span class="chip">DE / EN</span></div>
+              <div class="world-top">
+                <div class="world-id">WORLD_004 // MANAGEMENT</div>
+                <div class="world-state"><i></i> IN DEVELOPMENT</div>
+              </div>
+              <h3 class="world-title">BUDEN<span>BOSS</span></h3>
+              <p class="world-copy">
+                Vom Klappgrill zum Frittenimperium. Mobile-first Imbiss-Management mit <strong>Oldschool-Browsergame-Druck</strong>,
+                aber moderner technischer Basis: Schichten, Speisekarte, Weiterbildung, Ausrüstung, Großmarkt, Stadt und
+                eine Welt, die später echte Multiplayer-Reibung bekommen soll.
+              </p>
+              <div class="chips">
+                <span class="chip">Management</span><span class="chip">Mobile First</span><span class="chip">DE / EN</span>
+                <span class="chip">PostgreSQL</span><span class="chip">Slice Driven</span>
+              </div>
+              <div class="world-actions"><span class="action">Private development // active</span></div>
             </div>
-            <div class="project-actions"><span class="mini">Private Development</span></div>
-          </article>
+            <div class="world-corner">STATUS <b>ACTIVE</b><br>SLICES // SEALED CONTRACTS</div>
+          </div>
+          <div class="world-side" aria-hidden="true">
+            <div class="world-orbit"></div><div class="world-orbit two"></div>
+            <div class="world-symbol"><b>BUDEN<span>BOSS</span></b></div>
+          </div>
+        </article>
 
-          <article class="project rsg reveal">
+        <article class="world cc reveal" id="ccrp" data-world>
+          <div class="world-main">
             <div>
-              <div class="project-num">PROJECT_005 <span class="status"><span class="dot"></span> CLIENT WORK</span></div>
-              <div class="project-visual"><div class="mark">RANDOM SPACE GAME</div><div class="beam"></div></div>
-              <h3>Random Space Game</h3>
-              <p>Kundenauftrag für eine Browser-Weltraumstrategie auf FastAPI, PostgreSQL und React. Register/Login, Onboarding, Spezies, Bau, Produktion, Mining, Handel, Missionen, Forschung und Kolonisierung.</p>
-              <div class="chips"><span class="chip">Client Project</span><span class="chip">FastAPI</span><span class="chip">React</span><span class="chip">PostgreSQL</span></div>
+              <div class="world-top">
+                <div class="world-id">SYSTEM_005 // REDM FRAMEWORK</div>
+                <div class="world-state"><i></i> FOUNDATION BUILD</div>
+              </div>
+              <h3 class="world-title">CCRP<span>CORE</span></h3>
+              <p class="world-copy">
+                Unser RedM RP/Survival-Framework: <strong>kleiner server-authoritativer Kern, starke First-Party APIs und ein UI aus einem Guss.</strong>
+                Charaktere, Appearance, Inventar, Survival und Spawn sind nur der Anfang. Langfristig soll der Server über ein
+                Admin-Control-Plane aufgebaut werden — Jobs, Häuser, Shops und Weltinhalte ohne ständiges Dateigefrickel.
+              </p>
+              <div class="chips">
+                <span class="chip">RedM</span><span class="chip">Framework</span><span class="chip">Server Authority</span>
+                <span class="chip">First Party UI</span><span class="chip">Control Plane</span>
+              </div>
+              <div class="world-actions"><span class="action">Private framework development</span></div>
             </div>
-            <div class="project-actions"><a class="mini live" href="https://web-production-165f5.up.railway.app/" target="_blank" rel="noreferrer">Live Preview ↗</a></div>
-          </article>
+            <div class="world-corner">PRINCIPLE <b>SMALL CORE</b><br>POWERFUL API // ONE PRODUCT LANGUAGE</div>
+          </div>
+          <div class="world-side" aria-hidden="true">
+            <div class="world-orbit"></div><div class="world-orbit two"></div>
+            <div class="world-symbol"><b>CCRP<span>CORE</span></b></div>
+          </div>
+        </article>
+      </div>
+    </section>
 
-          <article class="project ccrp reveal">
-            <div>
-              <div class="project-num">PROJECT_006 <span class="status"><span class="dot"></span> FRAMEWORK</span></div>
-              <div class="project-visual"><div class="mark">CCRP // CORE</div><div class="beam"></div></div>
-              <h3>CCRP-Core</h3>
-              <p>Clean-room RedM RP/Survival-Framework: kleiner server-authoritativer Kern, First-Party UI, Charaktere, Appearance, Inventar, Survival, Spawn und langfristig ein Admin-Control-Plane statt manueller Welt-Dateiedits.</p>
-              <div class="chips"><span class="chip">RedM</span><span class="chip">Framework</span><span class="chip">Server Authority</span><span class="chip">Admin Tools</span></div>
+    <section class="client-zone" id="client">
+      <div class="wrap">
+        <div class="client-head reveal">
+          <div><div class="chapter">02 // COMMISSIONED WORK</div><h2 class="client-heading">Für Kunden<br>bauen wir auch.</h2></div>
+          <p>Wichtig: Dieser Bereich ist bewusst getrennt. Hier zeigen wir Arbeit, die wir umgesetzt haben, die aber <strong>nicht als eigenes Gurgenbaba-Game verkauft wird.</strong></p>
+        </div>
+
+        <article class="commission reveal">
+          <div>
+            <div class="client-badge"><i></i> KUNDENAUFTRAG // CLIENT COMMISSION</div>
+            <h3>Random Space Game</h3>
+            <p>
+              Browser-Weltraumstrategie als Auftragsarbeit. Wir haben dafür eine produktive Basis aus FastAPI, PostgreSQL und React gebaut:
+              Auth, Onboarding, Spezies, Gebäude, Tick-Produktion, Mining, Handel, Missionen, Forschung, Systemkarte und Kolonisierung.
+              <strong style="color:#dbe6ee">Das Projekt gehört in unser Portfolio als umgesetzte Kundenarbeit — nicht in die Liste unserer eigenen Spielwelten.</strong>
+            </p>
+            <div class="chips">
+              <span class="chip">Client Commission</span><span class="chip">FastAPI</span><span class="chip">React</span>
+              <span class="chip">PostgreSQL</span><span class="chip">Space Strategy</span>
             </div>
-            <div class="project-actions"><span class="mini">Private Development</span></div>
+            <div class="commission-actions">
+              <a class="action primary" href="https://web-production-165f5.up.railway.app/" target="_blank" rel="noreferrer">Open client preview ↗</a>
+            </div>
+          </div>
+          <aside class="commission-side">
+            <div class="label">Portfolio classification</div>
+            <b>Commissioned Development</b>
+            <p>Konzeptionelle und technische Umsetzung für einen Kunden. Separat von unseren Original-IP-Projekten geführt.</p>
+          </aside>
+        </article>
+      </div>
+    </section>
+
+    <section class="dna" id="dna">
+      <div class="wrap">
+        <div class="dna-top reveal">
+          <div><div class="chapter">03 // GURGEN DNA</div><h2 class="dna-heading">Warum es sich<br>nach uns anfühlt.</h2></div>
+          <p>Unsere Projekte sehen nicht gleich aus. Das sollen sie auch nicht. Die Gemeinsamkeit liegt tiefer: in Progression, Persistenz, Technik und dem Willen, Dinge nach dem ersten „funktioniert“ weiterzuziehen.</p>
+        </div>
+
+        <div class="dna-grid reveal">
+          <article class="dna-card">
+            <div><div class="n">01 // PROGRESSION</div><h3>Keine Placebo-Upgrades.</h3><p>Wenn du investierst, soll sich dein Spiel verändern. Stärkere Optionen, neue Routen, sichtbare Entwicklung — nicht nur +0,5 %.</p></div>
+            <div class="dna-mark">↑↑</div>
+          </article>
+          <article class="dna-card">
+            <div><div class="n">02 // PERSISTENCE</div><h3>Spielstände haben Gewicht.</h3><p>Accounts, Charaktere, Planeten und Welten sollen Geschichten tragen. Deshalb bauen wir langfristige Systeme statt Wegwerf-Runs ohne Kontext.</p></div>
+            <div class="dna-mark">∞</div>
+          </article>
+          <article class="dna-card">
+            <div><div class="n">03 // OPERATIONS</div><h3>Live ist nicht das Ende.</h3><p>Deployment, Migrations, Performance, LiveOps, Monitoring und Community-Feedback gehören für uns zum Game Design.</p></div>
+            <div class="dna-mark">LIVE</div>
+          </article>
+          <article class="dna-card">
+            <div><div class="n">04 // IDENTITY</div><h3>Kein AI-SaaS-Look.</h3><p>Jedes Projekt bekommt eine eigene Sprache. Oldschool, Sci-Fi, comic-chaotisch oder Western — aber nie austauschbare Bubble-UI.</p></div>
+            <div class="dna-mark">G</div>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="dna">
+    <section class="ops" id="ops">
       <div class="wrap">
-        <div class="section-top reveal">
-          <div><div class="kicker">02 // Design DNA</div><h2>Kein Skin.<br>Ein System.</h2></div>
-          <p class="section-copy">Die Projekte unterscheiden sich bewusst im Look und Genre. Was sie verbindet, ist die Idee, dass Entscheidungen, Progression und technische Architektur echten Einfluss haben sollen.</p>
-        </div>
-        <div class="principles reveal">
-          <div class="principle"><div class="n">01 / PROGRESSION</div><h3>Veränderung muss spürbar sein.</h3><p>Upgrades sollen Entscheidungen und Spielweisen verändern — nicht nur eine Zahl hinter dem Komma.</p></div>
-          <div class="principle"><div class="n">02 / PERSISTENCE</div><h3>Spielstände erzählen Geschichten.</h3><p>Welten, Charaktere und Accounts behalten Bedeutung über eine einzelne Session hinaus.</p></div>
-          <div class="principle"><div class="n">03 / OPERATIONS</div><h3>Shipping gehört zum Design.</h3><p>Tests, Migrationen, Performance, Deployments und Feedback-Loops sind Teil des Produkts, nicht die Fußnote dahinter.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <div class="stack reveal">
-      <div>Python</div><div>TypeScript</div><div>PostgreSQL</div><div>Flask / FastAPI</div><div>Node / Fastify</div><div>Railway / Cloudflare</div>
-    </div>
-
-    <section id="about">
-      <div class="wrap">
-        <div class="section-top reveal">
-          <div><div class="kicker">03 // Build philosophy</div><h2>Vom Prototyp<br>zum Betrieb.</h2></div>
-          <p class="section-copy">Ich baue gern dort weiter, wo viele Hobbyprojekte aufhören: Persistenz, echte Datenmodelle, Race-Condition-Schutz, Responsive UI, CI-Gates, Performance, LiveOps und die unsichtbaren Werkzeuge hinter einem funktionierenden Spiel.</p>
+        <div class="ops-shell reveal">
+          <div class="ops-head"><span>GURGEN OPS // DEVELOPMENT REALITY</span><span>NOT A MOCKUP PIPELINE</span></div>
+          <div class="ops-grid">
+            <div class="ops-terminal">
+              <h3>We ship the boring parts too.</h3>
+              <div class="log"><span class="time">00:01:14</span><span class="state">PASS</span><span>migration integrity / schema gate</span></div>
+              <div class="log"><span class="time">00:02:06</span><span class="state">PASS</span><span>responsive browser matrix</span></div>
+              <div class="log"><span class="time">00:03:42</span><span class="state warn">WATCH</span><span>production p95 / queue hotpath</span></div>
+              <div class="log"><span class="time">00:04:11</span><span class="state">PASS</span><span>idempotency / exactly-once mutation</span></div>
+              <div class="log"><span class="time">00:05:20</span><span class="state">LIVE</span><span>deploy / smoke / healthz</span></div>
+              <div class="log"><span class="time">00:06:00</span><span class="state">LOOP</span><span>player feedback → next system pass</span></div>
+            </div>
+            <div class="ops-copy">
+              <div class="chapter">04 // BUILD PHILOSOPHY</div>
+              <div class="big">Vom ersten Button bis zum Live-Hotpath.</div>
+              <p>
+                Uns interessiert der komplette Weg: UI, Domain-Logik, Datenbank, Queues, Race Conditions, responsive Verhalten,
+                Tests, Deployments und das, was Spieler fünf Minuten nach Release kaputtmachen. Genau dort werden Projekte für uns interessant.
+              </p>
+              <div class="ops-pills">
+                <span>PostgreSQL</span><span>Python</span><span>TypeScript</span><span>FastAPI</span><span>Flask</span>
+                <span>Fastify</span><span>Railway</span><span>Cloudflare</span><span>Playwright</span><span>GitHub Actions</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -301,26 +673,108 @@
       <div class="wrap">
         <div class="contact-box reveal">
           <div>
-            <div class="kicker">04 // Find me</div>
-            <h2>Code. Spiele.<br>Experimente.</h2>
-            <p>Öffentliche Projekte, Releases und technische Arbeit landen auf GitHub. Spielbare Builds sind direkt bei den jeweiligen Projekten verlinkt.</p>
+            <div class="chapter">05 // OPEN SIGNAL</div>
+            <h2>Spiel es.<br>Lies den Code.<br>Sieh uns bauen.</h2>
+            <p>Die beste Erklärung unserer Arbeit sind die laufenden Projekte selbst. Einige sind öffentlich, einige bewusst privat — aber alle werden als echte Systeme behandelt.</p>
           </div>
-          <div class="contact-right">
-            <a class="btn btn-primary" href="https://github.com/Gurgenbaba" target="_blank" rel="noreferrer">GitHub Profil ↗</a>
+          <div class="contact-actions">
+            <a class="btn primary" href="https://github.com/Gurgenbaba" target="_blank" rel="noreferrer">GitHub ↗</a>
             <a class="btn" href="https://gurgenbaba.itch.io/" target="_blank" rel="noreferrer">itch.io ↗</a>
+            <a class="btn" href="https://genesis-colonies.com/" target="_blank" rel="noreferrer">Genesis ↗</a>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer><div class="wrap"><span>© 2026 GURGENBABA // BUILT TO BE PLAYED</span><span>GURGENBABA.GITHUB.IO</span></div></footer>
+  <footer>
+    <div class="wrap">
+      <span>© 2026 GURGENBABA // GAMES // SYSTEMS // WORLDS</span>
+      <span>BUILT TO BE PLAYED // BUILT TO KEEP RUNNING</span>
+    </div>
+  </footer>
 
   <script>
-    const io = new IntersectionObserver((entries) => {
-      for (const e of entries) if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-    }, { threshold: .08 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    (() => {
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const boot = document.getElementById('boot');
+      if (!reduced) setTimeout(() => boot.classList.add('off'), 1180);
+      else boot.classList.add('off');
+
+      const canvas = document.getElementById('space');
+      const ctx = canvas.getContext('2d', { alpha: true });
+      let stars = [], w = 0, h = 0, dpr = 1, frame = 0;
+
+      function resize(){
+        dpr = Math.min(devicePixelRatio || 1, 1.6);
+        w = innerWidth; h = innerHeight;
+        canvas.width = Math.floor(w*dpr); canvas.height = Math.floor(h*dpr);
+        canvas.style.width = w+'px'; canvas.style.height = h+'px';
+        ctx.setTransform(dpr,0,0,dpr,0,0);
+        const count = Math.min(170, Math.max(60, Math.floor((w*h)/9500)));
+        stars = Array.from({length:count}, () => ({
+          x:Math.random()*w,y:Math.random()*h,z:.25+Math.random()*.9,r:.3+Math.random()*1.15,s:.04+Math.random()*.15
+        }));
+      }
+
+      function draw(){
+        ctx.clearRect(0,0,w,h);
+        for(const s of stars){
+          s.y += s.s;
+          if(s.y>h+4){s.y=-4;s.x=Math.random()*w}
+          ctx.globalAlpha=.22+s.z*.46;
+          ctx.fillStyle=s.z>.8?'#c2ff3e':'#a9dff0';
+          ctx.fillRect(s.x,s.y,s.r,s.r);
+        }
+        ctx.globalAlpha=1;
+        if(!reduced) frame=requestAnimationFrame(draw);
+      }
+      resize(); draw();
+      addEventListener('resize',resize,{passive:true});
+
+      const progress = document.getElementById('progress');
+      const reveals = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver(entries=>{
+        entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
+      },{threshold:.08});
+      reveals.forEach(el=>io.observe(el));
+
+      const railLinks=[...document.querySelectorAll('.world-rail a')];
+      const observed=[...document.querySelectorAll('[data-world],#client')];
+      const sectionObserver=new IntersectionObserver(entries=>{
+        entries.forEach(e=>{
+          if(!e.isIntersecting)return;
+          railLinks.forEach(a=>a.classList.toggle('active',a.dataset.section===e.target.id));
+        });
+      },{rootMargin:'-35% 0px -55% 0px',threshold:0});
+      observed.forEach(el=>sectionObserver.observe(el));
+
+      let ticking=false;
+      addEventListener('scroll',()=>{
+        if(ticking)return;ticking=true;
+        requestAnimationFrame(()=>{
+          const max=document.documentElement.scrollHeight-innerHeight;
+          progress.style.width=(max>0?(scrollY/max)*100:0)+'%';
+          ticking=false;
+        });
+      },{passive:true});
+
+      addEventListener('pointermove',e=>{
+        document.documentElement.style.setProperty('--mx',e.clientX+'px');
+        document.documentElement.style.setProperty('--my',e.clientY+'px');
+      },{passive:true});
+
+      const command=document.getElementById('command');
+      if(command && !reduced && matchMedia('(pointer:fine)').matches){
+        command.addEventListener('pointermove',e=>{
+          const r=command.getBoundingClientRect();
+          const x=(e.clientX-r.left)/r.width-.5;
+          const y=(e.clientY-r.top)/r.height-.5;
+          command.style.transform='perspective(900px) rotateY('+(x*5)+'deg) rotateX('+(-y*4)+'deg)';
+        });
+        command.addEventListener('pointerleave',()=>command.style.transform='');
+      }
+    })();
   </script>
 </body>
 </html>
