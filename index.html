@@ -35,7 +35,7 @@
       content:"";position:fixed;inset:0;pointer-events:none;z-index:9;opacity:.028;
       background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")
     }
-    button,a{font:inherit;color:inherit}a{text-decoration:none}button{cursor:pointer}
+    body{touch-action:pan-y} button,a{font:inherit;color:inherit}a{text-decoration:none}button{cursor:pointer;touch-action:manipulation}
     #space{position:fixed;inset:0;z-index:0;pointer-events:none}
     .shell{position:relative;z-index:10;height:100svh;display:grid;grid-template-rows:72px minmax(0,1fr) 118px}
     .wrap{width:min(calc(100% - 36px),1440px);margin:auto}
