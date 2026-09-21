@@ -3,44 +3,324 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#080b0e">
-  <title>Gurgenbaba Games — Welten, die weiterlaufen</title>
-  <meta name="description" content="Strategie, Management und eigenwillige Multiplayer-Welten von Gurgenbaba Games.">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23080b0e'/%3E%3Cpath d='M49 20 32 11 15 20v24l17 9 17-9V31H30v8h10v1l-8 4-8-4V25l8-4 12 6z' fill='%23e9ff48'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#080b10">
+  <meta name="description" content="Gurgenbaba Games — Browsergames, Roguelites, Multiplayer-Systeme und Frameworks.">
+  <meta property="og:title" content="Gurgenbaba Games // Portfolio">
+  <meta property="og:description" content="Persistente Welten. Eigenständige Systeme. Spiele und technische Projekte von Gurgenbaba.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gurgenbaba.github.io/">
+  <title>Gurgenbaba Games // Portfolio</title>
   <style>
-    :root{--ink:#eef1e8;--muted:#9ba49b;--line:#293029;--acid:#e9ff48;--ember:#ff6534;--panel:#11161a;--black:#080b0e;--max:1240px}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--black);color:var(--ink);font:16px/1.55 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;overflow-x:hidden}
-    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:38px 38px;mask-image:linear-gradient(to bottom,#000,transparent 82%)}
-    a{color:inherit}.wrap{width:min(calc(100% - 40px),var(--max));margin:auto}.nav{height:74px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
-    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:900;letter-spacing:.08em}.brand-mark{width:34px;height:34px;display:grid;place-items:center;background:var(--acid);color:var(--black);font-family:Arial,sans-serif;font-weight:1000;clip-path:polygon(20% 0,100% 0,100% 80%,80% 100%,0 100%,0 20%)}
-    .nav-links{display:flex;gap:28px}.nav-links a{text-decoration:none;color:var(--muted);font-size:.88rem}.nav-links a:hover{color:var(--acid)}
-    .hero{min-height:700px;display:grid;grid-template-columns:1.25fr .75fr;gap:60px;align-items:center;padding:86px 0 80px}.kicker{color:var(--acid);text-transform:uppercase;letter-spacing:.16em;font-size:.82rem;font-weight:800}.hero h1{font-family:Arial Black,Impact,sans-serif;text-transform:uppercase;font-size:clamp(4rem,9vw,8.8rem);letter-spacing:-.065em;line-height:.82;margin:24px 0 30px;max-width:900px}.hero h1 span{color:transparent;-webkit-text-stroke:2px var(--ink)}
-    .lead{max-width:680px;color:#c0c6bf;font:clamp(1rem,2vw,1.18rem)/1.65 Arial,sans-serif;margin:0}.actions{display:flex;gap:12px;margin-top:34px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;gap:12px;padding:14px 18px;border:1px solid var(--line);text-decoration:none;text-transform:uppercase;font-weight:900;font-size:.82rem;letter-spacing:.07em}.btn.primary{background:var(--acid);color:#090b09;border-color:var(--acid)}.btn:hover{transform:translateY(-2px)}
-    .signal{position:relative;aspect-ratio:1;border:1px solid var(--line);display:grid;place-items:center;background:radial-gradient(circle,rgba(233,255,72,.14),transparent 62%)}.signal:before,.signal:after{content:"";position:absolute;border:1px solid #3a443a;border-radius:50%;inset:14%}.signal:after{inset:29%;border-style:dashed;animation:spin 16s linear infinite}.signal strong{font:900 clamp(4rem,9vw,8rem)/1 Arial Black,sans-serif;color:var(--acid);letter-spacing:-.08em}.signal small{position:absolute;bottom:22px;left:22px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}@keyframes spin{to{transform:rotate(360deg)}}
-    .section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;padding:95px 0 32px;border-top:1px solid var(--line)}.section-head h2{margin:0;font:900 clamp(2.5rem,6vw,5.3rem)/.95 Arial Black,sans-serif;text-transform:uppercase;letter-spacing:-.045em}.section-head p{max-width:420px;margin:0;color:var(--muted);font-family:Arial,sans-serif}
-    .projects{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;padding-bottom:110px}.card{position:relative;min-height:430px;background:var(--panel);border:1px solid var(--line);padding:30px;display:flex;flex-direction:column;overflow:hidden;transition:.25s ease}.card:hover{border-color:#596356;transform:translateY(-4px)}.card.hero-card{grid-column:span 8;min-height:560px;background:radial-gradient(circle at 85% 20%,rgba(91,128,255,.25),transparent 40%),linear-gradient(145deg,#131b25,#0d1117)}.card.side{grid-column:span 4}.card.half{grid-column:span 6}.index{font-size:.78rem;color:var(--muted);letter-spacing:.12em}.status{position:absolute;top:28px;right:28px;border:1px solid currentColor;padding:5px 9px;font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--acid)}.status.dev{color:#ff9e55}.glyph{height:145px;margin:46px 0 28px;display:grid;place-items:center;font:900 clamp(4rem,9vw,8rem)/1 Arial Black,sans-serif;color:rgba(255,255,255,.07);text-transform:uppercase;letter-spacing:-.08em}.hero-card .glyph{height:220px;color:rgba(104,149,255,.16);font-size:clamp(5rem,14vw,12rem)}.card h3{font:900 clamp(2rem,4vw,4.2rem)/.95 Arial Black,sans-serif;text-transform:uppercase;letter-spacing:-.04em;margin:auto 0 14px}.card p{font-family:Arial,sans-serif;color:#b5bcb4;max-width:640px;margin:0}.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.meta span{border:1px solid #333b36;padding:6px 9px;font-size:.7rem;text-transform:uppercase;color:#b9c2b8}.card-actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}.card-link{padding:10px 13px;border:1px solid #465044;text-decoration:none;text-transform:uppercase;font-size:.72rem;font-weight:900;letter-spacing:.07em}.card-link.play{background:var(--acid);border-color:var(--acid);color:#080b0e}.card-link:hover{border-color:var(--acid)}
-    .archive{padding:0 0 110px}.archive-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}.archive-item{padding:26px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:190px}.archive-item b{display:block;color:var(--acid);font-size:.72rem;letter-spacing:.12em;margin-bottom:25px}.archive-item h3{margin:0 0 10px;font:900 1.4rem Arial,sans-serif;text-transform:uppercase}.archive-item p{margin:0;color:var(--muted);font-family:Arial,sans-serif;font-size:.93rem}
-    .manifesto{display:grid;grid-template-columns:.7fr 1.3fr;gap:70px;padding:100px 0;border-top:1px solid var(--line)}.manifesto h2{font:900 clamp(2.4rem,5vw,5rem)/.95 Arial Black,sans-serif;text-transform:uppercase;margin:0;letter-spacing:-.04em}.rules{display:grid;gap:0}.rule{display:grid;grid-template-columns:70px 1fr;gap:20px;padding:24px 0;border-top:1px solid var(--line)}.rule:last-child{border-bottom:1px solid var(--line)}.rule b{color:var(--acid)}.rule h3{margin:0 0 6px;font:800 1.15rem Arial,sans-serif}.rule p{margin:0;color:var(--muted);font-family:Arial,sans-serif}
-    footer{padding:36px 0 60px;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em}
-    @media(max-width:800px){.wrap{width:min(calc(100% - 28px),var(--max))}.nav-links{display:none}.hero{grid-template-columns:1fr;min-height:auto;padding:70px 0}.signal{aspect-ratio:16/9}.section-head,.manifesto{grid-template-columns:1fr;display:grid}.projects{display:grid}.card,.card.hero-card,.card.side,.card.half{grid-column:1/-1;min-height:420px}.hero-card .glyph{height:150px}.manifesto{gap:42px}.archive-grid{grid-template-columns:1fr}.hero h1{-webkit-text-stroke:0}.hero h1 span{color:var(--ink);-webkit-text-stroke:0}footer{gap:20px;flex-direction:column}}
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.signal:after{animation:none}.card,.btn{transition:none}}
+    :root{
+      --bg:#07090d;--bg2:#0b1016;--panel:#0d131b;--panel2:#101923;--text:#edf4f7;
+      --muted:#8b9aa6;--line:#23303c;--acid:#b9ff37;--cyan:#36d9ff;--orange:#ff9c45;
+      --red:#ff5b6e;--purple:#a878ff;--max:1280px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:
+      radial-gradient(circle at 15% 10%,rgba(54,217,255,.08),transparent 28%),
+      radial-gradient(circle at 82% 0%,rgba(185,255,55,.06),transparent 26%),
+      linear-gradient(180deg,#07090d 0%,#080c11 58%,#05070a 100%);
+      color:var(--text);font:500 15px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      overflow-x:hidden
+    }
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;background-image:
+      linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+      background-size:42px 42px;mask-image:linear-gradient(to bottom,black,transparent 70%);z-index:-1
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(calc(100% - 34px),var(--max));margin:auto}
+    .nav{position:sticky;top:0;z-index:50;background:rgba(7,9,13,.78);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav-inner{height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+    .sigil{width:31px;height:31px;border:1px solid var(--acid);display:grid;place-items:center;color:var(--acid);font-weight:950;box-shadow:inset 0 0 18px rgba(185,255,55,.12),0 0 22px rgba(185,255,55,.08)}
+    .brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:.18em;margin-top:-3px}
+    .nav-links{display:flex;align-items:center;gap:22px;color:#a9b5bd;font-size:12px;text-transform:uppercase;letter-spacing:.12em}
+    .nav-links a:hover{color:white}
+    .nav-cta{border:1px solid #334352;padding:9px 12px;color:#dbe7ec}
+    .hero{min-height:calc(100vh - 70px);display:grid;align-items:center;position:relative;padding:84px 0 64px}
+    .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:70px;align-items:center}
+    .eyebrow{display:flex;align-items:center;gap:10px;color:var(--acid);font-weight:850;font-size:11px;letter-spacing:.22em;text-transform:uppercase}
+    .eyebrow:before{content:"";width:34px;height:1px;background:currentColor}
+    h1{font-size:clamp(58px,9vw,126px);line-height:.83;letter-spacing:-.075em;margin:26px 0 30px;font-weight:950;text-transform:uppercase}
+    h1 span{display:block;color:transparent;-webkit-text-stroke:1px #576570}
+    .lede{max-width:760px;font-size:clamp(18px,2vw,24px);line-height:1.45;color:#b7c3ca}
+    .lede b{color:#f4f8fa}
+    .hero-actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:34px}
+    .btn{display:inline-flex;align-items:center;gap:11px;border:1px solid #34414d;padding:13px 17px;text-transform:uppercase;font-size:11px;font-weight:900;letter-spacing:.13em;transition:.2s ease;background:#0d1319}
+    .btn:hover{transform:translateY(-2px);border-color:#647787;background:#121b24}
+    .btn-primary{background:var(--acid);border-color:var(--acid);color:#0a0d08}
+    .btn-primary:hover{background:#d0ff72;border-color:#d0ff72}
+    .arrow{font-size:16px}
+    .hero-console{border:1px solid #25313b;background:linear-gradient(180deg,rgba(16,25,35,.94),rgba(9,14,20,.94));box-shadow:0 30px 80px rgba(0,0,0,.45);position:relative}
+    .hero-console:before,.hero-console:after{content:"";position:absolute;width:32px;height:32px;border-color:var(--cyan)}
+    .hero-console:before{left:-1px;top:-1px;border-left:2px solid;border-top:2px solid}
+    .hero-console:after{right:-1px;bottom:-1px;border-right:2px solid;border-bottom:2px solid}
+    .console-head{padding:14px 17px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;color:#778894;font-size:10px;letter-spacing:.15em;text-transform:uppercase}
+    .console-body{padding:24px}
+    .portrait{height:280px;position:relative;overflow:hidden;border:1px solid #22303b;background:
+      radial-gradient(circle at 50% 32%,rgba(54,217,255,.3),transparent 16%),
+      radial-gradient(circle at 50% 50%,rgba(54,217,255,.08),transparent 42%),
+      linear-gradient(135deg,#0b1219,#070a0e)}
+    .portrait:before{content:"G";position:absolute;inset:0;display:grid;place-items:center;font-size:190px;font-weight:950;letter-spacing:-.1em;color:rgba(255,255,255,.03);text-shadow:0 0 70px rgba(54,217,255,.12)}
+    .orbit{position:absolute;border:1px solid rgba(54,217,255,.18);border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%)}
+    .o1{width:210px;height:210px}.o2{width:300px;height:120px;transform:translate(-50%,-50%) rotate(-16deg)}
+    .core{position:absolute;width:11px;height:11px;background:var(--acid);box-shadow:0 0 28px var(--acid);left:calc(50% - 5px);top:calc(50% - 5px)}
+    .scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);animation:scan 4s linear infinite;opacity:.65}
+    @keyframes scan{from{top:10%}to{top:90%}}
+    .console-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);margin-top:15px;border:1px solid var(--line)}
+    .stat{background:#0b1117;padding:14px}
+    .stat b{display:block;font-size:22px;letter-spacing:-.04em}
+    .stat span{color:#778793;text-transform:uppercase;letter-spacing:.12em;font-size:9px}
+    .ticker{border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);padding:12px 0;overflow:hidden;color:#71808c;text-transform:uppercase;font-size:10px;letter-spacing:.16em;white-space:nowrap}
+    .ticker-track{display:inline-block;animation:ticker 28s linear infinite}
+    .ticker b{color:#cdd8dd;margin:0 20px}
+    @keyframes ticker{to{transform:translateX(-50%)}}
+    section{padding:110px 0}
+    .section-top{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px;margin-bottom:46px;align-items:end}
+    .kicker{color:var(--acid);font:900 10px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.2em;text-transform:uppercase}
+    h2{font-size:clamp(38px,5vw,70px);line-height:.95;letter-spacing:-.055em;margin:11px 0 0;text-transform:uppercase}
+    .section-copy{color:#98a7b1;font-size:18px;max-width:720px}
+    .projects{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .project{grid-column:span 6;min-height:440px;border:1px solid var(--line);background:linear-gradient(145deg,#0e151d,#0a0e13 68%);position:relative;overflow:hidden;padding:30px;display:flex;flex-direction:column;justify-content:space-between;transition:.25s}
+    .project:hover{transform:translateY(-4px);border-color:#3b4b57;box-shadow:0 22px 60px rgba(0,0,0,.28)}
+    .project.featured{grid-column:span 8;min-height:520px}
+    .project.side{grid-column:span 4;min-height:520px}
+    .project:after{content:"";position:absolute;right:-70px;top:-70px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,var(--glow,rgba(54,217,255,.15)),transparent 70%);pointer-events:none}
+    .project-num{color:#5f6f7b;font:800 10px ui-monospace,monospace;letter-spacing:.16em}
+    .status{display:inline-flex;align-items:center;gap:8px;margin-left:15px;color:#9eabb3}
+    .dot{width:6px;height:6px;background:var(--status,#7d8c97);box-shadow:0 0 12px var(--status,#7d8c97)}
+    .project-visual{height:150px;margin:24px 0;border:1px solid #1f2a33;position:relative;overflow:hidden;background:
+      linear-gradient(120deg,rgba(255,255,255,.035),transparent 45%),
+      repeating-linear-gradient(90deg,transparent 0 34px,rgba(255,255,255,.018) 35px),
+      repeating-linear-gradient(0deg,transparent 0 34px,rgba(255,255,255,.018) 35px)}
+    .project-visual .mark{position:absolute;inset:0;display:grid;place-items:center;font-size:54px;font-weight:950;letter-spacing:-.07em;color:rgba(255,255,255,.10);text-transform:uppercase}
+    .project-visual .beam{position:absolute;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);left:8%;right:8%;top:50%;box-shadow:0 0 22px var(--accent)}
+    .project h3{font-size:clamp(28px,3vw,48px);line-height:.95;letter-spacing:-.045em;margin:0 0 13px;text-transform:uppercase}
+    .project p{color:#93a3ad;max-width:640px;margin:0}
+    .chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:20px}
+    .chip{border:1px solid #26343e;padding:5px 8px;color:#8fa0aa;font:800 9px ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase}
+    .project-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:24px}
+    .mini{padding:10px 12px;border:1px solid #2e3d48;font-size:10px;font-weight:900;letter-spacing:.11em;text-transform:uppercase;background:rgba(255,255,255,.015)}
+    .mini.live{border-color:color-mix(in srgb,var(--accent),#223 55%);color:#eaf1f4}
+    .mini:hover{background:rgba(255,255,255,.06)}
+    .gc{--accent:#36d9ff;--glow:rgba(54,217,255,.18);--status:#b9ff37}
+    .overdrive{--accent:#ff9c45;--glow:rgba(255,156,69,.2);--status:#ff9c45}
+    .sham{--accent:#ff5b6e;--glow:rgba(255,91,110,.19);--status:#b9ff37}
+    .buden{--accent:#ffd15a;--glow:rgba(255,209,90,.16);--status:#a878ff}
+    .rsg{--accent:#73a7ff;--glow:rgba(115,167,255,.18);--status:#73a7ff}
+    .ccrp{--accent:#c49b6c;--glow:rgba(196,155,108,.16);--status:#a878ff}
+    .principles{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);background:var(--line);gap:1px}
+    .principle{background:#0a1016;padding:32px;min-height:250px}
+    .principle .n{color:var(--acid);font:900 10px ui-monospace,monospace;letter-spacing:.2em}
+    .principle h3{font-size:24px;letter-spacing:-.03em;text-transform:uppercase;margin:42px 0 12px}
+    .principle p{color:#8f9da6;margin:0}
+    .stack{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(6,1fr)}
+    .stack div{padding:18px;border-right:1px solid var(--line);text-align:center;color:#83929d;font:800 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}
+    .stack div:last-child{border-right:0}
+    .contact{padding-bottom:70px}
+    .contact-box{border:1px solid var(--line);padding:50px;background:linear-gradient(115deg,rgba(185,255,55,.05),transparent 42%),#0a1016;display:grid;grid-template-columns:1.2fr .8fr;gap:50px;align-items:center}
+    .contact h2{margin:0 0 18px}
+    .contact p{color:#94a2ac;font-size:17px;max-width:680px}
+    .contact-right{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+    footer{border-top:1px solid rgba(255,255,255,.06);padding:24px 0 40px;color:#65747e;font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}
+    footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .reveal{opacity:0;transform:translateY(18px);transition:.7s cubic-bezier(.2,.7,.2,1)}
+    .reveal.visible{opacity:1;transform:none}
+    @media(max-width:980px){
+      .nav-links a:not(.nav-cta){display:none}.hero-grid,.section-top,.contact-box{grid-template-columns:1fr}
+      .hero{min-height:auto}.hero-console{max-width:620px}.project,.project.featured,.project.side{grid-column:span 12;min-height:430px}
+      .principles{grid-template-columns:1fr}.stack{grid-template-columns:repeat(3,1fr)}.contact-right{justify-content:flex-start}
+    }
+    @media(max-width:620px){
+      .wrap{width:min(calc(100% - 22px),var(--max))}.nav-inner{height:62px}.brand small{display:none}
+      .hero{padding-top:58px}h1{font-size:55px}.lede{font-size:17px}.project{padding:20px}.project-visual{height:115px}
+      section{padding:76px 0}.section-copy{font-size:16px}.principle{min-height:auto}.stack{grid-template-columns:repeat(2,1fr)}
+      .contact-box{padding:28px}.console-body{padding:16px}.portrait{height:220px}
+    }
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
   </style>
 </head>
 <body>
-  <header class="wrap nav"><a class="brand" href="#top"><span class="brand-mark">G</span>GURGENBABA GAMES</a><nav class="nav-links" aria-label="Hauptnavigation"><a href="#games">Projekte</a><a href="#archive">Archiv</a><a href="#principles">DNA</a></nav></header>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="Gurgenbaba Games Start">
+        <span class="sigil">G</span><span>Gurgenbaba<small>Games // Systems // Worlds</small></span>
+      </a>
+      <div class="nav-links">
+        <a href="#projects">Projekte</a><a href="#dna">DNA</a><a href="#about">Ansatz</a>
+        <a class="nav-cta" href="https://github.com/Gurgenbaba" target="_blank" rel="noreferrer">GitHub ↗</a>
+      </div>
+    </div>
+  </nav>
+
   <main id="top">
-    <section class="wrap hero"><div><div class="kicker">Independent game worlds // Germany</div><h1>Welten,<br><span>die weiter&shy;laufen.</span></h1><p class="lead">Persistente Universen, harte Entscheidungen und Systeme mit echtem Gewicht. Von galaktischer Strategie bis zum eigenen Imbiss — jedes Projekt ist anders, aber keines spielt sich von selbst.</p><div class="actions"><a class="btn primary" href="#games">Spiele ansehen ↓</a><a class="btn" href="https://genesis-colonies.com/">Genesis spielen ↗</a></div></div><div class="signal" aria-label="Sechs Spielprojekte im Portfolio"><strong>06</strong><small>Welten / Experimente / Releases</small></div></section>
-    <section class="wrap" id="games"><div class="section-head"><h2>Die Projekte</h2><p>Spielbar, in Entwicklung oder auf dem Weg zum nächsten großen Release.</p></div>
-      <div class="projects">
-        <article class="card hero-card"><span class="index">PROJECT_001</span><span class="status">Live</span><div class="glyph" aria-hidden="true">GC</div><h3>Genesis Colonies</h3><p>Ein persistentes Browser-Strategiespiel für Imperien ohne künstliche Levelgrenze. Planeten ausbauen, Flotten kommandieren, Allianzen formen, Expeditionen wagen und durch Ascension immer tiefer in die galaktische Ökonomie vordringen.</p><div class="meta"><span>Space Strategy</span><span>Persistent Universe</span><span>DE / EN</span><span>Browser</span></div><div class="card-actions"><a class="card-link play" href="https://genesis-colonies.com/">Jetzt spielen ↗</a><a class="card-link" href="https://github.com/Gurgenbaba/genesis-colonies">GitHub ↗</a></div></article>
-        <article class="card side"><span class="index">PROJECT_002</span><span class="status dev">In Entwicklung</span><div class="glyph" aria-hidden="true">BB</div><h3>Buden&shy;boss</h3><p>Oldschool Imbiss-Management mit Multiplayer-Druck: Schichten planen, Speisekarten bauen, im Großmarkt einkaufen, Skills lernen und aus einer kleinen Bude ein Revier machen.</p><div class="meta"><span>Management</span><span>Multiplayer</span><span>DE / EN</span><span>Mobile First</span></div></article>
-        <article class="card half"><span class="index">PROJECT_003</span><span class="status dev">In Entwicklung</span><div class="glyph" aria-hidden="true">MS</div><h3>MySchamhaar Revival</h3><p>Das absurde Social-RPG rund um eine lebendige Haarwurzel. Pflege, Begegnungen, Duelle, Schule, Skills und sichtbares Haarwachstum greifen als ein gemeinsames Progressionssystem ineinander.</p><div class="meta"><span>Social RPG</span><span>Persistent Character</span><span>Browser</span></div><div class="card-actions"><a class="card-link play" href="https://myschamhaar-revival-production.up.railway.app/">Jetzt spielen ↗</a></div></article>
-        <article class="card half"><span class="index">PROJECT_004</span><span class="status dev">In Entwicklung</span><div class="glyph" aria-hidden="true">OD</div><h3>Genesis Colonies: Overdrive</h3><p>Top-down Space-Roguelite im Genesis-Universum. Falcon Interceptor, Odyssey Solar Skiff, Harvest Reclaimer und Veil Specter schaffen vier völlig verschiedene Spielweisen.</p><div class="meta"><span>Roguelite</span><span>Top Down</span><span>Space Combat</span></div><div class="card-actions"><a class="card-link play" href="https://gurgenbaba.itch.io/genesis-colonies-overdrive">Jetzt spielen ↗</a></div></article>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Independent game worlds // Germany</div>
+          <h1>Welten,<span>die bleiben.</span></h1>
+          <p class="lede"><b>Persistente Browsergames, Multiplayer-Systeme und eigenständige Spielideen.</b> Von galaktischer Strategie bis Imbiss-Management, Social-RPG und RedM-Framework — jedes Projekt folgt seiner eigenen Logik.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">Projekte ansehen <span class="arrow">↓</span></a>
+            <a class="btn" href="https://genesis-colonies.com/" target="_blank" rel="noreferrer">Genesis live <span class="arrow">↗</span></a>
+          </div>
+        </div>
+        <aside class="hero-console" aria-label="Portfolio Status">
+          <div class="console-head"><span>Portfolio / Active signal</span><span>2026</span></div>
+          <div class="console-body">
+            <div class="portrait"><div class="orbit o1"></div><div class="orbit o2"></div><div class="core"></div><div class="scan"></div></div>
+            <div class="console-stats">
+              <div class="stat"><b>06</b><span>Featured projects</span></div>
+              <div class="stat"><b>04</b><span>Playable / live builds</span></div>
+              <div class="stat"><b>DE / EN</b><span>Product language</span></div>
+              <div class="stat"><b>∞</b><span>Iteration budget</span></div>
+            </div>
+          </div>
+        </aside>
       </div>
     </section>
-    <section class="wrap archive" id="archive"><div class="section-head"><h2>Aus dem Archiv</h2><p>Frühere Universen und technische Experimente, aus denen die heutigen Spiele gewachsen sind.</p></div><div class="archive-grid"><article class="archive-item"><b>LEGACY_01</b><h3>Nebula Wars</h3><p>Frühe persistente Space-Strategy-Welt und einer der direkten Vorläufer von Genesis Colonies.</p></article><article class="archive-item"><b>LEGACY_02</b><h3>Random Space Game</h3><p>Gameplay-Labor für Weltraumkampf, Progression und neue visuelle Richtungen.</p></article><article class="archive-item"><b>TOOL_01</b><h3>OGX Expedition</h3><p>Expeditions- und Analysewerkzeug aus der OGame-Community — Teil der technischen Wurzeln des Portfolios.</p></article></div></section>
-    <section class="wrap manifesto" id="principles"><h2>Kein Skin.<br>Ein System.</h2><div class="rules"><div class="rule"><b>01</b><div><h3>Progression soll spürbar sein.</h3><p>Upgrades verändern Entscheidungen, Spielweisen und die sichtbare Welt — nicht nur eine Zahl hinter dem Komma.</p></div></div><div class="rule"><b>02</b><div><h3>Persistenz schafft Geschichten.</h3><p>Deine Entscheidungen bleiben. Welten entwickeln sich weiter, auch wenn du gerade nicht hinsiehst.</p></div></div><div class="rule"><b>03</b><div><h3>Community ist Teil des Designs.</h3><p>Feedback landet nicht in einer Ablage. Es wird geprüft, simuliert und zum Bestandteil des Spiels.</p></div></div></div></section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <b>GENESIS COLONIES</b> PERSISTENT UNIVERSE <b>OVERDRIVE</b> CO-OP ROGUELITE <b>MY SCHAMHAAR</b> SOCIAL RPG <b>BUDENBOSS</b> MANAGEMENT <b>CCRP-CORE</b> REDM FRAMEWORK <b>RANDOM SPACE GAME</b> CLIENT WORK
+        <b>GENESIS COLONIES</b> PERSISTENT UNIVERSE <b>OVERDRIVE</b> CO-OP ROGUELITE <b>MY SCHAMHAAR</b> SOCIAL RPG <b>BUDENBOSS</b> MANAGEMENT <b>CCRP-CORE</b> REDM FRAMEWORK <b>RANDOM SPACE GAME</b> CLIENT WORK
+      </div>
+    </div>
+
+    <section id="projects">
+      <div class="wrap">
+        <div class="section-top reveal">
+          <div><div class="kicker">01 // Selected work</div><h2>Die Projekte.</h2></div>
+          <p class="section-copy">Nicht als Mockups gedacht, sondern als Systeme: mit Spielschleifen, Persistenz, Balancing, Deployment, Tests und laufender Weiterentwicklung.</p>
+        </div>
+
+        <div class="projects">
+          <article class="project featured gc reveal">
+            <div>
+              <div class="project-num">PROJECT_001 <span class="status"><span class="dot"></span> LIVE</span></div>
+              <div class="project-visual"><div class="mark">GC // UNIVERSE</div><div class="beam"></div></div>
+              <h3>Genesis Colonies</h3>
+              <p>Persistentes Browser-Strategiespiel für ein wachsendes Imperium: Kolonien, Forschung, Flotten, Allianzen, Handel, Ascension, Commander-Skills und serverweite Systeme in einem langlebigen Universum.</p>
+              <div class="chips"><span class="chip">Space Strategy</span><span class="chip">Persistent Universe</span><span class="chip">Browser</span><span class="chip">Live Ops</span></div>
+            </div>
+            <div class="project-actions">
+              <a class="mini live" href="https://genesis-colonies.com/" target="_blank" rel="noreferrer">Jetzt spielen ↗</a>
+              <a class="mini" href="https://github.com/Gurgenbaba/genesis-colonies" target="_blank" rel="noreferrer">Public Repo ↗</a>
+            </div>
+          </article>
+
+          <article class="project side overdrive reveal">
+            <div>
+              <div class="project-num">PROJECT_002 <span class="status"><span class="dot"></span> PLAYABLE</span></div>
+              <div class="project-visual"><div class="mark">OVERDRIVE</div><div class="beam"></div></div>
+              <h3>Genesis Colonies: OVERDRIVE</h3>
+              <p>Top-down Space-Roguelite mit vier Schiffsidentitäten, persistenter Meta-Progression, Ark-Defense und Genesis Online Co-op für bis zu vier Commander.</p>
+              <div class="chips"><span class="chip">Roguelite</span><span class="chip">Co-op</span><span class="chip">HTML5</span></div>
+            </div>
+            <div class="project-actions"><a class="mini live" href="https://gurgenbaba.itch.io/genesis-colonies-overdrive" target="_blank" rel="noreferrer">Auf itch.io spielen ↗</a></div>
+          </article>
+
+          <article class="project sham reveal">
+            <div>
+              <div class="project-num">PROJECT_003 <span class="status"><span class="dot"></span> LIVE BUILD</span></div>
+              <div class="project-visual"><div class="mark">MY SCHAMHAAR</div><div class="beam"></div></div>
+              <h3>MySchamhaar Revival</h3>
+              <p>Clean-room Social-Browser-RPG mit einem eigenen Shamhaar: Charakterentwicklung, sichtbares Haarwachstum, Pflege, Jobs, Schule, Supermarkt, Begegnungen, PvP, Gilden, Markt und Seasons.</p>
+              <div class="chips"><span class="chip">Social RPG</span><span class="chip">Persistent</span><span class="chip">PvP</span><span class="chip">Browser</span></div>
+            </div>
+            <div class="project-actions"><a class="mini live" href="https://myschamhaar-revival-production.up.railway.app/" target="_blank" rel="noreferrer">Live Build öffnen ↗</a></div>
+          </article>
+
+          <article class="project buden reveal">
+            <div>
+              <div class="project-num">PROJECT_004 <span class="status"><span class="dot"></span> IN DEVELOPMENT</span></div>
+              <div class="project-visual"><div class="mark">BUDENBOSS</div><div class="beam"></div></div>
+              <h3>BUDENBOSS</h3>
+              <p>Mobile-first Imbiss-Management mit Oldschool-Browsergame-DNA. Schichten, Speisekarten, Weiterbildung, Ausrüstung, Großmarkt und Stadt bilden den Weg vom Klappgrill zum Frittenimperium.</p>
+              <div class="chips"><span class="chip">Management</span><span class="chip">Mobile First</span><span class="chip">Multiplayer DNA</span><span class="chip">DE / EN</span></div>
+            </div>
+            <div class="project-actions"><span class="mini">Private Development</span></div>
+          </article>
+
+          <article class="project rsg reveal">
+            <div>
+              <div class="project-num">PROJECT_005 <span class="status"><span class="dot"></span> CLIENT WORK</span></div>
+              <div class="project-visual"><div class="mark">RANDOM SPACE GAME</div><div class="beam"></div></div>
+              <h3>Random Space Game</h3>
+              <p>Kundenauftrag für eine Browser-Weltraumstrategie auf FastAPI, PostgreSQL und React. Register/Login, Onboarding, Spezies, Bau, Produktion, Mining, Handel, Missionen, Forschung und Kolonisierung.</p>
+              <div class="chips"><span class="chip">Client Project</span><span class="chip">FastAPI</span><span class="chip">React</span><span class="chip">PostgreSQL</span></div>
+            </div>
+            <div class="project-actions"><a class="mini live" href="https://web-production-165f5.up.railway.app/" target="_blank" rel="noreferrer">Live Preview ↗</a></div>
+          </article>
+
+          <article class="project ccrp reveal">
+            <div>
+              <div class="project-num">PROJECT_006 <span class="status"><span class="dot"></span> FRAMEWORK</span></div>
+              <div class="project-visual"><div class="mark">CCRP // CORE</div><div class="beam"></div></div>
+              <h3>CCRP-Core</h3>
+              <p>Clean-room RedM RP/Survival-Framework: kleiner server-authoritativer Kern, First-Party UI, Charaktere, Appearance, Inventar, Survival, Spawn und langfristig ein Admin-Control-Plane statt manueller Welt-Dateiedits.</p>
+              <div class="chips"><span class="chip">RedM</span><span class="chip">Framework</span><span class="chip">Server Authority</span><span class="chip">Admin Tools</span></div>
+            </div>
+            <div class="project-actions"><span class="mini">Private Development</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="dna">
+      <div class="wrap">
+        <div class="section-top reveal">
+          <div><div class="kicker">02 // Design DNA</div><h2>Kein Skin.<br>Ein System.</h2></div>
+          <p class="section-copy">Die Projekte unterscheiden sich bewusst im Look und Genre. Was sie verbindet, ist die Idee, dass Entscheidungen, Progression und technische Architektur echten Einfluss haben sollen.</p>
+        </div>
+        <div class="principles reveal">
+          <div class="principle"><div class="n">01 / PROGRESSION</div><h3>Veränderung muss spürbar sein.</h3><p>Upgrades sollen Entscheidungen und Spielweisen verändern — nicht nur eine Zahl hinter dem Komma.</p></div>
+          <div class="principle"><div class="n">02 / PERSISTENCE</div><h3>Spielstände erzählen Geschichten.</h3><p>Welten, Charaktere und Accounts behalten Bedeutung über eine einzelne Session hinaus.</p></div>
+          <div class="principle"><div class="n">03 / OPERATIONS</div><h3>Shipping gehört zum Design.</h3><p>Tests, Migrationen, Performance, Deployments und Feedback-Loops sind Teil des Produkts, nicht die Fußnote dahinter.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="stack reveal">
+      <div>Python</div><div>TypeScript</div><div>PostgreSQL</div><div>Flask / FastAPI</div><div>Node / Fastify</div><div>Railway / Cloudflare</div>
+    </div>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="section-top reveal">
+          <div><div class="kicker">03 // Build philosophy</div><h2>Vom Prototyp<br>zum Betrieb.</h2></div>
+          <p class="section-copy">Ich baue gern dort weiter, wo viele Hobbyprojekte aufhören: Persistenz, echte Datenmodelle, Race-Condition-Schutz, Responsive UI, CI-Gates, Performance, LiveOps und die unsichtbaren Werkzeuge hinter einem funktionierenden Spiel.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact">
+      <div class="wrap">
+        <div class="contact-box reveal">
+          <div>
+            <div class="kicker">04 // Find me</div>
+            <h2>Code. Spiele.<br>Experimente.</h2>
+            <p>Öffentliche Projekte, Releases und technische Arbeit landen auf GitHub. Spielbare Builds sind direkt bei den jeweiligen Projekten verlinkt.</p>
+          </div>
+          <div class="contact-right">
+            <a class="btn btn-primary" href="https://github.com/Gurgenbaba" target="_blank" rel="noreferrer">GitHub Profil ↗</a>
+            <a class="btn" href="https://gurgenbaba.itch.io/" target="_blank" rel="noreferrer">itch.io ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
-  <footer class="wrap"><span>© 2026 Gurgenbaba Games</span><span>Built for players, not metrics.</span></footer>
+
+  <footer><div class="wrap"><span>© 2026 GURGENBABA // BUILT TO BE PLAYED</span><span>GURGENBABA.GITHUB.IO</span></div></footer>
+
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    }, { threshold: .08 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
 </body>
 </html>
