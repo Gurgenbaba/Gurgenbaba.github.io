@@ -16,7 +16,7 @@
       --acid:#c4ff3d;--stage:#35d9ff;--glow:rgba(53,217,255,.18)
     }
     *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}
+    html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);overflow-x:hidden;overscroll-behavior-x:none}
     body{
       overflow:hidden;font:500 15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
       background:
@@ -103,7 +103,7 @@
 
     .dockwrap{border-top:1px solid rgba(255,255,255,.06);background:linear-gradient(180deg,rgba(5,8,11,.5),rgba(5,8,11,.92));backdrop-filter:blur(14px)}
     .dock{height:118px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px;align-items:center}
-    .worldbtn{height:76px;text-align:left;border:1px solid #24343f;background:#080e14;padding:11px 12px;position:relative;overflow:hidden;transition:border-color .18s,background .18s}
+    .worldbtn{height:76px;min-width:0;text-align:left;border:1px solid #24343f;background:#080e14;padding:11px 12px;position:relative;overflow:hidden;transition:border-color .18s,background .18s;touch-action:manipulation}
     .worldbtn:hover{border-color:#536774;background:#0a1219}.worldbtn.active{border-color:var(--stage);background:#0a1219}
     .worldbtn:after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--stage);transition:width .24s}.worldbtn.active:after{width:100%}
     .worldbtn small{display:block;color:#5c6d78;font:800 8px/1 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}
@@ -146,13 +146,13 @@
       .topbar{height:64px}.topmeta .pill:not(.live){display:none}
       .stage{grid-template-columns:1fr;padding:42px 0 24px}.copy{padding:0 18px;grid-template-rows:auto auto auto auto auto;gap:14px}
       .title{min-height:0}.desc{min-height:0}.meta{min-height:0}.actions{min-height:0}.visual{min-height:390px}.orb{width:min(68vw,450px)}
-      .dockwrap{position:sticky;bottom:0;z-index:200}.dock{height:auto;padding:8px 0;overflow:auto;grid-template-columns:repeat(5,minmax(168px,1fr))}.worldbtn{height:70px}
+      .dockwrap{position:sticky;bottom:0;z-index:200;overflow:hidden;touch-action:manipulation}.dock{height:auto;padding:8px 0;overflow:hidden;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}.worldbtn{height:70px;min-width:0}
       .process{grid-template-columns:1fr 1fr}.case{grid-template-columns:1fr}
     }
     @media(max-width:650px){
       .wrap{width:min(calc(100% - 18px),1440px)}.brand small{display:none}.topmeta{display:none}
       .top-actions .iconbtn:first-child{display:none}.title{font-size:clamp(48px,14vw,72px)}.desc{font-size:16px}.visual{min-height:310px}.orb{width:min(76vw,340px)}
-      .dock{grid-template-columns:repeat(5,150px)}.actions .cta{width:100%}.panelbody{padding:24px 18px}.servicegrid,.dnaitems,.process,.datagrid{grid-template-columns:1fr}
+      .dock{grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;padding:6px 0}.worldbtn{height:62px;padding:8px 4px;text-align:center}.worldbtn small,.worldbtn span{display:none}.worldbtn b{margin-top:0;font-size:8px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.actions .cta{width:100%}.panelbody{padding:24px 18px}.servicegrid,.dnaitems,.process,.datagrid{grid-template-columns:1fr}
     }
     @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.boot{display:none}}
   </style>
@@ -288,35 +288,35 @@
       const worlds = [
         {
           eyebrow:'WORLD_001 // FLAGSHIP', color:'#35d9ff', glow:'rgba(53,217,255,.18)',
-          title:'Genesis', sub:'Colonies', mark:'GENESIS', mark2:'∞', state:'LIVE / EVOLVING', status:'LIVE // MULTI-UNIVERSE',
+          title:'Genesis', sub:'Colonies', nav:'Genesis', mark:'GENESIS', mark2:'∞', state:'LIVE / EVOLVING', status:'LIVE // MULTI-UNIVERSE',
           desc:'Unser langlebigstes Universum: <strong>persistente Strategie ohne künstlichen Deckel.</strong> Kolonien, Flotten, Allianzen, Ascension, Commander-Skills, Events und LiveOps greifen ineinander.',
           tags:['Persistent Universe','Space Strategy','LiveOps','Ascension','Multi Universe','Browser'],
           actions:[['ENTER UNIVERSE ↗','https://genesis-colonies.com/',1],['PUBLIC CODEBASE ↗','https://github.com/Gurgenbaba/genesis-colonies',0]]
         },
         {
           eyebrow:'WORLD_002 // GENESIS SIDEVERSE', color:'#ff9d43', glow:'rgba(255,157,67,.18)',
-          title:'OVER', sub:'DRIVE', mark:'OVER', mark2:'DRIVE', state:'PLAYABLE / GENESIS ONLINE', status:'PLAYABLE // 4 COMMANDERS',
+          title:'OVER', sub:'DRIVE', nav:'Overdrive', mark:'OVER', mark2:'DRIVE', state:'PLAYABLE / GENESIS ONLINE', status:'PLAYABLE // 4 COMMANDERS',
           desc:'Top-down Space-Roguelite mit <strong>vier Schiffsidentitäten, Ark-Defense und Genesis Online.</strong> Quick Play, Server Browser, Private Rooms, Host-Migration und Co-op für bis zu vier Commander.',
           tags:['Roguelite','Co-op','Cloudflare DO','Persistent Meta','HTML5'],
           actions:[['PLAY ON ITCH.IO ↗','https://gurgenbaba.itch.io/genesis-colonies-overdrive',1]]
         },
         {
           eyebrow:'WORLD_003 // CLEAN-ROOM REVIVAL', color:'#ff5d72', glow:'rgba(255,93,114,.17)',
-          title:'MySchamhaar', sub:'Revival', mark:'HAIR', mark2:'WORM', state:'LIVE BUILD / SOCIAL RPG', status:'LIVE BUILD // PERSISTENT',
+          title:'MySchamhaar', sub:'Revival', nav:'Schamhaar', mark:'HAIR', mark2:'WORM', state:'LIVE BUILD / SOCIAL RPG', status:'LIVE BUILD // PERSISTENT',
           desc:'Ein bewusst schräges Social-Browser-RPG, bei dem man Fortschritt <strong>direkt am Haar sieht.</strong> Pflege, Jobs, Schule, Supermarkt, Equipment, PvP, Gilden, Markt und Seasons.',
           tags:['Social RPG','Visible Progression','PvP','Guilds','Economy','Browser'],
           actions:[['OPEN LIVE BUILD ↗','https://myschamhaar-revival-production.up.railway.app/',1]]
         },
         {
           eyebrow:'WORLD_004 // MANAGEMENT', color:'#ffd35a', glow:'rgba(255,211,90,.15)',
-          title:'BUDEN', sub:'BOSS', mark:'BUDEN', mark2:'BOSS', state:'ACTIVE DEVELOPMENT', status:'IN DEVELOPMENT // MOBILE FIRST',
+          title:'BUDEN', sub:'BOSS', nav:'Budenboss', mark:'BUDEN', mark2:'BOSS', state:'ACTIVE DEVELOPMENT', status:'IN DEVELOPMENT // MOBILE FIRST',
           desc:'Vom Klappgrill zum Frittenimperium. <strong>Oldschool-Browsergame-Druck auf moderner technischer Basis.</strong> Schichten, Speisekarte, Weiterbildung, Ausrüstung, Großmarkt und Stadt.',
           tags:['Management','Mobile First','DE / EN','PostgreSQL','Slice Driven'],
           actions:[['PRIVATE DEVELOPMENT',null,0]]
         },
         {
           eyebrow:'SYSTEM_005 // REDM FRAMEWORK', color:'#c59b70', glow:'rgba(197,155,112,.16)',
-          title:'CCRP', sub:'CORE', mark:'CCRP', mark2:'CORE', state:'FOUNDATION / FRAMEWORK', status:'PRIVATE FRAMEWORK // REDM',
+          title:'CCRP', sub:'CORE', nav:'CCRP', mark:'CCRP', mark2:'CORE', state:'FOUNDATION / FRAMEWORK', status:'PRIVATE FRAMEWORK // REDM',
           desc:'RedM RP/Survival-Framework: <strong>kleiner server-authoritativer Kern, starke First-Party APIs und ein UI aus einem Guss.</strong> Langfristig mit Admin-Control-Plane statt Welt-Dateigefrickel.',
           tags:['RedM','Framework','Server Authority','First Party UI','Control Plane'],
           actions:[['PRIVATE FRAMEWORK DEVELOPMENT',null,0]]
@@ -330,7 +330,7 @@
       let active=0;
 
       function renderDock(){
-        dock.innerHTML=worlds.map((w,i)=>'<button class="worldbtn '+(i===0?'active':'')+'" data-world="'+i+'"><small>0'+(i+1)+' // '+w.status.split('//')[0]+'</small><b>'+w.title+' '+w.sub+'</b><span>'+w.status+'</span></button>').join('');
+        dock.innerHTML=worlds.map((w,i)=>'<button class="worldbtn '+(i===0?'active':'')+'" data-world="'+i+'"><small>0'+(i+1)+' // '+w.status.split('//')[0]+'</small><b>'+w.nav+'</b><span>'+w.status+'</span></button>').join('');
         dock.querySelectorAll('[data-world]').forEach(btn=>btn.addEventListener('click',()=>selectWorld(+btn.dataset.world)));
       }
 
