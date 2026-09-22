@@ -3,441 +3,314 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Gurgenbaba — Welten, die bleiben.</title>
+  <meta name="description" content="Portfolio von Gurgenbaba: persistente Spiele, Multiplayer-Systeme, Live-Projekte, Frameworks und ausgewählte Kundenarbeit.">
+  <link rel="canonical" href="https://gurgenbaba.github.io/">
   <meta name="theme-color" content="#05070a">
-  <meta name="description" content="Genesis Metaverse by Gurgenbaba — persistente Spielwelten, Genesis Colonies, OVERDRIVE und weitere interaktive Projekte.">
-  <meta property="og:title" content="Genesis Metaverse // Gurgenbaba">
-  <meta property="og:description" content="Persistent worlds. Connected ideas. Live universes.">
   <meta property="og:type" content="website">
+  <meta property="og:title" content="Gurgenbaba — Welten, die bleiben.">
+  <meta property="og:description" content="Games. Systems. Live projects. Genesis Colonies, OVERDRIVE, MySchamhaar Revival und ausgewählte Auftragsarbeit.">
   <meta property="og:url" content="https://gurgenbaba.github.io/">
-  <title>Genesis Metaverse // Gurgenbaba</title>
-  <style>
-    :root{
-      --bg:#030508;--panel:#071018;--panel2:#0b151e;--line:#203641;--line2:#304b59;
-      --text:#f5f8fa;--muted:#81939e;--soft:#afbdc5;--acid:#caff45;--cyan:#38ddff;
-      --orange:#ff9d43;--red:#ff6176;--gold:#ffd45f;--blue:#7ca7ff;--sand:#c8a17b;
-      --max:1440px;--mx:50vw;--my:20vh
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth;background:var(--bg)}
-    body{margin:0;color:var(--text);background:var(--bg);font:500 15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}
-    a{color:inherit;text-decoration:none}
-    button{font:inherit;color:inherit}
-    :focus-visible{outline:2px solid var(--acid);outline-offset:4px}
-    body:before{content:"";position:fixed;inset:0;z-index:-3;background:
-      radial-gradient(circle at var(--mx) var(--my),rgba(56,221,255,.07),transparent 31rem),
-      radial-gradient(circle at 88% 2%,rgba(202,255,69,.045),transparent 29rem),
-      linear-gradient(180deg,#05080c 0%,#020407 100%)}
-    body:after{content:"";position:fixed;inset:0;z-index:80;pointer-events:none;opacity:.023;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-    .gridfx{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.15;background:
-      linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:52px 52px;
-      mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.9) 58%,transparent 93%)}
-    #stars{position:fixed;inset:0;z-index:-1;pointer-events:none}
-    .wrap{width:min(calc(100% - 40px),var(--max));margin:auto}
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-
-    .topbar{position:sticky;top:0;z-index:60;background:rgba(3,5,8,.78);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.065)}
-    .topbar-inner{min-height:70px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:22px}
-    .brand{display:flex;align-items:center;gap:12px;min-width:0;font-weight:950;letter-spacing:.08em;text-transform:uppercase}
-    .sigil{width:35px;height:35px;flex:0 0 35px;display:grid;place-items:center;border:1px solid var(--acid);color:var(--acid);box-shadow:0 0 26px rgba(202,255,69,.08),inset 0 0 16px rgba(202,255,69,.06);font-weight:950}
-    .brand-copy{min-width:0}
-    .brand-title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .brand small{display:block;color:#647782;font:800 8px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.15em;margin-top:2px}
-    .nav{display:flex;gap:25px;align-items:center;color:#92a3ad;font-size:10px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
-    .nav a{position:relative;padding:5px 0}.nav a:after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--acid);transition:.2s}.nav a:hover{color:#fff}.nav a:hover:after{right:0}
-    .top-actions{display:flex;justify-content:flex-end;align-items:center;gap:12px}
-    .signal{display:flex;align-items:center;gap:8px;color:#71838d;font:800 8px/1 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}
-    .signal i{width:6px;height:6px;background:var(--acid);box-shadow:0 0 13px var(--acid)}
-    .github{border:1px solid #304752;padding:9px 11px;color:#c5d0d6;font:900 9px/1 ui-monospace,monospace;letter-spacing:.11em;text-transform:uppercase}
-    .menu-button{display:none;width:44px;height:44px;border:1px solid #2c434e;background:#071017;align-items:center;justify-content:center;padding:0}
-    .menu-button span,.menu-button:before,.menu-button:after{content:"";display:block;width:17px;height:1px;background:#c8d3d8;position:absolute}
-    .menu-button:before{transform:translateY(-5px)}.menu-button:after{transform:translateY(5px)}
-    .mobile-nav{display:none}
-
-    .hero{padding:84px 0 62px}
-    .hero-grid{display:grid;grid-template-columns:minmax(0,.94fr) minmax(520px,1.06fr);gap:54px;align-items:center}
-    .eyebrow{display:flex;align-items:center;gap:11px;color:var(--acid);font:900 9px/1 ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase}
-    .eyebrow:before{content:"";width:38px;height:1px;background:currentColor}
-    .hero-title{margin:24px 0 26px;text-transform:uppercase;font-weight:980;letter-spacing:-.078em;line-height:.79;font-size:clamp(66px,7.8vw,120px)}
-    .hero-title span{display:block}
-    .hero-title .outline{color:transparent;-webkit-text-stroke:1px #71858f;text-shadow:0 0 34px rgba(56,221,255,.035)}
-    .hero-copy{max-width:730px;color:#9fadb6;font-size:clamp(17px,1.35vw,21px);line-height:1.58}
-    .hero-copy strong{color:#f6fafb}
-    .hero-actions{display:grid;grid-template-columns:auto auto;justify-content:start;gap:9px;margin-top:29px}
-    .btn{min-height:45px;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:11px 14px;border:1px solid #314955;background:rgba(7,13,18,.75);font:950 9px/1 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;transition:.2s}
-    .btn:hover{transform:translateY(-2px);border-color:#708691;background:#0b151d}
-    .btn.primary{background:var(--acid);border-color:var(--acid);color:#081006}
-    .btn.tertiary{grid-column:1/-1;color:#91a2ac;background:transparent}
-    .hero-metrics{display:grid;grid-template-columns:repeat(3,1fr);max-width:670px;border:1px solid #203540;background:#203540;gap:1px;margin-top:25px}
-    .metric{background:#071018;padding:13px 14px}.metric b{display:block;font-size:19px;letter-spacing:-.04em}.metric span{display:block;margin-top:5px;color:#617681;font:800 8px/1.35 ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase}
-
-    .map-shell{position:relative;min-height:555px;border:1px solid #223844;background:
-      radial-gradient(circle at 50% 48%,rgba(56,221,255,.075),transparent 30%),
-      linear-gradient(145deg,rgba(10,20,28,.97),rgba(4,8,12,.98));overflow:hidden;
-      clip-path:polygon(0 4%,4% 0,100% 0,100% 96%,96% 100%,0 100%)}
-    .map-shell:before,.map-shell:after{content:"";position:absolute;z-index:8;width:45px;height:45px;pointer-events:none}
-    .map-shell:before{left:-1px;top:-1px;border-left:1px solid var(--cyan);border-top:1px solid var(--cyan)}
-    .map-shell:after{right:-1px;bottom:-1px;border-right:1px solid var(--cyan);border-bottom:1px solid var(--cyan)}
-    .map-head{position:absolute;left:20px;right:20px;top:17px;z-index:9;display:flex;justify-content:space-between;color:#5f7480;font:800 8px/1 ui-monospace,monospace;letter-spacing:.13em;text-transform:uppercase}
-    .map{position:absolute;inset:51px 18px 18px}
-    .scan{position:absolute;left:8%;right:8%;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);box-shadow:0 0 24px rgba(56,221,255,.55);animation:scan 5.7s linear infinite;opacity:.28;z-index:2}
-    @keyframes scan{from{top:12%}to{top:88%}}
-    .orbitline{position:absolute;left:50%;top:50%;width:72%;height:72%;transform:translate(-50%,-50%);border:1px solid rgba(56,221,255,.08);border-radius:50%}
-    .orbitline.two{width:94%;height:56%;transform:translate(-50%,-50%) rotate(-18deg)}
-    .route{position:absolute;left:50%;top:50%;height:1px;transform-origin:0 0;background:linear-gradient(90deg,rgba(56,221,255,.48),rgba(56,221,255,.05));box-shadow:0 0 10px rgba(56,221,255,.1);z-index:1}
-    .r1{width:30%;transform:rotate(-29deg)}.r2{width:34%;transform:rotate(31deg)}.r3{width:37%;transform:rotate(150deg)}.r4{width:34%;transform:rotate(207deg)}.r5{width:27%;transform:rotate(92deg)}
-    .node{position:absolute;z-index:4;border:1px solid #2a4350;background:rgba(6,12,17,.92);padding:10px 11px;text-align:left;min-width:118px;box-shadow:0 12px 30px rgba(0,0,0,.24);transition:.2s;cursor:pointer}
-    .node:hover{transform:translateY(-4px);border-color:var(--node);box-shadow:0 0 30px color-mix(in srgb,var(--node),transparent 78%)}
-    .node small{display:block;color:#627985;font:800 7px/1 ui-monospace,monospace;letter-spacing:.11em;text-transform:uppercase}
-    .node b{display:block;margin-top:6px;font-size:11px;letter-spacing:.01em;text-transform:uppercase}
-    .node i{display:block;position:absolute;width:6px;height:6px;border-radius:50%;background:var(--node);box-shadow:0 0 14px var(--node)}
-    .node.genesis{--node:var(--cyan);left:50%;top:50%;transform:translate(-50%,-50%);min-width:198px;padding:18px 16px;text-align:center;border-color:var(--cyan);background:#07131b;box-shadow:0 0 50px rgba(56,221,255,.12)}
-    .node.genesis:hover{transform:translate(-50%,-53%)}.node.genesis b{font-size:19px}.node.genesis i{left:calc(50% - 3px);top:-4px}
-    .node.overdrive{--node:var(--orange);right:6%;top:17%}.node.overdrive i{left:-4px;top:50%}
-    .node.sham{--node:var(--red);left:8%;top:15%}.node.sham i{right:-4px;top:50%}
-    .node.buden{--node:var(--gold);right:4%;bottom:15%}.node.buden i{left:-4px;top:50%}
-    .node.ccrp{--node:var(--sand);left:7%;bottom:12%}.node.ccrp i{right:-4px;top:50%}
-    .node.client{--node:var(--blue);left:50%;bottom:5%;transform:translateX(-50%)}.node.client:hover{transform:translate(-50%,-4px)}.node.client i{left:calc(50% - 3px);top:-4px}
-    .map-legend{position:absolute;left:18px;bottom:15px;z-index:8;color:#526873;font:800 7px/1 ui-monospace,monospace;letter-spacing:.11em;text-transform:uppercase}
-
-    .ticker{border-top:1px solid rgba(255,255,255,.055);border-bottom:1px solid rgba(255,255,255,.055);overflow:hidden;white-space:nowrap;color:#5e727d;font:800 9px/1 ui-monospace,monospace;letter-spacing:.15em;text-transform:uppercase;padding:12px 0}
-    .ticker-track{display:inline-block;animation:ticker 34s linear infinite}.ticker b{color:#cbd7dc;margin:0 20px}
-    @keyframes ticker{to{transform:translateX(-50%)}}
-
-    .block{padding:106px 0}
-    .section-head{display:grid;grid-template-columns:.76fr 1.24fr;gap:48px;align-items:end;margin-bottom:40px}
-    .kicker{color:var(--acid);font:900 9px/1 ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase}
-    h2{font-size:clamp(42px,5.4vw,78px);line-height:.9;letter-spacing:-.057em;margin:12px 0 0;text-transform:uppercase}
-    .section-head p{color:#91a2ac;font-size:18px;max-width:770px;margin:0}
-
-    .core-grid{display:grid;grid-template-columns:1.18fr .82fr;gap:14px}
-    .world-card,.other-card,.client-card{position:relative;overflow:hidden;border:1px solid #223843;background:linear-gradient(145deg,#09131c,#05090d);transition:.22s}
-    .world-card:hover,.other-card:hover{transform:translateY(-4px);border-color:#415c69}
-    .world-card{min-height:500px;padding:30px;display:flex;flex-direction:column;justify-content:space-between}
-    .world-card:after,.other-card:after{content:"";position:absolute;right:-88px;top:-88px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,var(--glow),transparent 70%);pointer-events:none}
-    .world-card.gc{--glow:rgba(56,221,255,.18)}.world-card.od{--glow:rgba(255,157,67,.18)}
-    .code{color:#657985;font:900 8px/1 ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase}
-    .world-art{height:184px;border:1px solid #1d303b;margin:24px 0;position:relative;overflow:hidden;background:
-      radial-gradient(circle at 50% 50%,var(--glow),transparent 36%),
-      repeating-linear-gradient(90deg,transparent 0 38px,rgba(255,255,255,.018) 39px),
-      repeating-linear-gradient(0deg,transparent 0 38px,rgba(255,255,255,.018) 39px)}
-    .world-art:before{content:"";position:absolute;left:10%;right:10%;top:50%;height:1px;background:linear-gradient(90deg,transparent,currentColor,transparent);box-shadow:0 0 24px currentColor;opacity:.55}
-    .world-art strong{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-size:clamp(38px,4vw,60px);line-height:.8;letter-spacing:-.06em;text-transform:uppercase;color:rgba(255,255,255,.085)}
-    .world-card h3,.other-card h3,.client-card h3{font-size:clamp(30px,3.2vw,50px);line-height:.92;letter-spacing:-.045em;text-transform:uppercase;margin:0 0 12px}
-    .world-card p,.other-card p,.client-card p{color:#8da0aa;margin:0;max-width:730px}
-    .chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:20px}
-    .chip{border:1px solid #273c47;padding:5px 8px;color:#81949f;font:800 8px/1 ui-monospace,monospace;letter-spacing:.095em;text-transform:uppercase}
-    .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
-    .mini{min-height:39px;display:inline-flex;align-items:center;padding:10px 12px;border:1px solid #304854;background:#071018;font:900 8px/1 ui-monospace,monospace;letter-spacing:.11em;text-transform:uppercase}
-    .mini:hover{border-color:#708894;background:#0b161f}
-
-    .world-index{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .other-card{min-height:370px;padding:26px;display:flex;flex-direction:column;justify-content:space-between}
-    .other-card.sham{--glow:rgba(255,97,118,.17)}.other-card.buden{--glow:rgba(255,212,95,.15)}.other-card.ccrp{--glow:rgba(200,161,123,.16)}
-    .card-icon{width:42px;height:42px;border:1px solid #2c424d;display:grid;place-items:center;margin:28px 0 34px;color:var(--accent);font-weight:950;font-size:17px}
-    .other-card.sham{--accent:var(--red)}.other-card.buden{--accent:var(--gold)}.other-card.ccrp{--accent:var(--sand)}
-
-    .client-card{padding:34px;display:grid;grid-template-columns:1.1fr .9fr;gap:42px;align-items:center;background:linear-gradient(135deg,rgba(124,167,255,.055),transparent 42%),#071018}
-    .deliverables{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#213641;border:1px solid #213641}
-    .deliverable{background:#071018;padding:16px}.deliverable small{display:block;color:#5f7480;font:800 8px/1 ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase}.deliverable b{display:block;margin-top:7px;font-size:14px}
-
-    .philosophy{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#203540;border:1px solid #203540}
-    .principle{background:#071018;padding:28px;min-height:230px}.principle small{color:var(--acid);font:900 8px/1 ui-monospace,monospace;letter-spacing:.14em}.principle h3{font-size:20px;line-height:1.05;text-transform:uppercase;margin:42px 0 11px}.principle p{color:#81949e;margin:0;font-size:13px}
-    .stack{border-top:1px solid #203540;border-bottom:1px solid #203540;display:grid;grid-template-columns:repeat(7,1fr);margin-top:70px}.stack div{padding:16px;border-right:1px solid #203540;text-align:center;color:#71858f;font:800 8px/1 ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase}.stack div:last-child{border-right:0}
-
-    .final{padding:84px 0 62px}
-    .final-box{border:1px solid #233a45;background:linear-gradient(120deg,rgba(202,255,69,.045),transparent 40%),#071018;padding:42px;display:grid;grid-template-columns:1.2fr .8fr;gap:36px;align-items:center}
-    .final-box h2{margin-top:0}.final-box p{color:#8fa1ab;max-width:720px;font-size:17px}.final-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
-    footer{border-top:1px solid rgba(255,255,255,.055);padding:22px 0 38px;color:#5d707b;font:800 8px/1 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-
-    .reveal{opacity:0;transform:translateY(18px);transition:.65s cubic-bezier(.2,.7,.2,1)}.reveal.on{opacity:1;transform:none}
-
-    @media(max-width:1120px){
-      .topbar-inner{grid-template-columns:1fr auto}.nav{display:none}.hero-grid,.core-grid,.client-card,.section-head,.final-box{grid-template-columns:1fr}.hero{padding-top:72px}.map-shell{min-height:510px}.section-head p{font-size:16px}.world-index{grid-template-columns:1fr}.philosophy{grid-template-columns:1fr 1fr}.final-actions{justify-content:flex-start}.stack{grid-template-columns:repeat(4,1fr)}
-    }
-
-    @media(max-width:720px){
-      .wrap{width:min(calc(100% - 22px),var(--max))}
-      .topbar-inner{min-height:62px;grid-template-columns:1fr auto}.signal,.github{display:none}.brand-title{font-size:12px}.brand small{font-size:7px}
-      .menu-button{display:flex;position:relative}
-      .mobile-nav{display:grid;grid-template-rows:0fr;transition:grid-template-rows .24s;background:rgba(3,5,8,.97);border-top:1px solid transparent}
-      .mobile-nav.open{grid-template-rows:1fr;border-top-color:rgba(255,255,255,.06)}
-      .mobile-nav-inner{overflow:hidden}.mobile-nav-links{padding:10px 11px 18px;display:grid;gap:7px}
-      .mobile-nav a{min-height:45px;border:1px solid #203641;background:#071018;display:flex;align-items:center;justify-content:space-between;padding:0 13px;font:900 9px/1 ui-monospace,monospace;letter-spacing:.11em;text-transform:uppercase;color:#a7b6be}
-
-      .hero{padding:42px 0 34px}.hero-grid{gap:30px}.eyebrow{font-size:8px;letter-spacing:.17em}.eyebrow:before{width:24px}
-      .hero-title{font-size:clamp(48px,15vw,72px);line-height:.84;margin:19px 0 20px;letter-spacing:-.068em}
-      .hero-title .outline{color:#c7d2d8;-webkit-text-stroke:0;text-shadow:none}
-      .hero-copy{max-width:31ch;font-size:16px;line-height:1.55}
-      .hero-actions{grid-template-columns:1fr;width:100%;margin-top:23px}.btn,.btn.tertiary{grid-column:auto;width:100%;min-height:50px}
-      .hero-metrics{grid-template-columns:repeat(3,1fr);margin-top:16px}.metric{padding:11px 9px}.metric b{font-size:17px}.metric span{font-size:7px;letter-spacing:.075em}
-      .map-shell{min-height:365px;clip-path:none}.map-head{left:12px;right:12px;top:12px}.map-head span:last-child{display:none}.map{inset:40px 7px 7px}
-      .orbitline{width:74%;height:68%}.orbitline.two{width:96%;height:53%}
-      .node{min-width:76px;padding:6px 7px}.node b{font-size:8px}.node small{display:none}.node.genesis{min-width:122px;padding:11px 9px}.node.genesis b{font-size:12px}
-      .node.sham{left:2%;top:13%}.node.overdrive{right:1%;top:13%}.node.ccrp{left:2%;bottom:15%}.node.buden{right:1%;bottom:15%}.node.client{bottom:3%}
-      .map-legend{display:none}
-      .ticker{font-size:8px;padding:10px 0}
-      .block{padding:72px 0}.section-head{gap:18px;margin-bottom:28px}h2{font-size:clamp(38px,12vw,56px)}.section-head p{font-size:15px}
-      .world-card{min-height:auto;padding:19px}.world-art{height:118px;margin:18px 0}.world-card h3,.other-card h3,.client-card h3{font-size:32px}
-      .other-card{min-height:auto;padding:19px}.card-icon{margin:21px 0 27px}
-      .client-card{padding:19px;gap:26px}.deliverables{grid-template-columns:1fr 1fr}.deliverable{padding:13px}.deliverable b{font-size:12px}
-      .philosophy{grid-template-columns:1fr}.principle{min-height:auto;padding:22px}.principle h3{margin-top:27px}
-      .stack{grid-template-columns:repeat(2,1fr);margin-top:45px}.stack div{min-height:45px;display:grid;place-items:center}
-      .final{padding:65px 0 40px}.final-box{padding:22px;gap:24px}.final-box p{font-size:15px}.final-actions{display:grid}.final-actions .btn{width:100%}
-    }
-
-    @media(max-width:390px){
-      .brand small{display:none}.hero-title{font-size:48px}.hero-metrics{grid-template-columns:1fr}.metric{display:flex;align-items:center;justify-content:space-between;gap:12px}.metric span{margin:0;text-align:right}.map-shell{min-height:338px}.node{min-width:70px}.node.genesis{min-width:108px}.world-card h3,.other-card h3,.client-card h3{font-size:28px}.deliverables{grid-template-columns:1fr}
-    }
-
-    @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
-  </style>
+  <meta property="og:image" content="https://gurgenbaba.github.io/assets/img/og/share.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Gurgenbaba — Welten, die bleiben.">
+  <meta name="twitter:description" content="Persistente Spiele und Systeme. Keine Demo-Silos.">
+  <meta name="twitter:image" content="https://gurgenbaba.github.io/assets/img/og/share.webp">
+  <link rel="icon" href="assets/img/brand/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/brand/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/brand/apple-touch.png">
+  <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
-  <canvas id="stars" aria-hidden="true"></canvas>
-  <div class="gridfx" aria-hidden="true"></div>
-
-  <header class="topbar">
-    <div class="wrap topbar-inner">
-      <a class="brand" href="#top" aria-label="Genesis Metaverse Start">
-        <span class="sigil">G</span>
-        <span class="brand-copy"><span class="brand-title">Genesis Metaverse</span><small>BY GURGENBABA // COMMAND PORTAL</small></span>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top">
+        <span class="brand-mark" aria-hidden="true">G</span>
+        <span>
+          Gurgenbaba
+          <small>Games // Systems // Live</small>
+        </span>
       </a>
       <nav class="nav" aria-label="Hauptnavigation">
-        <a href="#genesis">Genesis</a><a href="#worlds">Worlds</a><a href="#client">Client Work</a><a href="#system">System DNA</a>
+        <a href="#projects">Projects</a>
+        <a href="#visuals">Visuals</a>
+        <a href="#systems">Systems</a>
+        <a href="#about">About</a>
+        <a class="ext" href="https://github.com/Gurgenbaba" rel="noreferrer">GitHub</a>
       </nav>
-      <div class="top-actions">
-        <span class="signal"><i></i> systems online</span>
-        <a class="github" href="https://github.com/Gurgenbaba" target="_blank" rel="noreferrer">GitHub ↗</a>
-        <button class="menu-button" id="menuButton" type="button" aria-label="Menü öffnen" aria-expanded="false"><span></span></button>
-      </div>
-    </div>
-    <div class="mobile-nav" id="mobileNav">
-      <div class="mobile-nav-inner">
-        <nav class="wrap mobile-nav-links" aria-label="Mobile Navigation">
-          <a href="#genesis"><span>01</span> Genesis</a>
-          <a href="#worlds"><span>02</span> Other Worlds</a>
-          <a href="#client"><span>03</span> Client Work</a>
-          <a href="#system"><span>04</span> System DNA</a>
-          <a href="https://github.com/Gurgenbaba" target="_blank" rel="noreferrer"><span>↗</span> GitHub</a>
-        </nav>
-      </div>
     </div>
   </header>
 
   <main id="top">
     <section class="hero">
       <div class="wrap hero-grid">
-        <div>
-          <div class="eyebrow">Persistent worlds // evolving systems</div>
-          <h1 class="hero-title"><span>Genesis</span><span class="outline">Metaverse</span></h1>
-          <p class="hero-copy"><strong>Mehr als ein einzelnes Spiel.</strong> Genesis ist die zentrale Sci-Fi-IP hinter einem wachsenden Ökosystem aus persistenten Strategiewelten und Action-Erfahrungen. Rundherum entstehen weitere eigenständige Welten, Frameworks und Kundenprojekte.</p>
+        <div class="hero-copy">
+          <p class="kicker">Gurgenbaba</p>
+          <h1><span>Welten,</span><span>die bleiben.</span></h1>
+        </div>
+        <figure class="hero-visual hero-frame">
+          <img
+            src="assets/img/projects/genesis-colonies/overview.webp"
+            width="1600"
+            height="900"
+            alt="Genesis Colonies: Kommando-Übersicht der Kolonie Aurora Prime"
+            fetchpriority="high">
+          <figcaption class="hero-cap"><span>PROJECT_001 // LIVE</span><span>Genesis Colonies</span></figcaption>
+        </figure>
+        <div class="hero-rest">
+          <p class="hero-copy">Persistente Spiele, Multiplayer-Systeme, Frameworks. <strong>Keine wegwerfbaren Prototypen</strong> — Produkte, die weiterlaufen, wenn der Tab zu ist.</p>
           <div class="hero-actions">
-            <a class="btn primary" href="https://genesis-colonies.com/" target="_blank" rel="noreferrer">Enter Genesis Colonies ↗</a>
-            <a class="btn" href="https://gurgenbaba.itch.io/genesis-colonies-overdrive" target="_blank" rel="noreferrer">Play OVERDRIVE ↗</a>
-            <a class="btn tertiary" href="#genesis">Explore the Metaverse ↓</a>
-          </div>
-          <div class="hero-metrics" aria-label="Portfolio Übersicht">
-            <div class="metric"><b>02</b><span>Genesis experiences</span></div>
-            <div class="metric"><b>03</b><span>Original worlds</span></div>
-            <div class="metric"><b>01</b><span>Client commission</span></div>
-          </div>
-        </div>
-
-        <div class="map-shell" aria-label="Genesis Metaverse Übersicht">
-          <div class="map-head"><span>METAVERSE CARTOGRAPHY // LIVE</span><span>SECTOR G-26</span></div>
-          <div class="scan"></div>
-          <div class="map">
-            <div class="orbitline"></div><div class="orbitline two"></div>
-            <div class="route r1"></div><div class="route r2"></div><div class="route r3"></div><div class="route r4"></div><div class="route r5"></div>
-            <a class="node genesis" href="#genesis"><i></i><small>CORE UNIVERSE</small><b>Genesis Colonies</b></a>
-            <a class="node overdrive" href="#overdrive"><i></i><small>GENESIS SIDEVERSE</small><b>OVERDRIVE</b></a>
-            <a class="node sham" href="#worlds"><i></i><small>OTHER WORLD</small><b>MySchamhaar</b></a>
-            <a class="node buden" href="#worlds"><i></i><small>OTHER WORLD</small><b>BUDENBOSS</b></a>
-            <a class="node ccrp" href="#worlds"><i></i><small>FRAMEWORK</small><b>CCRP-Core</b></a>
-            <a class="node client" href="#client"><i></i><small>COMMISSION</small><b>Random Space Game</b></a>
-            <div class="map-legend">CONNECTED IDEAS // INDEPENDENT GAME LOOPS // ONE PORTFOLIO</div>
+            <a class="btn primary" href="https://genesis-colonies.com/">Enter Genesis Colonies</a>
+            <a class="btn" href="https://gurgenbaba.itch.io/genesis-colonies-overdrive">Play OVERDRIVE</a>
+            <a class="btn ghost" href="#projects">All projects</a>
           </div>
         </div>
       </div>
     </section>
 
-    <div class="ticker" aria-hidden="true"><div class="ticker-track">
-      <b>GENESIS COLONIES</b> PERSISTENT STRATEGY <b>OVERDRIVE</b> CO-OP ROGUELITE <b>MY SCHAMHAAR</b> SOCIAL RPG <b>BUDENBOSS</b> MANAGEMENT <b>CCRP-CORE</b> REDM FRAMEWORK <b>RANDOM SPACE GAME</b> CLIENT WORK
-      <b>GENESIS COLONIES</b> PERSISTENT STRATEGY <b>OVERDRIVE</b> CO-OP ROGUELITE <b>MY SCHAMHAAR</b> SOCIAL RPG <b>BUDENBOSS</b> MANAGEMENT <b>CCRP-CORE</b> REDM FRAMEWORK <b>RANDOM SPACE GAME</b> CLIENT WORK
-    </div></div>
-
-    <section class="block" id="genesis">
+    <section class="block" id="genesis" aria-labelledby="genesis-title">
       <div class="wrap">
-        <div class="section-head reveal">
-          <div><div class="kicker">01 // Genesis Core</div><h2>One IP.<br>Different fronts.</h2></div>
-          <p>Genesis Colonies bildet das persistente strategische Zentrum. OVERDRIVE übersetzt dieselbe kreative Welt in eine direkte, schnelle Action-Erfahrung. Nicht derselbe Game Loop — aber dieselbe größere Vision.</p>
+        <header class="block-head reveal">
+          <p class="kicker">Flagship</p>
+          <h2 id="genesis-title">Genesis Colonies</h2>
+          <p>Persistentes Browser-Strategiespiel. Kolonien, Flotten, Forschung, Allianzen, Ascension, Commander, LiveOps. Kein künstlicher Leveldeckel.</p>
+        </header>
+        <div class="flag">
+          <article class="reveal">
+            <img src="assets/img/projects/genesis-colonies/galaxy.webp" width="1400" height="788" alt="Galaxie-Ansicht in Genesis Colonies">
+            <div class="flag-copy">
+              <p class="meta"><span>Galaxy</span><span class="status">Persistent universe</span></p>
+              <h3>Systeme scannen. Expandieren.</h3>
+              <p>Die Karte bleibt. Fortschritt sitzt auf dem Server, nicht in einer Session.</p>
+            </div>
+          </article>
+          <article class="reveal">
+            <img src="assets/img/projects/genesis-colonies/fleet.webp" width="1400" height="788" alt="Flottenansicht in Genesis Colonies">
+            <div class="flag-copy">
+              <p class="meta"><span>Fleet</span><span class="status">Production game</span></p>
+              <h3>Flotten, Kampf, Handel.</h3>
+              <p>Bewegung und Konflikt als laufender Weltzustand, nicht als einmaliger Fight-Screen.</p>
+            </div>
+          </article>
+          <article class="reveal">
+            <img src="assets/img/projects/genesis-colonies/world-boss.webp" width="1400" height="788" alt="World-Boss-Ansicht in Genesis Colonies">
+            <div class="flag-copy">
+              <p class="meta"><span>LiveOps</span><span class="status">Shared events</span></p>
+              <h3>Events, die alle treffen.</h3>
+              <p>World Boss und laufender Betrieb gehören zum Produkt, nicht zur Roadmap-Folie.</p>
+            </div>
+          </article>
+          <article class="reveal">
+            <img src="assets/img/projects/genesis-colonies/commander.webp" width="1400" height="788" alt="Commander-Ansicht in Genesis Colonies">
+            <div class="flag-copy">
+              <p class="meta"><span>Commander</span><span class="status">Player systems</span></p>
+              <h3>Identität im Universum.</h3>
+              <p>Klassen, Skills, Fortschritt — gebunden an den Account, nicht an einen Run.</p>
+            </div>
+          </article>
         </div>
+      </div>
+    </section>
 
-        <div class="core-grid">
-          <article class="world-card gc reveal">
-            <div>
-              <div class="code">CORE_001 // LIVE UNIVERSE</div>
-              <div class="world-art" style="color:var(--cyan)"><strong>GENESIS<br>COLONIES</strong></div>
+    <section class="block" id="projects" aria-labelledby="projects-title">
+      <div class="wrap">
+        <header class="block-head reveal">
+          <p class="kicker">Projects</p>
+          <h2 id="projects-title">Gebaut, nicht nur skizziert.</h2>
+          <p>Eigene IPs, ein Framework, ein Kundenauftrag. Jede Welt hat eigene Regeln. Gemeinsam ist ihnen Persistenz.</p>
+        </header>
+
+        <div class="projects">
+          <article class="card genesis reveal">
+            <img src="assets/img/projects/genesis-colonies/empire.webp" width="1400" height="788" alt="Imperiumsübersicht in Genesis Colonies">
+            <div class="card-body">
+              <p class="meta"><span>PROJECT_001</span><span class="status">LIVE</span></p>
               <h3>Genesis Colonies</h3>
-              <p>Persistentes Browser-Strategiespiel ohne künstlichen Leveldeckel. Kolonien, Flotten, Forschung, Allianzen, Ascension, Commander-Skills, Events und LiveOps wachsen zu einem langfristigen Universum zusammen.</p>
-              <div class="chips"><span class="chip">Persistent Universe</span><span class="chip">Space Strategy</span><span class="chip">Ascension</span><span class="chip">Multi-Universe</span><span class="chip">LiveOps</span></div>
+              <p>Persistentes Browser-Strategiespiel. Keine künstliche Levelgrenze. Ein Universum, das weiterläuft.</p>
+              <div class="chips"><span class="chip">Space strategy</span><span class="chip">Flask</span><span class="chip">PostgreSQL</span><span class="chip">LiveOps</span></div>
+              <div class="actions">
+                <a class="btn primary" href="https://genesis-colonies.com/">Enter universe</a>
+                <a class="btn" href="https://github.com/Gurgenbaba/genesis-colonies">Public codebase</a>
+              </div>
             </div>
-            <div class="actions"><a class="mini" href="https://genesis-colonies.com/" target="_blank" rel="noreferrer">Enter Universe ↗</a><a class="mini" href="https://github.com/Gurgenbaba/genesis-colonies" target="_blank" rel="noreferrer">Public Codebase ↗</a></div>
           </article>
 
-          <article class="world-card od reveal" id="overdrive">
-            <div>
-              <div class="code">SIDEVERSE_002 // PLAYABLE</div>
-              <div class="world-art" style="color:var(--orange)"><strong>OVER<br>DRIVE</strong></div>
-              <h3>Genesis Colonies: OVERDRIVE</h3>
-              <p>Top-down Space-Roguelite mit vier Schiffsidentitäten, persistenter Meta-Progression, Ark-Defense und Genesis Online Co-op für bis zu vier Commander.</p>
-              <div class="chips"><span class="chip">Roguelite</span><span class="chip">Co-op</span><span class="chip">Genesis Online</span><span class="chip">HTML5</span></div>
+          <article class="card overdrive reveal">
+            <img src="assets/img/projects/overdrive/combat.webp" width="1600" height="900" alt="Gefecht in Genesis Colonies OVERDRIVE">
+            <div class="card-body">
+              <p class="meta"><span>PROJECT_002</span><span class="status">PLAYABLE</span></p>
+              <h3>OVERDRIVE</h3>
+              <p>Top-down Space-Roguelite. Vier Ship Frames, persistente Progression, Ark Defense, Genesis Online bis 4 Spieler.</p>
+              <div class="chips"><span class="chip">Roguelite</span><span class="chip">Co-op</span><span class="chip">HTML5</span><span class="chip">itch.io</span></div>
+              <div class="actions">
+                <a class="btn" href="https://gurgenbaba.itch.io/genesis-colonies-overdrive">Play on itch.io</a>
+              </div>
             </div>
-            <div class="actions"><a class="mini" href="https://gurgenbaba.itch.io/genesis-colonies-overdrive" target="_blank" rel="noreferrer">Play on itch.io ↗</a></div>
           </article>
-        </div>
-      </div>
-    </section>
 
-    <section class="block" id="worlds">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div><div class="kicker">02 // Other Worlds</div><h2>Different rules.<br>Same obsession.</h2></div>
-          <p>Die anderen Welten stehen bewusst für eigene Genres, eigene UI-Sprachen und eigene Gameplay-Regeln. Gemeinsam ist ihnen der Fokus auf Persistenz, Systemtiefe und einen echten spielbaren Zustand statt eines reinen Prototyps.</p>
-        </div>
-
-        <div class="world-index">
-          <article class="other-card sham reveal">
-            <div>
-              <div class="code">WORLD_003 // LIVE BUILD</div><div class="card-icon">M</div>
+          <article class="card myschamhaar reveal">
+            <img src="assets/img/projects/myschamhaar/live.webp" width="1280" height="800" alt="Startansicht von MySchamhaar Revival mit Charakter">
+            <div class="card-body">
+              <p class="meta"><span>PROJECT_003</span><span class="status">LIVE BUILD</span></p>
               <h3>MySchamhaar Revival</h3>
-              <p>Clean-room Social-Browser-RPG mit sichtbarer Charakterentwicklung: Haarwachstum, Pflege, Jobs, Schule, Supermarkt, PvP, Gilden, Markt und Seasons.</p>
-              <div class="chips"><span class="chip">Social RPG</span><span class="chip">PvP</span><span class="chip">Persistent</span></div>
+              <p>Clean-room Social Browser RPG. Sichtbares Haarwachstum, Pflege, Schule, Jobs, PvP, Gilden, Markt, Seasons.</p>
+              <div class="chips"><span class="chip">Social RPG</span><span class="chip">TypeScript</span><span class="chip">PostgreSQL</span></div>
+              <div class="actions">
+                <a class="btn" href="https://myschamhaar-revival-production.up.railway.app/">Open live build</a>
+              </div>
             </div>
-            <div class="actions"><a class="mini" href="https://myschamhaar-revival-production.up.railway.app/" target="_blank" rel="noreferrer">Open Live Build ↗</a></div>
           </article>
 
-          <article class="other-card buden reveal">
-            <div>
-              <div class="code">WORLD_004 // DEVELOPMENT</div><div class="card-icon">B</div>
-              <h3>BUDENBOSS</h3>
-              <p>Mobile-first Imbiss-Management mit Oldschool-Browsergame-DNA: Schichten, Speisekarten, Weiterbildung, Ausrüstung, Großmarkt und Stadt.</p>
-              <div class="chips"><span class="chip">Management</span><span class="chip">Mobile First</span><span class="chip">DE / EN</span></div>
+          <article class="card budenboss reveal">
+            <div class="phone">
+              <img src="assets/img/projects/budenboss/stand.webp" width="390" height="396" alt="Budenboss: Imbiss-Zentrale mit Schichten, Karte und Markt">
             </div>
-            <div class="actions"><span class="mini">Private Development</span></div>
+            <div class="card-body">
+              <p class="meta"><span>PROJECT_004</span><span class="status">IN DEVELOPMENT</span></p>
+              <h3>Budenboss</h3>
+              <p>Mobile-first Imbiss-Management. Schichten, Speisekarte, Weiterbildung, Ausrüstung, Großmarkt, Stadt.</p>
+              <div class="chips"><span class="chip">Management</span><span class="chip">Mobile first</span><span class="chip">DE / EN</span></div>
+              <div class="actions"><span class="btn ghost">Private development</span></div>
+            </div>
           </article>
 
-          <article class="other-card ccrp reveal">
-            <div>
-              <div class="code">SYSTEM_005 // FRAMEWORK</div><div class="card-icon">C</div>
+          <article class="card ccrp reveal">
+            <img class="diagram" src="assets/img/projects/ccrp-core/diagram.webp" width="720" height="420" alt="Originales Systemdiagramm von CCRP-Core: Core, Player, World, Admin Control Plane">
+            <div class="card-body">
+              <p class="meta"><span>PROJECT_006</span><span class="status">FRAMEWORK / IN DEVELOPMENT</span></p>
               <h3>CCRP-Core</h3>
-              <p>Clean-room RedM RP/Survival-Framework mit server-authoritativem Kern, First-Party UI und langfristigem Admin-Control-Plane statt manueller Welt-Dateiedits.</p>
-              <div class="chips"><span class="chip">RedM</span><span class="chip">Framework</span><span class="chip">Control Plane</span></div>
+              <p>Clean-room RedM RP/Survival-Core. Server-authoritative. Welt, Jobs und Shops sollen über ein Admin-Control-Plane laufen — nicht über ständige Dateiedits.</p>
+              <div class="chips"><span class="chip">RedM</span><span class="chip">Framework</span><span class="chip">Control plane</span></div>
+              <div class="actions"><span class="btn ghost">Private framework</span></div>
             </div>
-            <div class="actions"><span class="mini">Private Framework Development</span></div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="block" id="client">
+    <section class="block" id="visuals" aria-labelledby="visuals-title">
       <div class="wrap">
-        <div class="section-head reveal">
-          <div><div class="kicker">03 // Commissioned Development</div><h2>Built for<br>someone else.</h2></div>
-          <p>Random Space Game ist bewusst getrennt von den eigenen IPs: ein Kundenauftrag, der zeigt, dass dieselbe System- und Full-Stack-Arbeit auch für externe Projekte funktioniert.</p>
+        <header class="block-head reveal">
+          <p class="kicker">In action</p>
+          <h2 id="visuals-title">Selected screens</h2>
+          <p>Echte Oberflächen. Keine Moodboards.</p>
+        </header>
+        <div class="visuals">
+          <button class="visual reveal" data-full="assets/img/projects/genesis-colonies/galaxy.webp" data-alt="Galaxie in Genesis Colonies">
+            <img src="assets/img/projects/genesis-colonies/galaxy.webp" width="1400" height="788" alt="Galaxie in Genesis Colonies">
+            <span>Genesis // Galaxy</span>
+          </button>
+          <button class="visual reveal" data-full="assets/img/projects/overdrive/ark-command.webp" data-alt="Ark Command in OVERDRIVE">
+            <img src="assets/img/projects/overdrive/ark-command.webp" width="1400" height="788" alt="Ark Command in OVERDRIVE">
+            <span>OVERDRIVE // Ark</span>
+          </button>
+          <button class="visual reveal" data-full="assets/img/projects/myschamhaar/live.webp" data-alt="MySchamhaar Revival Start">
+            <img src="assets/img/projects/myschamhaar/live.webp" width="1280" height="800" alt="MySchamhaar Revival Start">
+            <span>MySchamhaar // Start</span>
+          </button>
         </div>
+      </div>
+    </section>
 
-        <article class="client-card reveal">
-          <div>
-            <div class="code">CLIENT_001 // RANDOM SPACE GAME</div>
-            <h3>Browser-Weltraumstrategie als Auftragsarbeit.</h3>
-            <p>FastAPI, React und PostgreSQL bilden den Kern. Umgesetzt wurden Auth, Onboarding, Spezies, Gebäude, Tick-Produktion, Mining, Handel, Missionen, Forschung, Systemkarte und Kolonisierung.</p>
-            <div class="actions"><a class="mini" href="https://web-production-165f5.up.railway.app/" target="_blank" rel="noreferrer">Open Client Preview ↗</a></div>
-          </div>
-          <div class="deliverables">
-            <div class="deliverable"><small>Product</small><b>Browser Strategy Game</b></div>
-            <div class="deliverable"><small>Backend</small><b>FastAPI</b></div>
-            <div class="deliverable"><small>Frontend</small><b>React</b></div>
-            <div class="deliverable"><small>Database</small><b>PostgreSQL</b></div>
-            <div class="deliverable"><small>Scope</small><b>Full-Stack Game Systems</b></div>
-            <div class="deliverable"><small>Type</small><b>Client Commission</b></div>
+    <section class="block" id="client" aria-labelledby="client-title">
+      <div class="wrap">
+        <header class="block-head reveal">
+          <p class="kicker">Commission</p>
+          <h2 id="client-title">Für jemand anderen gebaut.</h2>
+          <p>Kein Gurgenbaba-IP. Ein Kundenprojekt, das dieselbe Systemarbeit außerhalb der eigenen Welten zeigt.</p>
+        </header>
+        <article class="client reveal">
+          <img src="assets/img/projects/random-space-game/preview.webp" width="1400" height="875" alt="Landing und Login der Kundenarbeit Random Space Game">
+          <div class="client-body">
+            <p class="badge">CLIENT WORK</p>
+            <p class="meta"><span>PROJECT_005</span><span>Customer project</span></p>
+            <h3>Random Space Game</h3>
+            <p>Browser-Weltraumstrategie als Auftragsarbeit. FastAPI, React, PostgreSQL. Auth, Spezies, Gebäude, Tick-Produktion, Mining, Handel, Missionen, Forschung, Kolonisierung.</p>
+            <div class="chips">
+              <span class="chip">Client commission</span>
+              <span class="chip">FastAPI</span>
+              <span class="chip">React</span>
+              <span class="chip">PostgreSQL</span>
+            </div>
+            <div class="actions">
+              <a class="btn" href="https://web-production-165f5.up.railway.app/">Open client preview</a>
+            </div>
           </div>
         </article>
       </div>
     </section>
 
-    <section class="block" id="system">
+    <section class="block" id="systems" aria-labelledby="systems-title">
       <div class="wrap">
-        <div class="section-head reveal">
-          <div><div class="kicker">04 // Build Philosophy</div><h2>Not just<br>a prototype.</h2></div>
-          <p>Der eigentliche Unterschied entsteht nach dem ersten spielbaren Build: Persistenz, Datenmodelle, Race-Condition-Schutz, Responsive UX, CI-Gates, Performance, Admin-Tools und LiveOps.</p>
+        <header class="block-head reveal">
+          <p class="kicker">Systems</p>
+          <h2 id="systems-title">Nicht nur Oberfläche.</h2>
+          <p>Der Unterschied sitzt hinter dem ersten spielbaren Build: Autorität, Persistenz, Betrieb.</p>
+        </header>
+        <div class="systems reveal">
+          <article>
+            <p class="meta"><span>01</span><span class="status">Authority</span></p>
+            <h3>Server entscheidet</h3>
+            <p>Spielzustand, Combat, Inventar, Economy — serverseitig. Clients zeigen, sie besitzen die Welt nicht.</p>
+          </article>
+          <article>
+            <p class="meta"><span>02</span><span class="status">Persistence</span></p>
+            <h3>Stände tragen Geschichte</h3>
+            <p>PostgreSQL, Migrationen, Accounts und Welten, die Sessions überleben.</p>
+          </article>
+          <article>
+            <p class="meta"><span>03</span><span class="status">Realtime</span></p>
+            <h3>Mehrere Spieler</h3>
+            <p>WebSockets, Matchmaking, Räume, Host-Migration. Co-op ist kein Screenshot.</p>
+          </article>
+          <article>
+            <p class="meta"><span>04</span><span class="status">Operations</span></p>
+            <h3>Live ist ein Zustand</h3>
+            <p>Railway, Cloudflare, CI, Performance, Admin-Tools, Seasons.</p>
+          </article>
         </div>
-        <div class="philosophy reveal">
-          <div class="principle"><small>01 / PROGRESSION</small><h3>Upgrades verändern Entscheidungen.</h3><p>Kein reines Prozent-Klicken. Fortschritt soll neue Optionen, Routen oder sichtbare Zustände erzeugen.</p></div>
-          <div class="principle"><small>02 / PERSISTENCE</small><h3>Spielstände tragen Geschichte.</h3><p>Welten, Accounts und Charaktere sollen über einzelne Sessions hinaus Bedeutung behalten.</p></div>
-          <div class="principle"><small>03 / OPERATIONS</small><h3>Live ist ein eigener Zustand.</h3><p>Deployments, Migrationen, Monitoring, Performance und Feedback gehören zum Produkt.</p></div>
-          <div class="principle"><small>04 / UI LANGUAGE</small><h3>Jede Welt braucht eine Stimme.</h3><p>Keine generische Bubble-UI. Produkt, Genre und Interaktion bestimmen die visuelle Sprache.</p></div>
+        <div class="stack reveal">
+          <span>Python</span><span>TypeScript</span><span>PostgreSQL</span><span>Flask / FastAPI</span><span>Node / Fastify</span><span>WebSockets</span><span>Cloudflare Workers</span><span>Railway</span><span>CI</span><span>Mobile-first</span>
         </div>
-        <div class="stack reveal"><div>Python</div><div>TypeScript</div><div>PostgreSQL</div><div>Flask / FastAPI</div><div>Node / Fastify</div><div>Railway</div><div>Cloudflare</div></div>
       </div>
     </section>
 
-    <section class="final">
-      <div class="wrap final-box reveal">
-        <div><div class="kicker">05 // Gurgenbaba</div><h2>Games.<br>Systems.<br>Worlds.</h2><p>Öffentliche Builds, Repositories und Releases sind direkt in den jeweiligen Projekten verlinkt. Der Rest entsteht dort, wo Code, Spielsystem und Betrieb gleichzeitig gelöst werden müssen.</p></div>
-        <div class="final-actions"><a class="btn primary" href="https://github.com/Gurgenbaba" target="_blank" rel="noreferrer">GitHub Profile ↗</a><a class="btn" href="https://gurgenbaba.itch.io/" target="_blank" rel="noreferrer">itch.io ↗</a></div>
+    <section class="block" id="about" aria-labelledby="about-title">
+      <div class="wrap">
+        <div class="close reveal">
+          <div>
+            <p class="kicker">Gurgenbaba</p>
+            <h2 id="about-title">Games. Systems. Worlds.</h2>
+            <p>Öffentliche Builds liegen bei den Projekten. Der Rest entsteht dort, wo Code, Spielsystem und Betrieb gleichzeitig gelöst werden müssen.</p>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="https://github.com/Gurgenbaba">GitHub profile</a>
+            <a class="btn" href="https://gurgenbaba.itch.io/">itch.io</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer><div class="wrap footer-inner"><span>© 2026 GURGENBABA // GENESIS METAVERSE</span><span style="display:flex;gap:14px;flex-wrap:wrap"><a href="/impressum.html">IMPRESSUM</a><a href="/datenschutz.html">DATENSCHUTZ</a><span>GURGENBABA.GITHUB.IO</span></span></div></footer>
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 Gurgenbaba</span>
+      <span>
+        <a href="impressum.html">Impressum</a>
+        ·
+        <a href="datenschutz.html">Datenschutz</a>
+        ·
+        gurgenbaba.github.io
+      </span>
+    </div>
+  </footer>
 
-  <script>
-    (function(){
-      var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var root=document.documentElement;
-      var raf=0;
-      addEventListener('pointermove',function(e){
-        if(raf)return;
-        raf=requestAnimationFrame(function(){root.style.setProperty('--mx',e.clientX+'px');root.style.setProperty('--my',e.clientY+'px');raf=0});
-      },{passive:true});
-
-      var menuButton=document.getElementById('menuButton');
-      var mobileNav=document.getElementById('mobileNav');
-      if(menuButton&&mobileNav){
-        menuButton.addEventListener('click',function(){
-          var open=mobileNav.classList.toggle('open');
-          menuButton.setAttribute('aria-expanded',String(open));
-          menuButton.setAttribute('aria-label',open?'Menü schließen':'Menü öffnen');
-        });
-        mobileNav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mobileNav.classList.remove('open');menuButton.setAttribute('aria-expanded','false')})});
-      }
-
-      var nodes=document.querySelectorAll('.reveal');
-      if('IntersectionObserver' in window&&!reduced){
-        var io=new IntersectionObserver(function(entries){
-          entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}});
-        },{threshold:.07});
-        nodes.forEach(function(el){io.observe(el)});
-      }else{nodes.forEach(function(el){el.classList.add('on')})}
-
-      var canvas=document.getElementById('stars');
-      var ctx=canvas.getContext('2d',{alpha:true}),stars=[],w=0,h=0,dpr=1;
-      function resize(){
-        dpr=Math.min(devicePixelRatio||1,1.4);w=innerWidth;h=innerHeight;
-        canvas.width=Math.floor(w*dpr);canvas.height=Math.floor(h*dpr);canvas.style.width=w+'px';canvas.style.height=h+'px';
-        ctx.setTransform(dpr,0,0,dpr,0,0);
-        var count=Math.min(150,Math.max(55,Math.floor(w*h/11000)));
-        stars=Array.from({length:count},function(){return{x:Math.random()*w,y:Math.random()*h,z:.2+Math.random()*.8,r:.35+Math.random()*.9,s:.02+Math.random()*.065}});
-      }
-      function draw(){
-        ctx.clearRect(0,0,w,h);
-        stars.forEach(function(s){s.y+=s.s;if(s.y>h+2){s.y=-2;s.x=Math.random()*w}ctx.globalAlpha=.12+s.z*.35;ctx.fillStyle=s.z>.92?'#caff45':'#bcecf7';ctx.fillRect(s.x,s.y,s.r,s.r)});
-        ctx.globalAlpha=1;if(!reduced)requestAnimationFrame(draw);
-      }
-      resize();draw();addEventListener('resize',resize,{passive:true});
-    })();
-  </script>
+  <div class="lightbox" id="lightbox" hidden>
+    <button type="button" data-close aria-label="Schließen">Close</button>
+    <img alt="">
+  </div>
+  <script src="assets/js/site.js"></script>
 </body>
 </html>

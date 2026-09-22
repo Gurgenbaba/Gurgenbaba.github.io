@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" role="img">
+  <rect width="720" height="420" fill="#0b1014"/>
+  <rect x="0.5" y="0.5" width="719" height="419" fill="none" stroke="#2a3a44"/>
+  <text x="24" y="32" fill="#c4a27a" font-family="Consolas, monospace" font-size="11">SYSTEM_006 // DIAGRAM - NOT A SCREENSHOT</text>
+  <text x="24" y="58" fill="#e8eef1" font-family="Segoe UI, sans-serif" font-size="22" font-weight="700">CCRP-CORE</text>
+  <text x="24" y="80" fill="#8b9ba4" font-family="Segoe UI, sans-serif" font-size="13">Server authoritative. Small core. World edits through control plane.</text>
+  <g font-family="Consolas, monospace" font-size="11">
+    <rect x="24" y="108" width="210" height="64" fill="#10171c" stroke="#3a4a52"/>
+    <text x="36" y="132" fill="#c4a27a">CORE</text>
+    <text x="36" y="152" fill="#d5dee3">Characters / Spawn / Survival</text>
+    <rect x="255" y="108" width="210" height="64" fill="#10171c" stroke="#3a4a52"/>
+    <text x="267" y="132" fill="#c4a27a">PLAYER</text>
+    <text x="267" y="152" fill="#d5dee3">Appearance / Inventory / Jobs</text>
+    <rect x="486" y="108" width="210" height="64" fill="#10171c" stroke="#3a4a52"/>
+    <text x="498" y="132" fill="#c4a27a">WORLD</text>
+    <text x="498" y="152" fill="#d5dee3">Interactions / Economy / Shops</text>
+    <rect x="24" y="196" width="672" height="88" fill="#141c12" stroke="#c6f04a"/>
+    <text x="36" y="226" fill="#c6f04a">ADMIN / MODERATION / WORLD CONTROL</text>
+    <text x="36" y="250" fill="#d5dee3">Houses, jobs, shops and content stay out of constant file edits.</text>
+    <text x="36" y="268" fill="#8b9ba4">Operators drive the world from a control plane.</text>
+    <rect x="24" y="308" width="672" height="84" fill="#10171c" stroke="#2a3a44"/>
+    <text x="36" y="338" fill="#8b9ba4">AUTHORITY</text>
+    <text x="36" y="360" fill="#d5dee3">Game state is decided on the server. Clients present. They do not own the world.</text>
+    <text x="36" y="378" fill="#8b9ba4">RedM / Persistence / First-party UI / In development</text>
+  </g>
+</svg>

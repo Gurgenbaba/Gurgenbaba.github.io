@@ -1,5 +1,5 @@
-# Gurgenbaba Games
+# Gurgenbaba
 
-Öffentliche Landingpage für die Spielprojekte von Gurgenbaba.
+Öffentliches Portfolio.
 
-Live: https://gurgenbaba.github.io
+Live: https://gurgenbaba.github.io/
