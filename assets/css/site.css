@@ -656,7 +656,9 @@ section[id] { scroll-margin-top: 72px; }
 }
 .client-body { padding: 28px; }
 .client.demo-case { --accent: #e07a4f; }
-.demo-case .badge { border-color: #e07a4f; color: #e07a4f; }
+.demo-case .badge { border-color: var(--accent); color: var(--accent); }
+.client.app-case { --accent: #8b8bff; }
+.demo-case + .demo-case { margin-top: 16px; }
 .demo-shot { display: block; overflow: hidden; }
 .demo-shot img {
   width: 100%;
@@ -1565,7 +1567,7 @@ body.legal .links a { color: #96a8b2; }
   translate: 0 -3px;
 }
 .client:hover { border-color: var(--cl); box-shadow: 0 18px 60px -28px var(--cl); }
-.client.demo-case:hover { border-color: #e07a4f; box-shadow: 0 18px 60px -28px #e07a4f; }
+.client.demo-case:hover { border-color: var(--accent); box-shadow: 0 18px 60px -28px var(--accent); }
 .card:hover img:not(.diagram), .client:hover > img, .demo-case:hover .demo-shot img { transform: scale(1.04); }
 .spot.spot > * {
   background-image: radial-gradient(420px circle at var(--mx, -999px) var(--my, -999px), rgba(198, 240, 74, 0.09), transparent 60%);

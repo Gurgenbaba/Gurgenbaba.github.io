@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Formkurve – Training &amp; Ernährung (Demo)</title>
+  <meta name="description" content="Demo-Web-App von Gurgenbaba: Kalorien und Makros tracken, Training abhaken, Fortschritt sehen. Läuft komplett im Browser.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#f2f4f8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)">
+  <meta property="og:title" content="Formkurve – Demo-Web-App von Gurgenbaba">
+  <meta property="og:description" content="Fitness- und Ernährungs-App als Demo. So könnte Ihre Web-App aussehen.">
+  <meta property="og:image" content="https://gurgenbaba.github.io/assets/img/projects/demo-fitness/preview.webp">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="app.css">
+  <script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("fx")</script>
+</head>
+<body>
+  <div class="demo-bar">
+    <p><strong>Demo-Web-App von Gurgenbaba.</strong> Die App ist erfunden, deine Eingaben bleiben nur in diesem Browser.</p>
+    <a href="/#preise">So eine Web-App ab 2.900 € →</a>
+  </div>
+
+  <div class="app">
+    <aside class="side">
+      <a class="brand" href="#heute" aria-label="Formkurve, Heute">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9"/><path d="M6 21c4 0 5-10 10-10s5 7 10 7"/></svg>
+        <span>Formkurve</span>
+      </a>
+      <nav class="nav" aria-label="App-Navigation" data-nav></nav>
+      <div class="side-foot">
+        <p>Demo · Daten nur in deinem Browser</p>
+        <button type="button" class="link" data-reset>Demo zurücksetzen</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="bar">
+        <div>
+          <p class="date" data-date></p>
+          <h1 data-title>Heute</h1>
+        </div>
+        <a class="me" href="#profil" aria-label="Profil" data-initial>A</a>
+      </header>
+
+      <section class="view" data-view="heute" aria-label="Heute">
+        <div class="grid">
+          <article class="card ring-card">
+            <h2>Kalorien</h2>
+            <div class="ring-wrap">
+              <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="track" cx="60" cy="60" r="52"/>
+                <circle class="fill" cx="60" cy="60" r="52" data-ring/>
+              </svg>
+              <div class="ring-text"><b data-left>0</b><span data-left-label>kcal übrig</span></div>
+            </div>
+            <dl class="ring-stats">
+              <div><dt>Gegessen</dt><dd data-eaten>0</dd></div>
+              <div><dt>Ziel</dt><dd data-goal>0</dd></div>
+            </dl>
+          </article>
+
+          <article class="card macros-card">
+            <h2>Makros</h2>
+            <div class="macros" data-macros></div>
+          </article>
+
+          <article class="card water-card">
+            <div class="card-head"><h2>Wasser</h2><span class="muted" data-water-text></span></div>
+            <div class="water" data-water></div>
+            <p class="muted small water-tip">Ein Glas = 250 ml. Tippen zum Auffüllen.</p>
+          </article>
+
+          <article class="card train-card">
+            <div class="card-head"><h2>Training heute</h2><span class="tag" data-plan-tag></span></div>
+            <p class="big" data-plan-name></p>
+            <div class="progress"><span data-plan-progress></span></div>
+            <p class="muted" data-plan-text></p>
+            <a class="btn primary" href="#training" data-plan-btn>Training starten</a>
+          </article>
+
+          <article class="card weight-card">
+            <div class="card-head"><h2>Gewicht</h2><button type="button" class="link" data-add-weight>+ Eintragen</button></div>
+            <p class="big"><span data-weight></span> <small>kg</small></p>
+            <p class="muted" data-weight-trend></p>
+            <svg class="spark" viewBox="0 0 200 50" preserveAspectRatio="none" aria-hidden="true" data-spark></svg>
+          </article>
+
+          <article class="card streak">
+            <div>
+              <h2>Serie</h2>
+              <p class="big" data-streak></p>
+              <p class="muted">Tage in Folge im Kalorienziel (±10 %)</p>
+            </div>
+            <div class="week-dots" data-week-dots></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" data-view="essen" aria-label="Ernährung" hidden>
+        <div class="card sum-card" data-day-sum></div>
+        <div class="meals" data-meals></div>
+      </section>
+
+      <section class="view" data-view="training" aria-label="Training" hidden>
+        <div class="card plan-head" data-plan-head></div>
+        <div class="exercises" data-exercises></div>
+        <div class="finish" data-finish></div>
+      </section>
+
+      <section class="view" data-view="fortschritt" aria-label="Fortschritt" hidden>
+        <div class="grid stats" data-stats></div>
+        <article class="card chart-card">
+          <div class="card-head"><h2>Gewichtsverlauf</h2><span class="muted">letzte 30 Tage</span></div>
+          <svg class="chart" viewBox="0 0 640 240" role="img" aria-label="Gewichtsverlauf der letzten 30 Tage" data-weight-chart></svg>
+        </article>
+        <article class="card chart-card">
+          <div class="card-head"><h2>Kalorien</h2><span class="muted">letzte 7 Tage</span></div>
+          <svg class="chart" viewBox="0 0 640 220" role="img" aria-label="Kalorien der letzten 7 Tage" data-kcal-chart></svg>
+        </article>
+      </section>
+
+      <section class="view" data-view="profil" aria-label="Profil" hidden>
+        <form class="card profile" data-profile novalidate>
+          <h2>Deine Daten</h2>
+          <div class="fields">
+            <label>Name<input name="name" maxlength="30" autocomplete="off"></label>
+            <label>Geschlecht
+              <select name="sex"><option value="m">männlich</option><option value="w">weiblich</option></select></label>
+            <label>Alter<input name="age" type="number" min="14" max="99" inputmode="numeric"></label>
+            <label>Größe (cm)<input name="height" type="number" min="120" max="230" inputmode="numeric"></label>
+            <label>Gewicht (kg)<input name="weight" type="number" min="35" max="250" step="0.1" inputmode="decimal"></label>
+            <label>Alltag
+              <select name="activity">
+                <option value="1.2">Sitzend, kaum Bewegung</option>
+                <option value="1.375">Leicht aktiv (1–2× Sport)</option>
+                <option value="1.55">Aktiv (3–4× Sport)</option>
+                <option value="1.725">Sehr aktiv (5–6× Sport)</option>
+              </select></label>
+            <label class="wide">Ziel
+              <select name="goal">
+                <option value="cut">Abnehmen (−400 kcal)</option>
+                <option value="keep">Gewicht halten</option>
+                <option value="bulk">Muskeln aufbauen (+250 kcal)</option>
+              </select></label>
+          </div>
+          <div class="targets" data-targets></div>
+          <p class="muted small">Berechnung nach Mifflin-St Jeor mal Aktivitätsfaktor. Protein 2 g und Fett 0,8 g pro kg Körpergewicht, der Rest aus Kohlenhydraten. Richtwerte, keine medizinische Beratung.</p>
+          <button type="submit" class="btn primary">Speichern</button>
+        </form>
+        <article class="card about-demo">
+          <h2>Über diese Demo</h2>
+          <p>Formkurve zeigt, was eine Web-App von Gurgenbaba kann: mehrere Ansichten, Formulare mit Live-Berechnung, eigene Diagramme, Timer, dunkles Design passend zum Handy. Auf dem Handy wirkt sie wie eine installierte App.</p>
+          <p>In einem echten Projekt kämen Login, Datenbank und Sync zwischen Geräten dazu. Hier bleibt alles im Speicher deines Browsers.</p>
+          <div class="row">
+            <a class="btn primary" href="/#kontakt">Eigene App anfragen</a>
+            <button type="button" class="btn" data-reset>Demo zurücksetzen</button>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <nav class="bottom" aria-label="App-Navigation" data-nav></nav>
+
+  <dialog class="sheet" data-food-dialog aria-labelledby="food-title">
+    <form method="dialog" class="sheet-in" data-food-form>
+      <div class="sheet-head">
+        <h2 id="food-title" data-food-title>Hinzufügen</h2>
+        <button type="button" class="x" data-close aria-label="Schließen">×</button>
+      </div>
+      <input class="search" type="search" placeholder="Lebensmittel suchen, z. B. Skyr" autocomplete="off" data-food-search aria-label="Lebensmittel suchen">
+      <ul class="food-list" data-food-list></ul>
+      <div class="portion" data-portion hidden>
+        <p data-portion-name></p>
+        <label>Menge (g)<input type="number" min="1" max="2000" inputmode="numeric" data-portion-grams></label>
+        <p class="muted" data-portion-kcal></p>
+        <button type="button" class="btn primary" data-portion-add>Eintragen</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="sheet small" data-weight-dialog aria-labelledby="w-title">
+    <form method="dialog" class="sheet-in" data-weight-form>
+      <div class="sheet-head"><h2 id="w-title">Gewicht heute</h2><button type="button" class="x" data-close aria-label="Schließen">×</button></div>
+      <label>Gewicht (kg)<input type="number" min="35" max="250" step="0.1" inputmode="decimal" data-weight-input required></label>
+      <button type="submit" class="btn primary">Speichern</button>
+    </form>
+  </dialog>
+
+  <div class="timer" data-timer hidden role="status">
+    <span>Pause</span><b data-timer-left>1:30</b>
+    <button type="button" data-timer-plus>+15 s</button>
+    <button type="button" data-timer-skip>Weiter</button>
+  </div>
+  <div class="toast" data-toast role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

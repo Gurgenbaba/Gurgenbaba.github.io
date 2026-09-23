@@ -14,6 +14,7 @@ Optimized copies only. Source projects were not modified.
 | `img/projects/budenboss/stand.webp` | Crop below debug overlay from `BUDENBOSS/.../street-review/stand-t0.png` | crop of real UI |
 | `img/projects/random-space-game/preview.webp` | Live capture `https://web-production-165f5.up.railway.app/` | capture, client work |
 | `img/projects/demo-salon/preview.webp` | Capture of `/demo/salon/` in this repo | capture of own demo |
+| `img/projects/demo-fitness/preview.webp` | Capture of `/demo/fitness/` in this repo | capture of own demo |
 | `img/projects/ccrp-core/diagram.svg` | Drawn for this repo | original diagram, shipped as SVG, not a screenshot |
 | `img/og/share.webp` | Composed from Genesis overview copy | social preview |
 | `img/brand/*` | Drawn for this repo | favicon / apple-touch |
