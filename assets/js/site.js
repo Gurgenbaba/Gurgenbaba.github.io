@@ -491,7 +491,7 @@
   var attachInfo = form.querySelector("[data-attach-info]");
   var honeypot = form.querySelector("[data-hp]");
   var doneIndex = steps.indexOf(form.querySelector('[data-step="done"]'));
-  var MAX_FILES = 5, MAX_FILE = 8 * 1024 * 1024, MAX_TOTAL = 20 * 1024 * 1024;
+  var MAX_FILES = 5, MAX_FILE = 8 * 1024 * 1024, MAX_TOTAL = 10 * 1024 * 1024;
   var EXT = /\.(pdf|png|jpe?g|webp|gif|heic|txt|md|csv|rtf|docx?|odt|xlsx?|ods|pptx?|odp|fig|sketch|psd|ai)$/i;
 
   function touch() { if (!startedAt) startedAt = Date.now(); }
