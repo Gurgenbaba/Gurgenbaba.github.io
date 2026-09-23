@@ -12,7 +12,6 @@ Optimized copies only. Source projects were not modified.
 | `img/projects/genesis-colonies/commander.webp` | `.../shot-12-commander.webp` | copy, recompressed |
 | `img/projects/overdrive/combat.webp` | `genesis-colonies-overdrive/release/itch/screenshots/combat.png` | copy, WebP |
 | `img/projects/overdrive/ark-command.webp` | `.../screenshots/ark-command.png` | copy, WebP |
-| `img/projects/myschamhaar/live.webp` | Live capture `https://myschamhaar-revival-production.up.railway.app/` (Start) | capture |
 | `img/projects/budenboss/stand.webp` | Crop below debug overlay from `BUDENBOSS/.../street-review/stand-t0.png` | crop of real UI |
 | `img/projects/random-space-game/preview.webp` | Live capture `https://web-production-165f5.up.railway.app/` | capture, client work |
 | `img/projects/ccrp-core/diagram.svg` | Drawn for this repo | original diagram source, not a screenshot |
@@ -20,8 +19,5 @@ Optimized copies only. Source projects were not modified.
 | `img/og/share.webp` | Composed from Genesis overview copy | social preview |
 | `img/brand/*` | Drawn for this repo | favicon / apple-touch |
 
-Captures that were not used:
-
-- MySchamhaar `/Charakter` opened a login wall. Not shipped as gameplay.
 
 Budenboss full-page screenshots contained a debug "Szenensteuerung" overlay and were not shipped whole.

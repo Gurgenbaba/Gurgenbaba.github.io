@@ -6,7 +6,6 @@
   --line: #243139;
   --acid: #c6f04a;
   --od: #ff8a3d;
-  --ms: #d56c3c;
   --bb: #e0b14a;
   --cc: #c4a27a;
   --cl: #9eb4cc;
@@ -201,7 +200,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 .projects {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
 }
 .card {
@@ -220,7 +219,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 .card .diagram { object-fit: contain; aspect-ratio: 16 / 10; }
 .card.overdrive img { object-position: center 40%; }
-.card.myschamhaar { --accent: var(--ms); }
 .card.overdrive { --accent: var(--od); }
 .card.budenboss { --accent: var(--bb); }
 .card.ccrp { --accent: var(--cc); }
@@ -591,6 +589,47 @@ section[id] { scroll-margin-top: 72px; }
 .close .kicker,
 .contact-main .kicker { color: var(--acid); font-size: 10px; margin: 0; }
 .btn.copied { border-color: var(--acid); color: var(--acid); }
+
+.nav .lang { border: 1px solid var(--acid); padding: 8px 10px; color: var(--acid); }
+.nav .lang:hover { background: var(--acid); color: #111704; }
+
+.gate-open { overflow: hidden; }
+.lang-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(5, 7, 10, 0.94);
+}
+.lang-gate-panel {
+  width: min(100%, 460px);
+  padding: 32px 28px 26px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+.lang-gate-panel .brand-mark { margin-bottom: 22px; }
+.lang-gate h2 {
+  margin: 14px 0 24px;
+  font-size: clamp(24px, 6vw, 32px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+.lang-gate h2 [aria-hidden] { color: #3d4c55; }
+.lang-gate-options { display: grid; gap: 10px; }
+.lang-gate-options .btn {
+  min-height: 64px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 0 18px;
+  width: 100%;
+}
+.lang-gate-options .btn strong { font: 800 18px/1 ui-sans-serif, system-ui, sans-serif; letter-spacing: 0; text-transform: none; }
+.lang-gate-options .btn small { font-size: 10px; opacity: 0.7; }
+.lang-gate-note { margin: 18px 0 0; color: var(--muted); font-size: 13px; }
 
 @media (max-width: 1100px) {
   .hero-grid {

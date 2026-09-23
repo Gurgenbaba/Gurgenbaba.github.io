@@ -8,7 +8,6 @@ from playwright.sync_api import TimeoutError as PlaywrightTimeout
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT_MS = ROOT / "assets" / "img" / "projects" / "myschamhaar"
 OUT_RSG = ROOT / "assets" / "img" / "projects" / "random-space-game"
 TMP = ROOT / "artifacts" / "captures"
 TMP.mkdir(parents=True, exist_ok=True)
@@ -27,27 +26,6 @@ def to_webp(src: Path, dest: Path, max_w: int, quality: int = 80) -> None:
 
 def shot(page, path: Path) -> None:
     page.screenshot(path=str(path), full_page=False, animations="disabled")
-
-
-def capture_myschamhaar(page) -> bool:
-    url = "https://myschamhaar-revival-production.up.railway.app/"
-    try:
-        page.set_viewport_size({"width": 1280, "height": 800})
-        page.goto(url, wait_until="domcontentloaded", timeout=45000)
-        page.wait_for_timeout(2500)
-        raw = TMP / "myschamhaar-landing.png"
-        shot(page, raw)
-        # Prefer a named play surface if present; otherwise keep landing if it looks like the product.
-        title = page.title()
-        print("myschamhaar title:", title, "url:", page.url)
-        if raw.stat().st_size < 4000:
-            print("myschamhaar capture too small, skip")
-            return False
-        to_webp(raw, OUT_MS / "live.webp", max_w=1400)
-        return True
-    except Exception as exc:
-        print("myschamhaar capture failed:", exc)
-        return False
 
 
 def capture_rsg(page) -> bool:
@@ -74,10 +52,9 @@ def main() -> None:
         browser = p.chromium.launch(headless=True)
         context = browser.new_context(device_scale_factor=1, locale="de-DE")
         page = context.new_page()
-        ms = capture_myschamhaar(page)
         rsg = capture_rsg(page)
         browser.close()
-        print("RESULT myschamhaar", ms, "rsg", rsg)
+        print("RESULT rsg", rsg)
 
 
 if __name__ == "__main__":

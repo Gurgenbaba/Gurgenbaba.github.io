@@ -10,7 +10,6 @@ IMG = ROOT / "assets" / "img"
 
 GC = Path(r"C:\Users\gurge\Desktop\RandomStuff\Coding\Genesis Colonies\static\img\landing")
 OD = Path(r"C:\Users\gurge\Documents\GitHub\genesis-colonies-overdrive\release\itch")
-MS = Path(r"C:\Users\gurge\Desktop\RandomStuff\Coding3\MySchamhaar-Revival\public\assets\brand")
 
 
 def save_webp(src: Path, dest: Path, max_w: int, quality: int = 78) -> None:
@@ -56,10 +55,6 @@ def main() -> None:
     }
     for name, (src, max_w, q) in od.items():
         save_webp(src, IMG / "projects" / "overdrive" / name, max_w=max_w, quality=q)
-
-    emblem = MS / "emblem.svg"
-    if emblem.is_file():
-        copy_bytes(emblem, IMG / "projects" / "myschamhaar" / "emblem.svg")
 
 
 if __name__ == "__main__":
