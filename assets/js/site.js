@@ -1,4 +1,24 @@
+/* ==========================================================================
+   Gurgenbaba — site.js
+   Plain script, no build step. Every module is a self-contained IIFE that
+   exits early when its markup is not on the page, so one file serves the home
+   pages, the case studies and the legal pages.
+
+    1 Language gate + DE/EN switch     8 Section label decode
+    2 Lightbox                         9 Hero rotator ("Ich baue ...")
+    3 Copy-to-clipboard buttons       10 Contact wizard (+ attachments, send)
+    4 Hero FX, reveal, spotlight,     11 Magnetic primary buttons
+      tech ticker                     12 Sticky mobile CTA
+    5 Live stats from Genesis         13 Genesis showcase monitor
+    6 Arcade triggers (lazy-loads arcade.js)
+    7 Scroll progress
+
+   Motion only runs with html.fx, which <head> sets unless the visitor prefers
+   reduced motion. Backend calls go to genesis-colonies.com (/api/public/*).
+   ========================================================================== */
+
 (function () {
+  // First visit: ask for the language once, remember it; the header switch updates it.
   var KEY = "gb-lang";
   var root = document.documentElement;
   var pageLang = root.lang === "en" ? "en" : "de";
@@ -83,6 +103,7 @@
 })();
 
 (function () {
+  // Screenshot lightbox: [data-full] buttons open the large image.
   var box = document.getElementById("lightbox");
   var boxImg = box ? box.querySelector("img") : null;
   var opener = null;
@@ -117,6 +138,7 @@
 })();
 
 (function () {
+  // [data-copy] buttons copy their value and confirm with [data-copied].
   document.querySelectorAll("[data-copy]").forEach(function (btn) {
     var label = btn.textContent;
     btn.addEventListener("click", function () {
@@ -136,6 +158,7 @@
 })();
 
 (function () {
+  // Hero boot line, starfield and tilt; scroll reveal; grid spotlight; endless tech ticker.
   var motion = document.documentElement.classList.contains("fx");
   var finePointer = matchMedia("(pointer: fine)").matches;
 

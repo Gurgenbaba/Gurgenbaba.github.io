@@ -1,4 +1,4 @@
-"""Create optimized portfolio copies. Never writes back into source projects."""
+"""Create the optimized image copies the site ships. Never writes back into source projects."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -23,21 +23,13 @@ def save_webp(src: Path, dest: Path, max_w: int, quality: int = 78) -> None:
     print(f"{dest.relative_to(ROOT)}  {dest.stat().st_size}  {Image.open(dest).size}")
 
 
-def copy_bytes(src: Path, dest: Path) -> None:
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    dest.write_bytes(src.read_bytes())
-    print(f"{dest.relative_to(ROOT)}  {dest.stat().st_size}  copy")
-
-
 def main() -> None:
     gc_shots = {
-        "hero-poster.webp": GC / "hero-poster.webp",
         "overview.webp": GC / "shots" / "shot-01-overview.webp",
         "galaxy.webp": GC / "shots" / "shot-02-galaxy.webp",
         "world-boss.webp": GC / "shots" / "shot-03-world-boss.webp",
         "fleet.webp": GC / "shots" / "shot-04-fleet.webp",
         "empire.webp": GC / "shots" / "shot-06-empire.webp",
-        "research.webp": GC / "shots" / "shot-11-research.webp",
         "commander.webp": GC / "shots" / "shot-12-commander.webp",
     }
     for name, src in gc_shots.items():
@@ -47,11 +39,7 @@ def main() -> None:
         save_webp(src, dest, max_w=max_w, quality=80)
 
     od = {
-        "cover.webp": (OD / "cover-630x500.png", 630, 82),
         "combat.webp": (OD / "screenshots" / "combat.png", 1600, 76),
-        "boss.webp": (OD / "screenshots" / "boss.png", 1400, 76),
-        "ark-command.webp": (OD / "screenshots" / "ark-command.png", 1400, 76),
-        "multiplayer.webp": (OD / "screenshots" / "multiplayer.png", 1400, 76),
     }
     for name, (src, max_w, q) in od.items():
         save_webp(src, IMG / "projects" / "overdrive" / name, max_w=max_w, quality=q)
