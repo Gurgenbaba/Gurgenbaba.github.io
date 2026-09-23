@@ -50,7 +50,7 @@ Die Seite ist statisch. Alles Dynamische läuft über öffentliche Routen im Gen
 |---|---|---|
 | `GET /api/public/stats` | Live-Zahlen im Genesis-Abschnitt und in der Case Study | – |
 | `POST /api/public/arcade/run`, `GET/POST /api/public/arcade/scores` | Arcade-Bestenliste | – |
-| `POST /api/public/contact` | Anfrage-Assistent inkl. Anhängen (max. 5 Dateien, 10 MB) | `CONTACT_DISCORD_WEBHOOK` und/oder `CONTACT_SMTP_USER` + `CONTACT_SMTP_PASSWORD` |
+| `POST /api/public/contact` | Anfrage-Assistent inkl. Anhängen (max. 5 Dateien, 10 MB) | `CONTACT_GITHUB_TOKEN` + `CONTACT_GITHUB_REPO` (Tickets im privaten Repo `Gurgenbaba/auftraege`), `CONTACT_DISCORD_WEBHOOK`, optional `CONTACT_SMTP_USER` + `CONTACT_SMTP_PASSWORD` |
 
 CORS ist auf `GC_PUBLIC_STATS_ORIGINS` beschränkt (Standard `https://gurgenbaba.github.io`). Bei einer eigenen Domain muss sie dort ergänzt werden.
 
@@ -58,6 +58,6 @@ CORS ist auf `GC_PUBLIC_STATS_ORIGINS` beschränkt (Standard `https://gurgenbaba
 
 - **Keine Unterseite darf wie ein Repo heißen.** `gurgenbaba.github.io/<repo-name>/` gehört GitHub für die Pages des gleichnamigen Repos. `/genesis-colonies/` zeigte deshalb „There isn't a GitHub Pages site here“. Unterseiten gehören unter Sammelordner wie `/case-study/…`.
 - **DE und EN gemeinsam pflegen.** Jede inhaltliche Änderung an `index.html` gehört auch in `en/index.html`, dasselbe gilt für die Case Study.
-- **Neue externe Aufrufe oder Speicherungen → Datenschutzerklärung anpassen.** Derzeit dokumentiert: GitHub Pages, `localStorage` (`gb-lang`), Live-Statistik, Arcade, Kontaktformular (Railway, Discord, Gmail).
+- **Neue externe Aufrufe oder Speicherungen → Datenschutzerklärung anpassen.** Derzeit dokumentiert: GitHub Pages, `localStorage` (`gb-lang`), Live-Statistik, Arcade, Kontaktformular (Railway, GitHub-Tickets, Discord, Gmail).
 - **Bewegung nur unter `.fx`.** `<head>` setzt die Klasse nur, wenn die Person keine reduzierte Bewegung eingestellt hat.
 - **Bilder nur als optimierte Kopie ablegen** und in `assets/README.md` eintragen.
