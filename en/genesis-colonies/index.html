@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Genesis Colonies — Case Study // Gurgenbaba</title>
+  <meta name="description" content="Case study: how Genesis Colonies is built. A persistent browser strategy game on Flask, PostgreSQL and Railway, with 2,100+ commits, 5,000+ tests and a database migration in live operation.">
+  <link rel="canonical" href="https://gurgenbaba.github.io/en/genesis-colonies/">
+  <link rel="alternate" hreflang="de" href="https://gurgenbaba.github.io/genesis-colonies/">
+  <link rel="alternate" hreflang="en" href="https://gurgenbaba.github.io/en/genesis-colonies/">
+  <link rel="alternate" hreflang="x-default" href="https://gurgenbaba.github.io/genesis-colonies/">
+  <meta name="theme-color" content="#05070a">
+  <link rel="preload" href="../../assets/fonts/unbounded-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
+  <script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("fx")</script>
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Genesis Colonies — Case Study">
+  <meta property="og:description" content="A universe that never sleeps: architecture, numbers and solved problems behind a persistent browser strategy game.">
+  <meta property="og:url" content="https://gurgenbaba.github.io/en/genesis-colonies/">
+  <meta property="og:image" content="https://gurgenbaba.github.io/assets/img/og/share.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../../assets/img/brand/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../assets/img/brand/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../../assets/img/brand/apple-touch.png">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../">
+        <span class="brand-mark" aria-hidden="true">G</span>
+        <span>
+          Gurgenbaba
+          <small>Games // Web // Systems</small>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="../">Portfolio</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#problems">Problems</a>
+        <a class="cta" href="../#contact">Contact</a>
+        <a class="lang" href="../../genesis-colonies/" hreflang="de" lang="de" data-set-lang="de" aria-label="Auf Deutsch wechseln">DE</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <canvas class="starfield" aria-hidden="true"></canvas>
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="kicker">Case Study</p>
+          <h1><span>Genesis</span><span>Colonies.</span></h1>
+        </div>
+        <figure class="hero-visual hero-frame">
+          <img src="../../assets/img/projects/genesis-colonies/empire.webp" width="1400" height="788" alt="Empire overview in Genesis Colonies" fetchpriority="high">
+          <figcaption class="hero-cap"><span>LIVE SINCE 2026</span><span>genesis-colonies.com</span></figcaption>
+        </figure>
+        <div class="hero-rest">
+          <p class="hero-copy"><strong>A universe that never sleeps.</strong> Genesis Colonies is a persistent browser strategy game: colonies, fleets, research and alliances keep running around the clock, even when nobody is logged in. Concept, code and operations: Gurgenbaba.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="https://genesis-colonies.com/">Play now</a>
+            <a class="btn" href="https://github.com/Gurgenbaba/genesis-colonies">View source</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="numbers" aria-labelledby="numbers-title">
+      <div class="wrap">
+        <header class="block-head reveal">
+          <p class="kicker">By the numbers</p>
+          <h2 id="numbers-title">Four months, one universe.</h2>
+          <p>From the first commit on 25 May 2026 to today. As of 23 September 2026.</p>
+        </header>
+        <div class="live-stats" data-stats-src="https://genesis-colonies.com/api/public/stats" data-min-players="10" data-locale="en-US" hidden>
+          <p class="live-stats-head"><span class="live-dot" aria-hidden="true"></span>Live in the universe right now</p>
+          <dl>
+            <div data-stat="players"><dt>Commanders</dt><dd>0</dd></div>
+            <div data-stat="active_24h" data-min="5"><dt>Active in 24 h</dt><dd>0</dd></div>
+            <div data-stat="colonies"><dt>Colonies</dt><dd>0</dd></div>
+            <div data-stat="fleets_in_flight" data-min="5"><dt>Fleets in flight</dt><dd>0</dd></div>
+            <div data-stat="alliances"><dt>Alliances</dt><dd>0</dd></div>
+          </dl>
+        </div>
+        <dl class="facts reveal">
+          <div><dt>Commits</dt><dd>2,129</dd></div>
+          <div><dt>Lines of game code</dt><dd>184k</dd></div>
+          <div><dt>Automated tests</dt><dd>5,158</dd></div>
+          <div><dt>Database migrations</dt><dd>175</dd></div>
+          <div><dt>In-game languages</dt><dd>8</dd></div>
+          <div><dt>CI workflows</dt><dd>17</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="block" id="challenge" aria-labelledby="challenge-title">
+      <div class="wrap">
+        <div class="close reveal">
+          <div>
+            <p class="kicker">The challenge</p>
+            <h2 id="challenge-title">A world that never pauses.</h2>
+            <p>A persistent strategy game has no save file and no restart. Construction, research and fleets complete on timers while many players act on the same state at once. Every action has to take effect exactly once: a fleet must not arrive twice, a building must not finish twice, resources must not appear out of nowhere.</p>
+            <p>Then there is operations: updates without data loss, a database that grows with the game, and tools to steer the live game.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="architecture" aria-labelledby="architecture-title">
+      <div class="wrap">
+        <header class="block-head reveal">
+          <p class="kicker">Architecture</p>
+          <h2 id="architecture-title">The server decides.</h2>
+          <p>The browser only displays. Every rule, every number and every timer is computed on the server and recorded in the database.</p>
+        </header>
+        <figure class="arch reveal" aria-label="System overview of Genesis Colonies">
+          <div class="arch-node arch-client">
+            <b>Browser</b>
+            <span>Vanilla JS · PJAX navigation without reloads · live polling</span>
+          </div>
+          <p class="arch-link"><span>HTTP · JSON · WebSocket</span></p>
+          <div class="arch-host">
+            <p class="arch-host-label">Railway</p>
+            <div class="arch-row">
+              <div class="arch-node">
+                <b>Web app</b>
+                <span>Flask behind Gunicorn · thin HTTP layer, game logic in its own modules</span>
+              </div>
+              <div class="arch-node">
+                <b>Maintenance worker</b>
+                <span>Separate process for the fleet tick, queues and cron jobs</span>
+              </div>
+              <div class="arch-node">
+                <b>Genesis Network</b>
+                <span>One account across several universes, signed hand-off tokens</span>
+              </div>
+            </div>
+          </div>
+          <p class="arch-link"><span>Transactions · row locks · migrations</span></p>
+          <div class="arch-node db">
+            <b>PostgreSQL</b>
+            <span>Production database · SQLite as well for local dev and tests</span>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="block" id="problems" aria-labelledby="problems-title">
+      <div class="wrap">
+        <header class="block-head reveal">
+          <p class="kicker">Solved problems</p>
+          <h2 id="problems-title">What happens beneath the surface.</h2>
+        </header>
+        <ol class="process challenges reveal">
+          <li>
+            <span class="step">01</span>
+            <h3>Database migration in live operation</h3>
+            <p>The game started on SQLite and now runs on PostgreSQL in production. An SQL translation layer lets the same code run on both databases, and dedicated CI jobs check Postgres transactions on every pull request.</p>
+          </li>
+          <li>
+            <span class="step">02</span>
+            <h3>Exactly once, never twice</h3>
+            <p>A central queue engine completes due construction, research and fleets. Every player action carries a request ID, so a double click or a retried request never triggers anything twice.</p>
+          </li>
+          <li>
+            <span class="step">03</span>
+            <h3>Fast despite background load</h3>
+            <p>Global ticks originally ran inside regular page requests and slowed navigation down. Today a separate worker process does that work, and performance workflows in CI raise the alarm before players notice.</p>
+          </li>
+          <li>
+            <span class="step">04</span>
+            <h3>One account, several universes</h3>
+            <p>Players sign in once and move between universes that each keep their own game state. The hand-off between servers uses short-lived, signed tokens.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="block" id="practice" aria-labelledby="practice-title">
+      <div class="wrap">
+        <header class="block-head reveal">
+          <p class="kicker">How it is built</p>
+          <h2 id="practice-title">Built to last.</h2>
+        </header>
+        <div class="systems reveal">
+          <article>
+            <p class="meta"><span>01</span><span class="status">Tests</span></p>
+            <h3>Over 5,000 tests</h3>
+            <p>Game rules, transactions and edge cases are covered automatically, including concurrent access.</p>
+          </article>
+          <article>
+            <p class="meta"><span>02</span><span class="status">Migrations</span></p>
+            <h3>Versioned schema</h3>
+            <p>175 migrations that run automatically on deploy. No manual edits to the production database.</p>
+          </article>
+          <article>
+            <p class="meta"><span>03</span><span class="status">Operations</span></p>
+            <h3>Admin Control Center</h3>
+            <p>A custom admin tool with an audit log: players, worlds and events are managed in the browser.</p>
+          </article>
+          <article>
+            <p class="meta"><span>04</span><span class="status">i18n</span></p>
+            <h3>Eight languages</h3>
+            <p>German, English, French, Spanish, Polish, Portuguese, Russian and Turkish.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="screens" aria-labelledby="screens-title">
+      <div class="wrap">
+        <header class="block-head reveal">
+          <p class="kicker">Screens</p>
+          <h2 id="screens-title">From the live game.</h2>
+          <p>Click to enlarge.</p>
+        </header>
+        <div class="visuals">
+          <button class="visual reveal" data-full="../../assets/img/projects/genesis-colonies/galaxy.webp" data-alt="Galaxy in Genesis Colonies">
+            <img src="../../assets/img/projects/genesis-colonies/galaxy.webp" width="1400" height="788" alt="Galaxy in Genesis Colonies" loading="lazy">
+            <span>Galaxy</span>
+          </button>
+          <button class="visual reveal" data-full="../../assets/img/projects/genesis-colonies/fleet.webp" data-alt="Fleet view in Genesis Colonies">
+            <img src="../../assets/img/projects/genesis-colonies/fleet.webp" width="1400" height="788" alt="Fleet view in Genesis Colonies" loading="lazy">
+            <span>Fleet</span>
+          </button>
+          <button class="visual reveal" data-full="../../assets/img/projects/genesis-colonies/world-boss.webp" data-alt="World Boss in Genesis Colonies">
+            <img src="../../assets/img/projects/genesis-colonies/world-boss.webp" width="1400" height="788" alt="World Boss in Genesis Colonies" loading="lazy">
+            <span>World Boss</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="contact" aria-labelledby="contact-title">
+      <div class="wrap">
+        <div class="contact reveal">
+          <div class="contact-main">
+            <p class="kicker">Your project</p>
+            <h2 id="contact-title">The same care for your idea.</h2>
+            <p>Shop, booking system or game: clean data, automated tests and operations that do not buckle under the first rush are my standard.</p>
+            <div class="actions">
+              <a class="btn primary" href="../#contact">Start a project</a>
+              <a class="btn" href="../#services">See services</a>
+            </div>
+          </div>
+          <aside class="contact-hints" aria-label="Tech stack">
+            <h3>Stack</h3>
+            <ul>
+              <li>Python · Flask · Gunicorn</li>
+              <li>PostgreSQL · SQLite (dev/tests)</li>
+              <li>Vanilla JS · PJAX · WebSockets</li>
+              <li>Railway · GitHub Actions CI</li>
+              <li>pytest · custom performance guards</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 Gurgenbaba <button class="arcade-launch" type="button" data-arcade title="Start the hidden arcade game">▶ Arcade</button></span>
+      <span>
+        <a href="../">Portfolio</a>
+        ·
+        <a href="../../impressum.html" hreflang="de">Legal notice (DE)</a>
+        ·
+        <a href="../../datenschutz.html" hreflang="de">Privacy (DE)</a>
+      </span>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <button type="button" data-close aria-label="Close">Close</button>
+    <img alt="">
+  </div>
+  <script src="../../assets/js/site.js"></script>
+</body>
+</html>

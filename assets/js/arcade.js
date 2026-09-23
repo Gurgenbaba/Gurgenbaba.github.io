@@ -7,13 +7,70 @@
     score: "Punkte", wave: "Welle", shield: "Schild", exit: "ESC / × beenden",
     hint: "Maus oder Finger bewegen · Schiff feuert automatisch",
     over: "Schilde down", again: "Nochmal", close: "Zurück zur Seite",
-    best: "Bestwert dieser Sitzung", power: "TRIPLE SHOT", wavePrefix: "WELLE "
+    best: "Bestwert dieser Sitzung", power: "TRIPLE SHOT", wavePrefix: "WELLE ",
+    board: "Top 10", enter: "Trag dich ein", initials: "3 Buchstaben", submit: "Eintragen",
+    saved: "Eingetragen! Platz ", savedOff: "Eingetragen, knapp außerhalb der Top 10.",
+    failed: "Konnte nicht speichern.", badName: "Genau 3 Buchstaben A–Z.", empty: "Noch keine Einträge. Sei die erste Legende."
   } : {
     score: "Score", wave: "Wave", shield: "Shield", exit: "ESC / × to exit",
     hint: "Move mouse or finger · ship fires automatically",
     over: "Shields down", again: "Play again", close: "Back to the site",
-    best: "Best this session", power: "TRIPLE SHOT", wavePrefix: "WAVE "
+    best: "Best this session", power: "TRIPLE SHOT", wavePrefix: "WAVE ",
+    board: "Top 10", enter: "Enter your name", initials: "3 letters", submit: "Submit",
+    saved: "Saved! Rank ", savedOff: "Saved, just outside the top 10.",
+    failed: "Could not save.", badName: "Exactly 3 letters A–Z.", empty: "No entries yet. Be the first legend."
   };
+
+  var API = "https://genesis-colonies.com/api/public/arcade";
+  var run = { token: null, started: 0 };
+
+  function api(path, body) {
+    var opts = { credentials: "omit" };
+    if (body !== undefined) {
+      // text/plain keeps it a CORS "simple" request, so no preflight is needed.
+      opts.method = "POST";
+      opts.headers = { "Content-Type": "text/plain" };
+      opts.body = body === null ? "" : JSON.stringify(body);
+    }
+    return fetch(API + path, opts).then(function (res) {
+      return res.json().then(function (data) { data.status = res.status; return data; });
+    });
+  }
+
+  function requestRun() {
+    run = { token: null, started: Date.now() };
+    var mine = run;
+    if (!window.fetch) return;
+    api("/run", null).then(function (data) {
+      if (data && data.ok && run === mine) mine.token = data.token;
+    }).catch(function () {});
+  }
+
+  function renderBoard(scores, highlightRank) {
+    var box = root.querySelector(".arcade-board");
+    var list = box.querySelector("ol");
+    list.innerHTML = "";
+    if (!scores.length) {
+      var li = el("li", "empty");
+      li.textContent = T.empty;
+      list.appendChild(li);
+    }
+    scores.forEach(function (row, i) {
+      var item = el("li", i + 1 === highlightRank ? "me" : "");
+      var name = el("span"); name.textContent = row.name;
+      var pts = el("b"); pts.textContent = row.score;
+      item.append(name, pts);
+      list.appendChild(item);
+    });
+    box.hidden = false;
+  }
+
+  function loadBoard() {
+    if (!window.fetch) return;
+    api("/scores").then(function (data) {
+      if (data && data.ok && state && state.over) renderBoard(data.scores || []);
+    }).catch(function () {});
+  }
 
   var best = 0;
   var root, canvas, ctx, raf = 0, opener = null;
@@ -45,10 +102,44 @@
     var banner = el("p", "arcade-banner");
     var over = el("div", "arcade-over",
       '<h2>' + T.over + '</h2><p data-final></p>' +
+      '<form class="arcade-entry" hidden><label>' + T.enter +
+      '<input name="initials" maxlength="3" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="' + T.initials + '"></label>' +
+      '<button type="submit" class="btn primary">' + T.submit + '</button><p class="arcade-msg" aria-live="polite"></p></form>' +
+      '<div class="arcade-board" hidden><h3>' + T.board + '</h3><ol></ol></div>' +
       '<div class="actions"><button type="button" class="btn primary" data-again>' + T.again + '</button>' +
       '<button type="button" class="btn" data-leave>' + T.close + '</button></div>');
     over.hidden = true;
     over.querySelector("[data-again]").addEventListener("click", reset);
+    var form = over.querySelector(".arcade-entry");
+    var input = form.querySelector("input");
+    input.addEventListener("input", function () {
+      input.value = input.value.toUpperCase().replace(/[^A-Z]/g, "").slice(0, 3);
+    });
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var msg = form.querySelector(".arcade-msg");
+      if (!/^[A-Z]{3}$/.test(input.value)) { msg.textContent = T.badName; input.focus(); return; }
+      var submitted = state;
+      form.querySelector("button").disabled = true;
+      api("/scores", {
+        token: submitted.token, name: input.value, score: submitted.score,
+        wave: submitted.wave, duration_ms: submitted.duration
+      }).then(function (data) {
+        if (data && data.ok) {
+          form.hidden = true;
+          renderBoard(data.scores || [], data.rank);
+          var info = root.querySelector("[data-final]");
+          info.textContent += " · " + (data.rank ? T.saved + data.rank : T.savedOff);
+          root.querySelector("[data-again]").focus();
+        } else {
+          msg.textContent = data && data.error === "bad_name" ? T.badName : T.failed;
+          form.querySelector("button").disabled = false;
+        }
+      }).catch(function () {
+        msg.textContent = T.failed;
+        form.querySelector("button").disabled = false;
+      });
+    });
     over.querySelector("[data-leave]").addEventListener("click", stop);
     root.append(canvas, hud, close, hint, banner, over);
 
@@ -61,7 +152,7 @@
     var k = e.key.toLowerCase();
     if (k === "escape") { stop(); return; }
     if (e.type === "keydown" && k === "tab") {
-      var list = Array.prototype.filter.call(root.querySelectorAll("button"), function (b) { return b.offsetParent !== null; });
+      var list = Array.prototype.filter.call(root.querySelectorAll("button, input"), function (b) { return b.offsetParent !== null; });
       if (list.length) {
         var i = list.indexOf(document.activeElement);
         e.preventDefault();
@@ -69,7 +160,7 @@
       }
       return;
     }
-    if (state) state.keys[k] = e.type === "keydown";
+    if (state && e.target.tagName !== "INPUT") state.keys[k] = e.type === "keydown";
   }
 
   function resize() {
@@ -82,6 +173,7 @@
 
   function reset() {
     root.querySelector(".arcade-over").hidden = true;
+    requestRun();
     state = {
       x: w / 2, tx: w / 2, y: h - Math.max(110, h * 0.16), keys: {},
       bullets: [], rocks: [], sparks: [], orbs: [], stars: [],
@@ -133,7 +225,16 @@
     var o = root.querySelector(".arcade-over");
     o.querySelector("[data-final]").textContent = T.score + ": " + state.score + " · " + T.best + ": " + best;
     o.hidden = false;
-    o.querySelector("[data-again]").focus();
+    state.token = run.token;
+    state.duration = Date.now() - run.started;
+    var form = o.querySelector(".arcade-entry");
+    form.hidden = !(run.token && state.score > 0);
+    form.querySelector("button").disabled = false;
+    form.querySelector(".arcade-msg").textContent = "";
+    o.querySelector(".arcade-board").hidden = true;
+    loadBoard();
+    if (!form.hidden) form.querySelector("input").focus();
+    else o.querySelector("[data-again]").focus();
     burst(state.x, state.y, 60, "#ff8a3d", 6);
   }
 

@@ -325,7 +325,7 @@
       var cells = [];
       box.querySelectorAll("[data-stat]").forEach(function (cell) {
         var value = Number(data[cell.getAttribute("data-stat")]);
-        if (!(value > 0)) { cell.remove(); return; }
+        if (!(value >= (Number(cell.getAttribute("data-min")) || 1))) { cell.remove(); return; }
         cells.push({ el: cell.querySelector("dd"), value: value });
       });
       box.hidden = false;

@@ -824,6 +824,177 @@ body.legal h1 {
 }
 
 
+/* ---------- Case study ---------- */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.facts > div { background: var(--bg); padding: 22px 20px 24px; }
+.facts dt {
+  color: #7d8d95;
+  font: 700 9px/1.2 ui-monospace, Consolas, monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.facts dd {
+  margin: 10px 0 0;
+  font: 800 clamp(32px, 4.4vw, 56px)/1 var(--display);
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+.facts > div:nth-child(3n + 1) dd { color: var(--acid); text-shadow: 0 0 36px rgba(198, 240, 74, 0.25); }
+
+.arch {
+  margin: 0;
+  padding: 26px;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(rgba(36, 49, 57, 0.35) 1px, transparent 1px) 0 0 / 28px 28px,
+    linear-gradient(90deg, rgba(36, 49, 57, 0.35) 1px, transparent 1px) 0 0 / 28px 28px,
+    var(--panel);
+  display: grid;
+  justify-items: center;
+}
+.arch-node {
+  width: 100%;
+  max-width: 520px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  text-align: center;
+}
+.arch-node b {
+  display: block;
+  font: 800 16px/1.1 var(--display);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+.arch-node span { display: block; margin-top: 6px; color: var(--muted); font-size: 14px; }
+.arch-node.arch-client { border-color: var(--cl); }
+.arch-node.arch-client b { color: var(--cl); }
+.arch-node.db { border-color: var(--od); box-shadow: 0 0 40px -18px var(--od); }
+.arch-node.db b { color: var(--od); }
+.arch-link {
+  position: relative;
+  margin: 0;
+  padding: 28px 0;
+  color: #7d8d95;
+  font: 700 9px/1 ui-monospace, Consolas, monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.arch-link::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(var(--acid), rgba(198, 240, 74, 0.1));
+  transform: translateX(-50%);
+  z-index: 0;
+}
+.arch-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  border: 5px solid transparent;
+  border-top-color: var(--acid);
+  transform: translate(-50%, 50%);
+}
+.arch-link { text-align: center; }
+.arch-link span { position: relative; z-index: 1; padding: 3px 8px; background: var(--panel); }
+.arch-host {
+  width: 100%;
+  padding: 30px 16px 16px;
+  border: 1px dashed rgba(198, 240, 74, 0.45);
+  position: relative;
+}
+.arch-host-label {
+  position: absolute;
+  top: -8px;
+  left: 16px;
+  margin: 0;
+  padding: 0 8px;
+  background: var(--panel);
+  color: var(--acid);
+  font: 800 10px/16px ui-monospace, Consolas, monospace;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.arch-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.arch-row .arch-node { max-width: none; }
+.arch-row .arch-node:first-child { border-color: var(--acid); box-shadow: 0 0 40px -18px var(--acid); }
+.arch-row .arch-node:first-child b { color: var(--acid); }
+.challenges { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.challenges h3 { font-size: 18px; }
+.challenges p { font-size: 15px; }
+.text-link {
+  display: inline-block;
+  margin-top: 4px;
+  color: var(--acid);
+  font: 800 11px/1.4 ui-monospace, Consolas, monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(198, 240, 74, 0.35);
+}
+.text-link:hover { border-color: var(--acid); text-shadow: 0 0 18px rgba(198, 240, 74, 0.6); }
+
+/* ---------- Arcade board ---------- */
+.arcade-over { max-height: calc(100% - 32px); overflow-y: auto; }
+.arcade-entry { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: end; margin: 0 0 16px; text-align: left; }
+.arcade-entry label {
+  display: grid;
+  gap: 6px;
+  color: #7d8d95;
+  font: 700 9px/1 ui-monospace, Consolas, monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.arcade-entry input {
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--acid);
+  background: #05070a;
+  color: var(--acid);
+  font: 800 22px/1 var(--display);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+.arcade-entry input::placeholder { color: #3d4c55; font-size: 12px; letter-spacing: 0.1em; }
+.arcade-entry input:focus { outline: none; box-shadow: 0 0 0 1px var(--acid), 0 0 24px -6px var(--acid); }
+.arcade-entry .btn { width: auto; }
+.arcade-entry label, .arcade-entry input { min-width: 0; width: 100%; }
+.arcade-msg { grid-column: 1 / -1; margin: 0; min-height: 1em; color: var(--od); font-size: 13px; }
+.arcade-board { margin: 0 0 18px; text-align: left; }
+.arcade-board h3 {
+  margin: 0 0 8px;
+  color: var(--acid);
+  font: 800 10px/1 ui-monospace, Consolas, monospace;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.arcade-board ol { margin: 0; padding: 0; list-style: none; counter-reset: rank; }
+.arcade-board li {
+  display: grid;
+  grid-template-columns: 2.2em 1fr auto;
+  gap: 8px;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--line);
+  font: 700 14px/1.2 ui-monospace, Consolas, monospace;
+  counter-increment: rank;
+}
+.arcade-board li::before { content: counter(rank, decimal-leading-zero); color: #6d7d86; }
+.arcade-board li.me { color: var(--acid); background: rgba(198, 240, 74, 0.08); }
+.arcade-board li.empty { display: block; color: var(--muted); font-family: inherit; }
+.arcade-board li.empty::before { content: none; }
+.arcade-board li b { font-variant-numeric: tabular-nums; }
+
 /* ---------- Scroll progress ---------- */
 .scroll-progress {
   position: absolute;
@@ -962,6 +1133,7 @@ body.legal h1 {
   .process { grid-template-columns: 1fr 1fr; }
   .contact { grid-template-columns: 1fr; }
   .contact-hints { border-left: 0; border-top: 1px solid var(--line); }
+  .arch-row { grid-template-columns: 1fr; }
   .card.genesis { display: flex; }
   .visual:first-child { grid-row: auto; display: block; }
   .visuals { grid-template-rows: none; }
@@ -984,6 +1156,8 @@ body.legal h1 {
   .close { padding: 22px; }
   .close .actions { display: grid; }
   .services, .process { grid-template-columns: 1fr; }
+  .facts { grid-template-columns: 1fr 1fr; }
+  .arch { padding: 18px 12px; }
   .services article, .services-cta { min-height: 0; padding: 22px 18px; }
   .services-cta .btn { align-self: stretch; }
   .contact-main, .contact-hints { padding: 24px 20px; }
