@@ -551,6 +551,23 @@
     return parts.join("\n\n");
   }
 
+  // The same answers as language-neutral ids. The backend turns them into a work
+  // order for the owner; the customer only ever sees the letter above.
+  function brief() {
+    var type = pressed("type")[0];
+    var id = function (b) { return b.getAttribute("data-id"); };
+    return JSON.stringify({
+      v: 1,
+      lang: document.documentElement.lang === "en" ? "en" : "de",
+      type: type ? type.getAttribute("data-key") : "",
+      features: pressed("features").map(id),
+      timeline: pressed("timeline").map(id)[0] || "",
+      budget: pressed("budget").map(id)[0] || "",
+      note: note.value.trim(),
+      edited: edited
+    });
+  }
+
   function updateSend() {
     var type = pressed("type")[0];
     var subject = form.getAttribute("data-subject") + (type ? ": " + type.getAttribute("data-value") : "");
@@ -722,6 +739,7 @@
     data.append("email", email.value.trim());
     data.append("subject", form.getAttribute("data-subject") + (type ? ": " + type.getAttribute("data-value") : ""));
     data.append("message", letter.value);
+    data.append("brief", brief());
     data.append("elapsed_ms", String(startedAt ? Date.now() - startedAt : 0));
     data.append("website", honeypot.value);
     files.forEach(function (file) { data.append("files", file, file.name); });
