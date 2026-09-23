@@ -319,7 +319,9 @@
     .then(function (res) { return res.ok ? res.json() : null; })
     .then(function (data) {
       clearTimeout(timer);
-      if (!data || !data.ok || !(data.players > 0)) return;
+      // Below this the counters read more like an empty server than a living universe.
+      var minPlayers = Number(box.getAttribute("data-min-players")) || 1;
+      if (!data || !data.ok || !(data.players >= minPlayers)) return;
       var cells = [];
       box.querySelectorAll("[data-stat]").forEach(function (cell) {
         var value = Number(data[cell.getAttribute("data-stat")]);
