@@ -420,24 +420,43 @@
               <fieldset data-label="Project">
                 <legend>1 · What should it be?</legend>
                 <div class="pick" data-field="type" data-single>
-                  <button type="button" aria-pressed="false" data-value="Website">Website</button>
-                  <button type="button" aria-pressed="false" data-value="Online shop">Online shop</button>
-                  <button type="button" aria-pressed="false" data-value="Web app">Web app</button>
-                  <button type="button" aria-pressed="false" data-value="Browser game">Browser game</button>
-                  <button type="button" aria-pressed="false" data-value="Something else">Something else</button>
+                  <button type="button" aria-pressed="false" data-value="Website" data-key="web" data-question="2 · What should the website do?">Website</button>
+                  <button type="button" aria-pressed="false" data-value="Online shop" data-key="shop" data-question="2 · What should the shop do?">Online shop</button>
+                  <button type="button" aria-pressed="false" data-value="Web app" data-key="app" data-question="2 · What should the web app do?">Web app</button>
+                  <button type="button" aria-pressed="false" data-value="Browser game" data-key="game" data-question="2 · What should the game do?">Browser game</button>
+                  <button type="button" aria-pressed="false" data-value="Something else" data-key="other" data-question="2 · Roughly what is it about?">Something else</button>
                 </div>
               </fieldset>
               <fieldset data-label="Features">
-                <legend>2 · What should it do?</legend>
-                <div class="pick" data-field="features">
-                  <button type="button" aria-pressed="false" data-value="Login &amp; accounts">Login &amp; accounts</button>
-                  <button type="button" aria-pressed="false" data-value="Payments">Payments</button>
-                  <button type="button" aria-pressed="false" data-value="Bookings &amp; appointments">Bookings &amp; appointments</button>
-                  <button type="button" aria-pressed="false" data-value="Admin area">Admin area</button>
-                  <button type="button" aria-pressed="false" data-value="Multilingual">Multilingual</button>
-                  <button type="button" aria-pressed="false" data-value="Real-time / multiplayer">Real-time / multiplayer</button>
-                  <button type="button" aria-pressed="false" data-value="New design">New design</button>
-                  <button type="button" aria-pressed="false" data-value="Redo an existing site">Redo an existing site</button>
+                <legend data-default="2 · What should it do?">2 · What should it do?</legend>
+                <p class="pick-hint">Pick a project type above first, then matching options appear here.</p>
+                <div class="pick" data-field="features" data-depends="type">
+                  <button type="button" aria-pressed="false" data-value="Contact form" data-for="web" hidden>Contact form</button>
+                  <button type="button" aria-pressed="false" data-value="Appointment booking" data-for="web app" hidden>Appointment booking</button>
+                  <button type="button" aria-pressed="false" data-value="Blog / news" data-for="web" hidden>Blog / news</button>
+                  <button type="button" aria-pressed="false" data-value="Edit content myself" data-for="web shop" hidden>Edit content myself</button>
+                  <button type="button" aria-pressed="false" data-value="SEO &amp; fast loading" data-for="web shop" hidden>SEO &amp; fast loading</button>
+                  <button type="button" aria-pressed="false" data-value="Product management" data-for="shop" hidden>Product management</button>
+                  <button type="button" aria-pressed="false" data-value="Payments (PayPal, card …)" data-for="shop app other" hidden>Payments (PayPal, card …)</button>
+                  <button type="button" aria-pressed="false" data-value="Shipping &amp; invoices" data-for="shop" hidden>Shipping &amp; invoices</button>
+                  <button type="button" aria-pressed="false" data-value="Customer accounts" data-for="shop" hidden>Customer accounts</button>
+                  <button type="button" aria-pressed="false" data-value="Vouchers &amp; discounts" data-for="shop" hidden>Vouchers &amp; discounts</button>
+                  <button type="button" aria-pressed="false" data-value="Login &amp; accounts" data-for="app other" hidden>Login &amp; accounts</button>
+                  <button type="button" aria-pressed="false" data-value="Roles &amp; permissions" data-for="app" hidden>Roles &amp; permissions</button>
+                  <button type="button" aria-pressed="false" data-value="Dashboard &amp; reports" data-for="app" hidden>Dashboard &amp; reports</button>
+                  <button type="button" aria-pressed="false" data-value="Integrations (API)" data-for="app other" hidden>Integrations (API)</button>
+                  <button type="button" aria-pressed="false" data-value="Real-time updates" data-for="app" hidden>Real-time updates</button>
+                  <button type="button" aria-pressed="false" data-value="Accounts &amp; save states" data-for="game" hidden>Accounts &amp; save states</button>
+                  <button type="button" aria-pressed="false" data-value="Multiplayer / real-time" data-for="game" hidden>Multiplayer / real-time</button>
+                  <button type="button" aria-pressed="false" data-value="Leaderboards" data-for="game" hidden>Leaderboards</button>
+                  <button type="button" aria-pressed="false" data-value="In-game shop" data-for="game" hidden>In-game shop</button>
+                  <button type="button" aria-pressed="false" data-value="Admin tools" data-for="game app shop" hidden>Admin tools</button>
+                  <button type="button" aria-pressed="false" data-value="Mobile first" data-for="game app" hidden>Mobile first</button>
+                  <button type="button" aria-pressed="false" data-value="Automation" data-for="other" hidden>Automation</button>
+                  <button type="button" aria-pressed="false" data-value="Advice &amp; assessment" data-for="other" hidden>Advice &amp; assessment</button>
+                  <button type="button" aria-pressed="false" data-value="Multilingual" data-for="web shop app game" hidden>Multilingual</button>
+                  <button type="button" aria-pressed="false" data-value="New design" data-for="web shop" hidden>New design</button>
+                  <button type="button" aria-pressed="false" data-value="Redo an existing site" data-for="web shop app" hidden>Redo an existing site</button>
                 </div>
               </fieldset>
               <fieldset data-label="Timeline">

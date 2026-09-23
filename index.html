@@ -420,24 +420,43 @@
               <fieldset data-label="Projekt">
                 <legend>1 · Was soll entstehen?</legend>
                 <div class="pick" data-field="type" data-single>
-                  <button type="button" aria-pressed="false" data-value="Website">Website</button>
-                  <button type="button" aria-pressed="false" data-value="Online-Shop">Online-Shop</button>
-                  <button type="button" aria-pressed="false" data-value="Web-App">Web-App</button>
-                  <button type="button" aria-pressed="false" data-value="Browsergame">Browsergame</button>
-                  <button type="button" aria-pressed="false" data-value="Etwas anderes">Etwas anderes</button>
+                  <button type="button" aria-pressed="false" data-value="Website" data-key="web" data-question="2 · Was soll die Website können?">Website</button>
+                  <button type="button" aria-pressed="false" data-value="Online-Shop" data-key="shop" data-question="2 · Was soll der Shop können?">Online-Shop</button>
+                  <button type="button" aria-pressed="false" data-value="Web-App" data-key="app" data-question="2 · Was soll die Web-App können?">Web-App</button>
+                  <button type="button" aria-pressed="false" data-value="Browsergame" data-key="game" data-question="2 · Was soll das Spiel können?">Browsergame</button>
+                  <button type="button" aria-pressed="false" data-value="Etwas anderes" data-key="other" data-question="2 · Worum geht es ungefähr?">Etwas anderes</button>
                 </div>
               </fieldset>
               <fieldset data-label="Funktionen">
-                <legend>2 · Was soll es können?</legend>
-                <div class="pick" data-field="features">
-                  <button type="button" aria-pressed="false" data-value="Login &amp; Accounts">Login &amp; Accounts</button>
-                  <button type="button" aria-pressed="false" data-value="Zahlungen">Zahlungen</button>
-                  <button type="button" aria-pressed="false" data-value="Buchungen &amp; Termine">Buchungen &amp; Termine</button>
-                  <button type="button" aria-pressed="false" data-value="Admin-Bereich">Admin-Bereich</button>
-                  <button type="button" aria-pressed="false" data-value="Mehrsprachig">Mehrsprachig</button>
-                  <button type="button" aria-pressed="false" data-value="Echtzeit / Multiplayer">Echtzeit / Multiplayer</button>
-                  <button type="button" aria-pressed="false" data-value="Neues Design">Neues Design</button>
-                  <button type="button" aria-pressed="false" data-value="Bestehende Seite überarbeiten">Bestehende Seite überarbeiten</button>
+                <legend data-default="2 · Was soll es können?">2 · Was soll es können?</legend>
+                <p class="pick-hint">Wählen Sie zuerst oben eine Projektart, dann erscheinen hier passende Optionen.</p>
+                <div class="pick" data-field="features" data-depends="type">
+                  <button type="button" aria-pressed="false" data-value="Kontaktformular" data-for="web" hidden>Kontaktformular</button>
+                  <button type="button" aria-pressed="false" data-value="Terminbuchung" data-for="web app" hidden>Terminbuchung</button>
+                  <button type="button" aria-pressed="false" data-value="Blog / News" data-for="web" hidden>Blog / News</button>
+                  <button type="button" aria-pressed="false" data-value="Inhalte selbst pflegen" data-for="web shop" hidden>Inhalte selbst pflegen</button>
+                  <button type="button" aria-pressed="false" data-value="SEO &amp; schnelle Ladezeit" data-for="web shop" hidden>SEO &amp; schnelle Ladezeit</button>
+                  <button type="button" aria-pressed="false" data-value="Produktverwaltung" data-for="shop" hidden>Produktverwaltung</button>
+                  <button type="button" aria-pressed="false" data-value="Zahlungen (PayPal, Karte …)" data-for="shop app other" hidden>Zahlungen (PayPal, Karte …)</button>
+                  <button type="button" aria-pressed="false" data-value="Versand &amp; Rechnungen" data-for="shop" hidden>Versand &amp; Rechnungen</button>
+                  <button type="button" aria-pressed="false" data-value="Kundenkonten" data-for="shop" hidden>Kundenkonten</button>
+                  <button type="button" aria-pressed="false" data-value="Gutscheine &amp; Rabatte" data-for="shop" hidden>Gutscheine &amp; Rabatte</button>
+                  <button type="button" aria-pressed="false" data-value="Login &amp; Accounts" data-for="app other" hidden>Login &amp; Accounts</button>
+                  <button type="button" aria-pressed="false" data-value="Rollen &amp; Rechte" data-for="app" hidden>Rollen &amp; Rechte</button>
+                  <button type="button" aria-pressed="false" data-value="Dashboard &amp; Auswertungen" data-for="app" hidden>Dashboard &amp; Auswertungen</button>
+                  <button type="button" aria-pressed="false" data-value="Schnittstellen (API)" data-for="app other" hidden>Schnittstellen (API)</button>
+                  <button type="button" aria-pressed="false" data-value="Echtzeit-Updates" data-for="app" hidden>Echtzeit-Updates</button>
+                  <button type="button" aria-pressed="false" data-value="Accounts &amp; Spielstände" data-for="game" hidden>Accounts &amp; Spielstände</button>
+                  <button type="button" aria-pressed="false" data-value="Multiplayer / Echtzeit" data-for="game" hidden>Multiplayer / Echtzeit</button>
+                  <button type="button" aria-pressed="false" data-value="Ranglisten" data-for="game" hidden>Ranglisten</button>
+                  <button type="button" aria-pressed="false" data-value="Ingame-Shop" data-for="game" hidden>Ingame-Shop</button>
+                  <button type="button" aria-pressed="false" data-value="Admin-Tools" data-for="game app shop" hidden>Admin-Tools</button>
+                  <button type="button" aria-pressed="false" data-value="Mobile first" data-for="game app" hidden>Mobile first</button>
+                  <button type="button" aria-pressed="false" data-value="Automatisierung" data-for="other" hidden>Automatisierung</button>
+                  <button type="button" aria-pressed="false" data-value="Beratung &amp; Einschätzung" data-for="other" hidden>Beratung &amp; Einschätzung</button>
+                  <button type="button" aria-pressed="false" data-value="Mehrsprachig" data-for="web shop app game" hidden>Mehrsprachig</button>
+                  <button type="button" aria-pressed="false" data-value="Neues Design" data-for="web shop" hidden>Neues Design</button>
+                  <button type="button" aria-pressed="false" data-value="Bestehende Seite überarbeiten" data-for="web shop app" hidden>Bestehende Seite überarbeiten</button>
                 </div>
               </fieldset>
               <fieldset data-label="Zeitrahmen">

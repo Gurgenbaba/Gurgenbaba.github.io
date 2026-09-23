@@ -473,6 +473,37 @@
   var pct = card.querySelector("[data-brief-pct]");
   var bar = card.querySelector(".brief-meter span");
   var note = form.querySelector('[data-field="note"]');
+  var typeBox = form.querySelector('.pick[data-field="type"]');
+  var featBox = form.querySelector('.pick[data-depends="type"]');
+
+  // Step 2 only offers what fits the project type chosen in step 1.
+  function syncFeatures() {
+    if (!typeBox || !featBox) return;
+    var set = featBox.closest("fieldset");
+    var legend = set.querySelector("legend");
+    var hint = set.querySelector(".pick-hint");
+    var active = typeBox.querySelector('button[aria-pressed="true"]');
+    var key = active ? active.getAttribute("data-key") : null;
+    var n = 0;
+    featBox.querySelectorAll("button").forEach(function (b) {
+      var show = !!key && b.getAttribute("data-for").split(" ").indexOf(key) !== -1;
+      if (!show) {
+        b.hidden = true;
+        b.setAttribute("aria-pressed", "false");
+        return;
+      }
+      if (b.hidden) {
+        b.hidden = false;
+        b.style.setProperty("--i", n);
+        b.classList.remove("pop");
+        void b.offsetWidth;
+        b.classList.add("pop");
+      }
+      n++;
+    });
+    if (hint) hint.hidden = !!key;
+    legend.textContent = active ? active.getAttribute("data-question") : legend.getAttribute("data-default");
+  }
 
   function picked(field) {
     var box = form.querySelector('.pick[data-field="' + field + '"]');
@@ -532,6 +563,7 @@
       var on = btn.getAttribute("aria-pressed") !== "true";
       if (single) box.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
       btn.setAttribute("aria-pressed", on ? "true" : "false");
+      if (box === typeBox) syncFeatures();
       render(box.getAttribute("data-field"));
     });
   });
@@ -547,6 +579,7 @@
       setTimeout(function () { copyBtn.textContent = label; copyBtn.classList.remove("copied"); }, 1800);
     });
   });
+  syncFeatures();
   render();
 })();
 
