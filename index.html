@@ -123,7 +123,6 @@
           <p class="kicker">Flagship</p>
           <h2 id="genesis-title">Genesis Colonies</h2>
           <p>Persistentes Browser-Strategiespiel. Kolonien, Flotten, Forschung, Allianzen, Ascension, Commander, LiveOps. Kein künstlicher Leveldeckel.</p>
-          <a class="text-link" href="case-study/genesis-colonies/">Wie es gebaut ist: Case Study lesen →</a>
         </header>
         <div class="live-stats" data-stats-src="https://genesis-colonies.com/api/public/stats" data-min-players="10" data-locale="de-DE" hidden>
           <p class="live-stats-head"><span class="live-dot" aria-hidden="true"></span>Live aus dem Universum</p>
@@ -135,39 +134,48 @@
             <div data-stat="alliances"><dt>Allianzen</dt><dd>0</dd></div>
           </dl>
         </div>
-        <div class="flag">
-          <article class="reveal">
-            <img src="assets/img/projects/genesis-colonies/galaxy.webp" width="1400" height="788" alt="Galaxie-Ansicht in Genesis Colonies">
-            <div class="flag-copy">
-              <p class="meta"><span>Galaxy</span><span class="status">Persistent universe</span></p>
-              <h3>Systeme scannen. Expandieren.</h3>
-              <p>Die Karte bleibt. Fortschritt sitzt auf dem Server, nicht in einer Session.</p>
-            </div>
-          </article>
-          <article class="reveal">
-            <img src="assets/img/projects/genesis-colonies/fleet.webp" width="1400" height="788" alt="Flottenansicht in Genesis Colonies">
-            <div class="flag-copy">
-              <p class="meta"><span>Fleet</span><span class="status">Production game</span></p>
-              <h3>Flotten, Kampf, Handel.</h3>
-              <p>Bewegung und Konflikt als laufender Weltzustand, nicht als einmaliger Fight-Screen.</p>
-            </div>
-          </article>
-          <article class="reveal">
-            <img src="assets/img/projects/genesis-colonies/world-boss.webp" width="1400" height="788" alt="World-Boss-Ansicht in Genesis Colonies">
-            <div class="flag-copy">
-              <p class="meta"><span>LiveOps</span><span class="status">Shared events</span></p>
-              <h3>Events, die alle treffen.</h3>
-              <p>World Boss und laufender Betrieb gehören zum Produkt, nicht zur Roadmap-Folie.</p>
-            </div>
-          </article>
-          <article class="reveal">
-            <img src="assets/img/projects/genesis-colonies/commander.webp" width="1400" height="788" alt="Commander-Ansicht in Genesis Colonies">
-            <div class="flag-copy">
-              <p class="meta"><span>Commander</span><span class="status">Player systems</span></p>
-              <h3>Identität im Universum.</h3>
-              <p>Klassen, Skills, Fortschritt — gebunden an den Account, nicht an einen Run.</p>
-            </div>
-          </article>
+        <div class="showcase reveal" data-showcase>
+          <div class="sc-screen" id="sc-screen" role="tabpanel" aria-labelledby="sc-tab-0">
+            <img class="sc-img is-active" src="assets/img/projects/genesis-colonies/galaxy.webp" width="1400" height="788" alt="Galaxie-Ansicht in Genesis Colonies" data-slide="0">
+            <img class="sc-img" src="assets/img/projects/genesis-colonies/fleet.webp" width="1400" height="788" alt="Flottenansicht in Genesis Colonies" loading="lazy" data-slide="1" hidden>
+            <img class="sc-img" src="assets/img/projects/genesis-colonies/world-boss.webp" width="1400" height="788" alt="World-Boss-Ansicht in Genesis Colonies" loading="lazy" data-slide="2" hidden>
+            <img class="sc-img" src="assets/img/projects/genesis-colonies/commander.webp" width="1400" height="788" alt="Commander-Ansicht in Genesis Colonies" loading="lazy" data-slide="3" hidden>
+            <div class="sc-scan" aria-hidden="true"></div>
+            <div class="sc-hud" aria-hidden="true"><span class="sc-rec">LIVE-BUILD</span><span data-sc-counter>01 / 04</span></div>
+            <span class="sc-corner tl" aria-hidden="true"></span><span class="sc-corner tr" aria-hidden="true"></span>
+            <span class="sc-corner bl" aria-hidden="true"></span><span class="sc-corner br" aria-hidden="true"></span>
+          </div>
+          <div class="sc-tabs" role="tablist" aria-label="Bereiche von Genesis Colonies">
+            <button type="button" role="tab" id="sc-tab-0" aria-selected="true" aria-controls="sc-screen" data-slide="0">
+              <span class="sc-num">01</span>
+              <span class="sc-text"><b>Galaxy</b><strong>Systeme scannen. Expandieren.</strong><small>Die Karte bleibt. Fortschritt sitzt auf dem Server, nicht in einer Session.</small></span>
+              <span class="sc-status">Persistent universe</span>
+              <i class="sc-progress" aria-hidden="true"></i>
+            </button>
+            <button type="button" role="tab" id="sc-tab-1" aria-selected="false" aria-controls="sc-screen" data-slide="1" tabindex="-1">
+              <span class="sc-num">02</span>
+              <span class="sc-text"><b>Fleet</b><strong>Flotten, Kampf, Handel.</strong><small>Bewegung und Konflikt als laufender Weltzustand, nicht als einmaliger Fight-Screen.</small></span>
+              <span class="sc-status">Production game</span>
+              <i class="sc-progress" aria-hidden="true"></i>
+            </button>
+            <button type="button" role="tab" id="sc-tab-2" aria-selected="false" aria-controls="sc-screen" data-slide="2" tabindex="-1">
+              <span class="sc-num">03</span>
+              <span class="sc-text"><b>LiveOps</b><strong>Events, die alle treffen.</strong><small>World Boss und laufender Betrieb gehören zum Produkt, nicht zur Roadmap-Folie.</small></span>
+              <span class="sc-status">Shared events</span>
+              <i class="sc-progress" aria-hidden="true"></i>
+            </button>
+            <button type="button" role="tab" id="sc-tab-3" aria-selected="false" aria-controls="sc-screen" data-slide="3" tabindex="-1">
+              <span class="sc-num">04</span>
+              <span class="sc-text"><b>Commander</b><strong>Identität im Universum.</strong><small>Klassen, Skills, Fortschritt — gebunden an den Account, nicht an einen Run.</small></span>
+              <span class="sc-status">Player systems</span>
+              <i class="sc-progress" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+        <div class="actions sc-actions reveal">
+          <a class="btn primary" href="https://genesis-colonies.com/">Universum betreten</a>
+          <a class="btn" href="case-study/genesis-colonies/">Case Study lesen</a>
+          <a class="btn ghost" href="https://github.com/Gurgenbaba/genesis-colonies">Quellcode ansehen</a>
         </div>
       </div>
     </section>
@@ -181,21 +189,6 @@
         </header>
 
         <div class="projects">
-          <article class="card genesis reveal">
-            <img src="assets/img/projects/genesis-colonies/empire.webp" width="1400" height="788" alt="Imperiumsübersicht in Genesis Colonies">
-            <div class="card-body">
-              <p class="meta"><span>PROJECT_001</span><span class="status">LIVE</span></p>
-              <h3>Genesis Colonies</h3>
-              <p>Persistentes Browser-Strategiespiel. Keine künstliche Levelgrenze. Ein Universum, das weiterläuft.</p>
-              <div class="chips"><span class="chip">Space strategy</span><span class="chip">Flask</span><span class="chip">PostgreSQL</span><span class="chip">LiveOps</span></div>
-              <div class="actions">
-                <a class="btn primary" href="https://genesis-colonies.com/">Universum betreten</a>
-                <a class="btn" href="https://github.com/Gurgenbaba/genesis-colonies">Quellcode ansehen</a>
-                <a class="btn" href="case-study/genesis-colonies/">Case Study lesen</a>
-              </div>
-            </div>
-          </article>
-
           <article class="card overdrive reveal">
             <img src="assets/img/projects/overdrive/combat.webp" width="1600" height="900" alt="Gefecht in Genesis Colonies OVERDRIVE">
             <div class="card-body">
@@ -233,30 +226,6 @@
               <div class="actions"><span class="btn ghost">Privates Framework</span></div>
             </div>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="block" id="visuals" aria-labelledby="visuals-title">
-      <div class="wrap">
-        <header class="block-head reveal">
-          <p class="kicker">Screens</p>
-          <h2 id="visuals-title">Echte Oberflächen.</h2>
-          <p>Screenshots aus laufenden Builds. Keine Moodboards. Zum Vergrößern anklicken.</p>
-        </header>
-        <div class="visuals">
-          <button class="visual reveal" data-full="assets/img/projects/genesis-colonies/galaxy.webp" data-alt="Galaxie in Genesis Colonies">
-            <img src="assets/img/projects/genesis-colonies/galaxy.webp" width="1400" height="788" alt="Galaxie in Genesis Colonies">
-            <span>Genesis // Galaxy</span>
-          </button>
-          <button class="visual reveal" data-full="assets/img/projects/overdrive/ark-command.webp" data-alt="Ark Command in OVERDRIVE">
-            <img src="assets/img/projects/overdrive/ark-command.webp" width="1400" height="788" alt="Ark Command in OVERDRIVE">
-            <span>OVERDRIVE // Ark</span>
-          </button>
-          <button class="visual reveal" data-full="assets/img/projects/random-space-game/preview.webp" data-alt="Kundenprojekt Random Space Game">
-            <img src="assets/img/projects/random-space-game/preview.webp" width="1400" height="875" alt="Kundenprojekt Random Space Game">
-            <span>Client // Random Space Game</span>
-          </button>
         </div>
       </div>
     </section>

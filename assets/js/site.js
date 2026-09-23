@@ -783,3 +783,84 @@
   var footer = document.querySelector(".site-footer");
   if (footer) new IntersectionObserver(function (e) { atFooter = e[0].isIntersecting; sync(); }).observe(footer);
 })();
+
+(function () {
+  // Genesis showcase: tabs switch the monitor. The active tab's CSS progress bar drives
+  // auto-advance, so pausing the animation (hover, focus, off-screen) pauses the rotation too.
+  var box = document.querySelector("[data-showcase]");
+  if (!box) return;
+  var motion = document.documentElement.classList.contains("fx");
+  var tabs = Array.prototype.slice.call(box.querySelectorAll('[role="tab"]'));
+  var imgs = Array.prototype.slice.call(box.querySelectorAll(".sc-img"));
+  var screen = box.querySelector(".sc-screen");
+  var counter = box.querySelector("[data-sc-counter]");
+  var list = box.querySelector('[role="tablist"]');
+  var caption = document.createElement("p");
+  caption.className = "sc-caption";
+  list.insertAdjacentElement("afterend", caption);
+  var current = 0;
+
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+
+  function select(index, focus) {
+    var i = (index + tabs.length) % tabs.length;
+    if (i !== current) {
+      var prev = imgs[current];
+      var next = imgs[i];
+      prev.classList.remove("is-active");
+      prev.classList.add("was-active");
+      next.hidden = false;
+      next.classList.remove("was-active");
+      void next.offsetWidth;
+      next.classList.add("is-active");
+      setTimeout(function () {
+        prev.classList.remove("was-active");
+        if (!prev.classList.contains("is-active")) prev.hidden = true;
+      }, motion ? 800 : 0);
+      if (motion) {
+        screen.classList.remove("glitch");
+        void screen.offsetWidth;
+        screen.classList.add("glitch");
+      }
+    }
+    tabs.forEach(function (tab, n) {
+      var on = n === i;
+      tab.setAttribute("aria-selected", on ? "true" : "false");
+      tab.tabIndex = on ? 0 : -1;
+    });
+    screen.setAttribute("aria-labelledby", tabs[i].id);
+    counter.textContent = pad(i + 1) + " / " + pad(tabs.length);
+    caption.textContent = tabs[i].querySelector("small").textContent;
+    current = i;
+    if (focus) tabs[i].focus();
+  }
+
+  tabs.forEach(function (tab, i) {
+    tab.addEventListener("click", function () { select(i); });
+    tab.querySelector(".sc-progress").addEventListener("animationend", function () {
+      if (tab.getAttribute("aria-selected") === "true") select(i + 1);
+    });
+  });
+
+  list.addEventListener("keydown", function (e) {
+    var map = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 };
+    if (e.key in map) { e.preventDefault(); select(current + map[e.key], true); }
+    else if (e.key === "Home") { e.preventDefault(); select(0, true); }
+    else if (e.key === "End") { e.preventDefault(); select(tabs.length - 1, true); }
+  });
+
+  var hover = false, focused = false, visible = false;
+  function sync() { box.classList.toggle("paused", hover || focused || !visible || document.hidden); }
+  box.addEventListener("pointerenter", function () { hover = true; sync(); });
+  box.addEventListener("pointerleave", function () { hover = false; sync(); });
+  box.addEventListener("focusin", function () { focused = true; sync(); });
+  box.addEventListener("focusout", function () { focused = false; sync(); });
+  document.addEventListener("visibilitychange", sync);
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; sync(); }, { threshold: 0.35 }).observe(box);
+  } else {
+    visible = true;
+  }
+  select(0);
+  sync();
+})();
