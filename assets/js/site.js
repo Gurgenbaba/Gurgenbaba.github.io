@@ -439,3 +439,142 @@
     io.observe(el);
   });
 })();
+
+(function () {
+  // "Ich baue Websites / Online-Shops / ..." types and deletes itself under the headline.
+  var el = document.querySelector("[data-rotate]");
+  if (!el) return;
+  var words = el.getAttribute("data-rotate").split("|");
+  if (!document.documentElement.classList.contains("fx")) return;
+  var i = 0, pos = words[0].length, deleting = true;
+  el.classList.add("typing");
+  function step() {
+    if (deleting) {
+      pos--;
+      if (pos < 0) { deleting = false; i = (i + 1) % words.length; pos = 0; }
+    } else {
+      pos++;
+    }
+    el.textContent = words[i].slice(0, pos) || "​";
+    if (!deleting && pos >= words[i].length) { deleting = true; setTimeout(step, 1900); return; }
+    setTimeout(step, deleting ? 38 : 70);
+  }
+  setTimeout(step, 2200);
+})();
+
+(function () {
+  // Brief builder: chips + note become a live summary and a ready-to-send email. Nothing leaves the page.
+  var form = document.querySelector("[data-brief]");
+  if (!form) return;
+  var card = document.querySelector(".brief-card");
+  var empty = form.getAttribute("data-empty") || "–";
+  var send = card.querySelector("[data-brief-send]");
+  var copyBtn = card.querySelector("[data-brief-copy]");
+  var pct = card.querySelector("[data-brief-pct]");
+  var bar = card.querySelector(".brief-meter span");
+  var note = form.querySelector('[data-field="note"]');
+
+  function picked(field) {
+    var box = form.querySelector('.pick[data-field="' + field + '"]');
+    return Array.prototype.filter.call(box.querySelectorAll("button"), function (b) {
+      return b.getAttribute("aria-pressed") === "true";
+    }).map(function (b) { return b.getAttribute("data-value"); });
+  }
+
+  function values() {
+    var out = {};
+    form.querySelectorAll(".pick").forEach(function (box) {
+      out[box.getAttribute("data-field")] = picked(box.getAttribute("data-field")).join(", ");
+    });
+    out.note = note.value.trim();
+    return out;
+  }
+
+  function mailText(v) {
+    var lines = [form.getAttribute("data-greeting"), ""];
+    form.querySelectorAll("[data-label]").forEach(function (group) {
+      var field = group.querySelector("[data-field]").getAttribute("data-field");
+      if (v[field]) lines.push(group.getAttribute("data-label") + ": " + v[field]);
+    });
+    lines.push("", form.getAttribute("data-closing"));
+    return lines.join("\n");
+  }
+
+  function render(changed) {
+    var v = values();
+    var filled = 0, total = 0;
+    card.querySelectorAll("[data-out]").forEach(function (row) {
+      var key = row.getAttribute("data-out");
+      var dd = row.querySelector("dd");
+      var text = v[key] || empty;
+      total++;
+      if (v[key]) filled++;
+      if (dd.textContent !== text) {
+        dd.textContent = text;
+        row.classList.toggle("set", !!v[key]);
+        if (key === changed) { row.classList.remove("flash"); void row.offsetWidth; row.classList.add("flash"); }
+      }
+    });
+    var p = Math.round((filled / total) * 100);
+    pct.textContent = p;
+    bar.style.transform = "scaleX(" + p / 100 + ")";
+    card.classList.toggle("ready", !!v.type);
+    send.href = "mailto:" + form.getAttribute("data-mail") +
+      "?subject=" + encodeURIComponent(form.getAttribute("data-subject")) +
+      "&body=" + encodeURIComponent(mailText(v));
+  }
+
+  form.querySelectorAll(".pick").forEach(function (box) {
+    var single = box.hasAttribute("data-single");
+    box.addEventListener("click", function (e) {
+      var btn = e.target.closest("button");
+      if (!btn) return;
+      var on = btn.getAttribute("aria-pressed") !== "true";
+      if (single) box.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+      render(box.getAttribute("data-field"));
+    });
+  });
+  note.addEventListener("input", function () { render("note"); });
+
+  copyBtn.addEventListener("click", function () {
+    var label = copyBtn.textContent;
+    var text = mailText(values());
+    if (!navigator.clipboard) return;
+    navigator.clipboard.writeText(text).then(function () {
+      copyBtn.textContent = copyBtn.getAttribute("data-copied");
+      copyBtn.classList.add("copied");
+      setTimeout(function () { copyBtn.textContent = label; copyBtn.classList.remove("copied"); }, 1800);
+    });
+  });
+  render();
+})();
+
+(function () {
+  // Primary buttons lean towards the cursor.
+  if (!document.documentElement.classList.contains("fx") || !matchMedia("(pointer: fine)").matches) return;
+  document.querySelectorAll(".btn.primary").forEach(function (btn) {
+    btn.classList.add("magnetic");
+    btn.addEventListener("pointermove", function (e) {
+      var r = btn.getBoundingClientRect();
+      var x = (e.clientX - r.left - r.width / 2) * 0.22;
+      var y = (e.clientY - r.top - r.height / 2) * 0.35;
+      btn.style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px)";
+    });
+    btn.addEventListener("pointerleave", function () { btn.style.transform = ""; });
+  });
+})();
+
+(function () {
+  // Mobile: "Projekt anfragen" bar once the hero is gone, hidden again at the contact section.
+  var cta = document.querySelector("[data-sticky-cta]");
+  var hero = document.querySelector(".hero");
+  var target = cta && document.querySelector(cta.getAttribute("href"));
+  if (!cta || !hero || !target || !("IntersectionObserver" in window)) return;
+  var pastHero = false, atTarget = false, atFooter = false;
+  var sync = function () { cta.classList.toggle("show", pastHero && !atTarget && !atFooter); };
+  new IntersectionObserver(function (e) { pastHero = !e[0].isIntersecting; sync(); }).observe(hero);
+  new IntersectionObserver(function (e) { atTarget = e[0].isIntersecting; sync(); }, { rootMargin: "0px 0px -30% 0px" }).observe(target);
+  var footer = document.querySelector(".site-footer");
+  if (footer) new IntersectionObserver(function (e) { atFooter = e[0].isIntersecting; sync(); }).observe(footer);
+})();
