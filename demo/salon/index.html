@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Kamm &amp; Kante – Friseur in Musterstadt (Demo)</title>
+  <meta name="description" content="Demo-Website von Gurgenbaba: ein fiktiver Friseursalon mit Preisliste, Team, Öffnungszeiten und Online-Terminbuchung.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#f6f1ea">
+  <meta name="color-scheme" content="light">
+  <meta property="og:title" content="Kamm &amp; Kante – Demo-Website von Gurgenbaba">
+  <meta property="og:description" content="Fiktiver Friseursalon mit Online-Terminbuchung. So könnte Ihre Website aussehen.">
+  <meta property="og:image" content="https://gurgenbaba.github.io/assets/img/projects/demo-salon/preview.webp">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="salon.css">
+  <script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("fx")</script>
+</head>
+<body>
+  <div class="demo-bar">
+    <p><strong>Demo-Projekt von Gurgenbaba.</strong> Der Salon ist erfunden, Buchungen werden nicht verschickt.</p>
+    <a href="/#preise">So eine Website ab 1.190 € →</a>
+  </div>
+
+  <header class="top">
+    <div class="wrap top-in">
+      <a class="logo" href="#start" aria-label="Kamm und Kante, zum Seitenanfang">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19"/><path d="M12 27l16-14M12 13l16 14"/><circle cx="12" cy="27" r="3.2"/><circle cx="12" cy="13" r="3.2"/></svg>
+        <span>Kamm <em>&amp;</em> Kante</span>
+      </a>
+      <nav aria-label="Hauptnavigation">
+        <a href="#leistungen">Leistungen</a>
+        <a href="#team">Team</a>
+        <a href="#zeiten">Öffnungszeiten</a>
+        <a class="pill" href="#termin">Termin buchen</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="start">
+    <section class="hero">
+      <div class="wrap hero-in">
+        <div class="hero-copy">
+          <p class="status" data-open-status><span class="dot"></span><span>Öffnungszeiten werden geladen …</span></p>
+          <h1>Guter Schnitt.<br><span>Gute Laune.</span></h1>
+          <p class="lead">Ihr Friseur mitten in Musterstadt. Schneiden, Farbe und Styling für Damen, Herren und Kinder. Termin in 30 Sekunden online buchen, ohne Warteschleife.</p>
+          <div class="cta">
+            <a class="btn primary" href="#termin">Termin online buchen</a>
+            <a class="btn" href="#leistungen">Preise ansehen</a>
+          </div>
+          <ul class="facts">
+            <li><strong>30 s</strong><span>bis zum Termin</span></li>
+            <li><strong>3</strong><span>Stylisten</span></li>
+            <li><strong>Di–Sa</strong><span>geöffnet</span></li>
+          </ul>
+        </div>
+        <figure class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 420 480">
+            <path class="a1" d="M40 480V210a170 170 0 0 1 340 0v270z"/>
+            <path class="a2" d="M92 480V224a118 118 0 0 1 236 0v256z"/>
+            <circle class="sun" cx="318" cy="118" r="46"/>
+            <g class="scissors">
+              <path d="M150 380L290 200M150 200L290 380"/>
+              <circle cx="138" cy="396" r="22"/>
+              <circle cx="138" cy="184" r="22"/>
+            </g>
+            <g class="comb">
+              <rect x="226" y="316" width="130" height="22" rx="6"/>
+              <path d="M236 338v26M248 338v26M260 338v26M272 338v26M284 338v26M296 338v26M308 338v26M320 338v26M332 338v26M344 338v26"/>
+            </g>
+          </svg>
+        </figure>
+      </div>
+    </section>
+
+    <section class="block" id="leistungen" aria-labelledby="l-title">
+      <div class="wrap">
+        <header class="head">
+          <p class="eyebrow">Leistungen &amp; Preise</p>
+          <h2 id="l-title">Klare Preise, keine Überraschung.</h2>
+          <p>Alle Preise inklusive Beratung. Bei langem oder sehr dichtem Haar kann es etwas mehr werden, das sagen wir Ihnen vorher.</p>
+        </header>
+        <div class="tabs" role="tablist" aria-label="Kategorien">
+          <button role="tab" aria-selected="true" aria-controls="cat-damen" id="tab-damen">Damen</button>
+          <button role="tab" aria-selected="false" aria-controls="cat-herren" id="tab-herren" tabindex="-1">Herren</button>
+          <button role="tab" aria-selected="false" aria-controls="cat-kinder" id="tab-kinder" tabindex="-1">Kinder</button>
+          <button role="tab" aria-selected="false" aria-controls="cat-farbe" id="tab-farbe" tabindex="-1">Farbe</button>
+        </div>
+        <div class="menus" data-menus></div>
+      </div>
+    </section>
+
+    <section class="block alt" id="team" aria-labelledby="t-title">
+      <div class="wrap">
+        <header class="head">
+          <p class="eyebrow">Team</p>
+          <h2 id="t-title">Drei Paar Hände, ein Anspruch.</h2>
+        </header>
+        <div class="team" data-team></div>
+      </div>
+    </section>
+
+    <section class="block" id="termin" aria-labelledby="b-title">
+      <div class="wrap booking-wrap">
+        <header class="head">
+          <p class="eyebrow">Online-Termin</p>
+          <h2 id="b-title">In vier Schritten zum Termin.</h2>
+          <p>Freie Zeiten sehen Sie sofort. Sie bekommen eine Bestätigung per E-Mail und können den Termin in Ihren Kalender übernehmen.</p>
+        </header>
+        <div class="booking" data-booking>
+          <ol class="b-steps" aria-hidden="true">
+            <li class="on">Leistung</li><li>Stylist</li><li>Zeit</li><li>Kontakt</li>
+          </ol>
+          <div class="b-panel" data-panel="service">
+            <h3 tabindex="-1">Was dürfen wir für Sie tun?</h3>
+            <div class="choice-list" data-services></div>
+          </div>
+          <div class="b-panel" data-panel="stylist" hidden>
+            <h3 tabindex="-1">Bei wem möchten Sie den Termin?</h3>
+            <div class="choice-list stylists" data-stylists></div>
+            <button type="button" class="back" data-back>← Zurück</button>
+          </div>
+          <div class="b-panel" data-panel="time" hidden>
+            <h3 tabindex="-1">Wann passt es Ihnen?</h3>
+            <div class="days" data-days role="listbox" aria-label="Tag wählen"></div>
+            <div class="slots" data-slots aria-live="polite"></div>
+            <button type="button" class="back" data-back>← Zurück</button>
+          </div>
+          <form class="b-panel" data-panel="contact" hidden novalidate>
+            <h3 tabindex="-1">Fast geschafft.</h3>
+            <p class="summary" data-summary></p>
+            <label>Ihr Name<input name="name" autocomplete="name" required maxlength="80"></label>
+            <label>E-Mail oder Telefon<input name="contact" autocomplete="email" required maxlength="120"></label>
+            <label>Hinweis (optional)<textarea name="note" rows="2" maxlength="300" placeholder="z. B. Haare bitte nur spitzen"></textarea></label>
+            <p class="err" data-err hidden>Bitte Name und E-Mail oder Telefon angeben.</p>
+            <div class="row">
+              <button type="button" class="back" data-back>← Zurück</button>
+              <button type="submit" class="btn primary">Termin verbindlich buchen</button>
+            </div>
+          </form>
+          <div class="b-panel done" data-panel="done" hidden>
+            <svg class="check" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-16"/></svg>
+            <h3 tabindex="-1" data-done-title>Termin gebucht!</h3>
+            <p data-done-text></p>
+            <p class="demo-note">Demo: Es wurde nichts gesendet oder gespeichert. Auf einer echten Seite bekämen Sie und der Salon jetzt eine E-Mail, und der Termin wäre im Kalender des Salons geblockt.</p>
+            <div class="row">
+              <button type="button" class="btn" data-ics>In Kalender eintragen</button>
+              <button type="button" class="btn ghost" data-restart>Weiteren Termin buchen</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block alt" id="zeiten" aria-labelledby="z-title">
+      <div class="wrap visit">
+        <div>
+          <p class="eyebrow">Besuch</p>
+          <h2 id="z-title">Öffnungszeiten &amp; Anfahrt</h2>
+          <table class="hours" data-hours>
+            <tbody></tbody>
+          </table>
+          <p class="addr"><strong>Kamm &amp; Kante</strong><br>Musterstraße 12<br>12345 Musterstadt</p>
+          <p class="addr">Parkplätze direkt vor dem Salon. Barrierefreier Eingang.</p>
+        </div>
+        <figure class="map" aria-label="Kartenskizze: Salon an der Musterstraße, Ecke Lindenweg">
+          <svg viewBox="0 0 400 300" aria-hidden="true">
+            <rect width="400" height="300" class="land"/>
+            <path class="park" d="M250 20h120v90H250z"/>
+            <path class="water" d="M-10 250C80 220 140 280 230 250S360 210 410 235V310H-10z"/>
+            <path class="road big" d="M-10 150H410"/>
+            <path class="road" d="M180-10V310M60-10l60 320M300 150l80-160"/>
+            <text x="16" y="140">Musterstraße</text>
+            <text x="188" y="40" transform="rotate(90 188 40)">Lindenweg</text>
+            <g class="pin"><path d="M214 128c0-14 11-24 24-24s24 10 24 24c0 18-24 38-24 38s-24-20-24-38z"/><circle cx="238" cy="127" r="8"/></g>
+          </svg>
+          <figcaption>Kartenskizze statt Google Maps: lädt schnell und kommt ohne Tracking aus.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="demo-end">
+      <div class="wrap demo-end-in">
+        <div>
+          <p class="eyebrow">Diese Seite ist eine Demo</p>
+          <h2>Ihre Website so, nur mit Ihrem Namen?</h2>
+          <p>Gebaut von Gurgenbaba: responsive, schnell, ohne Tracking, mit Online-Terminbuchung. Die Termine können auf Wunsch in Ihrem Google- oder Outlook-Kalender landen.</p>
+        </div>
+        <div class="cta">
+          <a class="btn primary" href="/#kontakt">Projekt anfragen</a>
+          <a class="btn" href="/#preise">Preise ansehen</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <span>Kamm &amp; Kante ist ein erfundener Salon. Demo von <a href="/">Gurgenbaba</a>.</span>
+      <span><a href="/impressum.html">Impressum</a> · <a href="/datenschutz.html">Datenschutz</a></span>
+    </div>
+  </footer>
+
+  <a class="mobile-book" href="#termin" data-mobile-book>Termin buchen</a>
+
+  <script src="salon.js"></script>
+</body>
+</html>

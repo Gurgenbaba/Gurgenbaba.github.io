@@ -29,6 +29,7 @@ PAGES = [
     "/404.html",
     "/impressum.html",
     "/datenschutz.html",
+    "/demo/salon/",
 ]
 WIDTHS = [(1920, 1080), (1366, 768), (375, 812), (320, 700)]
 
