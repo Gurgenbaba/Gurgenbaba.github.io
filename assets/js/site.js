@@ -263,7 +263,7 @@
 
   // Scroll reveal, grids fade in child by child
   document.querySelectorAll(".services, .systems, .process").forEach(function (el) { el.classList.add("stagger"); });
-  document.querySelectorAll(".projects, .flag, .visuals").forEach(function (group) {
+  document.querySelectorAll(".projects, .visuals").forEach(function (group) {
     Array.prototype.forEach.call(group.children, function (el, n) { el.style.setProperty("--d", (n % 3) * 0.08 + "s"); });
   });
   var items = document.querySelectorAll(".reveal");

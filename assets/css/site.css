@@ -231,13 +231,13 @@ section[id] { scroll-margin-top: 72px; }
   align-items: start;
   grid-template-rows: auto 1fr;
 }
-.hero-copy {
-  grid-area: copy;
+.hero-copy { grid-area: copy; max-width: 42rem; }
+.hero-lead {
   max-width: 42rem;
   color: var(--muted);
   font-size: clamp(16px, 1.3vw, 19px);
 }
-.hero-copy strong { color: var(--ink); font-weight: 650; }
+.hero-lead strong { color: var(--ink); font-weight: 650; }
 .hero-visual { grid-area: visual; perspective: 1200px; }
 .hero-rest { grid-area: rest; }
 .hero h1 {
@@ -603,7 +603,7 @@ section[id] { scroll-margin-top: 72px; }
   flex-direction: column;
   min-width: 0;
   overflow: hidden;
-  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+  transition: border-color 0.25s, box-shadow 0.25s, translate 0.25s;
 }
 .card.overdrive { --accent: var(--od); }
 .card.budenboss { --accent: var(--bb); }
@@ -644,7 +644,7 @@ section[id] { scroll-margin-top: 72px; }
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   background: var(--panel);
   overflow: hidden;
-  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+  transition: border-color 0.25s, box-shadow 0.25s;
 }
 .client > img {
   width: 100%;
@@ -957,7 +957,7 @@ section[id] { scroll-margin-top: 72px; }
 .wiz-mailto a { color: #8d9ba4; border-bottom: 1px solid var(--line); }
 .wiz-mailto a:hover { color: var(--acid); border-color: var(--acid); }
 [data-attach-info] { color: var(--acid); }
-.brief-privacy { margin: 14px 0 0; color: #6d7d86; font-size: 12px; }
+.wiz-privacy { margin: 14px 0 0; color: #6d7d86; font-size: 12px; }
 .btn.busy { pointer-events: none; opacity: 0.8; background-image: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent); background-size: 200% 100%; animation: busy 1s linear infinite; }
 .wiz-sent { text-align: center; padding: 18px 0 6px; }
 .wiz-sent .wiz-hint { margin: 0 auto 8px; max-width: 32rem; font-size: 15px; }
@@ -967,7 +967,7 @@ section[id] { scroll-margin-top: 72px; }
 .sent-mark circle { stroke-dasharray: 151; stroke-dashoffset: 0; }
 .sent-mark path { stroke-dasharray: 40; stroke-dashoffset: 0; }
 .letter-card { display: flex; flex-direction: column; gap: 14px; position: sticky; top: 84px; }
-.brief-head {
+.letter-head {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1279,7 +1279,7 @@ body.legal .eyebrow {
 body.legal h1 {
   margin: 14px 0 20px;
   font-family: var(--display);
-  font-size: clamp(44px, 8vw, 78px);
+  font-size: clamp(26px, 9vw, 78px);
   font-weight: 800;
   line-height: 0.9;
   letter-spacing: -0.035em;
@@ -1299,6 +1299,7 @@ body.legal .panel li { color: #a2b1b9; }
 body.legal .panel strong { color: #fff; }
 body.legal .panel ul { padding-left: 20px; }
 body.legal a { color: #9eb4cc; }
+body.legal code, body.legal a { overflow-wrap: anywhere; }
 body.legal .stamp {
   margin-top: 26px;
   color: #667b86;
@@ -1477,10 +1478,16 @@ body.legal .links a { color: #96a8b2; }
 .stagger.will-reveal.on > *:nth-child(4) { transition-delay: 0.21s; }
 .stagger.will-reveal.on > *:nth-child(5) { transition-delay: 0.28s; }
 .stagger.will-reveal.on > *:nth-child(6) { transition-delay: 0.35s; }
+/* Revealed cards keep their hover transitions next to the reveal ones. */
+.card.will-reveal,
+.client.will-reveal {
+  transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.25s, box-shadow 0.25s, translate 0.25s;
+  transition-delay: var(--d, 0s), var(--d, 0s), 0s, 0s, 0s;
+}
 .card:hover {
   border-color: var(--accent, var(--acid));
   box-shadow: 0 18px 60px -28px var(--accent, var(--acid));
-  transform: translateY(-3px);
+  translate: 0 -3px;
 }
 .client:hover { border-color: var(--cl); box-shadow: 0 18px 60px -28px var(--cl); }
 .card:hover img:not(.diagram), .client:hover > img { transform: scale(1.04); }

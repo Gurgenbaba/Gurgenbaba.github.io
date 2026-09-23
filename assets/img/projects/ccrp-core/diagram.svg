@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" role="img">
   <rect width="720" height="420" fill="#0b1014"/>
   <rect x="0.5" y="0.5" width="719" height="419" fill="none" stroke="#2a3a44"/>
-  <text x="24" y="32" fill="#c4a27a" font-family="Consolas, monospace" font-size="11">SYSTEM_006 // DIAGRAM - NOT A SCREENSHOT</text>
+  <text x="24" y="32" fill="#c4a27a" font-family="Consolas, monospace" font-size="11">PROJECT_004 // DIAGRAM - NOT A SCREENSHOT</text>
   <text x="24" y="58" fill="#e8eef1" font-family="Segoe UI, sans-serif" font-size="22" font-weight="700">CCRP-CORE</text>
   <text x="24" y="80" fill="#8b9ba4" font-family="Segoe UI, sans-serif" font-size="13">Server authoritative. Small core. World edits through control plane.</text>
   <g font-family="Consolas, monospace" font-size="11">
