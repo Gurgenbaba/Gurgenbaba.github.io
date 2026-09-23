@@ -134,3 +134,174 @@
     });
   });
 })();
+
+(function () {
+  var motion = document.documentElement.classList.contains("fx");
+  var finePointer = matchMedia("(pointer: fine)").matches;
+
+  // Boot line in the hero kicker
+  var kicker = document.querySelector(".hero .kicker");
+  if (kicker) {
+    var boot = document.createElement("span");
+    boot.className = "boot";
+    boot.setAttribute("aria-hidden", "true");
+    kicker.appendChild(boot);
+    var line = "// SYSTEM ONLINE";
+    if (!motion) {
+      boot.textContent = line;
+    } else {
+      var i = 0;
+      setTimeout(function tick() {
+        boot.textContent = line.slice(0, ++i);
+        if (i < line.length) setTimeout(tick, 38 + Math.random() * 40);
+      }, 500);
+    }
+  }
+
+  // Starfield behind the hero
+  var hero = document.querySelector(".hero");
+  var canvas = hero && hero.querySelector(".starfield");
+  if (canvas && canvas.getContext) {
+    var ctx = canvas.getContext("2d");
+    var stars = [], w = 0, h = 0, dpr = 1, mx = 0, my = 0, px = 0, py = 0;
+    var running = false, visible = true, shooter = null, raf = 0;
+
+    var resize = function () {
+      if (hero.clientWidth === w && hero.clientHeight === h) return;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = hero.clientWidth; h = hero.clientHeight;
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var count = Math.min(420, Math.round((w * h) / 4200));
+      stars = [];
+      for (var n = 0; n < count; n++) {
+        var z = Math.random();
+        stars.push({
+          x: Math.random() * w, y: Math.random() * h, z: z,
+          r: 0.4 + z * 1.4,
+          a: 0.25 + z * 0.65,
+          tw: Math.random() * Math.PI * 2,
+          acid: Math.random() < 0.06
+        });
+      }
+    };
+
+    var draw = function (t) {
+      ctx.clearRect(0, 0, w, h);
+      px += (mx - px) * 0.05; py += (my - py) * 0.05;
+      for (var n = 0; n < stars.length; n++) {
+        var s = stars[n];
+        if (motion) {
+          s.x -= 0.04 + s.z * 0.22;
+          if (s.x < -4) { s.x = w + 4; s.y = Math.random() * h; }
+        }
+        var x = s.x + px * s.z * 26, y = s.y + py * s.z * 18;
+        var a = s.a * (motion ? 0.75 + 0.25 * Math.sin(t / 700 + s.tw) : 1);
+        ctx.fillStyle = s.acid ? "rgba(198,240,74," + a + ")" : "rgba(220,232,238," + a + ")";
+        ctx.beginPath();
+        ctx.arc(x, y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      if (motion) {
+        if (!shooter && Math.random() < 0.004) {
+          shooter = { x: Math.random() * w * 0.8 + w * 0.2, y: Math.random() * h * 0.4, life: 1 };
+        }
+        if (shooter) {
+          var sx = shooter.x, sy = shooter.y;
+          var g = ctx.createLinearGradient(sx, sy, sx + 120, sy - 40);
+          g.addColorStop(0, "rgba(198,240,74," + shooter.life + ")");
+          g.addColorStop(1, "rgba(198,240,74,0)");
+          ctx.strokeStyle = g; ctx.lineWidth = 1.4;
+          ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(sx + 120, sy - 40); ctx.stroke();
+          shooter.x -= 9; shooter.y += 3; shooter.life -= 0.018;
+          if (shooter.life <= 0) shooter = null;
+        }
+      }
+    };
+
+    var loop = function (t) {
+      draw(t);
+      raf = requestAnimationFrame(loop);
+    };
+    var sync = function () {
+      var should = motion && visible && !document.hidden;
+      if (should && !running) { running = true; raf = requestAnimationFrame(loop); }
+      if (!should && running) { running = false; cancelAnimationFrame(raf); }
+    };
+
+    resize();
+    draw(0);
+    window.addEventListener("resize", function () { resize(); if (!running) draw(0); });
+    document.addEventListener("visibilitychange", sync);
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; sync(); }).observe(hero);
+    }
+    sync();
+
+    if (motion && finePointer) {
+      var frame = hero.querySelector(".hero-frame");
+      hero.addEventListener("pointermove", function (e) {
+        var r = hero.getBoundingClientRect();
+        mx = (e.clientX - r.left) / r.width - 0.5;
+        my = (e.clientY - r.top) / r.height - 0.5;
+        if (frame) {
+          var f = frame.getBoundingClientRect();
+          var fx = (e.clientX - f.left) / f.width - 0.5;
+          var fy = (e.clientY - f.top) / f.height - 0.5;
+          frame.style.setProperty("--ry", (Math.max(-1, Math.min(1, fx)) * 8).toFixed(2) + "deg");
+          frame.style.setProperty("--rx", (Math.max(-1, Math.min(1, fy)) * -6).toFixed(2) + "deg");
+        }
+      });
+      hero.addEventListener("pointerleave", function () {
+        mx = my = 0;
+        if (frame) { frame.style.setProperty("--rx", "0deg"); frame.style.setProperty("--ry", "0deg"); }
+      });
+    }
+  }
+
+  if (!motion) return;
+
+  // Scroll reveal, grids fade in child by child
+  document.querySelectorAll(".services, .systems, .process").forEach(function (el) { el.classList.add("stagger"); });
+  document.querySelectorAll(".projects, .flag, .visuals").forEach(function (group) {
+    Array.prototype.forEach.call(group.children, function (el, n) { el.style.setProperty("--d", (n % 3) * 0.08 + "s"); });
+  });
+  var items = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add("on"); io.unobserve(entry.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    items.forEach(function (el) { el.classList.add("will-reveal"); io.observe(el); });
+  }
+
+  // Spotlight that follows the cursor across grid cells
+  if (finePointer) {
+    document.querySelectorAll(".services, .systems, .process").forEach(function (grid) {
+      grid.classList.add("spot");
+      grid.addEventListener("pointermove", function (e) {
+        Array.prototype.forEach.call(grid.children, function (cell) {
+          var r = cell.getBoundingClientRect();
+          cell.style.setProperty("--mx", e.clientX - r.left + "px");
+          cell.style.setProperty("--my", e.clientY - r.top + "px");
+        });
+      });
+    });
+  }
+
+  // Endless tech ticker
+  document.querySelectorAll(".stack").forEach(function (stack) {
+    var track = document.createElement("div");
+    track.className = "ticker-track";
+    var originals = Array.prototype.slice.call(stack.children);
+    originals.forEach(function (el) { track.appendChild(el); });
+    originals.forEach(function (el) {
+      var copy = el.cloneNode(true);
+      copy.setAttribute("aria-hidden", "true");
+      track.appendChild(copy);
+    });
+    stack.appendChild(track);
+    stack.classList.add("ticker");
+  });
+})();

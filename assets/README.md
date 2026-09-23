@@ -21,3 +21,9 @@ Optimized copies only. Source projects were not modified.
 
 
 Budenboss full-page screenshots contained a debug "Szenensteuerung" overlay and were not shipped whole.
+
+Fonts:
+
+| File | Source | License |
+|---|---|---|
+| `fonts/unbounded-latin-wght.woff2` | Unbounded variable, latin subset (via Fontsource) | SIL OFL 1.1, see `fonts/OFL-unbounded.txt` |
