@@ -58,6 +58,11 @@
           "itemOffered": {
             "@type": "Service",
             "name": "Websites & landing pages"
+          },
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "minPrice": 490,
+            "priceCurrency": "EUR"
           }
         },
         {
@@ -65,6 +70,11 @@
           "itemOffered": {
             "@type": "Service",
             "name": "Online shops"
+          },
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "minPrice": 1890,
+            "priceCurrency": "EUR"
           }
         },
         {
@@ -72,6 +82,11 @@
           "itemOffered": {
             "@type": "Service",
             "name": "Web apps & portals"
+          },
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "minPrice": 2900,
+            "priceCurrency": "EUR"
           }
         },
         {
@@ -79,6 +94,11 @@
           "itemOffered": {
             "@type": "Service",
             "name": "Browser games & multiplayer"
+          },
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "minPrice": 2900,
+            "priceCurrency": "EUR"
           }
         },
         {
@@ -86,10 +106,17 @@
           "itemOffered": {
             "@type": "Service",
             "name": "Hosting & maintenance"
+          },
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "minPrice": 29,
+            "priceCurrency": "EUR",
+            "unitText": "MONTH"
           }
         }
       ]
-    }
+    },
+    "priceRange": "from €49"
   }
   </script>
 </head>
@@ -106,6 +133,7 @@
       <nav class="nav" aria-label="Main navigation">
         <a href="#services">Services</a>
         <a href="#projects">Projects</a>
+        <a href="#pricing">Pricing</a>
         <a href="#about">About</a>
         <a class="cta" href="#contact">Contact</a>
         <a class="ext" href="https://github.com/Gurgenbaba" rel="noreferrer">GitHub</a>
@@ -362,7 +390,7 @@
           <div>
             <p class="kicker">About</p>
             <h2 id="about-title">Behind Gurgenbaba.</h2>
-            <p>Gurgenbaba is my label as a developer. I build my own browser games and systems and deliver web projects for clients, from concept to live operation.</p>
+            <p>I&#x27;m Robert, a developer from Thuringia, Germany, and Gurgenbaba is my label. I build my own browser games and systems and deliver web projects for clients, from concept to live operation.</p>
             <p>You work directly with the person writing the code. No agency in between, short paths, honest assessments.</p>
             <p>I work with AI tools — openly, not hidden. For you, that means faster prototypes, more thorough testing and more time for the decisions that matter in the end. Architecture, review and responsibility for the code stay with me.</p>
           </div>
@@ -372,6 +400,94 @@
             <a class="btn" href="https://gurgenbaba.itch.io/">itch.io</a>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="block" id="pricing" aria-labelledby="pricing-title">
+      <div class="wrap">
+        <header class="block-head reveal">
+          <p class="kicker">Pricing</p>
+          <h2 id="pricing-title">Fair fixed prices.</h2>
+          <p>Starting prices as a guide. After a free intro call you get a binding fixed price, no surprises. You pay in two parts: half at the start, the rest on approval.</p>
+        </header>
+        <div class="prices reveal">
+          <article class="price">
+            <h3>Small job</h3>
+            <p class="price-tag"><small>from</small>€49</p>
+            <p>Fix a bug, swap texts or images, add a page.</p>
+            <ul>
+              <li>Fixes, tweaks, small extensions</li>
+              <li>Then €55 per hour, estimated upfront</li>
+              <li>Usually done within a few days</li>
+            </ul>
+            <a class="btn" href="#contact" data-pick-type="other">Request</a>
+          </article>
+          <article class="price">
+            <h3>Landing page</h3>
+            <p class="price-tag"><small>from</small>€490</p>
+            <p>One page that convinces.</p>
+            <ul>
+              <li>Responsive design</li>
+              <li>Contact form</li>
+              <li>Imprint &amp; privacy pages integrated</li>
+              <li>SEO basics</li>
+              <li>Two rounds of revisions</li>
+            </ul>
+            <a class="btn" href="#contact" data-pick-type="web">Request</a>
+          </article>
+          <article class="price featured">
+            <span class="price-badge">Popular</span>
+            <h3>Website</h3>
+            <p class="price-tag"><small>from</small>€1,190</p>
+            <p>The presence your business needs.</p>
+            <ul>
+              <li>Up to 5 pages</li>
+              <li>Edit content yourself (optional)</li>
+              <li>Fast and easy to find</li>
+              <li>Domain &amp; hosting set up</li>
+              <li>Two rounds of revisions</li>
+            </ul>
+            <a class="btn primary" href="#contact" data-pick-type="web">Request</a>
+          </article>
+          <article class="price">
+            <h3>Online shop</h3>
+            <p class="price-tag"><small>from</small>€1,890</p>
+            <p>Sell online, without the headache.</p>
+            <ul>
+              <li>Shopify, WooCommerce or custom</li>
+              <li>PayPal &amp; card payments</li>
+              <li>Up to 25 products set up</li>
+              <li>Legal texts integrated</li>
+              <li>Personal walkthrough</li>
+            </ul>
+            <a class="btn" href="#contact" data-pick-type="shop">Request</a>
+          </article>
+          <article class="price">
+            <h3>Web app &amp; browser game</h3>
+            <p class="price-tag"><small>from</small>€2,900</p>
+            <p>Accounts, database, real time.</p>
+            <ul>
+              <li>Concept &amp; data model</li>
+              <li>Login, roles, admin tools</li>
+              <li>Real time &amp; multiplayer</li>
+              <li>Built in milestones with a preview link</li>
+            </ul>
+            <a class="btn" href="#contact" data-pick-type="app">Request</a>
+          </article>
+          <article class="price">
+            <h3>Care plan</h3>
+            <p class="price-tag"><small>from</small>€29 <small>/ month</small></p>
+            <p>So it keeps running after launch.</p>
+            <ul>
+              <li>Hosting &amp; domain looked after</li>
+              <li>Updates &amp; backups</li>
+              <li>Small changes included (30 min/month)</li>
+              <li>Quick help when something breaks</li>
+            </ul>
+            <a class="btn" href="#contact" data-pick-type="other">Request</a>
+          </article>
+        </div>
+        <p class="price-note">Guide prices. The binding price is in your quote. Third-party costs such as hosting, domain, licences (e.g. Shopify) and payment fees are billed to you directly by the provider.</p>
       </div>
     </section>
 
@@ -389,8 +505,8 @@
           </li>
           <li>
             <span class="step">02</span>
-            <h3>Call &amp; quote</h3>
-            <p>We clarify goals and scope. You get a quote with deliverables, timeline and price.</p>
+            <h3>Intro call &amp; quote</h3>
+            <p>Free, 15 minutes by phone or video. Then you get a fixed-price quote with deliverables and timeline.</p>
           </li>
           <li>
             <span class="step">03</span>
@@ -415,7 +531,11 @@
         <div class="faq reveal">
           <details>
             <summary><span>What will my project cost?</span><i aria-hidden="true"></i></summary>
-            <div class="faq-a"><p>It depends on the scope. After a short call you get a written quote with deliverables, timeline and price. The request itself is non-binding.</p></div>
+            <div class="faq-a"><p>Guide prices are listed under <a href="#pricing">Pricing</a> above: small jobs from €49, landing pages from €490, websites from €1,190, online shops from €1,890. After a free intro call you get a binding fixed price. The request itself is non-binding.</p></div>
+          </details>
+          <details>
+            <summary><span>How do I pay?</span><i aria-hidden="true"></i></summary>
+            <div class="faq-a"><p>For projects, half at the start and the rest on approval, by bank transfer or PayPal. Small jobs are paid once they are done.</p></div>
           </details>
           <details>
             <summary><span>How long does it take?</span><i aria-hidden="true"></i></summary>
@@ -447,8 +567,8 @@
           <div class="contact-main">
             <p class="kicker">Contact</p>
             <h2 id="contact-title">Start a project.</h2>
-            <p>Five quick questions and your request is written for you. No wording needed. Small jobs are welcome too, such as a single page, an update or a bug fix. I work in German and English.</p>
-            <form class="wizard" data-wizard data-endpoint="https://genesis-colonies.com/api/public/contact" data-mail="r.finn2303@gmail.com" data-subject="Project request" data-and="and" data-t-hello="Hi," data-t-intro="I&#x27;m interested in {type}." data-t-features="Most important to me would be {list}." data-t-note="A few words about my project:" data-t-outro="Looking forward to hearing from you." data-t-closing="Best regards" novalidate>
+            <p>Five quick questions and your request is written for you. No wording needed. Small jobs are welcome too, such as a single page, an update or a bug fix. I work in German and English and reply within 1–2 business days.</p>
+            <form class="wizard" data-wizard data-endpoint="https://genesis-colonies.com/api/public/contact" data-mail="r.finn2303@gmail.com" data-subject="Project request" data-and="and" data-t-hello="Hi," data-t-intro="I&#x27;m interested in {type}." data-t-features="Most important to me would be {list}." data-t-note="A few words about my project:" data-t-call="I&#x27;d be glad to talk it through in a short intro call first." data-t-outro="Looking forward to hearing from you." data-t-closing="Best regards" novalidate>
               <div class="wiz-bar" aria-hidden="true"><span></span></div>
               <section class="wiz-step" data-step="type">
                 <p class="wiz-progress">Question 1 of 5</p>
@@ -528,6 +648,7 @@
                   <input data-input="name" type="text" maxlength="80" autocomplete="name" placeholder="e.g. Anna Smith"></label>
                 <label class="wiz-field"><span>What is it about? A sentence or two is enough. (optional)</span>
                   <textarea data-input="note" rows="3" maxlength="600" placeholder="e.g. online booking for my hair salon with online payment"></textarea></label>
+                <label class="wiz-check"><input type="checkbox" data-input="call"><span>I&#x27;d like a free intro call (15 min, phone or video).</span></label>
                 <div class="wiz-field">
                   <span>Attachments (optional)</span>
                   <label class="drop" data-drop>
@@ -557,7 +678,7 @@
               <section class="wiz-step wiz-sent" data-step="sent" hidden>
                 <div class="sent-mark" aria-hidden="true"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-16"/></svg></div>
                 <h3 class="wiz-q" tabindex="-1" data-sent-title="Thank you{name}! Your request has arrived."></h3>
-                <p class="wiz-hint" data-sent-text="I will get back to you shortly at {email}."></p>
+                <p class="wiz-hint" data-sent-text="I will get back to you within 1–2 business days at {email}."></p>
                 <div class="wiz-nav"><span></span><button type="button" class="btn" data-restart>New request</button></div>
               </section>
             </form>

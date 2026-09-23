@@ -58,6 +58,11 @@
           "itemOffered": {
             "@type": "Service",
             "name": "Websites & Landingpages"
+          },
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "minPrice": 490,
+            "priceCurrency": "EUR"
           }
         },
         {
@@ -65,6 +70,11 @@
           "itemOffered": {
             "@type": "Service",
             "name": "Online-Shops"
+          },
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "minPrice": 1890,
+            "priceCurrency": "EUR"
           }
         },
         {
@@ -72,6 +82,11 @@
           "itemOffered": {
             "@type": "Service",
             "name": "Web-Apps & Portale"
+          },
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "minPrice": 2900,
+            "priceCurrency": "EUR"
           }
         },
         {
@@ -79,6 +94,11 @@
           "itemOffered": {
             "@type": "Service",
             "name": "Browsergames & Multiplayer"
+          },
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "minPrice": 2900,
+            "priceCurrency": "EUR"
           }
         },
         {
@@ -86,10 +106,17 @@
           "itemOffered": {
             "@type": "Service",
             "name": "Betrieb & Betreuung"
+          },
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "minPrice": 29,
+            "priceCurrency": "EUR",
+            "unitText": "MONTH"
           }
         }
       ]
-    }
+    },
+    "priceRange": "ab 49 €"
   }
   </script>
 </head>
@@ -106,6 +133,7 @@
       <nav class="nav" aria-label="Hauptnavigation">
         <a href="#leistungen">Leistungen</a>
         <a href="#projects">Projekte</a>
+        <a href="#preise">Preise</a>
         <a href="#about">Über mich</a>
         <a class="cta" href="#kontakt">Kontakt</a>
         <a class="ext" href="https://github.com/Gurgenbaba" rel="noreferrer">GitHub</a>
@@ -362,7 +390,7 @@
           <div>
             <p class="kicker">Über mich</p>
             <h2 id="about-title">Hinter Gurgenbaba.</h2>
-            <p>Gurgenbaba ist mein Label als Entwickler. Ich baue eigene Browsergames und Systeme und setze Webprojekte für Kunden um, vom Konzept bis zum laufenden Betrieb.</p>
+            <p>Ich bin Robert, Entwickler aus Thüringen, und Gurgenbaba ist mein Label. Ich baue eigene Browsergames und Systeme und setze Webprojekte für Kunden um, vom Konzept bis zum laufenden Betrieb.</p>
             <p>Sie arbeiten direkt mit dem, der den Code schreibt. Keine Agentur dazwischen, kurze Wege, ehrliche Einschätzungen.</p>
             <p>Ich arbeite mit KI-Werkzeugen — offen, nicht versteckt. Das bedeutet für Sie: schnellere Prototypen, gründlichere Tests und mehr Zeit für die Entscheidungen, die am Ende zählen. Architektur, Prüfung und Verantwortung für den Code bleiben bei mir.</p>
           </div>
@@ -372,6 +400,94 @@
             <a class="btn" href="https://gurgenbaba.itch.io/">itch.io</a>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="block" id="preise" aria-labelledby="preise-title">
+      <div class="wrap">
+        <header class="block-head reveal">
+          <p class="kicker">Preise</p>
+          <h2 id="preise-title">Faire Festpreise.</h2>
+          <p>Richtwerte für den Einstieg. Nach dem kostenlosen Erstgespräch bekommen Sie einen verbindlichen Festpreis, ohne Überraschungen. Bezahlt wird in zwei Teilen: die Hälfte zum Start, der Rest bei Abnahme.</p>
+        </header>
+        <div class="prices reveal">
+          <article class="price">
+            <h3>Kleinauftrag</h3>
+            <p class="price-tag"><small>ab</small>49 €</p>
+            <p>Fehler beheben, Texte oder Bilder tauschen, eine Seite ergänzen.</p>
+            <ul>
+              <li>Fehlerbehebung, Anpassungen, kleine Erweiterungen</li>
+              <li>Danach 55 € pro Stunde, vorher geschätzt</li>
+              <li>Meist in wenigen Tagen erledigt</li>
+            </ul>
+            <a class="btn" href="#kontakt" data-pick-type="other">Anfragen</a>
+          </article>
+          <article class="price">
+            <h3>Landingpage</h3>
+            <p class="price-tag"><small>ab</small>490 €</p>
+            <p>Eine Seite, die überzeugt.</p>
+            <ul>
+              <li>Responsives Design</li>
+              <li>Kontaktformular</li>
+              <li>Impressum &amp; Datenschutz eingebunden</li>
+              <li>SEO-Grundlagen</li>
+              <li>Zwei Korrekturrunden</li>
+            </ul>
+            <a class="btn" href="#kontakt" data-pick-type="web">Anfragen</a>
+          </article>
+          <article class="price featured">
+            <span class="price-badge">Beliebt</span>
+            <h3>Website</h3>
+            <p class="price-tag"><small>ab</small>1.190 €</p>
+            <p>Der Auftritt für Ihr Unternehmen.</p>
+            <ul>
+              <li>Bis zu 5 Unterseiten</li>
+              <li>Inhalte selbst pflegen (optional)</li>
+              <li>Schnell und gut auffindbar</li>
+              <li>Domain &amp; Hosting eingerichtet</li>
+              <li>Zwei Korrekturrunden</li>
+            </ul>
+            <a class="btn primary" href="#kontakt" data-pick-type="web">Anfragen</a>
+          </article>
+          <article class="price">
+            <h3>Online-Shop</h3>
+            <p class="price-tag"><small>ab</small>1.890 €</p>
+            <p>Online verkaufen, ohne Kopfschmerzen.</p>
+            <ul>
+              <li>Shopify, WooCommerce oder individuell</li>
+              <li>Zahlung per PayPal &amp; Karte</li>
+              <li>Bis zu 25 Produkte eingepflegt</li>
+              <li>Rechtstexte eingebunden</li>
+              <li>Persönliche Einweisung</li>
+            </ul>
+            <a class="btn" href="#kontakt" data-pick-type="shop">Anfragen</a>
+          </article>
+          <article class="price">
+            <h3>Web-App &amp; Browsergame</h3>
+            <p class="price-tag"><small>ab</small>2.900 €</p>
+            <p>Accounts, Datenbank, Echtzeit.</p>
+            <ul>
+              <li>Konzept &amp; Datenmodell</li>
+              <li>Login, Rollen, Admin-Tools</li>
+              <li>Echtzeit &amp; Multiplayer</li>
+              <li>In Meilensteinen mit Vorschau-Link</li>
+            </ul>
+            <a class="btn" href="#kontakt" data-pick-type="app">Anfragen</a>
+          </article>
+          <article class="price">
+            <h3>Betreuung</h3>
+            <p class="price-tag"><small>ab</small>29 € <small>/ Monat</small></p>
+            <p>Damit es nach dem Launch weiterläuft.</p>
+            <ul>
+              <li>Hosting &amp; Domain betreut</li>
+              <li>Updates &amp; Backups</li>
+              <li>Kleine Änderungen inklusive (30 Min./Monat)</li>
+              <li>Schnelle Hilfe, wenn etwas klemmt</li>
+            </ul>
+            <a class="btn" href="#kontakt" data-pick-type="other">Anfragen</a>
+          </article>
+        </div>
+        <p class="price-note">Richtpreise. Der verbindliche Preis steht im Angebot. Kosten von Drittanbietern wie Hosting, Domain, Lizenzen (z. B. Shopify) und Zahlungsgebühren rechnen die Anbieter direkt mit Ihnen ab.</p>
       </div>
     </section>
 
@@ -389,8 +505,8 @@
           </li>
           <li>
             <span class="step">02</span>
-            <h3>Gespräch &amp; Angebot</h3>
-            <p>Wir klären Ziel und Umfang. Sie bekommen ein Angebot mit Leistungen, Zeitplan und Preis.</p>
+            <h3>Erstgespräch &amp; Angebot</h3>
+            <p>Kostenlos, 15 Minuten per Telefon oder Video. Danach bekommen Sie ein Festpreis-Angebot mit Leistungen und Zeitplan.</p>
           </li>
           <li>
             <span class="step">03</span>
@@ -415,7 +531,11 @@
         <div class="faq reveal">
           <details>
             <summary><span>Was kostet mein Projekt?</span><i aria-hidden="true"></i></summary>
-            <div class="faq-a"><p>Das hängt vom Umfang ab. Nach einem kurzen Gespräch bekommen Sie ein schriftliches Angebot mit Leistungen, Zeitplan und Preis. Die Anfrage selbst ist unverbindlich.</p></div>
+            <div class="faq-a"><p>Richtwerte stehen oben unter <a href="#preise">Preise</a>: Kleinaufträge ab 49 €, Landingpages ab 490 €, Websites ab 1.190 €, Online-Shops ab 1.890 €. Nach dem kostenlosen Erstgespräch bekommen Sie einen verbindlichen Festpreis. Die Anfrage selbst ist unverbindlich.</p></div>
+          </details>
+          <details>
+            <summary><span>Wie wird bezahlt?</span><i aria-hidden="true"></i></summary>
+            <div class="faq-a"><p>Bei Projekten die Hälfte zum Start und den Rest bei Abnahme, per Überweisung oder PayPal. Kleinaufträge zahlen Sie erst, wenn sie erledigt sind.</p></div>
           </details>
           <details>
             <summary><span>Wie lange dauert es?</span><i aria-hidden="true"></i></summary>
@@ -447,8 +567,8 @@
           <div class="contact-main">
             <p class="kicker">Kontakt</p>
             <h2 id="kontakt-title">Projekt anfragen.</h2>
-            <p>Fünf kurze Fragen, dann steht Ihre Anfrage als fertiger Text da. Sie müssen nichts formulieren. Auch kleine Aufträge sind willkommen, etwa eine einzelne Seite, ein Update oder eine Fehlerbehebung.</p>
-            <form class="wizard" data-wizard data-endpoint="https://genesis-colonies.com/api/public/contact" data-mail="r.finn2303@gmail.com" data-subject="Projektanfrage" data-and="und" data-t-hello="Hallo," data-t-intro="ich interessiere mich für {type}." data-t-features="Wichtig wären mir vor allem {list}." data-t-features-one="Wichtig wäre mir vor allem {list}." data-t-note="Kurz zu meinem Vorhaben:" data-t-outro="Ich freue mich auf Ihre Rückmeldung." data-t-closing="Viele Grüße" novalidate>
+            <p>Fünf kurze Fragen, dann steht Ihre Anfrage als fertiger Text da. Sie müssen nichts formulieren. Auch kleine Aufträge sind willkommen, etwa eine einzelne Seite, ein Update oder eine Fehlerbehebung. Sie bekommen innerhalb von 1–2 Werktagen eine Antwort.</p>
+            <form class="wizard" data-wizard data-endpoint="https://genesis-colonies.com/api/public/contact" data-mail="r.finn2303@gmail.com" data-subject="Projektanfrage" data-and="und" data-t-hello="Hallo," data-t-intro="ich interessiere mich für {type}." data-t-features="Wichtig wären mir vor allem {list}." data-t-features-one="Wichtig wäre mir vor allem {list}." data-t-note="Kurz zu meinem Vorhaben:" data-t-call="Gern würde ich das vorab in einem kurzen Erstgespräch besprechen." data-t-outro="Ich freue mich auf Ihre Rückmeldung." data-t-closing="Viele Grüße" novalidate>
               <div class="wiz-bar" aria-hidden="true"><span></span></div>
               <section class="wiz-step" data-step="type">
                 <p class="wiz-progress">Frage 1 von 5</p>
@@ -472,20 +592,20 @@
                   <button type="button" aria-pressed="false" data-id="cms" data-value="Inhalte selbst pflegen" data-phrase="eine einfache Pflege der Inhalte" data-for="web shop" hidden>Inhalte selbst pflegen</button>
                   <button type="button" aria-pressed="false" data-id="seo" data-value="SEO &amp; schnelle Ladezeit" data-phrase="eine schnelle, gut auffindbare Seite" data-for="web shop" hidden>SEO &amp; schnelle Ladezeit</button>
                   <button type="button" aria-pressed="false" data-id="products" data-value="Produktverwaltung" data-phrase="eine Produktverwaltung" data-for="shop" hidden>Produktverwaltung</button>
-                  <button type="button" aria-pressed="false" data-id="payments" data-value="Zahlungen (PayPal, Karte …)" data-phrase="Online-Zahlungen (PayPal, Karte …)" data-for="shop app other" hidden>Zahlungen (PayPal, Karte …)</button>
+                  <button type="button" aria-pressed="false" data-id="payments" data-plural data-value="Zahlungen (PayPal, Karte …)" data-phrase="Online-Zahlungen (PayPal, Karte …)" data-for="shop app other" hidden>Zahlungen (PayPal, Karte …)</button>
                   <button type="button" aria-pressed="false" data-id="shipping" data-value="Versand &amp; Rechnungen" data-phrase="Versand mit Rechnungsstellung" data-for="shop" hidden>Versand &amp; Rechnungen</button>
-                  <button type="button" aria-pressed="false" data-id="customer_accounts" data-value="Kundenkonten" data-phrase="Kundenkonten" data-for="shop" hidden>Kundenkonten</button>
-                  <button type="button" aria-pressed="false" data-id="discounts" data-value="Gutscheine &amp; Rabatte" data-phrase="Rabattcodes" data-for="shop" hidden>Gutscheine &amp; Rabatte</button>
-                  <button type="button" aria-pressed="false" data-id="auth" data-value="Login &amp; Accounts" data-phrase="Benutzerkonten mit Login" data-for="app other" hidden>Login &amp; Accounts</button>
+                  <button type="button" aria-pressed="false" data-id="customer_accounts" data-plural data-value="Kundenkonten" data-phrase="Kundenkonten" data-for="shop" hidden>Kundenkonten</button>
+                  <button type="button" aria-pressed="false" data-id="discounts" data-plural data-value="Gutscheine &amp; Rabatte" data-phrase="Rabattcodes" data-for="shop" hidden>Gutscheine &amp; Rabatte</button>
+                  <button type="button" aria-pressed="false" data-id="auth" data-plural data-value="Login &amp; Accounts" data-phrase="Benutzerkonten mit Login" data-for="app other" hidden>Login &amp; Accounts</button>
                   <button type="button" aria-pressed="false" data-id="roles" data-value="Rollen &amp; Rechte" data-phrase="eine Rechteverwaltung" data-for="app" hidden>Rollen &amp; Rechte</button>
                   <button type="button" aria-pressed="false" data-id="dashboard" data-value="Dashboard &amp; Auswertungen" data-phrase="ein Dashboard mit Auswertungen" data-for="app" hidden>Dashboard &amp; Auswertungen</button>
-                  <button type="button" aria-pressed="false" data-id="api" data-value="Schnittstellen (API)" data-phrase="Schnittstellen zu anderen Systemen (API)" data-for="app other" hidden>Schnittstellen (API)</button>
-                  <button type="button" aria-pressed="false" data-id="realtime" data-value="Echtzeit-Updates" data-phrase="Echtzeit-Updates" data-for="app" hidden>Echtzeit-Updates</button>
-                  <button type="button" aria-pressed="false" data-id="game_saves" data-value="Accounts &amp; Spielstände" data-phrase="Accounts mit gespeicherten Spielständen" data-for="game" hidden>Accounts &amp; Spielstände</button>
+                  <button type="button" aria-pressed="false" data-id="api" data-plural data-value="Schnittstellen (API)" data-phrase="Schnittstellen zu anderen Systemen (API)" data-for="app other" hidden>Schnittstellen (API)</button>
+                  <button type="button" aria-pressed="false" data-id="realtime" data-plural data-value="Echtzeit-Updates" data-phrase="Echtzeit-Updates" data-for="app" hidden>Echtzeit-Updates</button>
+                  <button type="button" aria-pressed="false" data-id="game_saves" data-plural data-value="Accounts &amp; Spielstände" data-phrase="Accounts mit gespeicherten Spielständen" data-for="game" hidden>Accounts &amp; Spielstände</button>
                   <button type="button" aria-pressed="false" data-id="multiplayer" data-value="Multiplayer / Echtzeit" data-phrase="Multiplayer in Echtzeit" data-for="game" hidden>Multiplayer / Echtzeit</button>
-                  <button type="button" aria-pressed="false" data-id="leaderboards" data-value="Ranglisten" data-phrase="Ranglisten" data-for="game" hidden>Ranglisten</button>
+                  <button type="button" aria-pressed="false" data-id="leaderboards" data-plural data-value="Ranglisten" data-phrase="Ranglisten" data-for="game" hidden>Ranglisten</button>
                   <button type="button" aria-pressed="false" data-id="ingame_shop" data-value="Ingame-Shop" data-phrase="ein Ingame-Shop" data-for="game" hidden>Ingame-Shop</button>
-                  <button type="button" aria-pressed="false" data-id="admin" data-value="Admin-Tools" data-phrase="Admin-Werkzeuge" data-for="game app shop" hidden>Admin-Tools</button>
+                  <button type="button" aria-pressed="false" data-id="admin" data-plural data-value="Admin-Tools" data-phrase="Admin-Werkzeuge" data-for="game app shop" hidden>Admin-Tools</button>
                   <button type="button" aria-pressed="false" data-id="mobile" data-value="Mobile first" data-phrase="eine gute Bedienung auf dem Handy" data-for="game app" hidden>Mobile first</button>
                   <button type="button" aria-pressed="false" data-id="automation" data-value="Automatisierung" data-phrase="Automatisierung" data-for="other" hidden>Automatisierung</button>
                   <button type="button" aria-pressed="false" data-id="consulting" data-value="Beratung &amp; Einschätzung" data-phrase="eine ehrliche Einschätzung" data-for="other" hidden>Beratung &amp; Einschätzung</button>
@@ -528,6 +648,7 @@
                   <input data-input="name" type="text" maxlength="80" autocomplete="name" placeholder="z. B. Anna Schmidt"></label>
                 <label class="wiz-field"><span>Worum geht es? Ein, zwei Sätze reichen. (optional)</span>
                   <textarea data-input="note" rows="3" maxlength="600" placeholder="z. B. Terminbuchung für meinen Friseursalon mit Online-Zahlung"></textarea></label>
+                <label class="wiz-check"><input type="checkbox" data-input="call"><span>Ich hätte gern ein kostenloses Erstgespräch (15 Min., Telefon oder Video).</span></label>
                 <div class="wiz-field">
                   <span>Anhänge (optional)</span>
                   <label class="drop" data-drop>
@@ -557,7 +678,7 @@
               <section class="wiz-step wiz-sent" data-step="sent" hidden>
                 <div class="sent-mark" aria-hidden="true"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-16"/></svg></div>
                 <h3 class="wiz-q" tabindex="-1" data-sent-title="Danke{name}! Ihre Anfrage ist angekommen."></h3>
-                <p class="wiz-hint" data-sent-text="Ich melde mich zeitnah bei Ihnen unter {email}."></p>
+                <p class="wiz-hint" data-sent-text="Ich melde mich innerhalb von 1–2 Werktagen unter {email}."></p>
                 <div class="wiz-nav"><span></span><button type="button" class="btn" data-restart>Neue Anfrage</button></div>
               </section>
             </form>

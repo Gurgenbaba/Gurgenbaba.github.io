@@ -498,6 +498,7 @@
   var send = form.querySelector("[data-send]");
   var note = form.querySelector('[data-input="note"]');
   var name = form.querySelector('[data-input="name"]');
+  var call = form.querySelector('[data-input="call"]');
   var typeBox = form.querySelector('.pick[data-field="type"]');
   var featBox = form.querySelector('.pick[data-field="features"]');
   var featQuestion = form.querySelector('[data-step="features"] .wiz-q');
@@ -538,14 +539,18 @@
     var type = pressed("type")[0];
     if (!type) return "";
     var intro = t("intro").replace("{type}", type.getAttribute("data-phrase"));
-    var feats = pressed("features").map(function (b) { return b.getAttribute("data-phrase") || b.getAttribute("data-value"); });
-    if (feats.length) intro += " " + (feats.length === 1 && t("features-one") ? t("features-one") : t("features")).replace("{list}", joinList(feats));
+    var picked = pressed("features");
+    var feats = picked.map(function (b) { return b.getAttribute("data-phrase") || b.getAttribute("data-value"); });
+    // German needs "wäre" for one singular item, "wären" otherwise.
+    var one = feats.length === 1 && !picked[0].hasAttribute("data-plural") && t("features-one");
+    if (feats.length) intro += " " + (one ? t("features-one") : t("features")).replace("{list}", joinList(feats));
     var plan = pressed("timeline").concat(pressed("budget")).map(function (b) {
       return b.getAttribute("data-phrase");
     }).join(" ");
     var parts = [t("hello"), intro];
     if (plan) parts.push(plan);
     if (note.value.trim()) parts.push(t("note") + "\n" + note.value.trim());
+    if (call.checked) parts.push(t("call"));
     parts.push(t("outro"));
     parts.push(t("closing") + (name.value.trim() ? "\n" + name.value.trim() : ""));
     return parts.join("\n\n");
@@ -564,6 +569,7 @@
       timeline: pressed("timeline").map(id)[0] || "",
       budget: pressed("budget").map(id)[0] || "",
       note: note.value.trim(),
+      call: call.checked,
       edited: edited
     });
   }
@@ -664,6 +670,7 @@
       form.querySelectorAll('.pick button').forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
       note.value = "";
       name.value = "";
+      call.checked = false;
       email.value = "";
       files = [];
       renderFiles();
@@ -677,7 +684,16 @@
   [note, name].forEach(function (input) {
     input.addEventListener("input", function () { edited = false; touch(); refresh(); });
   });
+  call.addEventListener("change", function () { edited = false; touch(); refresh(); });
   email.addEventListener("input", function () { touch(); if (validEmail()) emailError.hidden = true; });
+
+  // "Anfragen" on a price card starts the wizard with that project type picked.
+  document.querySelectorAll("[data-pick-type]").forEach(function (link) {
+    link.addEventListener("click", function () {
+      var btn = typeBox.querySelector('[data-key="' + link.getAttribute("data-pick-type") + '"]');
+      if (btn && current === 0) btn.click();
+    });
+  });
 
   function formatSize(bytes) {
     return bytes < 1024 * 1024 ? Math.max(1, Math.round(bytes / 1024)) + " KB" : (bytes / 1048576).toFixed(1) + " MB";

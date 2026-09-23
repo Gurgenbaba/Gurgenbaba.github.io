@@ -4,7 +4,7 @@
     1 Tokens & fonts          9 Projects & client work    17 Case study
     2 Base                   10 Systems & tech ticker     18 Legal pages
     3 Layout & type          11 About                     19 Arcade
-    4 Buttons, chips, meta   12 Process                   20 Motion & hover
+    4 Buttons, chips, meta   12 Process & pricing         20 Motion & hover
     5 Header                 13 FAQ                       21 Responsive
     6 Hero                   14 Contact wizard
     7 Services               15 Footer & overlays
@@ -731,7 +731,7 @@ section[id] { scroll-margin-top: 72px; }
 .close p { margin: 0; color: var(--muted); max-width: 40rem; }
 .close p + p { margin-top: 12px; }
 
-/* 12 Process ------------------------------------------------------------- */
+/* 12 Process & pricing --------------------------------------------------- */
 .process {
   list-style: none;
   margin: 0;
@@ -755,6 +755,59 @@ section[id] { scroll-margin-top: 72px; }
   text-transform: uppercase;
 }
 .process p { margin: 0; color: var(--muted); font-size: 14px; }
+
+.prices {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.price {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 26px 24px 24px;
+  background: var(--panel);
+}
+.price.featured {
+  background: linear-gradient(180deg, rgba(198, 240, 74, 0.09), var(--panel) 55%);
+  box-shadow: inset 0 0 0 1px rgba(198, 240, 74, 0.5);
+}
+.price h3 { margin: 0; font-size: 17px; letter-spacing: -0.02em; text-transform: uppercase; }
+.price .price-tag {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--display);
+  font-size: clamp(28px, 2.8vw, 36px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.price-tag small {
+  font: 600 13px/1 ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  color: var(--muted);
+  letter-spacing: 0;
+}
+.price-tag small:first-child { margin-right: 6px; }
+.price p { margin: 0; color: var(--muted); font-size: 14px; }
+.price ul { margin: 4px 0 8px; padding: 0; list-style: none; display: grid; gap: 7px; font-size: 14px; }
+.price li { position: relative; padding-left: 22px; }
+.price li::before { content: "✓"; position: absolute; left: 0; color: var(--acid); font-weight: 800; }
+.price .btn { margin-top: auto; align-self: flex-start; }
+.price-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 5px 8px;
+  background: var(--acid);
+  color: var(--bg);
+  font: 800 10px/1 ui-monospace, Consolas, monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.price-note { margin: 16px 0 0; color: var(--muted); font-size: 13px; max-width: 60rem; }
 
 /* 13 FAQ ----------------------------------------------------------------- */
 .faq { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
@@ -914,6 +967,17 @@ section[id] { scroll-margin-top: 72px; }
   font-size: 15px;
 }
 .wiz-field textarea { resize: vertical; }
+.wiz-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: -2px 0 16px;
+  color: #c5d0d6;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.wiz-check input { flex: none; width: 18px; height: 18px; margin: 1px 0 0; accent-color: var(--acid); }
 .wiz-field input:focus, .wiz-field textarea:focus, .wiz-letter:focus { outline: none; border-color: var(--acid); box-shadow: 0 0 0 1px var(--acid); }
 .drop {
   position: relative;
@@ -1511,7 +1575,7 @@ body.legal .links a { color: #96a8b2; }
   .close,
   .systems { grid-template-columns: 1fr; }
   .services { grid-template-columns: 1fr 1fr; }
-  .process { grid-template-columns: 1fr 1fr; }
+  .process, .prices { grid-template-columns: 1fr 1fr; }
   .contact { grid-template-columns: 1fr; }
   .contact-hints { border-left: 0; border-top: 1px solid var(--line); }
   .showcase { grid-template-columns: 1fr; }
@@ -1543,7 +1607,9 @@ body.legal .links a { color: #96a8b2; }
   .systems { grid-template-columns: 1fr 1fr; }
   .close { padding: 22px; }
   .close .actions { display: grid; }
-  .services, .process { grid-template-columns: 1fr; }
+  .services, .process, .prices { grid-template-columns: 1fr; }
+  .price { padding: 22px 18px; }
+  .price .btn { align-self: stretch; }
   .sc-tabs { grid-template-columns: 1fr 1fr; }
   .sc-text b { display: none; }
   .facts { grid-template-columns: 1fr 1fr; }
