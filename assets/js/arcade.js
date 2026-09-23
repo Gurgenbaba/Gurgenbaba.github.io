@@ -10,7 +10,8 @@
     best: "Bestwert dieser Sitzung", power: "TRIPLE SHOT", wavePrefix: "WELLE ",
     board: "Top 10", enter: "Trag dich ein", initials: "3 Buchstaben", submit: "Eintragen",
     saved: "Eingetragen! Platz ", savedOff: "Eingetragen, knapp außerhalb der Top 10.",
-    failed: "Konnte nicht speichern.", badName: "Genau 3 Buchstaben A–Z.", empty: "Noch keine Einträge. Sei die erste Legende."
+    failed: "Konnte nicht speichern.", badName: "Genau 3 Buchstaben A–Z.", empty: "Noch keine Einträge. Sei die erste Legende.",
+    rankHint: "Reicht für Platz ", rankOut: "Knapp außerhalb der Top 10. Eintragen geht trotzdem.", refill: " · SCHILDE VOLL"
   } : {
     score: "Score", wave: "Wave", shield: "Shield", exit: "ESC / × to exit",
     hint: "Move mouse or finger · ship fires automatically",
@@ -18,7 +19,8 @@
     best: "Best this session", power: "TRIPLE SHOT", wavePrefix: "WAVE ",
     board: "Top 10", enter: "Enter your name", initials: "3 letters", submit: "Submit",
     saved: "Saved! Rank ", savedOff: "Saved, just outside the top 10.",
-    failed: "Could not save.", badName: "Exactly 3 letters A–Z.", empty: "No entries yet. Be the first legend."
+    failed: "Could not save.", badName: "Exactly 3 letters A–Z.", empty: "No entries yet. Be the first legend.",
+    rankHint: "Good for rank ", rankOut: "Just outside the top 10. You can still submit.", refill: " · SHIELDS FULL"
   };
 
   var API = "https://genesis-colonies.com/api/public/arcade";
@@ -65,10 +67,27 @@
     box.hidden = false;
   }
 
+  // Last board we saw. Prefetched when a run starts so it is on screen the moment the run ends.
+  var boardCache = null;
+
+  function showRankHint() {
+    var hint = root.querySelector(".arcade-rank");
+    if (!hint || !state || !state.over || !boardCache) return;
+    var ahead = boardCache.filter(function (row) { return row.score > state.score; }).length;
+    var rank = ahead + 1;
+    hint.textContent = rank <= 10 ? T.rankHint + rank + "!" : T.rankOut;
+    hint.classList.toggle("top", rank <= 10);
+  }
+
   function loadBoard() {
     if (!window.fetch) return;
     api("/scores").then(function (data) {
-      if (data && data.ok && state && state.over) renderBoard(data.scores || []);
+      if (!data || !data.ok) return;
+      boardCache = data.scores || [];
+      if (state && state.over && !root.querySelector(".arcade-entry").dataset.sent) {
+        renderBoard(boardCache);
+        showRankHint();
+      }
     }).catch(function () {});
   }
 
@@ -104,7 +123,7 @@
       '<h2>' + T.over + '</h2><p data-final></p>' +
       '<form class="arcade-entry" hidden><label>' + T.enter +
       '<input name="initials" maxlength="3" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="' + T.initials + '"></label>' +
-      '<button type="submit" class="btn primary">' + T.submit + '</button><p class="arcade-msg" aria-live="polite"></p></form>' +
+      '<button type="submit" class="btn primary">' + T.submit + '</button><p class="arcade-rank" aria-live="polite"></p><p class="arcade-msg" aria-live="polite"></p></form>' +
       '<div class="arcade-board" hidden><h3>' + T.board + '</h3><ol></ol></div>' +
       '<div class="actions"><button type="button" class="btn primary" data-again>' + T.again + '</button>' +
       '<button type="button" class="btn" data-leave>' + T.close + '</button></div>');
@@ -127,6 +146,8 @@
       }).then(function (data) {
         if (data && data.ok) {
           form.hidden = true;
+          form.dataset.sent = "1";
+          boardCache = data.scores || boardCache;
           renderBoard(data.scores || [], data.rank);
           var info = root.querySelector("[data-final]");
           info.textContent += " · " + (data.rank ? T.saved + data.rank : T.savedOff);
@@ -174,6 +195,7 @@
   function reset() {
     root.querySelector(".arcade-over").hidden = true;
     requestRun();
+    loadBoard();
     state = {
       x: w / 2, tx: w / 2, y: h - Math.max(110, h * 0.16), keys: {},
       bullets: [], rocks: [], sparks: [], orbs: [], stars: [],
@@ -232,6 +254,9 @@
     form.querySelector("button").disabled = false;
     form.querySelector(".arcade-msg").textContent = "";
     o.querySelector(".arcade-board").hidden = true;
+    delete form.dataset.sent;
+    form.querySelector(".arcade-rank").textContent = "";
+    if (boardCache) { renderBoard(boardCache); showRankHint(); }
     loadBoard();
     if (!form.hidden) form.querySelector("input").focus();
     else o.querySelector("[data-again]").focus();
@@ -269,7 +294,10 @@
       if (s.spawned >= s.toSpawn && s.rocks.length === 0) {
         s.wave++; s.spawned = 0; s.toSpawn = 8 + s.wave * 3;
         s.nextSpawn = t + 900;
-        announce(T.wavePrefix + s.wave);
+        var refilled = s.shield < 3;
+        s.shield = 3;
+        if (refilled) burst(s.x, s.y, 40, "#c6f04a", 4);
+        announce(T.wavePrefix + s.wave + (refilled ? T.refill : ""));
         hud();
       }
     }

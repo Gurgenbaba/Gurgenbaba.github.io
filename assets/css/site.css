@@ -970,6 +970,9 @@ body.legal h1 {
 .arcade-entry input:focus { outline: none; box-shadow: 0 0 0 1px var(--acid), 0 0 24px -6px var(--acid); }
 .arcade-entry .btn { width: auto; }
 .arcade-entry label, .arcade-entry input { min-width: 0; width: 100%; }
+.arcade-rank { grid-column: 1 / -1; margin: 0; color: var(--muted); font: 700 12px/1.3 ui-monospace, Consolas, monospace; letter-spacing: 0.06em; }
+.arcade-rank.top { color: var(--acid); text-shadow: 0 0 18px rgba(198, 240, 74, 0.5); }
+.arcade-rank:empty { display: none; }
 .arcade-msg { grid-column: 1 / -1; margin: 0; min-height: 1em; color: var(--od); font-size: 13px; }
 .arcade-board { margin: 0 0 18px; text-align: left; }
 .arcade-board h3 {
@@ -1082,6 +1085,7 @@ body.legal h1 {
   left: 0;
   right: 0;
   margin: 0;
+  padding: 0 16px;
   text-align: center;
   color: var(--acid);
   font: 800 clamp(28px, 7vw, 64px)/1 var(--display);
