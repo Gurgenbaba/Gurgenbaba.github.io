@@ -26,3 +26,10 @@ Fonts:
 | File | Source | License |
 |---|---|---|
 | `fonts/unbounded-latin-wght.woff2` | Unbounded variable, latin subset (via Fontsource) | SIL OFL 1.1, see `fonts/OFL-unbounded.txt` |
+
+## Hotel demo
+
+- `img/projects/demo-hotel/preview.webp`: optimized hero artwork from the hotel demo, 1400 × 875.
+- `/demo/hotel/hotel-{768,1536}.webp`: built-in ImageGen; fictional central German country hotel beside a river, cream plaster and timber details, forested low hills, late-summer golden hour, no people or text.
+- `/demo/hotel/zimmer-{768,1536}.webp`: built-in ImageGen; fictional boutique hotel bedroom, oak floors, cream linen, sage throws, balcony toward low wooded hills, morning light, no people or text.
+- Generated originals optimized to local WebP variants. Images depict no actual property; the demo labels the hotel and images as fictional. No external requests or browser storage are introduced.

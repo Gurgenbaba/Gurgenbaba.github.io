@@ -14,6 +14,7 @@ en/index.html                       Startseite EN (gleiche Struktur, eigene Anke
 case-study/genesis-colonies/        Case Study DE
 en/case-study/genesis-colonies/     Case Study EN
 demo/salon/                         Demo-Website eines erfundenen Friseursalons (eigenes CSS/JS, noindex)
+demo/hotel/                         Fiktives Landhotel mit Zimmerauswahl, Preisrechner und Demo-Anfrage (noindex)
 demo/fitness/                       Demo-Web-App für Training & Ernährung (eigenes CSS/JS, localStorage, noindex)
 404.html                            Spielbare Fehlerseite (eigenes Inline-Script)
 impressum.html, datenschutz.html    Rechtstexte (nur DE)
@@ -42,7 +43,7 @@ Aufrufe an `genesis-colonies.com` (Live-Zahlen, Arcade-Bestenliste, Kontaktformu
 python tools/qa-viewports.py
 ```
 
-Prüft alle 9 Seiten bei 1920, 1366, 375 und 320 px. Der Lauf schlägt fehl bei seitlichem Scrollen, kaputten Bildern, Script-Fehlern oder fehlgeschlagenen Anfragen. Screenshots landen in `artifacts/qa/` (ignoriert). Voraussetzung: `pip install playwright` und `playwright install chromium`.
+Prüft alle 10 Seiten bei 1920, 1366, 375 und 320 px. Der Lauf schlägt fehl bei seitlichem Scrollen, kaputten Bildern, Script-Fehlern oder fehlgeschlagenen Anfragen. Screenshots landen in `artifacts/qa/` (ignoriert). Voraussetzung: `pip install playwright` und `playwright install chromium`.
 
 ## Backend (Genesis Colonies)
 
