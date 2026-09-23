@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>404 // Gurgenbaba</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#05070a">
+  <link rel="icon" href="/assets/img/brand/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/unbounded-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    body { touch-action: none; user-select: none; -webkit-user-select: none; }
+    #game { position: fixed; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; }
+    .lost {
+      position: fixed;
+      top: max(18px, env(safe-area-inset-top));
+      left: 16px;
+      right: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      pointer-events: none;
+    }
+    .lost > * { pointer-events: auto; }
+    .lost .brand { color: var(--ink); }
+    .hud {
+      color: var(--acid);
+      font: 800 11px/1 ui-monospace, Consolas, monospace;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-align: right;
+    }
+    .hud small { display: block; margin-top: 6px; color: #6d7d86; font-size: 9px; }
+    .panel404 {
+      position: fixed;
+      left: 50%;
+      bottom: max(20px, env(safe-area-inset-bottom));
+      transform: translateX(-50%);
+      width: min(calc(100% - 32px), 520px);
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      background: rgba(11, 17, 22, 0.88);
+      backdrop-filter: blur(6px);
+      text-align: center;
+    }
+    .panel404 h1 {
+      margin: 0 0 6px;
+      font: 800 clamp(18px, 4.4vw, 24px)/1.1 var(--display);
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+    .panel404 p { margin: 0 0 14px; color: var(--muted); font-size: 14px; }
+    .panel404 .actions { justify-content: center; }
+    .panel404.won { border-color: var(--acid); box-shadow: 0 0 60px -20px var(--acid); }
+    .panel404.won h1 { color: var(--acid); }
+  </style>
+</head>
+<body>
+  <canvas id="game" aria-hidden="true"></canvas>
+
+  <div class="lost">
+    <a class="brand" href="/" data-home>
+      <span class="brand-mark" aria-hidden="true">G</span>
+      <span>Gurgenbaba</span>
+    </a>
+    <p class="hud" aria-live="polite"><span id="score">0 / 0</span><small id="hint">Maus oder Finger bewegen</small></p>
+  </div>
+
+  <div class="panel404" id="panel">
+    <h1 id="title">Sektor nicht gefunden</h1>
+    <p id="text">Diese Seite existiert nicht. Schieß die 404 ab oder flieg zurück zur Basis.</p>
+    <div class="actions">
+      <a class="btn primary" href="/" data-home id="home">Zur Startseite</a>
+      <button class="btn" type="button" id="again" hidden>Nochmal</button>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    var lang = "de";
+    try { lang = localStorage.getItem("gb-lang") || ""; } catch (e) {}
+    if (lang !== "de" && lang !== "en") {
+      lang = String((navigator.languages || [navigator.language || ""])[0] || "").toLowerCase().indexOf("de") === 0 ? "de" : "en";
+    }
+    var T = {
+      de: {
+        title: "Sektor nicht gefunden",
+        text: "Diese Seite existiert nicht. Schieß die 404 ab oder flieg zurück zur Basis.",
+        home: "Zur Startseite", again: "Nochmal", hint: "Maus oder Finger bewegen",
+        wonTitle: "Sektor gesäubert", wonText: "Sauber geflogen. So viel zum Thema Fehlerseite.",
+        keys: "← → oder A / D"
+      },
+      en: {
+        title: "Sector not found",
+        text: "This page does not exist. Shoot down the 404 or fly back to base.",
+        home: "Back to home", again: "Play again", hint: "Move mouse or finger",
+        wonTitle: "Sector cleared", wonText: "Clean flying. So much for an error page.",
+        keys: "← → or A / D"
+      }
+    }[lang];
+    document.documentElement.lang = lang;
+    var home = lang === "en" ? "/en/" : "/";
+    document.querySelectorAll("[data-home]").forEach(function (a) { a.href = home; });
+    var $ = function (id) { return document.getElementById(id); };
+    $("title").textContent = T.title;
+    $("text").textContent = T.text;
+    $("home").textContent = T.home;
+    $("again").textContent = T.again;
+    $("hint").textContent = matchMedia("(pointer: fine)").matches ? T.hint + " · " + T.keys : T.hint;
+
+    var canvas = $("game"), ctx = canvas.getContext("2d");
+    var w = 0, h = 0, dpr = 1;
+    var stars = [], blocks = [], bullets = [], sparks = [];
+    var ship = { x: 0, y: 0, tx: 0 };
+    var laidOutW = 0, lastFrame = 0, keys = {}, lastShot = 0, total = 0, hits = 0, won = false, shake = 0;
+
+    var GLYPHS = {
+      "4": ["101", "101", "111", "001", "001"],
+      "0": ["111", "101", "101", "101", "111"]
+    };
+
+    function layout() {
+      var cols = 3 * 3 + 2; // "404" plus two gap columns
+      var cell = Math.floor(Math.min(w * 0.8 / cols, h * 0.38 / 5, 64));
+      var ox = (w - cols * cell) / 2, oy = Math.max(h * 0.16, 90);
+      blocks = [];
+      "404".split("").forEach(function (ch, gi) {
+        GLYPHS[ch].forEach(function (row, ry) {
+          row.split("").forEach(function (bit, rx) {
+            if (bit !== "1") return;
+            blocks.push({
+              x: ox + (gi * 4 + rx) * cell, y: oy + ry * cell,
+              s: cell - 4, hp: 2, flash: 0, phase: Math.random() * 6.28, alive: true
+            });
+          });
+        });
+      });
+      total = blocks.length; hits = 0; won = false;
+      updateScore();
+    }
+
+    function resize() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = window.innerWidth; h = window.innerHeight;
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      stars = [];
+      for (var i = 0; i < Math.min(300, (w * h) / 5000); i++) {
+        stars.push({ x: Math.random() * w, y: Math.random() * h, z: Math.random() });
+      }
+      ship.y = h - Math.max(190, h * 0.28);
+      if (!ship.x) { ship.x = ship.tx = w / 2; }
+      // Only rebuild the target when the width changes, so a mobile URL bar does not reset the run.
+      if (w !== laidOutW) { laidOutW = w; layout(); }
+    }
+
+    function updateScore() {
+      $("score").textContent = hits + " / " + total;
+    }
+
+    function burst(x, y, n, color, speed) {
+      for (var i = 0; i < n; i++) {
+        var a = Math.random() * Math.PI * 2, v = (0.5 + Math.random()) * speed;
+        sparks.push({ x: x, y: y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, life: 1, color: color });
+      }
+    }
+
+    function win() {
+      won = true;
+      var panel = $("panel");
+      panel.classList.add("won");
+      $("title").textContent = T.wonTitle;
+      $("text").textContent = T.wonText;
+      $("again").hidden = false;
+      for (var i = 0; i < 6; i++) {
+        burst(w * (0.2 + Math.random() * 0.6), h * (0.2 + Math.random() * 0.3), 40, i % 2 ? "#c6f04a" : "#ff8a3d", 6);
+      }
+    }
+
+    $("again").addEventListener("click", function () {
+      $("panel").classList.remove("won");
+      $("title").textContent = T.title;
+      $("text").textContent = T.text;
+      $("again").hidden = true;
+      layout();
+    });
+
+    function aim(clientX) { ship.tx = Math.max(20, Math.min(w - 20, clientX)); }
+    window.addEventListener("pointermove", function (e) { aim(e.clientX); });
+    window.addEventListener("pointerdown", function (e) { if (e.target === canvas) aim(e.clientX); });
+    window.addEventListener("keydown", function (e) { keys[e.key.toLowerCase()] = true; });
+    window.addEventListener("keyup", function (e) { keys[e.key.toLowerCase()] = false; });
+    window.addEventListener("resize", resize);
+
+    function frame(t) {
+      // k = elapsed time in 60 fps frames, so speed is the same on 60 Hz and 144 Hz screens.
+      var k = lastFrame ? Math.min(t - lastFrame, 50) / (1000 / 60) : 1;
+      lastFrame = t;
+      if (keys["arrowleft"] || keys["a"]) ship.tx = Math.max(20, ship.tx - 9 * k);
+      if (keys["arrowright"] || keys["d"]) ship.tx = Math.min(w - 20, ship.tx + 9 * k);
+      var prevX = ship.x;
+      ship.x += (ship.tx - ship.x) * (1 - Math.pow(0.82, k));
+      var tilt = Math.max(-0.5, Math.min(0.5, (ship.x - prevX) / k * 0.05));
+
+      if (!won && t - lastShot > 130) {
+        lastShot = t;
+        bullets.push({ x: ship.x - 7, y: ship.y - 14 }, { x: ship.x + 7, y: ship.y - 14 });
+      }
+
+      ctx.save();
+      if (shake > 0) { ctx.translate((Math.random() - 0.5) * shake, (Math.random() - 0.5) * shake); shake *= Math.pow(0.85, k); }
+      ctx.fillStyle = "#05070a";
+      ctx.fillRect(-20, -20, w + 40, h + 40);
+
+      stars.forEach(function (s) {
+        s.y += (0.3 + s.z * 2.2) * k;
+        if (s.y > h) { s.y = 0; s.x = Math.random() * w; }
+        ctx.fillStyle = "rgba(220,232,238," + (0.2 + s.z * 0.6) + ")";
+        ctx.fillRect(s.x, s.y, 1 + s.z, 1 + s.z * 2.5);
+      });
+
+      blocks.forEach(function (b) {
+        if (!b.alive) return;
+        var bob = Math.sin(t / 600 + b.phase) * 3;
+        b.dy = bob;
+        ctx.fillStyle = b.flash > 0 ? "#ffffff" : b.hp === 2 ? "#c6f04a" : "#ff8a3d";
+        ctx.shadowColor = ctx.fillStyle; ctx.shadowBlur = 18;
+        ctx.fillRect(b.x, b.y + bob, b.s, b.s);
+        ctx.shadowBlur = 0;
+        b.flash = Math.max(0, b.flash - k);
+      });
+
+      ctx.fillStyle = "#c6f04a";
+      for (var i = bullets.length - 1; i >= 0; i--) {
+        var p = bullets[i];
+        p.y -= 13 * k;
+        var hit = false;
+        for (var j = 0; j < blocks.length && !hit; j++) {
+          var b = blocks[j];
+          if (!b.alive) continue;
+          var by = b.y + (b.dy || 0);
+          if (p.x > b.x && p.x < b.x + b.s && p.y > by && p.y < by + b.s) {
+            hit = true;
+            b.hp -= 1; b.flash = 3;
+            burst(p.x, p.y, 5, "#c6f04a", 3);
+            if (b.hp <= 0) {
+              b.alive = false; hits += 1; shake = 7;
+              burst(b.x + b.s / 2, by + b.s / 2, 26, "#ff8a3d", 5);
+              updateScore();
+              if (hits === total) win();
+            }
+          }
+        }
+        if (hit || p.y < -20) { bullets.splice(i, 1); continue; }
+        ctx.fillRect(p.x - 1.5, p.y, 3, 12);
+      }
+
+      for (var k = sparks.length - 1; k >= 0; k--) {
+        var s = sparks[k];
+        s.x += s.vx * k; s.y += s.vy * k; s.vy += 0.08 * k; s.life -= 0.025 * k;
+        if (s.life <= 0) { sparks.splice(k, 1); continue; }
+        ctx.globalAlpha = s.life;
+        ctx.fillStyle = s.color;
+        ctx.fillRect(s.x, s.y, 3, 3);
+      }
+      ctx.globalAlpha = 1;
+
+      // Ship
+      ctx.translate(ship.x, ship.y);
+      ctx.rotate(tilt);
+      var flame = 10 + Math.random() * 10;
+      ctx.fillStyle = "#ff8a3d";
+      ctx.beginPath(); ctx.moveTo(-6, 14); ctx.lineTo(0, 14 + flame); ctx.lineTo(6, 14); ctx.fill();
+      ctx.fillStyle = "#c6f04a";
+      ctx.shadowColor = "#c6f04a"; ctx.shadowBlur = 20;
+      ctx.beginPath();
+      ctx.moveTo(0, -22); ctx.lineTo(18, 16); ctx.lineTo(6, 10); ctx.lineTo(0, 16);
+      ctx.lineTo(-6, 10); ctx.lineTo(-18, 16); ctx.closePath(); ctx.fill();
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = "#05070a";
+      ctx.beginPath(); ctx.moveTo(0, -8); ctx.lineTo(4, 4); ctx.lineTo(-4, 4); ctx.closePath(); ctx.fill();
+      ctx.restore();
+
+      requestAnimationFrame(frame);
+    }
+
+    resize();
+    requestAnimationFrame(frame);
+  })();
+  </script>
+</body>
+</html>

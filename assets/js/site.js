@@ -305,3 +305,50 @@
     stack.classList.add("ticker");
   });
 })();
+
+(function () {
+  // Live counters from the Genesis Colonies server. Stays hidden unless real data arrives.
+  var box = document.querySelector("[data-stats-src]");
+  if (!box || !window.fetch) return;
+  var motion = document.documentElement.classList.contains("fx");
+  var fmt = new Intl.NumberFormat(box.getAttribute("data-locale") || undefined);
+  var ctrl = window.AbortController ? new AbortController() : null;
+  var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 6000);
+
+  fetch(box.getAttribute("data-stats-src"), { credentials: "omit", signal: ctrl ? ctrl.signal : undefined })
+    .then(function (res) { return res.ok ? res.json() : null; })
+    .then(function (data) {
+      clearTimeout(timer);
+      if (!data || !data.ok || !(data.players > 0)) return;
+      var cells = [];
+      box.querySelectorAll("[data-stat]").forEach(function (cell) {
+        var value = Number(data[cell.getAttribute("data-stat")]);
+        if (!(value > 0)) { cell.remove(); return; }
+        cells.push({ el: cell.querySelector("dd"), value: value });
+      });
+      box.hidden = false;
+
+      var run = function () {
+        if (!motion) {
+          cells.forEach(function (c) { c.el.textContent = fmt.format(c.value); });
+          return;
+        }
+        var start = performance.now(), duration = 1400;
+        (function step(now) {
+          var t = Math.min(1, (now - start) / duration);
+          var eased = 1 - Math.pow(1 - t, 3);
+          cells.forEach(function (c) { c.el.textContent = fmt.format(Math.round(c.value * eased)); });
+          if (t < 1) requestAnimationFrame(step);
+        })(start);
+      };
+      if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting) { io.disconnect(); run(); }
+        }, { threshold: 0.4 });
+        io.observe(box);
+      } else {
+        run();
+      }
+    })
+    .catch(function () { clearTimeout(timer); });
+})();

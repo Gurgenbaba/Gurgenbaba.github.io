@@ -13,6 +13,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { background: var(--bg); scroll-behavior: smooth; }
 body {
   margin: 0;
@@ -776,6 +777,51 @@ body.legal h1 {
 .ticker:hover .ticker-track { animation-play-state: paused; }
 .ticker-track span { flex: none; }
 @keyframes ticker { to { transform: translateX(calc(-50% - 4px)); } }
+
+
+/* ---------- Live stats ---------- */
+.live-stats {
+  margin: -8px 0 22px;
+  border: 1px solid var(--line);
+  background: linear-gradient(90deg, rgba(198, 240, 74, 0.06), transparent 60%), var(--panel);
+}
+.live-stats-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--line);
+  color: var(--acid);
+  font: 800 10px/1 ui-monospace, Consolas, monospace;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--acid);
+  animation: pulse 1.8s infinite;
+}
+.live-stats dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin: 0;
+}
+.live-stats dl > div { padding: 16px 18px 18px; border-left: 1px solid var(--line); margin-left: -1px; }
+.live-stats dt {
+  color: #7d8d95;
+  font: 700 9px/1.2 ui-monospace, Consolas, monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.live-stats dd {
+  margin: 8px 0 0;
+  font: 800 clamp(24px, 2.6vw, 34px)/1 var(--display);
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
 
 @media (max-width: 1100px) {
   .hero-grid {
