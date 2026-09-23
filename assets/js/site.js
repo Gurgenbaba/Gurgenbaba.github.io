@@ -479,7 +479,23 @@
   var featBox = form.querySelector('.pick[data-field="features"]');
   var featQuestion = form.querySelector('[data-step="features"] .wiz-q');
   var defaultQuestion = featQuestion.textContent;
-  var current = 0, edited = false;
+  var current = 0, edited = false, startedAt = 0, files = [];
+  var email = form.querySelector('[data-input="email"]');
+  var emailError = form.querySelector("[data-email-error]");
+  var fileInput = form.querySelector("[data-files]");
+  var fileList = form.querySelector("[data-file-list]");
+  var fileError = form.querySelector("[data-file-error]");
+  var drop = form.querySelector("[data-drop]");
+  var submitBtn = form.querySelector("[data-submit]");
+  var submitError = form.querySelector("[data-submit-error]");
+  var attachInfo = form.querySelector("[data-attach-info]");
+  var honeypot = form.querySelector("[data-hp]");
+  var doneIndex = steps.indexOf(form.querySelector('[data-step="done"]'));
+  var MAX_FILES = 5, MAX_FILE = 8 * 1024 * 1024, MAX_TOTAL = 20 * 1024 * 1024;
+  var EXT = /\.(pdf|png|jpe?g|webp|gif|heic|txt|md|csv|rtf|docx?|odt|xlsx?|ods|pptx?|odp|fig|sketch|psd|ai)$/i;
+
+  function touch() { if (!startedAt) startedAt = Date.now(); }
+  function validEmail() { return /^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$/.test(email.value.trim()); }
 
   function t(key) { return form.getAttribute("data-t-" + key) || ""; }
 
@@ -500,7 +516,7 @@
     if (!type) return "";
     var intro = t("intro").replace("{type}", type.getAttribute("data-phrase"));
     var feats = pressed("features").map(function (b) { return b.getAttribute("data-phrase") || b.getAttribute("data-value"); });
-    if (feats.length) intro += " " + t("features").replace("{list}", joinList(feats));
+    if (feats.length) intro += " " + (feats.length === 1 && t("features-one") ? t("features-one") : t("features")).replace("{list}", joinList(feats));
     var plan = pressed("timeline").concat(pressed("budget")).map(function (b) {
       return b.getAttribute("data-phrase");
     }).join(" ");
@@ -559,7 +575,11 @@
     var step = steps[current];
     if (step.getAttribute("data-step") === "features") syncFeatures();
     if (step.getAttribute("data-step") === "done") refresh();
-    bar.style.transform = "scaleX(" + current / (steps.length - 1) + ")";
+    bar.style.transform = "scaleX(" + Math.min(1, current / doneIndex) + ")";
+    if (step.getAttribute("data-step") === "done") {
+      attachInfo.textContent = files.length ? "📎 " + files.map(function (f) { return f.name; }).join(", ") : "";
+      submitError.hidden = true;
+    }
     if (motion) {
       step.classList.remove("enter");
       void step.offsetWidth;
@@ -581,6 +601,7 @@
       if (single) box.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
       btn.setAttribute("aria-pressed", on || auto ? "true" : "false");
       edited = false;
+      touch();
       if (box === typeBox) syncFeatures();
       refresh();
       if (auto) {
@@ -591,22 +612,134 @@
   });
 
   form.addEventListener("click", function (e) {
-    if (e.target.closest("[data-next]")) show(current + 1);
+    var next = e.target.closest("[data-next]");
+    if (next && steps[current].getAttribute("data-step") === "details" && !validEmail()) {
+      emailError.hidden = false;
+      email.focus();
+      return;
+    }
+    if (next) show(current + 1);
     else if (e.target.closest("[data-back]")) show(current - 1);
     else if (e.target.closest("[data-restart]")) {
       form.querySelectorAll('.pick button').forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
       note.value = "";
       name.value = "";
+      email.value = "";
+      files = [];
+      renderFiles();
       edited = false;
+      startedAt = 0;
       refresh();
       show(0);
     }
   });
 
   [note, name].forEach(function (input) {
-    input.addEventListener("input", function () { edited = false; refresh(); });
+    input.addEventListener("input", function () { edited = false; touch(); refresh(); });
+  });
+  email.addEventListener("input", function () { touch(); if (validEmail()) emailError.hidden = true; });
+
+  function formatSize(bytes) {
+    return bytes < 1024 * 1024 ? Math.max(1, Math.round(bytes / 1024)) + " KB" : (bytes / 1048576).toFixed(1) + " MB";
+  }
+
+  function renderFiles() {
+    fileList.innerHTML = "";
+    files.forEach(function (file, i) {
+      var li = document.createElement("li");
+      var label = document.createElement("span");
+      label.textContent = file.name;
+      var size = document.createElement("small");
+      size.textContent = formatSize(file.size);
+      var remove = document.createElement("button");
+      remove.type = "button";
+      remove.textContent = "×";
+      remove.setAttribute("aria-label", fileList.getAttribute("data-remove") + ": " + file.name);
+      remove.addEventListener("click", function () { files.splice(i, 1); renderFiles(); });
+      li.append(label, size, remove);
+      fileList.appendChild(li);
+    });
+  }
+
+  function addFiles(list) {
+    var problem = "";
+    var total = files.reduce(function (sum, f) { return sum + f.size; }, 0);
+    Array.prototype.forEach.call(list, function (file) {
+      if (files.length >= MAX_FILES) { problem = "count"; return; }
+      if (!EXT.test(file.name)) { problem = "type"; return; }
+      if (file.size > MAX_FILE || total + file.size > MAX_TOTAL) { problem = "size"; return; }
+      total += file.size;
+      files.push(file);
+    });
+    fileError.hidden = !problem;
+    fileError.textContent = problem ? fileList.getAttribute("data-cerr-" + problem) : "";
+    touch();
+    renderFiles();
+  }
+
+  fileInput.addEventListener("change", function () { addFiles(fileInput.files); fileInput.value = ""; });
+  ["dragenter", "dragover"].forEach(function (type) {
+    drop.addEventListener(type, function (e) { e.preventDefault(); drop.classList.add("over"); });
+  });
+  ["dragleave", "drop"].forEach(function (type) {
+    drop.addEventListener(type, function (e) { e.preventDefault(); drop.classList.remove("over"); });
+  });
+  drop.addEventListener("drop", function (e) { if (e.dataTransfer) addFiles(e.dataTransfer.files); });
+
+  function submitErrorText(code) {
+    return submitError.getAttribute("data-err-" + String(code || "").replace(/_/g, "-")) ||
+      submitError.getAttribute("data-err-fallback");
+  }
+
+  submitBtn.addEventListener("click", function () {
+    if (submitBtn.disabled) return;
+    var type = pressed("type")[0];
+    var data = new FormData();
+    data.append("name", name.value.trim());
+    data.append("email", email.value.trim());
+    data.append("subject", form.getAttribute("data-subject") + (type ? ": " + type.getAttribute("data-value") : ""));
+    data.append("message", letter.value);
+    data.append("elapsed_ms", String(startedAt ? Date.now() - startedAt : 0));
+    data.append("website", honeypot.value);
+    files.forEach(function (file) { data.append("files", file, file.name); });
+
+    var label = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.classList.add("busy");
+    submitBtn.textContent = submitBtn.getAttribute("data-sending");
+    submitError.hidden = true;
+
+    var done = function () {
+      submitBtn.disabled = false;
+      submitBtn.classList.remove("busy");
+      submitBtn.textContent = label;
+    };
+    fetch(form.getAttribute("data-endpoint"), { method: "POST", body: data, credentials: "omit" })
+      .then(function (res) { return res.json().catch(function () { return { ok: false }; }); })
+      .then(function (reply) {
+        done();
+        if (!reply || !reply.ok) {
+          submitError.textContent = submitErrorText(reply && reply.error);
+          submitError.hidden = false;
+          return;
+        }
+        var sent = form.querySelector('[data-step="sent"]');
+        var who = name.value.trim().split(" ")[0];
+        sent.querySelector("[data-sent-title]").textContent =
+          sent.querySelector("[data-sent-title]").getAttribute("data-sent-title").replace("{name}", who ? ", " + who : "");
+        sent.querySelector("[data-sent-text]").textContent =
+          sent.querySelector("[data-sent-text]").getAttribute("data-sent-text").replace("{email}", email.value.trim());
+        show(steps.indexOf(sent));
+      })
+      .catch(function () {
+        done();
+        submitError.textContent = submitErrorText("");
+        submitError.hidden = false;
+      });
   });
   letter.addEventListener("input", function () { edited = true; updateSend(); });
+
+  form.addEventListener("submit", function (e) { e.preventDefault(); });
 
   var copyBtn = form.querySelector("[data-copy-letter]");
   copyBtn.addEventListener("click", function () {

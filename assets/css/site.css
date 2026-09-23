@@ -1000,6 +1000,62 @@ body.legal h1 {
 .contact-direct .btn { min-height: 34px; width: auto; }
 .brief-privacy { margin: 14px 0 0; color: #6d7d86; font-size: 12px; }
 
+.wiz-error { margin: -6px 0 14px; color: var(--od); font-size: 14px; font-weight: 600; }
+.wiz-send + .wiz-error { margin: 12px 0 0; }
+.drop {
+  position: relative;
+  display: grid;
+  gap: 4px;
+  place-items: center;
+  padding: 22px 16px;
+  border: 1px dashed #3b4c55;
+  background: var(--panel);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.drop input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.drop b { font-size: 15px; color: var(--ink); }
+.drop b u { color: var(--acid); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.drop small { color: #6d7d86; font-size: 12px; }
+.drop:hover, .drop.over, .drop:focus-within { border-color: var(--acid); background: rgba(198, 240, 74, 0.06); box-shadow: 0 0 30px -14px var(--acid); }
+.file-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.file-list:empty { display: none; }
+.file-list li {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  font-size: 14px;
+}
+.file-list li span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.file-list li small { color: #6d7d86; font-variant-numeric: tabular-nums; }
+.file-list li button { width: 28px; height: 28px; border: 1px solid var(--line); color: #8d9ba4; font-size: 16px; }
+.file-list li button:hover { border-color: var(--od); color: var(--od); }
+.fx .file-list li { animation: chip-in 0.3s ease-out both; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.wiz-mailto { margin: 12px 0 0; font-size: 13px; }
+.wiz-mailto a { color: #8d9ba4; border-bottom: 1px solid var(--line); }
+.wiz-mailto a:hover { color: var(--acid); border-color: var(--acid); }
+[data-attach-info] { color: var(--acid); }
+.btn.busy { pointer-events: none; opacity: 0.8; background-image: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent); background-size: 200% 100%; animation: busy 1s linear infinite; }
+@keyframes busy { from { background-position: 150% 0; } to { background-position: -50% 0; } }
+.wiz-sent { text-align: center; padding: 18px 0 6px; }
+.wiz-sent .wiz-hint { margin: 0 auto 8px; max-width: 32rem; font-size: 15px; }
+.wiz-sent .wiz-nav { justify-content: center; }
+.sent-mark { width: 84px; height: 84px; margin: 0 auto 18px; filter: drop-shadow(0 0 18px rgba(198, 240, 74, 0.55)); }
+.sent-mark svg { width: 100%; height: 100%; fill: none; stroke: var(--acid); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.sent-mark circle { stroke-dasharray: 151; stroke-dashoffset: 0; }
+.sent-mark path { stroke-dasharray: 40; stroke-dashoffset: 0; }
+.fx .wiz-sent:not([hidden]) .sent-mark circle { animation: sent-draw 0.7s ease-out both; }
+.fx .wiz-sent:not([hidden]) .sent-mark path { animation: sent-check 0.45s 0.55s ease-out both; }
+.fx .wiz-sent:not([hidden]) .sent-mark { animation: sent-pop 0.5s 0.9s ease-out both; }
+@keyframes sent-draw { from { stroke-dashoffset: 151; } to { stroke-dashoffset: 0; } }
+@keyframes sent-check { from { stroke-dasharray: 0 40; } to { stroke-dasharray: 40 0; } }
+@keyframes sent-pop { 50% { transform: scale(1.12); } }
 .wizard-wrap { align-items: start; }
 .letter-card { display: flex; flex-direction: column; gap: 14px; position: sticky; top: 84px; }
 .brief-head {

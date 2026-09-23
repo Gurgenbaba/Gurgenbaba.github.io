@@ -416,7 +416,7 @@
             <p class="kicker">Kontakt</p>
             <h2 id="kontakt-title">Projekt anfragen.</h2>
             <p>Fünf kurze Fragen, dann steht Ihre Anfrage als fertiger Text da. Sie müssen nichts formulieren. Auch kleine Aufträge sind willkommen, etwa eine einzelne Seite, ein Update oder eine Fehlerbehebung.</p>
-            <form class="wizard" data-wizard data-mail="r.finn2303@gmail.com" data-subject="Projektanfrage" data-and="und" data-t-hello="Hallo," data-t-intro="ich interessiere mich für {type}." data-t-features="Wichtig wären mir vor allem {list}." data-t-note="Kurz zu meinem Vorhaben:" data-t-outro="Ich freue mich auf Ihre Rückmeldung." data-t-closing="Viele Grüße" novalidate>
+            <form class="wizard" data-wizard data-endpoint="https://genesis-colonies.com/api/public/contact" data-mail="r.finn2303@gmail.com" data-subject="Projektanfrage" data-and="und" data-t-hello="Hallo," data-t-intro="ich interessiere mich für {type}." data-t-features="Wichtig wären mir vor allem {list}." data-t-features-one="Wichtig wäre mir vor allem {list}." data-t-note="Kurz zu meinem Vorhaben:" data-t-outro="Ich freue mich auf Ihre Rückmeldung." data-t-closing="Viele Grüße" novalidate>
               <div class="wiz-bar" aria-hidden="true"><span></span></div>
               <section class="wiz-step" data-step="type">
                 <p class="wiz-progress">Frage 1 von 5</p>
@@ -487,24 +487,46 @@
               </section>
               <section class="wiz-step" data-step="details" hidden>
                 <p class="wiz-progress">Frage 5 von 5</p>
-                <h3 class="wiz-q" tabindex="-1">Fast fertig. Noch etwas dazu?</h3>
-                <p class="wiz-hint">Beides optional.</p>
-                <label class="wiz-field"><span>Worum geht es? Ein, zwei Sätze reichen.</span>
-                  <textarea data-input="note" rows="3" maxlength="600" placeholder="z. B. Terminbuchung für meinen Friseursalon mit Online-Zahlung"></textarea></label>
-                <label class="wiz-field"><span>Ihr Name</span>
+                <h3 class="wiz-q" tabindex="-1">Fast fertig. Wie erreiche ich Sie?</h3>
+                <p class="wiz-hint">Nur die E-Mail-Adresse ist Pflicht, damit ich antworten kann.</p>
+                <label class="wiz-field"><span>Ihre E-Mail-Adresse</span>
+                  <input data-input="email" type="email" maxlength="254" autocomplete="email" inputmode="email" required placeholder="name@beispiel.de"></label>
+                <p class="wiz-error" data-email-error hidden>Bitte eine gültige E-Mail-Adresse angeben, damit ich antworten kann.</p>
+                <label class="wiz-field"><span>Ihr Name (optional)</span>
                   <input data-input="name" type="text" maxlength="80" autocomplete="name" placeholder="z. B. Anna Schmidt"></label>
+                <label class="wiz-field"><span>Worum geht es? Ein, zwei Sätze reichen. (optional)</span>
+                  <textarea data-input="note" rows="3" maxlength="600" placeholder="z. B. Terminbuchung für meinen Friseursalon mit Online-Zahlung"></textarea></label>
+                <div class="wiz-field">
+                  <span>Anhänge (optional)</span>
+                  <label class="drop" data-drop>
+                    <input type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.webp,.gif,.heic,.txt,.md,.csv,.rtf,.doc,.docx,.odt,.xls,.xlsx,.ods,.ppt,.pptx,.odp,.fig,.sketch,.psd,.ai" data-files>
+                    <b>Dateien hierher ziehen oder <u>auswählen</u></b>
+                    <small>Bis zu 5 Dateien, zusammen max. 20 MB: PDF, Bilder, Office-Dokumente, Design-Dateien</small>
+                  </label>
+                  <ul class="file-list" data-file-list data-remove="Entfernen" data-cerr-type="Dieser Dateityp wird nicht unterstützt." data-cerr-size="Zu groß. Max. 8 MB pro Datei, 20 MB insgesamt." data-cerr-count="Maximal 5 Dateien."></ul>
+                  <p class="wiz-error" data-file-error hidden></p>
+                </div>
+                <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" data-hp></label></div>
                 <div class="wiz-nav"><button type="button" class="wiz-back" data-back>← Zurück</button><button type="button" class="btn primary" data-next>Nachricht erstellen ✦</button></div>
               </section>
               <section class="wiz-step" data-step="done" hidden>
                 <h3 class="wiz-q" tabindex="-1">Ihre Nachricht ist fertig.</h3>
-                <p class="wiz-hint">Sie können den Text noch anpassen. Der Button öffnet Ihr E-Mail-Programm mit allem ausgefüllt.</p>
+                <p class="wiz-hint">Kurz prüfen, bei Bedarf anpassen, absenden. Fertig. <span data-attach-info></span></p>
                 <textarea class="wiz-letter" data-letter rows="12" aria-label="Ihre Nachricht ist fertig."></textarea>
                 <div class="wiz-send">
-                  <a class="btn primary" data-send href="mailto:r.finn2303@gmail.com">Per E-Mail senden</a>
+                  <button class="btn primary" type="button" data-submit data-sending="Wird gesendet …">Anfrage absenden</button>
                   <button class="btn" type="button" data-copy-letter data-copied="Kopiert">Text kopieren</button>
                 </div>
+                <p class="wiz-error" data-submit-error hidden data-err-rate-limited="Zu viele Anfragen in kurzer Zeit. Bitte später erneut versuchen oder das eigene E-Mail-Programm nutzen." data-err-bad-email="Die E-Mail-Adresse scheint nicht zu stimmen. Bitte einen Schritt zurück und prüfen." data-err-message-too-short="Die Nachricht ist zu kurz." data-err-file-type-not-allowed="Ein Anhang hat einen nicht erlaubten Dateityp." data-err-file-too-large="Ein Anhang ist zu groß (max. 8 MB pro Datei)." data-err-files-too-large="Die Anhänge sind zusammen zu groß (max. 20 MB)." data-err-too-many-files="Bitte höchstens 5 Anhänge." data-err-fallback="Das Absenden hat gerade nicht geklappt. Bitte erneut versuchen oder unten das eigene E-Mail-Programm nutzen."></p>
+                <p class="wiz-mailto"><a data-send href="mailto:r.finn2303@gmail.com">Lieber mit dem eigenen E-Mail-Programm senden (ohne Anhänge)</a></p>
                 <div class="wiz-nav"><button type="button" class="wiz-back" data-back>← Zurück</button><button type="button" class="wiz-skip" data-restart>Neu beginnen</button></div>
-                <p class="brief-privacy">Es wird nichts gespeichert oder übertragen, bis Sie die E-Mail selbst abschicken.</p>
+                <p class="brief-privacy">Beim Absenden werden Ihre Angaben und Anhänge an meinen Server übertragen und direkt per E-Mail an mich weitergeleitet, nicht gespeichert. Mehr in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+              </section>
+              <section class="wiz-step wiz-sent" data-step="sent" hidden>
+                <div class="sent-mark" aria-hidden="true"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-16"/></svg></div>
+                <h3 class="wiz-q" tabindex="-1" data-sent-title="Danke{name}! Ihre Anfrage ist angekommen."></h3>
+                <p class="wiz-hint" data-sent-text="Ich melde mich zeitnah bei Ihnen unter {email}."></p>
+                <div class="wiz-nav"><span></span><button type="button" class="btn" data-restart>Neue Anfrage</button></div>
               </section>
             </form>
             <p class="contact-direct">Lieber direkt schreiben? <a href="mailto:r.finn2303@gmail.com">r.finn2303@gmail.com</a> <button class="btn ghost" type="button" data-copy="r.finn2303@gmail.com" data-copied="Kopiert">Adresse kopieren</button></p>
