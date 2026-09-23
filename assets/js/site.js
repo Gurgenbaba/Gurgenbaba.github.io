@@ -354,3 +354,88 @@
     })
     .catch(function () { clearTimeout(timer); });
 })();
+
+(function () {
+  // Hidden arcade: Konami code, five quick taps on the logo, or the footer button.
+  var script = document.currentScript;
+  var src = script ? script.src.replace(/site\.js(\?.*)?$/, "arcade.js") : "assets/js/arcade.js";
+  var loading = null;
+  function launch(from) {
+    if (window.GBArcade) { window.GBArcade.start(from); return; }
+    if (loading) return;
+    loading = document.createElement("script");
+    loading.src = src;
+    loading.onload = function () { if (window.GBArcade) window.GBArcade.start(from); };
+    loading.onerror = function () { loading = null; };
+    document.body.appendChild(loading);
+  }
+
+  var code = ["arrowup", "arrowup", "arrowdown", "arrowdown", "arrowleft", "arrowright", "arrowleft", "arrowright", "b", "a"];
+  var pos = 0;
+  document.addEventListener("keydown", function (e) {
+    if (e.target && /input|textarea|select/i.test(e.target.tagName)) return;
+    var key = String(e.key || "").toLowerCase();
+    pos = key === code[pos] ? pos + 1 : key === code[0] ? 1 : 0;
+    if (pos === code.length) { pos = 0; launch(document.activeElement); }
+  });
+
+  var brand = document.querySelector(".site-header .brand");
+  var taps = [];
+  if (brand) {
+    brand.addEventListener("click", function () {
+      var now = Date.now();
+      taps = taps.filter(function (t) { return now - t < 2000; });
+      taps.push(now);
+      if (taps.length >= 5) { taps = []; launch(brand); }
+    });
+  }
+
+  document.querySelectorAll("[data-arcade]").forEach(function (btn) {
+    btn.addEventListener("click", function () { launch(btn); });
+  });
+})();
+
+(function () {
+  // Scroll progress under the sticky header.
+  var bar = document.createElement("span");
+  bar.className = "scroll-progress";
+  bar.setAttribute("aria-hidden", "true");
+  var header = document.querySelector(".site-header");
+  if (!header) return;
+  header.appendChild(bar);
+  var queued = false;
+  var update = function () {
+    queued = false;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.transform = "scaleX(" + (max > 0 ? Math.min(1, window.scrollY / max) : 0) + ")";
+  };
+  window.addEventListener("scroll", function () {
+    if (!queued) { queued = true; requestAnimationFrame(update); }
+  }, { passive: true });
+  update();
+})();
+
+(function () {
+  // Section labels decode like a terminal when they scroll into view.
+  if (!document.documentElement.classList.contains("fx") || !("IntersectionObserver" in window)) return;
+  var glyphs = "!<>-_\/[]{}=+*^?#01";
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      io.unobserve(entry.target);
+      var el = entry.target, text = el.textContent, start = performance.now(), duration = 700;
+      (function step(now) {
+        var t = Math.min(1, (now - start) / duration), out = "";
+        for (var i = 0; i < text.length; i++) {
+          var settle = i / text.length;
+          out += text[i] === " " || t > settle * 0.7 + 0.3 ? text[i] : glyphs[Math.floor(Math.random() * glyphs.length)];
+        }
+        el.textContent = t < 1 ? out : text;
+        if (t < 1) requestAnimationFrame(step);
+      })(start);
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll(".block-head .kicker, .close .kicker, .contact-main .kicker").forEach(function (el) {
+    io.observe(el);
+  });
+})();
