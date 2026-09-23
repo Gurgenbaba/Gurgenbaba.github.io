@@ -493,6 +493,105 @@ body.legal .foot { display: flex; justify-content: space-between; gap: 16px; fle
 body.legal .links { display: flex; gap: 14px; flex-wrap: wrap; }
 body.legal .links a { color: #96a8b2; }
 
+/* Leistungen */
+.services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.services article,
+.services-cta {
+  background: var(--panel);
+  padding: 26px 24px 28px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.services h3 {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+.services p { margin: 0; color: var(--muted); font-size: 15px; max-width: 34rem; }
+.services-cta { background: var(--bg); }
+.services-cta h3 { color: var(--acid); }
+.services-cta .btn { margin-top: auto; align-self: flex-start; }
+.services-cta:hover .btn { filter: brightness(1.08); }
+
+/* Ablauf */
+.process {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.process li { background: var(--bg); padding: 22px 20px 24px; }
+.process .step {
+  color: var(--acid);
+  font: 800 11px/1 ui-monospace, Consolas, monospace;
+  letter-spacing: 0.12em;
+}
+.process h3 {
+  margin: 26px 0 8px;
+  font-size: 17px;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+.process p { margin: 0; color: var(--muted); font-size: 14px; }
+
+/* Kontakt */
+.contact {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  border: 1px solid var(--acid);
+  background: var(--panel);
+}
+.contact-main { padding: 40px; }
+.contact-main h2 {
+  margin: 10px 0 14px;
+  font-size: clamp(36px, 5.4vw, 64px);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+.contact-main > p { margin: 0 0 26px; color: var(--muted); font-size: 17px; max-width: 34rem; }
+.contact-main .actions { margin-top: 0; }
+.contact-mail { margin: 18px 0 0; font-size: 15px; }
+.contact-mail a { color: var(--ink); border-bottom: 1px solid var(--line); }
+.contact-mail a:hover { border-color: var(--acid); }
+.contact-hints {
+  padding: 40px 32px;
+  border-left: 1px solid var(--line);
+  background: var(--bg);
+}
+.contact-hints h3 {
+  margin: 0 0 14px;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+.contact-hints ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 15px; }
+.contact-hints li { margin: 0 0 8px; }
+.contact-hints li::marker { color: var(--acid); }
+
+.close p + p { margin-top: 12px; }
+.nav .cta { color: var(--acid); }
+section[id] { scroll-margin-top: 72px; }
+.hero h1 { color: var(--ink); }
+.block-head .kicker,
+.close .kicker,
+.contact-main .kicker { color: var(--acid); font-size: 10px; margin: 0; }
+.btn.copied { border-color: var(--acid); color: var(--acid); }
+
 @media (max-width: 1100px) {
   .hero-grid {
     grid-template-columns: 1fr;
@@ -509,6 +608,10 @@ body.legal .links a { color: #96a8b2; }
   .client,
   .close,
   .systems { grid-template-columns: 1fr; }
+  .services { grid-template-columns: 1fr 1fr; }
+  .process { grid-template-columns: 1fr 1fr; }
+  .contact { grid-template-columns: 1fr; }
+  .contact-hints { border-left: 0; border-top: 1px solid var(--line); }
   .card.genesis { display: flex; }
   .visual:first-child { grid-row: auto; display: block; }
   .visuals { grid-template-rows: none; }
@@ -520,6 +623,7 @@ body.legal .links a { color: #96a8b2; }
   .header-inner { min-height: 56px; gap: 8px; flex-wrap: wrap; padding: 8px 0; }
   .nav { width: 100%; justify-content: space-between; gap: 8px; letter-spacing: 0.1em; }
   .nav .ext { display: none; }
+  section[id] { scroll-margin-top: 96px; }
   .hero { padding: 36px 0 28px; }
   .hero-grid { gap: 22px; }
   .hero h1 { font-size: clamp(44px, 14vw, 64px); margin: 14px 0 16px; }
@@ -529,6 +633,11 @@ body.legal .links a { color: #96a8b2; }
   .systems { grid-template-columns: 1fr 1fr; }
   .close { padding: 22px; }
   .close .actions { display: grid; }
+  .services, .process { grid-template-columns: 1fr; }
+  .services article, .services-cta { min-height: 0; padding: 22px 18px; }
+  .services-cta .btn { align-self: stretch; }
+  .contact-main, .contact-hints { padding: 24px 20px; }
+  .contact-main .actions { display: grid; }
   body.legal main { padding-top: 48px; }
   body.legal .panel { padding: 20px; }
 }

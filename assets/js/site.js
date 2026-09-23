@@ -26,3 +26,22 @@
     });
   }
 })();
+
+(function () {
+  document.querySelectorAll("[data-copy]").forEach(function (btn) {
+    var label = btn.textContent;
+    btn.addEventListener("click", function () {
+      var text = btn.getAttribute("data-copy");
+      var done = function () {
+        btn.textContent = "Kopiert";
+        btn.classList.add("copied");
+        setTimeout(function () { btn.textContent = label; btn.classList.remove("copied"); }, 1800);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () { window.location.href = "mailto:" + text; });
+      } else {
+        window.location.href = "mailto:" + text;
+      }
+    });
+  });
+})();
