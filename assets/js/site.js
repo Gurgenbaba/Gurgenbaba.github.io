@@ -463,35 +463,84 @@
 })();
 
 (function () {
-  // Brief builder: chips + note become a live summary and a ready-to-send email. Nothing leaves the page.
-  var form = document.querySelector("[data-brief]");
+  // Contact wizard: one question at a time; the answers are written up as a ready-to-send message.
+  var form = document.querySelector("[data-wizard]");
   if (!form) return;
-  var card = document.querySelector(".brief-card");
-  var empty = form.getAttribute("data-empty") || "–";
-  var send = card.querySelector("[data-brief-send]");
-  var copyBtn = card.querySelector("[data-brief-copy]");
-  var pct = card.querySelector("[data-brief-pct]");
-  var bar = card.querySelector(".brief-meter span");
-  var note = form.querySelector('[data-field="note"]');
+  var motion = document.documentElement.classList.contains("fx");
+  var steps = Array.prototype.slice.call(form.querySelectorAll(".wiz-step"));
+  var bar = form.querySelector(".wiz-bar span");
+  var preview = document.querySelector("[data-preview]");
+  var empty = document.querySelector(".letter-empty");
+  var letter = form.querySelector("[data-letter]");
+  var send = form.querySelector("[data-send]");
+  var note = form.querySelector('[data-input="note"]');
+  var name = form.querySelector('[data-input="name"]');
   var typeBox = form.querySelector('.pick[data-field="type"]');
-  var featBox = form.querySelector('.pick[data-depends="type"]');
+  var featBox = form.querySelector('.pick[data-field="features"]');
+  var featQuestion = form.querySelector('[data-step="features"] .wiz-q');
+  var defaultQuestion = featQuestion.textContent;
+  var current = 0, edited = false;
 
-  // Step 2 only offers what fits the project type chosen in step 1.
+  function t(key) { return form.getAttribute("data-t-" + key) || ""; }
+
+  function pressed(field) {
+    var box = form.querySelector('.pick[data-field="' + field + '"]');
+    return Array.prototype.filter.call(box.querySelectorAll("button"), function (b) {
+      return !b.hidden && b.getAttribute("aria-pressed") === "true";
+    });
+  }
+
+  function joinList(items) {
+    if (items.length < 2) return items.join("");
+    return items.slice(0, -1).join(", ") + " " + form.getAttribute("data-and") + " " + items[items.length - 1];
+  }
+
+  function compose() {
+    var type = pressed("type")[0];
+    if (!type) return "";
+    var intro = t("intro").replace("{type}", type.getAttribute("data-phrase"));
+    var feats = pressed("features").map(function (b) { return b.getAttribute("data-phrase") || b.getAttribute("data-value"); });
+    if (feats.length) intro += " " + t("features").replace("{list}", joinList(feats));
+    var plan = pressed("timeline").concat(pressed("budget")).map(function (b) {
+      return b.getAttribute("data-phrase");
+    }).join(" ");
+    var parts = [t("hello"), intro];
+    if (plan) parts.push(plan);
+    if (note.value.trim()) parts.push(t("note") + "\n" + note.value.trim());
+    parts.push(t("outro"));
+    parts.push(t("closing") + (name.value.trim() ? "\n" + name.value.trim() : ""));
+    return parts.join("\n\n");
+  }
+
+  function updateSend() {
+    var type = pressed("type")[0];
+    var subject = form.getAttribute("data-subject") + (type ? ": " + type.getAttribute("data-value") : "");
+    send.href = "mailto:" + form.getAttribute("data-mail") +
+      "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(letter.value);
+  }
+
+  function refresh() {
+    var text = compose();
+    empty.hidden = !!text;
+    preview.hidden = !text;
+    if (preview.textContent !== text) {
+      preview.textContent = text;
+      preview.classList.remove("flash");
+      void preview.offsetWidth;
+      preview.classList.add("flash");
+    }
+    if (!edited) letter.value = text;
+    updateSend();
+  }
+
+  // Step 2 only offers what fits the project type from step 1.
   function syncFeatures() {
-    if (!typeBox || !featBox) return;
-    var set = featBox.closest("fieldset");
-    var legend = set.querySelector("legend");
-    var hint = set.querySelector(".pick-hint");
-    var active = typeBox.querySelector('button[aria-pressed="true"]');
-    var key = active ? active.getAttribute("data-key") : null;
+    var type = pressed("type")[0];
+    var key = type ? type.getAttribute("data-key") : null;
     var n = 0;
     featBox.querySelectorAll("button").forEach(function (b) {
       var show = !!key && b.getAttribute("data-for").split(" ").indexOf(key) !== -1;
-      if (!show) {
-        b.hidden = true;
-        b.setAttribute("aria-pressed", "false");
-        return;
-      }
+      if (!show) { b.hidden = true; b.setAttribute("aria-pressed", "false"); return; }
       if (b.hidden) {
         b.hidden = false;
         b.style.setProperty("--i", n);
@@ -501,86 +550,76 @@
       }
       n++;
     });
-    if (hint) hint.hidden = !!key;
-    legend.textContent = active ? active.getAttribute("data-question") : legend.getAttribute("data-default");
+    featQuestion.textContent = type ? type.getAttribute("data-question") : defaultQuestion;
   }
 
-  function picked(field) {
-    var box = form.querySelector('.pick[data-field="' + field + '"]');
-    return Array.prototype.filter.call(box.querySelectorAll("button"), function (b) {
-      return b.getAttribute("aria-pressed") === "true";
-    }).map(function (b) { return b.getAttribute("data-value"); });
-  }
-
-  function values() {
-    var out = {};
-    form.querySelectorAll(".pick").forEach(function (box) {
-      out[box.getAttribute("data-field")] = picked(box.getAttribute("data-field")).join(", ");
-    });
-    out.note = note.value.trim();
-    return out;
-  }
-
-  function mailText(v) {
-    var lines = [form.getAttribute("data-greeting"), ""];
-    form.querySelectorAll("[data-label]").forEach(function (group) {
-      var field = group.querySelector("[data-field]").getAttribute("data-field");
-      if (v[field]) lines.push(group.getAttribute("data-label") + ": " + v[field]);
-    });
-    lines.push("", form.getAttribute("data-closing"));
-    return lines.join("\n");
-  }
-
-  function render(changed) {
-    var v = values();
-    var filled = 0, total = 0;
-    card.querySelectorAll("[data-out]").forEach(function (row) {
-      var key = row.getAttribute("data-out");
-      var dd = row.querySelector("dd");
-      var text = v[key] || empty;
-      total++;
-      if (v[key]) filled++;
-      if (dd.textContent !== text) {
-        dd.textContent = text;
-        row.classList.toggle("set", !!v[key]);
-        if (key === changed) { row.classList.remove("flash"); void row.offsetWidth; row.classList.add("flash"); }
-      }
-    });
-    var p = Math.round((filled / total) * 100);
-    pct.textContent = p;
-    bar.style.transform = "scaleX(" + p / 100 + ")";
-    card.classList.toggle("ready", !!v.type);
-    send.href = "mailto:" + form.getAttribute("data-mail") +
-      "?subject=" + encodeURIComponent(form.getAttribute("data-subject")) +
-      "&body=" + encodeURIComponent(mailText(v));
+  function show(index) {
+    current = Math.max(0, Math.min(steps.length - 1, index));
+    steps.forEach(function (step, i) { step.hidden = i !== current; });
+    var step = steps[current];
+    if (step.getAttribute("data-step") === "features") syncFeatures();
+    if (step.getAttribute("data-step") === "done") refresh();
+    bar.style.transform = "scaleX(" + current / (steps.length - 1) + ")";
+    if (motion) {
+      step.classList.remove("enter");
+      void step.offsetWidth;
+      step.classList.add("enter");
+    }
+    var top = form.getBoundingClientRect().top;
+    if (top < 60) form.scrollIntoView({ block: "start", behavior: motion ? "smooth" : "auto" });
+    var q = step.querySelector(".wiz-q");
+    if (q) q.focus({ preventScroll: true });
   }
 
   form.querySelectorAll(".pick").forEach(function (box) {
     var single = box.hasAttribute("data-single");
+    var auto = box.hasAttribute("data-auto");
     box.addEventListener("click", function (e) {
       var btn = e.target.closest("button");
       if (!btn) return;
       var on = btn.getAttribute("aria-pressed") !== "true";
       if (single) box.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
-      btn.setAttribute("aria-pressed", on ? "true" : "false");
+      btn.setAttribute("aria-pressed", on || auto ? "true" : "false");
+      edited = false;
       if (box === typeBox) syncFeatures();
-      render(box.getAttribute("data-field"));
+      refresh();
+      if (auto) {
+        var from = current;
+        setTimeout(function () { if (current === from) show(current + 1); }, motion ? 280 : 0);
+      }
     });
   });
-  note.addEventListener("input", function () { render("note"); });
 
+  form.addEventListener("click", function (e) {
+    if (e.target.closest("[data-next]")) show(current + 1);
+    else if (e.target.closest("[data-back]")) show(current - 1);
+    else if (e.target.closest("[data-restart]")) {
+      form.querySelectorAll('.pick button').forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
+      note.value = "";
+      name.value = "";
+      edited = false;
+      refresh();
+      show(0);
+    }
+  });
+
+  [note, name].forEach(function (input) {
+    input.addEventListener("input", function () { edited = false; refresh(); });
+  });
+  letter.addEventListener("input", function () { edited = true; updateSend(); });
+
+  var copyBtn = form.querySelector("[data-copy-letter]");
   copyBtn.addEventListener("click", function () {
-    var label = copyBtn.textContent;
-    var text = mailText(values());
     if (!navigator.clipboard) return;
-    navigator.clipboard.writeText(text).then(function () {
+    var label = copyBtn.textContent;
+    navigator.clipboard.writeText(letter.value).then(function () {
       copyBtn.textContent = copyBtn.getAttribute("data-copied");
       copyBtn.classList.add("copied");
       setTimeout(function () { copyBtn.textContent = label; copyBtn.classList.remove("copied"); }, 1800);
     });
   });
-  syncFeatures();
-  render();
+
+  refresh();
 })();
 
 (function () {

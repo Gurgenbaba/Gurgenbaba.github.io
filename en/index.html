@@ -411,91 +411,110 @@
 
     <section class="block" id="contact" aria-labelledby="contact-title">
       <div class="wrap">
-        <div class="contact brief-wrap reveal">
+        <div class="contact brief-wrap wizard-wrap reveal">
           <div class="contact-main">
             <p class="kicker">Contact</p>
             <h2 id="contact-title">Start a project.</h2>
-            <p>Click your brief together in 30 seconds. It turns into a ready-to-send email. Small jobs are welcome too, such as a single page, an update or a bug fix. Non-binding, prompt reply. I work in German and English.</p>
-            <form class="brief" data-brief data-mail="r.finn2303@gmail.com" data-subject="Project request via gurgenbaba.github.io" data-greeting="Hi,&#10;&#10;here is my brief:" data-closing="Best regards" data-empty="open">
-              <fieldset data-label="Project">
-                <legend>1 · What should it be?</legend>
-                <div class="pick" data-field="type" data-single>
-                  <button type="button" aria-pressed="false" data-value="Website" data-key="web" data-question="2 · What should the website do?">Website</button>
-                  <button type="button" aria-pressed="false" data-value="Online shop" data-key="shop" data-question="2 · What should the shop do?">Online shop</button>
-                  <button type="button" aria-pressed="false" data-value="Web app" data-key="app" data-question="2 · What should the web app do?">Web app</button>
-                  <button type="button" aria-pressed="false" data-value="Browser game" data-key="game" data-question="2 · What should the game do?">Browser game</button>
-                  <button type="button" aria-pressed="false" data-value="Something else" data-key="other" data-question="2 · Roughly what is it about?">Something else</button>
+            <p>Five quick questions and your request is written for you. No wording needed. Small jobs are welcome too, such as a single page, an update or a bug fix. I work in German and English.</p>
+            <form class="wizard" data-wizard data-mail="r.finn2303@gmail.com" data-subject="Project request" data-and="and" data-t-hello="Hi," data-t-intro="I&#x27;m interested in {type}." data-t-features="Most important to me would be {list}." data-t-note="A few words about my project:" data-t-outro="Looking forward to hearing from you." data-t-closing="Best regards" novalidate>
+              <div class="wiz-bar" aria-hidden="true"><span></span></div>
+              <section class="wiz-step" data-step="type">
+                <p class="wiz-progress">Question 1 of 5</p>
+                <h3 class="wiz-q" tabindex="-1">What should be built?</h3>
+                <div class="pick" data-field="type" data-single data-auto>
+                  <button type="button" aria-pressed="false" data-value="Website" data-key="web" data-phrase="a new website" data-question="What should the website do?">Website</button>
+                  <button type="button" aria-pressed="false" data-value="Online shop" data-key="shop" data-phrase="an online shop" data-question="What should the shop do?">Online shop</button>
+                  <button type="button" aria-pressed="false" data-value="Web app" data-key="app" data-phrase="a web app" data-question="What should the web app do?">Web app</button>
+                  <button type="button" aria-pressed="false" data-value="Browser game" data-key="game" data-phrase="a browser game" data-question="What should the game do?">Browser game</button>
+                  <button type="button" aria-pressed="false" data-value="Something else" data-key="other" data-phrase="a project that doesn&#x27;t quite fit the usual boxes" data-question="Roughly what is it about?">Something else</button>
                 </div>
-              </fieldset>
-              <fieldset data-label="Features">
-                <legend data-default="2 · What should it do?">2 · What should it do?</legend>
-                <p class="pick-hint">Pick a project type above first, then matching options appear here.</p>
-                <div class="pick" data-field="features" data-depends="type">
-                  <button type="button" aria-pressed="false" data-value="Contact form" data-for="web" hidden>Contact form</button>
-                  <button type="button" aria-pressed="false" data-value="Appointment booking" data-for="web app" hidden>Appointment booking</button>
-                  <button type="button" aria-pressed="false" data-value="Blog / news" data-for="web" hidden>Blog / news</button>
-                  <button type="button" aria-pressed="false" data-value="Edit content myself" data-for="web shop" hidden>Edit content myself</button>
-                  <button type="button" aria-pressed="false" data-value="SEO &amp; fast loading" data-for="web shop" hidden>SEO &amp; fast loading</button>
-                  <button type="button" aria-pressed="false" data-value="Product management" data-for="shop" hidden>Product management</button>
-                  <button type="button" aria-pressed="false" data-value="Payments (PayPal, card …)" data-for="shop app other" hidden>Payments (PayPal, card …)</button>
-                  <button type="button" aria-pressed="false" data-value="Shipping &amp; invoices" data-for="shop" hidden>Shipping &amp; invoices</button>
-                  <button type="button" aria-pressed="false" data-value="Customer accounts" data-for="shop" hidden>Customer accounts</button>
-                  <button type="button" aria-pressed="false" data-value="Vouchers &amp; discounts" data-for="shop" hidden>Vouchers &amp; discounts</button>
-                  <button type="button" aria-pressed="false" data-value="Login &amp; accounts" data-for="app other" hidden>Login &amp; accounts</button>
-                  <button type="button" aria-pressed="false" data-value="Roles &amp; permissions" data-for="app" hidden>Roles &amp; permissions</button>
-                  <button type="button" aria-pressed="false" data-value="Dashboard &amp; reports" data-for="app" hidden>Dashboard &amp; reports</button>
-                  <button type="button" aria-pressed="false" data-value="Integrations (API)" data-for="app other" hidden>Integrations (API)</button>
-                  <button type="button" aria-pressed="false" data-value="Real-time updates" data-for="app" hidden>Real-time updates</button>
-                  <button type="button" aria-pressed="false" data-value="Accounts &amp; save states" data-for="game" hidden>Accounts &amp; save states</button>
-                  <button type="button" aria-pressed="false" data-value="Multiplayer / real-time" data-for="game" hidden>Multiplayer / real-time</button>
-                  <button type="button" aria-pressed="false" data-value="Leaderboards" data-for="game" hidden>Leaderboards</button>
-                  <button type="button" aria-pressed="false" data-value="In-game shop" data-for="game" hidden>In-game shop</button>
-                  <button type="button" aria-pressed="false" data-value="Admin tools" data-for="game app shop" hidden>Admin tools</button>
-                  <button type="button" aria-pressed="false" data-value="Mobile first" data-for="game app" hidden>Mobile first</button>
-                  <button type="button" aria-pressed="false" data-value="Automation" data-for="other" hidden>Automation</button>
-                  <button type="button" aria-pressed="false" data-value="Advice &amp; assessment" data-for="other" hidden>Advice &amp; assessment</button>
-                  <button type="button" aria-pressed="false" data-value="Multilingual" data-for="web shop app game" hidden>Multilingual</button>
-                  <button type="button" aria-pressed="false" data-value="New design" data-for="web shop" hidden>New design</button>
-                  <button type="button" aria-pressed="false" data-value="Redo an existing site" data-for="web shop app" hidden>Redo an existing site</button>
+              </section>
+              <section class="wiz-step" data-step="features" hidden>
+                <p class="wiz-progress">Question 2 of 5</p>
+                <h3 class="wiz-q" tabindex="-1">What should it do?</h3>
+                <p class="wiz-hint">Pick several. Nothing fits? Just continue.</p>
+                <div class="pick" data-field="features">
+                  <button type="button" aria-pressed="false" data-value="Contact form" data-phrase="a contact form" data-for="web" hidden>Contact form</button>
+                  <button type="button" aria-pressed="false" data-value="Appointment booking" data-phrase="appointment booking" data-for="web app" hidden>Appointment booking</button>
+                  <button type="button" aria-pressed="false" data-value="Blog / news" data-phrase="a blog or news section" data-for="web" hidden>Blog / news</button>
+                  <button type="button" aria-pressed="false" data-value="Edit content myself" data-phrase="being able to edit content myself" data-for="web shop" hidden>Edit content myself</button>
+                  <button type="button" aria-pressed="false" data-value="SEO &amp; fast loading" data-phrase="a fast, easy-to-find site" data-for="web shop" hidden>SEO &amp; fast loading</button>
+                  <button type="button" aria-pressed="false" data-value="Product management" data-phrase="product management" data-for="shop" hidden>Product management</button>
+                  <button type="button" aria-pressed="false" data-value="Payments (PayPal, card …)" data-phrase="online payments (PayPal, card …)" data-for="shop app other" hidden>Payments (PayPal, card …)</button>
+                  <button type="button" aria-pressed="false" data-value="Shipping &amp; invoices" data-phrase="shipping with invoicing" data-for="shop" hidden>Shipping &amp; invoices</button>
+                  <button type="button" aria-pressed="false" data-value="Customer accounts" data-phrase="customer accounts" data-for="shop" hidden>Customer accounts</button>
+                  <button type="button" aria-pressed="false" data-value="Vouchers &amp; discounts" data-phrase="discount codes" data-for="shop" hidden>Vouchers &amp; discounts</button>
+                  <button type="button" aria-pressed="false" data-value="Login &amp; accounts" data-phrase="user accounts with login" data-for="app other" hidden>Login &amp; accounts</button>
+                  <button type="button" aria-pressed="false" data-value="Roles &amp; permissions" data-phrase="permission management" data-for="app" hidden>Roles &amp; permissions</button>
+                  <button type="button" aria-pressed="false" data-value="Dashboard &amp; reports" data-phrase="a dashboard with reports" data-for="app" hidden>Dashboard &amp; reports</button>
+                  <button type="button" aria-pressed="false" data-value="Integrations (API)" data-phrase="integrations with other systems (API)" data-for="app other" hidden>Integrations (API)</button>
+                  <button type="button" aria-pressed="false" data-value="Real-time updates" data-phrase="real-time updates" data-for="app" hidden>Real-time updates</button>
+                  <button type="button" aria-pressed="false" data-value="Accounts &amp; save states" data-phrase="accounts with saved progress" data-for="game" hidden>Accounts &amp; save states</button>
+                  <button type="button" aria-pressed="false" data-value="Multiplayer / real-time" data-phrase="real-time multiplayer" data-for="game" hidden>Multiplayer / real-time</button>
+                  <button type="button" aria-pressed="false" data-value="Leaderboards" data-phrase="leaderboards" data-for="game" hidden>Leaderboards</button>
+                  <button type="button" aria-pressed="false" data-value="In-game shop" data-phrase="an in-game shop" data-for="game" hidden>In-game shop</button>
+                  <button type="button" aria-pressed="false" data-value="Admin tools" data-phrase="admin tools" data-for="game app shop" hidden>Admin tools</button>
+                  <button type="button" aria-pressed="false" data-value="Mobile first" data-phrase="a great experience on phones" data-for="game app" hidden>Mobile first</button>
+                  <button type="button" aria-pressed="false" data-value="Automation" data-phrase="automation" data-for="other" hidden>Automation</button>
+                  <button type="button" aria-pressed="false" data-value="Advice &amp; assessment" data-phrase="an honest assessment" data-for="other" hidden>Advice &amp; assessment</button>
+                  <button type="button" aria-pressed="false" data-value="Multilingual" data-phrase="multiple languages" data-for="web shop app game" hidden>Multilingual</button>
+                  <button type="button" aria-pressed="false" data-value="New design" data-phrase="a new design" data-for="web shop" hidden>New design</button>
+                  <button type="button" aria-pressed="false" data-value="Redo an existing site" data-phrase="a redesign of an existing site" data-for="web shop app" hidden>Redo an existing site</button>
                 </div>
-              </fieldset>
-              <fieldset data-label="Timeline">
-                <legend>3 · Timeline</legend>
-                <div class="pick" data-field="timeline" data-single>
-                  <button type="button" aria-pressed="false" data-value="As soon as possible">As soon as possible</button>
-                  <button type="button" aria-pressed="false" data-value="Within 1–3 months">Within 1–3 months</button>
-                  <button type="button" aria-pressed="false" data-value="Flexible">Flexible</button>
+                <div class="wiz-nav"><button type="button" class="wiz-back" data-back>← Back</button><button type="button" class="btn primary" data-next>Next →</button></div>
+              </section>
+              <section class="wiz-step" data-step="timeline" hidden>
+                <p class="wiz-progress">Question 3 of 5</p>
+                <h3 class="wiz-q" tabindex="-1">When should it start?</h3>
+                <div class="pick" data-field="timeline" data-single data-auto>
+                  <button type="button" aria-pressed="false" data-value="As soon as possible" data-phrase="I&#x27;d like to start as soon as possible.">As soon as possible</button>
+                  <button type="button" aria-pressed="false" data-value="Within 1–3 months" data-phrase="It should be ready within the next 1–3 months.">Within 1–3 months</button>
+                  <button type="button" aria-pressed="false" data-value="Flexible" data-phrase="I&#x27;m flexible on timing.">Flexible</button>
                 </div>
-              </fieldset>
-              <fieldset data-label="Budget">
-                <legend>4 · Budget range (optional)</legend>
-                <div class="pick" data-field="budget" data-single>
-                  <button type="button" aria-pressed="false" data-value="up to €500">up to €500</button>
-                  <button type="button" aria-pressed="false" data-value="€500–2,000">€500–2,000</button>
-                  <button type="button" aria-pressed="false" data-value="€2,000–5,000">€2,000–5,000</button>
-                  <button type="button" aria-pressed="false" data-value="over €5,000">over €5,000</button>
-                  <button type="button" aria-pressed="false" data-value="Not sure yet">Not sure yet</button>
+                <div class="wiz-nav"><button type="button" class="wiz-back" data-back>← Back</button><button type="button" class="wiz-skip" data-next>Skip</button></div>
+              </section>
+              <section class="wiz-step" data-step="budget" hidden>
+                <p class="wiz-progress">Question 4 of 5</p>
+                <h3 class="wiz-q" tabindex="-1">Which budget range fits?</h3>
+                <div class="pick" data-field="budget" data-single data-auto>
+                  <button type="button" aria-pressed="false" data-value="up to €500" data-phrase="My budget is up to €500.">up to €500</button>
+                  <button type="button" aria-pressed="false" data-value="€500–2,000" data-phrase="My budget is around €500–2,000.">€500–2,000</button>
+                  <button type="button" aria-pressed="false" data-value="€2,000–5,000" data-phrase="My budget is around €2,000–5,000.">€2,000–5,000</button>
+                  <button type="button" aria-pressed="false" data-value="over €5,000" data-phrase="My budget is over €5,000.">over €5,000</button>
+                  <button type="button" aria-pressed="false" data-value="Not sure yet" data-phrase="I&#x27;m not sure about the budget yet and would appreciate an estimate.">Not sure yet</button>
                 </div>
-              </fieldset>
-              <label class="brief-note-field" data-label="Description">
-                <span>5 · In a sentence or two (optional)</span>
-                <textarea data-field="note" rows="3" maxlength="600" placeholder="e.g. online booking for my hair salon with online payment"></textarea>
-              </label>
+                <div class="wiz-nav"><button type="button" class="wiz-back" data-back>← Back</button><button type="button" class="wiz-skip" data-next>Skip</button></div>
+              </section>
+              <section class="wiz-step" data-step="details" hidden>
+                <p class="wiz-progress">Question 5 of 5</p>
+                <h3 class="wiz-q" tabindex="-1">Almost done. Anything to add?</h3>
+                <p class="wiz-hint">Both optional.</p>
+                <label class="wiz-field"><span>What is it about? A sentence or two is enough.</span>
+                  <textarea data-input="note" rows="3" maxlength="600" placeholder="e.g. online booking for my hair salon with online payment"></textarea></label>
+                <label class="wiz-field"><span>Your name</span>
+                  <input data-input="name" type="text" maxlength="80" autocomplete="name" placeholder="e.g. Anna Smith"></label>
+                <div class="wiz-nav"><button type="button" class="wiz-back" data-back>← Back</button><button type="button" class="btn primary" data-next>Write my message ✦</button></div>
+              </section>
+              <section class="wiz-step" data-step="done" hidden>
+                <h3 class="wiz-q" tabindex="-1">Your message is ready.</h3>
+                <p class="wiz-hint">You can still edit the text. The button opens your email app with everything filled in.</p>
+                <textarea class="wiz-letter" data-letter rows="12" aria-label="Your message is ready."></textarea>
+                <div class="wiz-send">
+                  <a class="btn primary" data-send href="mailto:r.finn2303@gmail.com">Send by email</a>
+                  <button class="btn" type="button" data-copy-letter data-copied="Copied">Copy text</button>
+                </div>
+                <div class="wiz-nav"><button type="button" class="wiz-back" data-back>← Back</button><button type="button" class="wiz-skip" data-restart>Start over</button></div>
+                <p class="brief-privacy">Nothing is stored or transmitted until you send the email yourself.</p>
+              </section>
             </form>
             <p class="contact-direct">Rather write directly? <a href="mailto:r.finn2303@gmail.com">r.finn2303@gmail.com</a> <button class="btn ghost" type="button" data-copy="r.finn2303@gmail.com" data-copied="Copied">Copy address</button></p>
           </div>
-          <aside class="contact-hints brief-card" aria-label="Your brief">
-            <p class="brief-head"><span class="live-dot" aria-hidden="true"></span>Your brief</p>
-            <dl class="brief-out" aria-live="polite">
-              <div data-out="type"><dt>Project</dt><dd>open</dd></div><div data-out="features"><dt>Features</dt><dd>open</dd></div><div data-out="timeline"><dt>Timeline</dt><dd>open</dd></div><div data-out="budget"><dt>Budget</dt><dd>open</dd></div><div data-out="note"><dt>Description</dt><dd>open</dd></div>
-            </dl>
-            <div class="brief-meter" aria-hidden="true"><span></span></div>
-            <p class="brief-meter-label"><b data-brief-pct>0</b> % complete</p>
-            <div class="actions">
-              <a class="btn primary" data-brief-send href="mailto:r.finn2303@gmail.com">Send brief by email</a>
-              <button class="btn" type="button" data-brief-copy data-copied="Copied">Copy text</button>
+          <aside class="contact-hints letter-card" aria-label="Your message is taking shape">
+            <p class="brief-head"><span class="live-dot" aria-hidden="true"></span>Your message is taking shape</p>
+            <div class="letter-paper">
+              <p class="letter-empty">Answer the questions on the left and your request writes itself here.</p>
+              <div class="letter-text" data-preview hidden></div>
             </div>
-            <p class="brief-privacy">Nothing is stored or transmitted. The button only opens your email app.</p>
           </aside>
         </div>
       </div>
