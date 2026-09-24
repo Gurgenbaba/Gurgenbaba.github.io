@@ -29,7 +29,7 @@ Fonts:
 
 ## Hotel demo
 
-- `img/projects/demo-hotel/preview.webp`: optimized hero artwork from the hotel demo, 1400 × 875.
+- `img/projects/demo-hotel/preview.webp`: live browser capture of `/demo/hotel/` on 2026-09-24, optimized to 1400 × 875.
 - `/demo/hotel/hotel-{768,1536}.webp`: built-in ImageGen; fictional central German country hotel beside a river, cream plaster and timber details, forested low hills, late-summer golden hour, no people or text.
 - `/demo/hotel/zimmer-{768,1536}.webp`: built-in ImageGen; fictional boutique hotel bedroom, oak floors, cream linen, sage throws, balcony toward low wooded hills, morning light, no people or text.
 - Generated originals optimized to local WebP variants. Images depict no actual property; the demo labels the hotel and images as fictional. No external requests or browser storage are introduced.
