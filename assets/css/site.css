@@ -547,6 +547,77 @@ section[id] { scroll-margin-top: 72px; }
 }
 @keyframes sc-prog { to { transform: scaleX(1); } }
 
+.network-rail {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin: -8px 0 22px;
+  border: 1px solid var(--line);
+  background: var(--line);
+  overflow: hidden;
+}
+.network-node {
+  position: relative;
+  min-width: 0;
+  padding: 18px;
+  background: var(--panel);
+  color: var(--ink);
+  text-decoration: none;
+  isolation: isolate;
+}
+.network-node::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 2px;
+  background: var(--muted);
+  opacity: 0.45;
+}
+.network-node.is-live::before { background: var(--acid); opacity: 1; }
+.network-node.is-future::before { background: var(--cl); opacity: 0.8; }
+a.network-node { transition: background 0.2s ease, transform 0.2s ease; }
+a.network-node:hover {
+  background: #10181d;
+  transform: translateY(-1px);
+}
+.network-kicker {
+  display: block;
+  margin: 0 72px 10px 0;
+  color: var(--muted);
+  font: 800 9px/1.2 ui-monospace, Consolas, monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.network-node.is-live .network-kicker { color: var(--acid); }
+.network-node strong {
+  display: block;
+  overflow: hidden;
+  color: var(--ink);
+  font: 700 clamp(13px, 1.4vw, 16px)/1.35 ui-monospace, Consolas, monospace;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.network-node small {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+.network-node em {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  color: var(--muted);
+  font: 900 9px/1 ui-monospace, Consolas, monospace;
+  font-style: normal;
+  letter-spacing: 0.12em;
+}
+.network-node.is-live em { color: var(--acid); }
+.network-node.is-locked { background: #090e12; }
+.network-node.is-locked em { color: var(--od); }
+.network-node.is-future em { color: var(--cl); }
+
 .live-stats {
   margin: -8px 0 22px;
   border: 1px solid var(--line);
@@ -1616,6 +1687,8 @@ body.legal .links a { color: #96a8b2; }
   .hero-grid { gap: 22px; }
   .hero h1 { font-size: clamp(32px, 10.5vw, 52px); margin: 14px 0 16px; }
   .hero-actions { display: grid; }
+  .network-rail { grid-template-columns: 1fr; }
+  .network-node strong { white-space: normal; }
   .btn { width: 100%; }
   .block { padding: 64px 0; }
   .systems { grid-template-columns: 1fr 1fr; }
