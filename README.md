@@ -35,7 +35,7 @@ python -m http.server 8791
 
 Dann http://127.0.0.1:8791/ öffnen. Die Sprachwahl erscheint beim ersten Besuch. Zum erneuten Testen `localStorage` für die Seite leeren.
 
-Aufrufe an `genesis-colonies.com` (Live-Zahlen, Arcade-Bestenliste, Kontaktformular) scheitern lokal an CORS. Das ist gewollt: Diese Bereiche bleiben dann einfach unsichtbar bzw. zeigen die Ausweichlösung.
+Aufrufe an den stabilen API-Origin `genesis-colonies.com` (Live-Zahlen, Arcade-Bestenliste, Kontaktformular) scheitern lokal an CORS. Das ist gewollt: Diese Bereiche bleiben dann einfach unsichtbar bzw. zeigen die Ausweichlösung.
 
 ## QA
 
@@ -44,6 +44,16 @@ python tools/qa-viewports.py
 ```
 
 Prüft alle 10 Seiten bei 1920, 1366, 375 und 320 px. Der Lauf schlägt fehl bei seitlichem Scrollen, kaputten Bildern, Script-Fehlern oder fehlgeschlagenen Anfragen. Screenshots landen in `artifacts/qa/` (ignoriert). Voraussetzung: `pip install playwright` und `playwright install chromium`.
+
+## Genesis Network URLs
+
+Das Portfolio folgt derselben Domain-Struktur wie das Spiel:
+
+- `https://dev.genesis-colonies.com` — kanonischer Browser-/Login-Origin und Network Authority
+- `https://uni1.genesis-colonies.com` — isoliertes UNI 1; aktuell Prelaunch/geschlossen
+- `https://uniN.genesis-colonies.com` — Konvention für weitere Universen
+- `https://genesis-colonies.com/api/public/*` — stabiler öffentlicher API-Origin für Portfolio-Funktionen
+- Historische Browser-Links wie `www.genesis-colonies.de` bleiben Redirect-Einstiege und sollen im Portfolio nicht als neue Primärlinks verwendet werden.
 
 ## Backend (Genesis Colonies)
 
