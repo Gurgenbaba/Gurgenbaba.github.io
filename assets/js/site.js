@@ -14,7 +14,7 @@
     7 Scroll progress
 
    Motion only runs with html.fx, which <head> sets unless the visitor prefers
-   reduced motion. Backend calls go to genesis-colonies.com (/api/public/*).
+   reduced motion. Public backend calls intentionally stay on genesis-colonies.com (/api/public/*); browser/game links use the canonical dev.genesis-colonies.com origin.
    ========================================================================== */
 
 (function () {
