@@ -17,15 +17,19 @@ jobs:
       SYSTEMOS_SERVICE_TOKEN: ${{ secrets.SYSTEMOS_SERVICE_TOKEN }}
 
     steps:
-      - name: Verify SystemOS secret
+      - name: Check SystemOS secret
+        id: systemos_gate
         shell: bash
         run: |
           if [[ -z "${SYSTEMOS_SERVICE_TOKEN}" ]]; then
-            echo "::error::Repository secret SYSTEMOS_SERVICE_TOKEN is not configured."
-            exit 1
+            echo "::notice::SYSTEMOS_SERVICE_TOKEN is not configured yet; telemetry is dormant."
+            echo "enabled=false" >> "${GITHUB_OUTPUT}"
+          else
+            echo "enabled=true" >> "${GITHUB_OUTPUT}"
           fi
 
       - name: Report deployment and health
+        if: ${{ steps.systemos_gate.outputs.enabled == 'true' }}
         shell: bash
         run: |
           set -euo pipefail
