@@ -11,7 +11,7 @@
   <link rel="alternate" hreflang="x-default" href="https://gurgenbaba.github.io/">
   <meta name="theme-color" content="#05070a">
   <link rel="preload" href="assets/fonts/unbounded-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
-  <script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("fx")</script>
+  <script>try{if(localStorage.getItem("gb-portfolio-view")==="os"){document.documentElement.setAttribute("data-view","os");var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content","#f4f6f8")}}catch(e){}if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("fx")</script>
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_DE">
   <meta property="og:locale:alternate" content="en_US">
@@ -148,6 +148,7 @@
         <a class="cta" href="#kontakt">Kontakt</a>
         <a class="ext" href="https://github.com/Gurgenbaba" rel="noreferrer">GitHub</a>
         <a class="lang" href="en/" hreflang="en" lang="en" data-set-lang="en" aria-label="Switch to English">EN</a>
+        <button class="view-toggle" type="button" data-view-toggle data-label-os="OS" data-label-showcase="SHOW" data-aria-os="Zum cleanen OS-Design wechseln" data-aria-showcase="Zum Showcase-Design wechseln" aria-pressed="false" aria-label="Zum cleanen OS-Design wechseln"><span data-view-label aria-hidden="true">OS</span></button>
       </nav>
     </div>
   </header>
