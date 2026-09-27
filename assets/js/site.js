@@ -247,7 +247,7 @@
       raf = requestAnimationFrame(loop);
     };
     var sync = function () {
-      var should = motion && visible && !document.hidden;
+      var should = motion && visible && !document.hidden && document.documentElement.getAttribute("data-view") !== "os";
       if (should && !running) { running = true; raf = requestAnimationFrame(loop); }
       if (!should && running) { running = false; cancelAnimationFrame(raf); }
     };
@@ -256,6 +256,7 @@
     draw(0);
     window.addEventListener("resize", function () { resize(); if (!running) draw(0); });
     document.addEventListener("visibilitychange", sync);
+    document.addEventListener("portfolio:viewchange", sync);
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; sync(); }).observe(hero);
     }
@@ -920,4 +921,54 @@
   }
   select(0);
   sync();
+})();
+
+
+(function () {
+  // Optional compact SystemOS-inspired view. The default remains the original
+  // showcase; the preference is shared between DE/EN on the same origin.
+  var root = document.documentElement;
+  var buttons = Array.prototype.slice.call(document.querySelectorAll("[data-view-toggle]"));
+  if (!buttons.length) return;
+
+  var storageKey = "gb-portfolio-view";
+  var themeMeta = document.querySelector('meta[name="theme-color"]');
+
+  function mode() {
+    return root.getAttribute("data-view") === "os" ? "os" : "showcase";
+  }
+
+  function syncButtons() {
+    var isOs = mode() === "os";
+    buttons.forEach(function (button) {
+      button.setAttribute("aria-pressed", isOs ? "true" : "false");
+      button.setAttribute(
+        "aria-label",
+        button.getAttribute(isOs ? "data-aria-showcase" : "data-aria-os")
+      );
+      var label = button.querySelector("[data-view-label]");
+      if (label) label.textContent = button.getAttribute(isOs ? "data-label-showcase" : "data-label-os");
+    });
+    if (themeMeta) themeMeta.setAttribute("content", isOs ? "#f4f6f8" : "#05070a");
+  }
+
+  function apply(next, persist) {
+    if (next === "os") root.setAttribute("data-view", "os");
+    else root.removeAttribute("data-view");
+
+    if (persist) {
+      try { localStorage.setItem(storageKey, next); } catch (e) {}
+    }
+
+    syncButtons();
+    document.dispatchEvent(new CustomEvent("portfolio:viewchange", { detail: { view: next } }));
+  }
+
+  buttons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      apply(mode() === "os" ? "showcase" : "os", true);
+    });
+  });
+
+  syncButtons();
 })();
