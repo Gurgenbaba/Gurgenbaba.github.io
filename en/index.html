@@ -3,27 +3,27 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title>Gurgenbaba — Worlds that last.</title>
-  <meta name="description" content="Gurgenbaba: websites, online shops, web apps and browser games. Persistent systems instead of throwaway prototypes. Request a project by email.">
+  <title>ABBES Digital — Websites, web apps &amp; digital systems from Thuringia</title>
+  <meta name="description" content="ABBES Digital builds websites, online shops, web apps and digital systems for businesses — directly with the developer in Thuringia, Germany.">
   <link rel="canonical" href="https://gurgenbaba.github.io/en/">
   <link rel="alternate" hreflang="de" href="https://gurgenbaba.github.io/">
   <link rel="alternate" hreflang="en" href="https://gurgenbaba.github.io/en/">
   <link rel="alternate" hreflang="x-default" href="https://gurgenbaba.github.io/">
-  <meta name="theme-color" content="#05070a">
+  <meta name="theme-color" content="#f3f6fb">
   <link rel="preload" href="../assets/fonts/unbounded-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
-  <script>try{if(localStorage.getItem("gb-portfolio-view")==="os"){document.documentElement.setAttribute("data-view","os");var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content","#f4f6f8")}}catch(e){}if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("fx")</script>
+  <script>document.documentElement.setAttribute("data-view","os");try{if(localStorage.getItem("gb-portfolio-view")==="showcase")document.documentElement.removeAttribute("data-view")}catch(e){}if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("fx")</script>
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="de_DE">
-  <meta property="og:title" content="Gurgenbaba — Worlds that last.">
-  <meta property="og:description" content="Websites, online shops, web apps and browser games. Own live projects like Genesis Colonies and OVERDRIVE, plus commissioned work for clients.">
+  <meta property="og:title" content="ABBES Digital — Digital products built to work.">
+  <meta property="og:description" content="Websites, shops, web apps and digital systems for businesses. Personally developed in Thuringia, Germany.">
   <meta property="og:url" content="https://gurgenbaba.github.io/en/">
   <meta property="og:image" content="https://gurgenbaba.github.io/assets/img/og/share.webp">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Gurgenbaba — Worlds that last.">
-  <meta name="twitter:description" content="Websites, shops, web apps and browser games. Built to keep running.">
+  <meta name="twitter:title" content="ABBES Digital — Digital products built to work.">
+  <meta name="twitter:description" content="Websites, shops, web apps and digital systems. Directly with the developer.">
   <meta name="twitter:image" content="https://gurgenbaba.github.io/assets/img/og/share.webp">
   <link rel="icon" href="../assets/img/brand/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="../assets/img/brand/favicon-32.png" sizes="32x32" type="image/png">
@@ -33,11 +33,13 @@
   {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    "name": "Gurgenbaba",
+    "name": "ABBES Digital",
     "url": "https://gurgenbaba.github.io/en/",
-    "description": "Websites, online shops, web apps and browser games. Persistent systems instead of throwaway prototypes, straight from the developer.",
+    "description": "Websites, online shops, web apps and digital systems for businesses, directly with the developer in Thuringia, Germany.",
     "image": "https://gurgenbaba.github.io/assets/img/og/share.webp",
-    "logo": "https://gurgenbaba.github.io/assets/img/brand/apple-touch.png",
+    "logo": "https://gurgenbaba.github.io/assets/img/brand/abbes-mark.svg",
+    "slogan": "Digital products built to work.",
+    "founder": {"@type": "Person", "name": "Robert Finn"},
     "email": "r.finn2303@gmail.com",
     "inLanguage": "en",
     "knowsLanguage": [
@@ -133,62 +135,70 @@
 <body>
   <header class="site-header">
     <div class="wrap header-inner">
-      <a class="brand" href="#top">
-        <span class="brand-mark" aria-hidden="true">G</span>
-        <span>
-          Gurgenbaba
-          <small>Games // Web // Systems</small>
-        </span>
+      <a class="brand abbes-brand" href="#top" aria-label="ABBES Digital – Home">
+        <img class="abbes-brand-mark" src="../assets/img/brand/abbes-mark.svg" width="38" height="38" alt="">
+        <span class="abbes-brand-type"><strong>ABBES<span>.</span></strong><small>DIGITAL · THURINGIA, GERMANY</small></span>
       </a>
       <nav class="nav" aria-label="Main navigation">
         <a href="#services">Services</a>
-        <a href="#projects">Projects</a>
+        <a href="#example">Work</a>
         <a href="#pricing">Pricing</a>
         <a href="#about">About</a>
-        <a class="cta" href="#contact">Contact</a>
+        <a class="cta" href="#contact">Start a project</a>
         <a class="ext" href="https://github.com/Gurgenbaba" rel="noreferrer">GitHub</a>
         <a class="lang" href="../" hreflang="de" lang="de" data-set-lang="de" aria-label="Auf Deutsch wechseln">DE</a>
-        <button class="view-toggle" type="button" data-view-toggle data-label-os="STUDIO" data-label-showcase="SHOWCASE" data-aria-os="Switch to Studio view" data-aria-showcase="Switch to Showcase view" aria-pressed="false" aria-label="Switch to Studio view"><span data-view-label aria-hidden="true">STUDIO</span></button>
+        <button class="view-toggle" type="button" data-view-toggle data-label-os="BUSINESS" data-label-showcase="DEV" data-aria-os="Switch to ABBES business view" data-aria-showcase="Switch to developer view" aria-pressed="true" aria-label="Switch to developer view"><span data-view-label aria-hidden="true">DEV</span></button>
       </nav>
     </div>
   </header>
 
+
   <main id="top">
-    <section class="hero">
+    <section class="hero abbes-hero">
       <canvas class="starfield" aria-hidden="true"></canvas>
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <p class="kicker">Gurgenbaba</p>
-          <h1><span>Worlds</span><span>that last.</span></h1>
-          <p class="hero-rotator" aria-label="I build websites, online shops, web apps, browser games, dashboards"><span aria-hidden="true">I build <b data-rotate="websites|online shops|web apps|browser games|dashboards">websites</b></span></p>
-          <p class="studio-scope-line" aria-hidden="true">Websites <span>·</span> Shops <span>·</span> Web apps <span>·</span> Portals <span>·</span> Games</p>
+          <p class="kicker">ABBES DIGITAL · THURINGIA, GERMANY</p>
+          <h1><span>Digital products</span><span>that move you forward.</span></h1>
+          <p class="abbes-claim">Built clear. Built useful.</p>
+          <p class="studio-scope-line" aria-hidden="true">Websites <span>·</span> Shops <span>·</span> Web apps <span>·</span> Portals <span>·</span> Systems</p>
         </div>
-        <figure class="hero-visual hero-frame">
-          <img
-            src="../assets/img/projects/genesis-colonies/overview.webp"
-            width="1600"
-            height="900"
-            alt="Genesis Colonies: command overview of the colony Aurora Prime"
-            fetchpriority="high">
-          <figcaption class="hero-cap"><span>PROJECT_001 // LIVE</span><span>Genesis Colonies</span></figcaption>
+        <figure class="hero-visual hero-frame abbes-slider" data-hero-slider aria-label="Selected work">
+          <div class="abbes-slides">
+            <img class="abbes-slide is-active" src="../assets/img/projects/genesis-colonies/overview.webp" width="1600" height="900" alt="Genesis Colonies command overview" fetchpriority="high" data-slide-title="Genesis Colonies · Command">
+            <img class="abbes-slide" src="../assets/img/projects/genesis-colonies/galaxy.webp" width="1400" height="788" alt="Genesis Colonies galaxy view" loading="lazy" data-slide-title="Genesis Colonies · Galaxy">
+            <img class="abbes-slide" src="../assets/img/projects/demo-salon/preview.webp" width="1400" height="875" alt="Kamm &amp; Kante demo website with booking" loading="lazy" data-slide-title="Kamm &amp; Kante · Website">
+            <img class="abbes-slide" src="../assets/img/projects/demo-hotel/preview.webp" width="1400" height="875" alt="Ufer &amp; Wald hotel website" loading="lazy" data-slide-title="Ufer &amp; Wald · Website">
+            <img class="abbes-slide" src="../assets/img/projects/demo-fitness/preview.webp" width="1400" height="875" alt="Formkurve web app dashboard" loading="lazy" data-slide-title="Formkurve · Web app">
+          </div>
+          <div class="abbes-slider-overlay" aria-hidden="true"></div>
+          <div class="abbes-slider-controls">
+            <div class="abbes-slider-label"><span class="live-dot"></span><span data-hero-caption>Genesis Colonies · Command</span></div>
+            <div class="abbes-slider-nav">
+              <button type="button" data-hero-prev aria-label="Previous project">←</button>
+              <span data-hero-count>01 / 05</span>
+              <button type="button" data-hero-next aria-label="Next project">→</button>
+            </div>
+          </div>
+          <div class="abbes-slider-progress" aria-hidden="true"><i data-hero-progress></i></div>
         </figure>
         <div class="hero-rest">
-          <p class="hero-lead">My own browser games and multiplayer systems, plus websites, online shops and web apps for clients. <strong>No throwaway prototypes</strong> — products that keep running after the tab is closed.</p>
+          <p class="hero-lead">Websites, booking systems, online shops and web apps for businesses. <strong>Direct developer contact, clear processes and technology designed to keep working after launch.</strong></p>
           <div class="hero-actions">
-            <a class="btn primary" href="#contact">Start a project</a>
-            <a class="btn" href="#services">See services</a>
-            <a class="btn ghost" href="https://dev.genesis-colonies.com/">Open Genesis Network</a>
+            <a class="btn primary" href="#contact">Free first conversation</a>
+            <a class="btn" href="#example">See the work</a>
+            <a class="btn ghost" href="#services">Services</a>
           </div>
         </div>
       </div>
     </section>
 
-    <aside class="studio-trust-shell" aria-label="How I work">
+    <aside class="studio-trust-shell" aria-label="Why ABBES Digital">
       <div class="wrap studio-trust">
-        <div><b>01</b><span><strong>Live products</strong><small>Own systems running in production</small></span></div>
-        <div><b>02</b><span><strong>End-to-end</strong><small>Concept, development, launch, support</small></span></div>
-        <div><b>03</b><span><strong>Direct contact</strong><small>No agency relay, straight to the developer</small></span></div>
-        <div><b>04</b><span><strong>Built to last</strong><small>Responsive, maintainable and ready to grow</small></span></div>
+        <div><b>01</b><span><strong>Direct contact</strong><small>Work with the developer from first call to launch</small></span></div>
+        <div><b>02</b><span><strong>Clear fixed pricing</strong><small>Transparent scope and pricing after requirements are clear</small></span></div>
+        <div><b>03</b><span><strong>Privacy by design</strong><small>Data-minimising, security-minded implementation</small></span></div>
+        <div><b>04</b><span><strong>Operation &amp; support</strong><small>Hosting, updates and extensions after launch</small></span></div>
       </div>
     </aside>
 
@@ -196,7 +206,7 @@
       <div class="wrap">
         <header class="block-head reveal">
           <p class="kicker">Services</p>
-          <h2 id="services-title">What I build for you.</h2>
+          <h2 id="services-title">What ABBES Digital builds for you.</h2>
           <p>From a simple website to a platform with accounts and payments. Held to the same standard as my own games: clean code that still holds up after launch.</p>
         </header>
         <div class="services reveal">
@@ -291,8 +301,8 @@
     <section class="block" id="genesis" aria-labelledby="genesis-title">
       <div class="wrap">
         <header class="block-head reveal">
-          <p class="kicker">Flagship</p>
-          <h2 id="genesis-title">Genesis Colonies</h2>
+          <p class="kicker">Engineering proof</p>
+          <h2 id="genesis-title">Genesis Colonies — real system depth.</h2>
           <p>Persistent browser strategy game. Colonies, fleets, research, alliances, ascension, commanders, LiveOps. No artificial level cap. One Genesis Network account connects isolated universes without mixing their game state.</p>
         </header>
         <div class="network-rail reveal" aria-label="Genesis Network universes">
@@ -375,7 +385,7 @@
       <div class="wrap">
         <header class="block-head reveal">
           <p class="kicker">Projects</p>
-          <h2 id="projects-title">Built, not just sketched.</h2>
+          <h2 id="projects-title">Own products. Real system depth.</h2>
           <p>Original IPs, a framework, a client commission. Every world has its own rules. What they share is persistence.</p>
         </header>
 
@@ -426,7 +436,7 @@
         <header class="block-head reveal">
           <p class="kicker">Client work</p>
           <h2 id="client-title">Built for someone else.</h2>
-          <p>Not a Gurgenbaba IP. A client project showing the same systems work outside my own worlds.</p>
+          <p>A client project outside my own product world — the same technical depth, tailored to a real client brief.</p>
         </header>
         <article class="client reveal">
           <img src="../assets/img/projects/random-space-game/preview.webp" width="1400" height="875" alt="Landing and login of the client project Random Space Game">
@@ -489,8 +499,8 @@
         <div class="close reveal">
           <div>
             <p class="kicker">About</p>
-            <h2 id="about-title">Behind Gurgenbaba.</h2>
-            <p>I&#x27;m Robert, a developer from Thuringia, Germany, and Gurgenbaba is my label. I build my own browser games and systems and deliver web projects for clients, from concept to live operation.</p>
+            <h2 id="about-title">Behind ABBES Digital.</h2>
+            <p>I&#x27;m Robert, a developer from Thuringia, Germany. With ABBES Digital I build websites, web apps and digital systems for businesses from concept to live operation. Gurgenbaba remains my label for games and experiments.</p>
             <p>You work directly with the person writing the code. No agency in between, short paths, honest assessments.</p>
             <p>I work with AI tools — openly, not hidden. For you, that means faster prototypes, more thorough testing and more time for the decisions that matter in the end. Architecture, review and responsibility for the code stay with me.</p>
           </div>
@@ -670,7 +680,7 @@
         <div class="contact wizard-wrap reveal">
           <div class="contact-main">
             <p class="kicker">Contact</p>
-            <h2 id="contact-title">Start a project.</h2>
+            <h2 id="contact-title">What should we build for you?</h2>
             <p>Five quick questions and your request is written for you. No wording needed. Small jobs are welcome too, such as a single page, an update or a bug fix. I work in German and English and reply within 1–2 business days.</p>
             <form class="wizard" data-wizard data-endpoint="https://genesis-colonies.com/api/public/contact" data-mail="r.finn2303@gmail.com" data-subject="Project request" data-and="and" data-t-hello="Hi," data-t-intro="I&#x27;m interested in {type}." data-t-features="Most important to me would be {list}." data-t-note="A few words about my project:" data-t-call="I&#x27;d be glad to talk it through in a short intro call first." data-t-outro="Looking forward to hearing from you." data-t-closing="Best regards" novalidate>
               <div class="wiz-bar" aria-hidden="true"><span></span></div>
@@ -805,7 +815,7 @@
 
   <footer class="site-footer">
     <div class="wrap footer-inner">
-      <span>© 2026 Gurgenbaba <button class="arcade-launch" type="button" data-arcade title="Start the hidden arcade game">▶ Arcade</button></span>
+      <span>© 2026 ABBES Digital · Robert Finn · Thuringia, Germany <button class="arcade-launch" type="button" data-arcade title="Start the hidden arcade game">▶ Arcade</button></span>
       <span>
         <a href="mailto:r.finn2303@gmail.com">Contact</a>
         ·
