@@ -1,0 +1,102 @@
+name: SystemOS Portfolio Bridge
+
+on:
+  deployment_status:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  report-systemos:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.deployment.environment == 'github-pages' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    env:
+      SYSTEMOS_URL: https://mail-hub-production-f6d2.up.railway.app
+      SYSTEMOS_SERVICE_TOKEN: ${{ secrets.SYSTEMOS_SERVICE_TOKEN }}
+
+    steps:
+      - name: Verify SystemOS secret
+        shell: bash
+        run: |
+          if [[ -z "${SYSTEMOS_SERVICE_TOKEN}" ]]; then
+            echo "::error::Repository secret SYSTEMOS_SERVICE_TOKEN is not configured."
+            exit 1
+          fi
+
+      - name: Report deployment and health
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+            state="success"
+            deploy_id="manual-${GITHUB_RUN_ID}"
+            commit="${GITHUB_SHA}"
+            target_url="https://gurgenbaba.github.io"
+          else
+            state="$(jq -r '.deployment_status.state // "unknown"' "${GITHUB_EVENT_PATH}")"
+            deploy_id="$(jq -r '.deployment_status.id // empty' "${GITHUB_EVENT_PATH}")"
+            commit="$(jq -r '.deployment.sha // .deployment.ref // empty' "${GITHUB_EVENT_PATH}")"
+            target_url="$(jq -r '.deployment_status.target_url // .deployment_status.environment_url // "https://gurgenbaba.github.io"' "${GITHUB_EVENT_PATH}")"
+          fi
+
+          case "${state}" in
+            success)
+              event_type="deployment.succeeded"
+              severity="info"
+              summary="Portfolio GitHub Pages deployment succeeded"
+              health_status="healthy"
+              ;;
+            failure|error)
+              event_type="deployment.failed"
+              severity="error"
+              summary="Portfolio GitHub Pages deployment failed"
+              health_status="unhealthy"
+              ;;
+            pending|queued|in_progress)
+              event_type="deployment.started"
+              severity="info"
+              summary="Portfolio GitHub Pages deployment started"
+              health_status=""
+              ;;
+            inactive)
+              echo "Inactive deployment status; nothing to report."
+              exit 0
+              ;;
+            *)
+              echo "Unsupported deployment status '${state}'; nothing to report."
+              exit 0
+              ;;
+          esac
+
+          event_payload="$(jq -cn             --arg event_id "github-pages:${deploy_id:-${GITHUB_RUN_ID}}"             --arg type "${event_type}"             --arg severity "${severity}"             --arg summary "${summary}"             --arg commit "${commit}"             --arg target_url "${target_url}"             --arg run_id "${GITHUB_RUN_ID}"             '{
+              event_id: $event_id,
+              type: $type,
+              severity: $severity,
+              summary: $summary,
+              metadata: {
+                commit: $commit,
+                provider: "github-pages",
+                run_id: $run_id,
+                target_url: $target_url
+              }
+            }'
+          )"
+
+          curl --fail-with-body --silent --show-error             --retry 2 --retry-all-errors --max-time 10             -H "Authorization: Bearer ${SYSTEMOS_SERVICE_TOKEN}"             -H "Content-Type: application/json"             --data "${event_payload}"             "${SYSTEMOS_URL}/api/v1/events"
+
+          if [[ -n "${health_status}" ]]; then
+            health_payload="$(jq -cn               --arg status "${health_status}"               --arg summary "Portfolio GitHub Pages is ${health_status}"               --arg commit "${commit}"               '{
+                status: $status,
+                summary: $summary,
+                metadata: {
+                  commit: $commit,
+                  provider: "github-pages"
+                }
+              }'
+            )"
+
+            curl --fail-with-body --silent --show-error               --retry 2 --retry-all-errors --max-time 10               -H "Authorization: Bearer ${SYSTEMOS_SERVICE_TOKEN}"               -H "Content-Type: application/json"               --data "${health_payload}"               "${SYSTEMOS_URL}/api/v1/health"
+          fi
