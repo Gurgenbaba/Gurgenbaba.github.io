@@ -2,7 +2,20 @@
 <html lang="de">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#030508">
+  <meta name="theme-color" content="#f3f6fb">
+  <script>
+    (function () {
+      var key = "abbes-theme";
+      var theme = null;
+      try { theme = localStorage.getItem(key); } catch (e) {}
+      if (theme !== "light" && theme !== "dark") {
+        theme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", theme);
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute("content", theme === "dark" ? "#09111f" : "#f3f6fb");
+    })();
+  </script>
   <meta name="description" content="Impressum von ABBES Digital: Anbieterkennzeichnung nach § 5 DDG für das Portfolio unter gurgenbaba.github.io.">
   <link rel="canonical" href="https://gurgenbaba.github.io/impressum.html">
   <meta name="robots" content="index,follow">
@@ -11,7 +24,7 @@
   <link rel="icon" href="assets/img/brand/favicon.svg" type="image/svg+xml">
 </head>
 <body class="legal">
-<header class="top"><div class="wrap topin"><a class="brand legal-brand" href="/"><strong>ABBES<span>.</span></strong><small>DIGITAL</small></a><a class="back" href="/">← Portfolio</a></div></header>
+<header class="top"><div class="wrap topin"><a class="brand legal-brand" href="/"><strong>ABBES<span>.</span></strong><small>DIGITAL</small></a><span class="legal-actions"><a class="back" href="/">← Portfolio</a><button class="theme-toggle" type="button" data-theme-toggle data-label-light="Hellen Modus aktivieren" data-label-dark="Dunklen Modus aktivieren" aria-label="Dunklen Modus aktivieren" aria-pressed="false"><svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg><svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 15.3A8.5 8.5 0 0 1 8.7 3.5 8.5 8.5 0 1 0 20.5 15.3Z"/></svg></button></span></div></header>
 <main><div class="wrap">
   <div class="eyebrow">Legal // § 5 DDG</div><h1>Impressum</h1>
   <p class="lead">Anbieterkennzeichnung für das ABBES-Digital-Portfolio und die zentral betriebenen Dienste.</p>
@@ -30,4 +43,5 @@
   <div class="stamp">Stand: 26.09.2026</div>
 </div></main>
 <footer><div class="wrap foot"><span>© 2026 ABBES Digital</span><span class="links"><a href="/">Portfolio</a><a href="/rechtliches.html">Rechtliches</a><a href="/impressum.html">Impressum</a><a href="/datenschutz.html">Datenschutz</a></span></div></footer>
+<script defer src="assets/js/site.js"></script>
 </body></html>
