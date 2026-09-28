@@ -157,178 +157,7 @@
   });
 })();
 
-(function () {
-  // Hero boot line, starfield and tilt; scroll reveal; grid spotlight; endless tech ticker.
-  var motion = document.documentElement.classList.contains("fx");
-  var finePointer = matchMedia("(pointer: fine)").matches;
 
-  // Boot line in the hero kicker
-  var kicker = document.querySelector(".hero .kicker");
-  if (kicker) {
-    var boot = document.createElement("span");
-    boot.className = "boot";
-    boot.setAttribute("aria-hidden", "true");
-    kicker.appendChild(boot);
-    var line = "// SYSTEM ONLINE";
-    if (!motion) {
-      boot.textContent = line;
-    } else {
-      var i = 0;
-      setTimeout(function tick() {
-        boot.textContent = line.slice(0, ++i);
-        if (i < line.length) setTimeout(tick, 38 + Math.random() * 40);
-      }, 500);
-    }
-  }
-
-  // Starfield behind the hero
-  var hero = document.querySelector(".hero");
-  var canvas = hero && hero.querySelector(".starfield");
-  if (canvas && canvas.getContext) {
-    var ctx = canvas.getContext("2d");
-    var stars = [], w = 0, h = 0, dpr = 1, mx = 0, my = 0, px = 0, py = 0;
-    var running = false, visible = true, shooter = null, raf = 0;
-
-    var resize = function () {
-      if (hero.clientWidth === w && hero.clientHeight === h) return;
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      w = hero.clientWidth; h = hero.clientHeight;
-      canvas.width = w * dpr; canvas.height = h * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      var count = Math.min(420, Math.round((w * h) / 4200));
-      stars = [];
-      for (var n = 0; n < count; n++) {
-        var z = Math.random();
-        stars.push({
-          x: Math.random() * w, y: Math.random() * h, z: z,
-          r: 0.4 + z * 1.4,
-          a: 0.25 + z * 0.65,
-          tw: Math.random() * Math.PI * 2,
-          acid: Math.random() < 0.06
-        });
-      }
-    };
-
-    var draw = function (t) {
-      ctx.clearRect(0, 0, w, h);
-      px += (mx - px) * 0.05; py += (my - py) * 0.05;
-      for (var n = 0; n < stars.length; n++) {
-        var s = stars[n];
-        if (motion) {
-          s.x -= 0.04 + s.z * 0.22;
-          if (s.x < -4) { s.x = w + 4; s.y = Math.random() * h; }
-        }
-        var x = s.x + px * s.z * 26, y = s.y + py * s.z * 18;
-        var a = s.a * (motion ? 0.75 + 0.25 * Math.sin(t / 700 + s.tw) : 1);
-        ctx.fillStyle = s.acid ? "rgba(198,240,74," + a + ")" : "rgba(220,232,238," + a + ")";
-        ctx.beginPath();
-        ctx.arc(x, y, s.r, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      if (motion) {
-        if (!shooter && Math.random() < 0.004) {
-          shooter = { x: Math.random() * w * 0.8 + w * 0.2, y: Math.random() * h * 0.4, life: 1 };
-        }
-        if (shooter) {
-          var sx = shooter.x, sy = shooter.y;
-          var g = ctx.createLinearGradient(sx, sy, sx + 120, sy - 40);
-          g.addColorStop(0, "rgba(198,240,74," + shooter.life + ")");
-          g.addColorStop(1, "rgba(198,240,74,0)");
-          ctx.strokeStyle = g; ctx.lineWidth = 1.4;
-          ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(sx + 120, sy - 40); ctx.stroke();
-          shooter.x -= 9; shooter.y += 3; shooter.life -= 0.018;
-          if (shooter.life <= 0) shooter = null;
-        }
-      }
-    };
-
-    var loop = function (t) {
-      draw(t);
-      raf = requestAnimationFrame(loop);
-    };
-    var sync = function () {
-      var should = motion && visible && !document.hidden && document.documentElement.getAttribute("data-view") !== "os";
-      if (should && !running) { running = true; raf = requestAnimationFrame(loop); }
-      if (!should && running) { running = false; cancelAnimationFrame(raf); }
-    };
-
-    resize();
-    draw(0);
-    window.addEventListener("resize", function () { resize(); if (!running) draw(0); });
-    document.addEventListener("visibilitychange", sync);
-    document.addEventListener("portfolio:viewchange", sync);
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; sync(); }).observe(hero);
-    }
-    sync();
-
-    if (motion && finePointer) {
-      var frame = hero.querySelector(".hero-frame");
-      hero.addEventListener("pointermove", function (e) {
-        var r = hero.getBoundingClientRect();
-        mx = (e.clientX - r.left) / r.width - 0.5;
-        my = (e.clientY - r.top) / r.height - 0.5;
-        if (frame) {
-          var f = frame.getBoundingClientRect();
-          var fx = (e.clientX - f.left) / f.width - 0.5;
-          var fy = (e.clientY - f.top) / f.height - 0.5;
-          frame.style.setProperty("--ry", (Math.max(-1, Math.min(1, fx)) * 8).toFixed(2) + "deg");
-          frame.style.setProperty("--rx", (Math.max(-1, Math.min(1, fy)) * -6).toFixed(2) + "deg");
-        }
-      });
-      hero.addEventListener("pointerleave", function () {
-        mx = my = 0;
-        if (frame) { frame.style.setProperty("--rx", "0deg"); frame.style.setProperty("--ry", "0deg"); }
-      });
-    }
-  }
-
-  if (!motion) return;
-
-  // Scroll reveal, grids fade in child by child
-  document.querySelectorAll(".services, .systems, .process").forEach(function (el) { el.classList.add("stagger"); });
-  document.querySelectorAll(".projects, .visuals").forEach(function (group) {
-    Array.prototype.forEach.call(group.children, function (el, n) { el.style.setProperty("--d", (n % 3) * 0.08 + "s"); });
-  });
-  var items = document.querySelectorAll(".reveal");
-  if ("IntersectionObserver" in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) { entry.target.classList.add("on"); io.unobserve(entry.target); }
-      });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
-    items.forEach(function (el) { el.classList.add("will-reveal"); io.observe(el); });
-  }
-
-  // Spotlight that follows the cursor across grid cells
-  if (finePointer) {
-    document.querySelectorAll(".services, .systems, .process").forEach(function (grid) {
-      grid.classList.add("spot");
-      grid.addEventListener("pointermove", function (e) {
-        Array.prototype.forEach.call(grid.children, function (cell) {
-          var r = cell.getBoundingClientRect();
-          cell.style.setProperty("--mx", e.clientX - r.left + "px");
-          cell.style.setProperty("--my", e.clientY - r.top + "px");
-        });
-      });
-    });
-  }
-
-  // Endless tech ticker
-  document.querySelectorAll(".stack").forEach(function (stack) {
-    var track = document.createElement("div");
-    track.className = "ticker-track";
-    var originals = Array.prototype.slice.call(stack.children);
-    originals.forEach(function (el) { track.appendChild(el); });
-    originals.forEach(function (el) {
-      var copy = el.cloneNode(true);
-      copy.setAttribute("aria-hidden", "true");
-      track.appendChild(copy);
-    });
-    stack.appendChild(track);
-    stack.classList.add("ticker");
-  });
-})();
 
 (function () {
   // Live counters from the Genesis Colonies server. Stays hidden unless real data arrives.
@@ -379,45 +208,7 @@
     .catch(function () { clearTimeout(timer); });
 })();
 
-(function () {
-  // Hidden arcade: Konami code, five quick taps on the logo, or the footer button.
-  var script = document.currentScript;
-  var src = script ? script.src.replace(/site\.js(\?.*)?$/, "arcade.js") : "assets/js/arcade.js";
-  var loading = null;
-  function launch(from) {
-    if (window.GBArcade) { window.GBArcade.start(from); return; }
-    if (loading) return;
-    loading = document.createElement("script");
-    loading.src = src;
-    loading.onload = function () { if (window.GBArcade) window.GBArcade.start(from); };
-    loading.onerror = function () { loading = null; };
-    document.body.appendChild(loading);
-  }
 
-  var code = ["arrowup", "arrowup", "arrowdown", "arrowdown", "arrowleft", "arrowright", "arrowleft", "arrowright", "b", "a"];
-  var pos = 0;
-  document.addEventListener("keydown", function (e) {
-    if (e.target && /input|textarea|select/i.test(e.target.tagName)) return;
-    var key = String(e.key || "").toLowerCase();
-    pos = key === code[pos] ? pos + 1 : key === code[0] ? 1 : 0;
-    if (pos === code.length) { pos = 0; launch(document.activeElement); }
-  });
-
-  var brand = document.querySelector(".site-header .brand");
-  var taps = [];
-  if (brand) {
-    brand.addEventListener("click", function () {
-      var now = Date.now();
-      taps = taps.filter(function (t) { return now - t < 2000; });
-      taps.push(now);
-      if (taps.length >= 5) { taps = []; launch(brand); }
-    });
-  }
-
-  document.querySelectorAll("[data-arcade]").forEach(function (btn) {
-    btn.addEventListener("click", function () { launch(btn); });
-  });
-})();
 
 (function () {
   // Scroll progress under the sticky header.
@@ -439,52 +230,9 @@
   update();
 })();
 
-(function () {
-  // Section labels decode like a terminal when they scroll into view.
-  if (!document.documentElement.classList.contains("fx") || !("IntersectionObserver" in window)) return;
-  var glyphs = "!<>-_\/[]{}=+*^?#01";
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      io.unobserve(entry.target);
-      var el = entry.target, text = el.textContent, start = performance.now(), duration = 700;
-      (function step(now) {
-        var t = Math.min(1, (now - start) / duration), out = "";
-        for (var i = 0; i < text.length; i++) {
-          var settle = i / text.length;
-          out += text[i] === " " || t > settle * 0.7 + 0.3 ? text[i] : glyphs[Math.floor(Math.random() * glyphs.length)];
-        }
-        el.textContent = t < 1 ? out : text;
-        if (t < 1) requestAnimationFrame(step);
-      })(start);
-    });
-  }, { threshold: 0.6 });
-  document.querySelectorAll(".block-head .kicker, .close .kicker, .contact-main .kicker").forEach(function (el) {
-    io.observe(el);
-  });
-})();
 
-(function () {
-  // "Ich baue Websites / Online-Shops / ..." types and deletes itself under the headline.
-  var el = document.querySelector("[data-rotate]");
-  if (!el) return;
-  var words = el.getAttribute("data-rotate").split("|");
-  if (!document.documentElement.classList.contains("fx")) return;
-  var i = 0, pos = words[0].length, deleting = true;
-  el.classList.add("typing");
-  function step() {
-    if (deleting) {
-      pos--;
-      if (pos < 0) { deleting = false; i = (i + 1) % words.length; pos = 0; }
-    } else {
-      pos++;
-    }
-    el.textContent = words[i].slice(0, pos) || "​";
-    if (!deleting && pos >= words[i].length) { deleting = true; setTimeout(step, 1900); return; }
-    setTimeout(step, deleting ? 38 : 70);
-  }
-  setTimeout(step, 2200);
-})();
+
+
 
 (function () {
   // Contact wizard: one question at a time; the answers are written up as a ready-to-send message.
@@ -813,20 +561,7 @@
   refresh();
 })();
 
-(function () {
-  // Primary buttons lean towards the cursor.
-  if (!document.documentElement.classList.contains("fx") || !matchMedia("(pointer: fine)").matches) return;
-  document.querySelectorAll(".btn.primary").forEach(function (btn) {
-    btn.classList.add("magnetic");
-    btn.addEventListener("pointermove", function (e) {
-      var r = btn.getBoundingClientRect();
-      var x = (e.clientX - r.left - r.width / 2) * 0.22;
-      var y = (e.clientY - r.top - r.height / 2) * 0.35;
-      btn.style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px)";
-    });
-    btn.addEventListener("pointerleave", function () { btn.style.transform = ""; });
-  });
-})();
+
 
 (function () {
   // Mobile: "Projekt anfragen" bar once the hero is gone, hidden again at the contact section.
@@ -842,136 +577,10 @@
   if (footer) new IntersectionObserver(function (e) { atFooter = e[0].isIntersecting; sync(); }).observe(footer);
 })();
 
-(function () {
-  // Genesis showcase: tabs switch the monitor. The active tab's CSS progress bar drives
-  // auto-advance, so pausing the animation (hover, focus, off-screen) pauses the rotation too.
-  var box = document.querySelector("[data-showcase]");
-  if (!box) return;
-  var motion = document.documentElement.classList.contains("fx");
-  var tabs = Array.prototype.slice.call(box.querySelectorAll('[role="tab"]'));
-  var imgs = Array.prototype.slice.call(box.querySelectorAll(".sc-img"));
-  var screen = box.querySelector(".sc-screen");
-  var counter = box.querySelector("[data-sc-counter]");
-  var list = box.querySelector('[role="tablist"]');
-  var caption = document.createElement("p");
-  caption.className = "sc-caption";
-  list.insertAdjacentElement("afterend", caption);
-  var current = 0;
-
-  function pad(n) { return (n < 10 ? "0" : "") + n; }
-
-  function select(index, focus) {
-    var i = (index + tabs.length) % tabs.length;
-    if (i !== current) {
-      var prev = imgs[current];
-      var next = imgs[i];
-      prev.classList.remove("is-active");
-      prev.classList.add("was-active");
-      next.hidden = false;
-      next.classList.remove("was-active");
-      void next.offsetWidth;
-      next.classList.add("is-active");
-      setTimeout(function () {
-        prev.classList.remove("was-active");
-        if (!prev.classList.contains("is-active")) prev.hidden = true;
-      }, motion ? 800 : 0);
-      if (motion) {
-        screen.classList.remove("glitch");
-        void screen.offsetWidth;
-        screen.classList.add("glitch");
-      }
-    }
-    tabs.forEach(function (tab, n) {
-      var on = n === i;
-      tab.setAttribute("aria-selected", on ? "true" : "false");
-      tab.tabIndex = on ? 0 : -1;
-    });
-    screen.setAttribute("aria-labelledby", tabs[i].id);
-    counter.textContent = pad(i + 1) + " / " + pad(tabs.length);
-    caption.textContent = tabs[i].querySelector("small").textContent;
-    current = i;
-    if (focus) tabs[i].focus();
-  }
-
-  tabs.forEach(function (tab, i) {
-    tab.addEventListener("click", function () { select(i); });
-    tab.querySelector(".sc-progress").addEventListener("animationend", function () {
-      if (tab.getAttribute("aria-selected") === "true") select(i + 1);
-    });
-  });
-
-  list.addEventListener("keydown", function (e) {
-    var map = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 };
-    if (e.key in map) { e.preventDefault(); select(current + map[e.key], true); }
-    else if (e.key === "Home") { e.preventDefault(); select(0, true); }
-    else if (e.key === "End") { e.preventDefault(); select(tabs.length - 1, true); }
-  });
-
-  var hover = false, focused = false, visible = false;
-  function sync() { box.classList.toggle("paused", hover || focused || !visible || document.hidden); }
-  box.addEventListener("pointerenter", function () { hover = true; sync(); });
-  box.addEventListener("pointerleave", function () { hover = false; sync(); });
-  box.addEventListener("focusin", function () { focused = true; sync(); });
-  box.addEventListener("focusout", function () { focused = false; sync(); });
-  document.addEventListener("visibilitychange", sync);
-  if ("IntersectionObserver" in window) {
-    new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; sync(); }, { threshold: 0.35 }).observe(box);
-  } else {
-    visible = true;
-  }
-  select(0);
-  sync();
-})();
 
 
-(function () {
-  // ABBES business view with the original developer showcase kept as an optional mode.
-  // The preference is shared between DE/EN on the same origin.
-  var root = document.documentElement;
-  var buttons = Array.prototype.slice.call(document.querySelectorAll("[data-view-toggle]"));
-  if (!buttons.length) return;
 
-  var storageKey = "gb-portfolio-view";
-  var themeMeta = document.querySelector('meta[name="theme-color"]');
 
-  function mode() {
-    return root.getAttribute("data-view") === "os" ? "os" : "showcase";
-  }
-
-  function syncButtons() {
-    var isOs = mode() === "os";
-    buttons.forEach(function (button) {
-      button.setAttribute("aria-pressed", isOs ? "true" : "false");
-      button.setAttribute(
-        "aria-label",
-        button.getAttribute(isOs ? "data-aria-showcase" : "data-aria-os")
-      );
-      var label = button.querySelector("[data-view-label]");
-      if (label) label.textContent = button.getAttribute(isOs ? "data-label-showcase" : "data-label-os");
-    });
-    if (themeMeta) themeMeta.setAttribute("content", isOs ? "#f3f6fb" : "#05070a");
-  }
-
-  function apply(next, persist) {
-    if (next === "os") root.setAttribute("data-view", "os");
-    else root.removeAttribute("data-view");
-
-    if (persist) {
-      try { localStorage.setItem(storageKey, next); } catch (e) {}
-    }
-
-    syncButtons();
-    document.dispatchEvent(new CustomEvent("portfolio:viewchange", { detail: { view: next } }));
-  }
-
-  buttons.forEach(function (button) {
-    button.addEventListener("click", function () {
-      apply(mode() === "os" ? "showcase" : "os", true);
-    });
-  });
-
-  syncButtons();
-})();
 
 
 (function () {
@@ -1096,9 +705,7 @@
     }, { threshold: 0.25 }).observe(box);
   }
 
-  document.addEventListener("portfolio:viewchange", function () {
-    schedule();
-  });
+  
 
   updateMeta();
   schedule();
