@@ -4213,3 +4213,23 @@ html[data-theme="dark"] body.legal footer {
   .theme-toggle svg { width: 16px; height: 16px; }
   html[data-theme="dark"][data-view="os"] .studio-trust > div { border-bottom-color: #22314a; }
 }
+
+
+.legal-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+body.legal .legal-actions .theme-toggle {
+  width: 36px;
+  height: 36px;
+  flex-basis: 36px;
+}
+@media (max-width: 620px) {
+  body.legal .legal-actions { gap: 7px; }
+  body.legal .legal-actions .theme-toggle {
+    width: 32px;
+    height: 32px;
+    flex-basis: 32px;
+  }
+}
