@@ -713,21 +713,15 @@
 
 
 (function () {
-  // ABBES persistent color theme. The first visit follows the operating-system
-  // preference; an explicit choice is saved locally and shared between DE/EN.
+  // ABBES persistent color theme. Light is the permanent default;
+  // only an explicit user choice is saved and shared between DE/EN.
   var key = "abbes-theme";
   var buttons = Array.prototype.slice.call(document.querySelectorAll("[data-theme-toggle]"));
   if (!buttons.length) return;
 
   var root = document.documentElement;
-  var media = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
-
   function storedTheme() {
     try { return localStorage.getItem(key); } catch (e) { return null; }
-  }
-
-  function systemTheme() {
-    return media && media.matches ? "dark" : "light";
   }
 
   function currentTheme() {
@@ -764,15 +758,7 @@
     });
   });
 
-  if (media) {
-    var followSystem = function (event) {
-      if (!storedTheme()) apply(event.matches ? "dark" : "light", false);
-    };
-    if (media.addEventListener) media.addEventListener("change", followSystem);
-    else if (media.addListener) media.addListener(followSystem);
-  }
-
-  apply(storedTheme() || currentTheme() || systemTheme(), false);
+  apply(storedTheme() || currentTheme() || "light", false);
 })();
 
 
