@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-view="os">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -11,7 +11,6 @@
   <link rel="alternate" hreflang="x-default" href="https://gurgenbaba.github.io/">
   <meta name="theme-color" content="#f3f6fb">
   <link rel="preload" href="../assets/fonts/unbounded-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
-  <script>document.documentElement.setAttribute("data-view","os");try{if(localStorage.getItem("gb-portfolio-view")==="showcase")document.documentElement.removeAttribute("data-view")}catch(e){}if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("fx")</script>
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="de_DE">
@@ -146,7 +145,6 @@
         <a class="cta" href="#contact">Start a project</a>
         <a class="ext" href="https://github.com/Gurgenbaba" rel="noreferrer">GitHub</a>
         <a class="lang" href="../" hreflang="de" lang="de" data-set-lang="de" aria-label="Auf Deutsch wechseln">DE</a>
-        <button class="view-toggle" type="button" data-view-toggle data-label-os="BUSINESS" data-label-showcase="DEV" data-aria-os="Switch to ABBES business view" data-aria-showcase="Switch to developer view" aria-pressed="true" aria-label="Switch to developer view"><span data-view-label aria-hidden="true">DEV</span></button>
       </nav>
     </div>
   </header>
@@ -154,7 +152,6 @@
 
   <main id="top">
     <section class="hero abbes-hero">
-      <canvas class="starfield" aria-hidden="true"></canvas>
       <div class="wrap hero-grid">
         <div class="hero-copy">
           <p class="kicker">ABBES DIGITAL · THURINGIA, GERMANY</p>
@@ -300,83 +297,30 @@
     <section class="block" id="genesis" aria-labelledby="genesis-title">
       <div class="wrap">
         <header class="block-head reveal">
-          <p class="kicker">Engineering proof</p>
-          <h2 id="genesis-title">Genesis Colonies — real system depth.</h2>
-          <p>Persistent browser strategy game. Colonies, fleets, research, alliances, ascension, commanders, LiveOps. No artificial level cap. One Genesis Network account connects isolated universes without mixing their game state.</p>
+          <p class="kicker">Own product</p>
+          <h2 id="genesis-title">Genesis Colonies as an engineering benchmark.</h2>
+          <p>The persistent browser strategy game combines accounts, databases, long-running state and live operations. It demonstrates that ABBES Digital can build and operate complete web systems, not just their visible interface.</p>
         </header>
-        <div class="network-rail reveal" aria-label="Genesis Network universes">
-          <a class="network-node is-live" href="https://dev.genesis-colonies.com/">
-            <span class="network-kicker">DEV · AUTHORITY</span>
-            <strong>dev.genesis-colonies.com</strong>
-            <small>Login, accounts &amp; continuous development</small>
-            <em>LIVE</em>
-          </a>
-          <div class="network-node is-locked">
-            <span class="network-kicker">UNI 1 · PRELAUNCH</span>
-            <strong>uni1.genesis-colonies.com</strong>
-            <small>Prelaunch maintenance · deliberately closed</small>
-            <em>CLOSED</em>
+        <article class="clean-case reveal">
+          <div class="clean-case-visuals">
+            <img src="../assets/img/projects/genesis-colonies/overview.webp" width="1600" height="900" alt="Genesis Colonies command overview" loading="lazy">
+            <img src="../assets/img/projects/genesis-colonies/fleet.webp" width="1400" height="788" alt="Genesis Colonies fleet view" loading="lazy">
           </div>
-          <div class="network-node is-future">
-            <span class="network-kicker">UNI N · READY</span>
-            <strong>uniN.genesis-colonies.com</strong>
-            <small>Future universes follow the same scheme</small>
-            <em>SCALE</em>
+          <div class="clean-case-body">
+            <p class="badge">LIVE PRODUCT</p>
+            <h3>From an idea to a running system.</h3>
+            <p>Genesis Colonies started in May 2026 as an independent browser game and quickly grew into continuously operated software with a backend, persistent data, multiple environments and its own operational structure.</p>
+            <ul class="proof-list">
+              <li><strong>Persistent data</strong><span>Accounts, progress and worlds survive individual sessions.</span></li>
+              <li><strong>Complex product logic</strong><span>Economy, research, fleets, progression and shared events work together.</span></li>
+              <li><strong>Live operation</strong><span>Deployment, administration and continued development are part of the product.</span></li>
+            </ul>
+            <div class="actions">
+              <a class="btn primary" href="../case-study/genesis-colonies/">Read the case study</a>
+              <a class="btn" href="https://github.com/Gurgenbaba/genesis-colonies">View source on GitHub</a>
+            </div>
           </div>
-        </div>
-        <div class="live-stats" data-stats-src="https://genesis-colonies.com/api/public/stats" data-min-players="10" data-locale="en-US" hidden>
-          <p class="live-stats-head"><span class="live-dot" aria-hidden="true"></span>Live from the universe</p>
-          <dl>
-            <div data-stat="players"><dt>Commanders</dt><dd>0</dd></div>
-            <div data-stat="active_24h" data-min="5"><dt>Active in 24 h</dt><dd>0</dd></div>
-            <div data-stat="colonies"><dt>Colonies</dt><dd>0</dd></div>
-            <div data-stat="fleets_in_flight" data-min="5"><dt>Fleets in flight</dt><dd>0</dd></div>
-            <div data-stat="alliances"><dt>Alliances</dt><dd>0</dd></div>
-          </dl>
-        </div>
-        <div class="showcase reveal" data-showcase>
-          <div class="sc-screen" id="sc-screen" role="tabpanel" aria-labelledby="sc-tab-0">
-            <img class="sc-img is-active" src="../assets/img/projects/genesis-colonies/galaxy.webp" width="1400" height="788" alt="Galaxy view in Genesis Colonies" data-slide="0">
-            <img class="sc-img" src="../assets/img/projects/genesis-colonies/fleet.webp" width="1400" height="788" alt="Fleet view in Genesis Colonies" loading="lazy" data-slide="1" hidden>
-            <img class="sc-img" src="../assets/img/projects/genesis-colonies/world-boss.webp" width="1400" height="788" alt="World boss view in Genesis Colonies" loading="lazy" data-slide="2" hidden>
-            <img class="sc-img" src="../assets/img/projects/genesis-colonies/commander.webp" width="1400" height="788" alt="Commander view in Genesis Colonies" loading="lazy" data-slide="3" hidden>
-            <div class="sc-scan" aria-hidden="true"></div>
-            <div class="sc-hud" aria-hidden="true"><span class="sc-rec">LIVE BUILD</span><span data-sc-counter>01 / 04</span></div>
-            <span class="sc-corner tl" aria-hidden="true"></span><span class="sc-corner tr" aria-hidden="true"></span>
-            <span class="sc-corner bl" aria-hidden="true"></span><span class="sc-corner br" aria-hidden="true"></span>
-          </div>
-          <div class="sc-tabs" role="tablist" aria-label="Areas of Genesis Colonies">
-            <button type="button" role="tab" id="sc-tab-0" aria-selected="true" aria-controls="sc-screen" data-slide="0">
-              <span class="sc-num">01</span>
-              <span class="sc-text"><b>Galaxy</b><strong>Scan systems. Expand.</strong><small>The map stays. Progress lives on the server, not in a session.</small></span>
-              <span class="sc-status">Persistent universe</span>
-              <i class="sc-progress" aria-hidden="true"></i>
-            </button>
-            <button type="button" role="tab" id="sc-tab-1" aria-selected="false" aria-controls="sc-screen" data-slide="1" tabindex="-1">
-              <span class="sc-num">02</span>
-              <span class="sc-text"><b>Fleet</b><strong>Fleets, combat, trade.</strong><small>Movement and conflict as ongoing world state, not a one-off fight screen.</small></span>
-              <span class="sc-status">Production game</span>
-              <i class="sc-progress" aria-hidden="true"></i>
-            </button>
-            <button type="button" role="tab" id="sc-tab-2" aria-selected="false" aria-controls="sc-screen" data-slide="2" tabindex="-1">
-              <span class="sc-num">03</span>
-              <span class="sc-text"><b>LiveOps</b><strong>Events that hit everyone.</strong><small>World bosses and live operations are part of the product, not a roadmap slide.</small></span>
-              <span class="sc-status">Shared events</span>
-              <i class="sc-progress" aria-hidden="true"></i>
-            </button>
-            <button type="button" role="tab" id="sc-tab-3" aria-selected="false" aria-controls="sc-screen" data-slide="3" tabindex="-1">
-              <span class="sc-num">04</span>
-              <span class="sc-text"><b>Commander</b><strong>An identity in the universe.</strong><small>Classes, skills, progression — tied to the account, not to a run.</small></span>
-              <span class="sc-status">Player systems</span>
-              <i class="sc-progress" aria-hidden="true"></i>
-            </button>
-          </div>
-        </div>
-        <div class="actions sc-actions reveal">
-          <a class="btn primary" href="https://dev.genesis-colonies.com/">Enter Genesis Network</a>
-          <a class="btn" href="case-study/genesis-colonies/">Read the case study</a>
-          <a class="btn ghost" href="https://github.com/Gurgenbaba/genesis-colonies">View source</a>
-        </div>
+        </article>
       </div>
     </section>
 
@@ -392,7 +336,7 @@
           <article class="card overdrive reveal">
             <img src="../assets/img/projects/overdrive/combat.webp" width="1600" height="900" alt="Combat in Genesis Colonies OVERDRIVE">
             <div class="card-body">
-              <p class="meta"><span>PROJECT_002</span><span class="status">PLAYABLE</span></p>
+              <p class="meta"><span>Own product</span><span class="status">Playable</span></p>
               <h3>OVERDRIVE</h3>
               <p>Top-down space roguelite. Four ship frames, persistent progression, Ark Defense, Genesis Online for up to 4 players.</p>
               <div class="chips"><span class="chip">Roguelite</span><span class="chip">Co-op</span><span class="chip">HTML5</span><span class="chip">itch.io</span></div>
@@ -408,7 +352,7 @@
               <img src="../assets/img/projects/budenboss/stand.webp" width="390" height="396" alt="Budenboss: snack stand hub with shifts, menu and market">
             </div>
             <div class="card-body">
-              <p class="meta"><span>PROJECT_003</span><span class="status">IN DEVELOPMENT</span></p>
+              <p class="meta"><span>Own product</span><span class="status">In development</span></p>
               <h3>Budenboss</h3>
               <p>Mobile-first snack stand management. Shifts, menu, training, equipment, wholesale market, city.</p>
               <div class="chips"><span class="chip">Management</span><span class="chip">Mobile first</span><span class="chip">DE / EN</span></div>
@@ -419,7 +363,7 @@
           <article class="card ccrp reveal">
             <img class="diagram" src="../assets/img/projects/ccrp-core/diagram.svg" width="720" height="420" alt="Original system diagram of CCRP-Core: core, player, world, admin control plane">
             <div class="card-body">
-              <p class="meta"><span>PROJECT_004</span><span class="status">FRAMEWORK / IN DEVELOPMENT</span></p>
+              <p class="meta"><span>Own product</span><span class="status">Framework</span></p>
               <h3>CCRP-Core</h3>
               <p>Clean-room RedM RP/survival core. Server-authoritative. World, jobs and shops are meant to run through an admin control plane — not constant file edits.</p>
               <div class="chips"><span class="chip">RedM</span><span class="chip">Framework</span><span class="chip">Control plane</span></div>
@@ -441,7 +385,7 @@
           <img src="../assets/img/projects/random-space-game/preview.webp" width="1400" height="875" alt="Landing and login of the client project Random Space Game">
           <div class="client-body">
             <p class="badge">CLIENT WORK</p>
-            <p class="meta"><span>PROJECT_005</span><span>Customer project</span></p>
+            <p class="meta"><span>Client project</span><span>Commissioned work</span></p>
             <h3>Random Space Game</h3>
             <p>Browser space strategy as a commission. FastAPI, React, PostgreSQL. Auth, species, buildings, tick-based production, mining, trade, missions, research, colonization.</p>
             <div class="chips">
@@ -461,52 +405,57 @@
     <section class="block" id="systems" aria-labelledby="systems-title">
       <div class="wrap">
         <header class="block-head reveal">
-          <p class="kicker">Engineering</p>
-          <h2 id="systems-title">More than a surface.</h2>
-          <p>The difference sits behind the first screen: authority, persistence, operations. That applies to a game just as much as to a shop.</p>
+          <p class="kicker">Technology &amp; operations</p>
+          <h2 id="systems-title">Clean technology behind the interface.</h2>
+          <p>A good website or web app should feel simple. Behind it, data, permissions, integrations, tests and operations need to work together reliably.</p>
         </header>
-        <div class="systems reveal">
+        <div class="systems clean-systems reveal">
           <article>
-            <p class="meta"><span>01</span><span class="status">Authority</span></p>
-            <h3>The server decides</h3>
-            <p>Game state, combat, inventory, economy — server-side. Clients display the world, they don't own it.</p>
+            <span class="clean-number">01</span>
+            <h3>Data &amp; access</h3>
+            <p>Databases, user accounts, roles and migrations are structured so later changes do not become a liability.</p>
           </article>
           <article>
-            <p class="meta"><span>02</span><span class="status">Persistence</span></p>
-            <h3>State carries history</h3>
-            <p>PostgreSQL, migrations, accounts and worlds that outlive sessions.</p>
+            <span class="clean-number">02</span>
+            <h3>Integrations &amp; payments</h3>
+            <p>APIs, forms, payment providers and external services are integrated server-side in a maintainable and traceable way.</p>
           </article>
           <article>
-            <p class="meta"><span>03</span><span class="status">Realtime</span></p>
-            <h3>Many players</h3>
-            <p>WebSockets, matchmaking, rooms, host migration. Co-op is not a screenshot.</p>
+            <span class="clean-number">03</span>
+            <h3>Quality &amp; operation</h3>
+            <p>Automated tests, deployments, backups and monitoring help catch problems early and roll out changes in a controlled way.</p>
           </article>
           <article>
-            <p class="meta"><span>04</span><span class="status">Operations</span></p>
-            <h3>Live is a state</h3>
-            <p>Railway, Cloudflare, CI, performance, admin tools, seasons.</p>
+            <span class="clean-number">04</span>
+            <h3>Central overview</h3>
+            <p>Support, deployments, service health and project information are brought together internally in one operational platform.</p>
           </article>
         </div>
-        <div class="stack reveal">
-          <span>PHP</span><span>MySQL</span><span>JavaScript</span><span>React</span><span>Python</span><span>TypeScript</span><span>PostgreSQL</span><span>Flask / FastAPI</span><span>Node / Fastify</span><span>WebSockets</span><span>Cloudflare Workers</span><span>Railway</span><span>CI</span><span>Mobile-first</span>
+        <div class="stack static-stack reveal" aria-label="Technologies">
+          <span>TypeScript</span><span>JavaScript</span><span>React</span><span>Python</span><span>FastAPI</span><span>Node / Fastify</span><span>PostgreSQL</span><span>WebSockets</span><span>Railway</span><span>Cloudflare</span><span>CI / Tests</span>
         </div>
       </div>
     </section>
 
     <section class="block" id="about" aria-labelledby="about-title">
       <div class="wrap">
-        <div class="close reveal">
+        <div class="close clean-about reveal">
           <div>
-            <p class="kicker">About</p>
-            <h2 id="about-title">Behind ABBES Digital.</h2>
-            <p>I&#x27;m Robert, a developer from Thuringia, Germany. With ABBES Digital I build websites, web apps and digital systems for businesses from concept to live operation. Gurgenbaba remains my label for games and experiments.</p>
-            <p>You work directly with the person writing the code. No agency in between, short paths, honest assessments.</p>
-            <p>I work with AI tools — openly, not hidden. For you, that means faster prototypes, more thorough testing and more time for the decisions that matter in the end. Architecture, review and responsibility for the code stay with me.</p>
+            <p class="kicker">About ABBES Digital</p>
+            <h2 id="about-title">Directly developed. Personally supported.</h2>
+            <p>I'm Robert, a developer from Thuringia, Germany. With ABBES Digital I build websites, web apps and digital systems for businesses — from the first concept through to live operation.</p>
+            <p>What started in May 2026 with Genesis Colonies as an independent browser game grew within a few months into several live products, web applications, internal tools and a shared operational platform. That experience now feeds directly into client work.</p>
+            <p>I use modern development tools and AI deliberately to make prototyping, testing and routine work more efficient. Architecture, review and responsibility for delivered code remain with me.</p>
+          </div>
+          <div class="origin-story" aria-label="From idea to running system">
+            <div><span>01</span><strong>Idea</strong><small>Clarify goal and value</small></div>
+            <div><span>02</span><strong>Product</strong><small>UX, code and data model</small></div>
+            <div><span>03</span><strong>Live operation</strong><small>Deployment, tests and support</small></div>
+            <div><span>04</span><strong>Evolution</strong><small>Extend instead of rebuilding</small></div>
           </div>
           <div class="actions">
-            <a class="btn primary" href="#contact">Get in touch</a>
-            <a class="btn" href="https://github.com/Gurgenbaba">GitHub profile</a>
-            <a class="btn" href="https://gurgenbaba.itch.io/">itch.io</a>
+            <a class="btn primary" href="#contact">Discuss a project</a>
+            <a class="btn" href="https://github.com/Gurgenbaba">View GitHub</a>
           </div>
         </div>
       </div>
@@ -516,7 +465,7 @@
       <div class="wrap">
         <header class="block-head reveal">
           <p class="kicker">Pricing</p>
-          <h2 id="pricing-title">Fair fixed prices.</h2>
+          <h2 id="pricing-title">Clear pricing.</h2>
           <p>Starting prices as a guide. After a free intro call you get a binding fixed price, no surprises. You pay in two parts: half at the start, the rest on approval.</p>
         </header>
         <div class="prices reveal">
@@ -572,7 +521,7 @@
             <a class="btn" href="#contact" data-pick-type="shop">Request</a>
           </article>
           <article class="price">
-            <h3>Web app &amp; browser game</h3>
+            <h3>Web app &amp; custom system</h3>
             <p class="price-tag"><small>from</small>€2,400</p>
             <p>Accounts, database, real time.</p>
             <ul>
@@ -679,7 +628,7 @@
         <div class="contact wizard-wrap reveal">
           <div class="contact-main">
             <p class="kicker">Contact</p>
-            <h2 id="contact-title">What should we build for you?</h2>
+            <h2 id="contact-title">What should be built for you?</h2>
             <p>Five quick questions and your request is written for you. No wording needed. Small jobs are welcome too, such as a single page, an update or a bug fix. I work in German and English and reply within 1–2 business days.</p>
             <form class="wizard" data-wizard data-endpoint="https://genesis-colonies.com/api/public/contact" data-mail="r.finn2303@gmail.com" data-subject="Project request" data-and="and" data-t-hello="Hi," data-t-intro="I&#x27;m interested in {type}." data-t-features="Most important to me would be {list}." data-t-note="A few words about my project:" data-t-call="I&#x27;d be glad to talk it through in a short intro call first." data-t-outro="Looking forward to hearing from you." data-t-closing="Best regards" novalidate>
               <div class="wiz-bar" aria-hidden="true"><span></span></div>
@@ -814,7 +763,7 @@
 
   <footer class="site-footer">
     <div class="wrap footer-inner">
-      <span>© 2026 ABBES Digital · Robert Finn · Thuringia, Germany <button class="arcade-launch" type="button" data-arcade title="Start the hidden arcade game">▶ Arcade</button></span>
+      <span>© 2026 ABBES Digital · Robert Finn · Thuringia, Germany</span>
       <span>
         <a href="mailto:r.finn2303@gmail.com">Contact</a>
         ·
