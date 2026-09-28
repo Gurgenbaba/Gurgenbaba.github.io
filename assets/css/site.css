@@ -3338,3 +3338,263 @@ body.legal footer {
   background: #eef3f8;
 }
 body.legal .links a { color: #607087; }
+
+
+/* 26 ABBES final clean pass ---------------------------------------------
+   Permanent business presentation: restrained motion, no terminal/cyber UI,
+   clearer cases and a calmer editorial rhythm. */
+html[data-view="os"] .kicker,
+body.legal .eyebrow {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 750;
+  letter-spacing: .11em;
+}
+html[data-view="os"] .boot,
+html[data-view="os"] .starfield,
+html[data-view="os"] .view-toggle { display: none !important; }
+
+html[data-view="os"] .block-head {
+  grid-template-columns: 120px minmax(260px,.82fr) minmax(340px,1fr);
+  align-items: start;
+}
+html[data-view="os"] .block-head p {
+  max-width: 720px;
+  color: #617086;
+}
+html[data-view="os"] .block-head h2 {
+  letter-spacing: -.04em;
+}
+
+/* Genesis as a clean customer-facing case study. */
+.clean-case {
+  display: grid;
+  grid-template-columns: minmax(0,1.25fr) minmax(330px,.75fr);
+  gap: 0;
+  overflow: hidden;
+  border: 1px solid #d6e0ec;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 18px 48px rgba(15,23,42,.08);
+}
+.clean-case-visuals {
+  display: grid;
+  grid-template-columns: minmax(0,1.35fr) minmax(180px,.65fr);
+  gap: 1px;
+  min-height: 430px;
+  overflow: hidden;
+  background: #d7e0eb;
+}
+.clean-case-visuals img {
+  width: 100%;
+  height: 100%;
+  min-height: 430px;
+  object-fit: cover;
+  object-position: center top;
+}
+.clean-case-visuals img + img {
+  object-position: 54% top;
+}
+.clean-case-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 34px;
+}
+.clean-case-body .badge {
+  align-self: flex-start;
+  margin-bottom: 15px;
+  border-color: #cfe0ff;
+  background: #edf4ff;
+  color: #245bd7;
+}
+.clean-case-body h3 {
+  margin: 0 0 13px;
+  color: #0b1830;
+  font-size: clamp(26px,2.2vw,34px);
+  line-height: 1.08;
+  letter-spacing: -.035em;
+}
+.clean-case-body > p {
+  margin: 0;
+  color: #627188;
+  font-size: 14px;
+  line-height: 1.65;
+}
+.proof-list {
+  display: grid;
+  gap: 0;
+  margin: 22px 0 24px;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid #e4eaf1;
+}
+.proof-list li {
+  display: grid;
+  gap: 4px;
+  padding: 13px 0;
+  border-bottom: 1px solid #e4eaf1;
+}
+.proof-list strong {
+  color: #182b49;
+  font-size: 13px;
+}
+.proof-list span {
+  color: #738196;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+/* Competence cards without terminal/status chrome. */
+.clean-systems article {
+  position: relative;
+  min-height: 185px;
+  padding: 24px;
+  background: #fff;
+}
+.clean-systems .meta { display: none; }
+.clean-number {
+  display: inline-flex;
+  margin-bottom: 22px;
+  color: #97a4b5;
+  font: 750 11px/1 Inter, ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: .08em;
+}
+.clean-systems h3 {
+  margin: 0 0 8px;
+  color: #142542;
+  font-size: 18px;
+}
+.clean-systems p {
+  margin: 0;
+  color: #68788e;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.static-stack {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 8px;
+  overflow: visible !important;
+  margin-top: 18px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.static-stack > span {
+  flex: 0 0 auto;
+  padding: 8px 11px;
+  border: 1px solid #d8e1ec;
+  border-radius: 999px;
+  background: #fff;
+  color: #607087;
+  font: 650 11px/1 Inter, ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* About: light, editorial and personal rather than a dark dev panel. */
+html[data-view="os"] #about {
+  border-top: 1px solid #dde5ef;
+  border-bottom: 1px solid #dde5ef;
+  background: #edf2f7;
+}
+html[data-view="os"] #about .clean-about {
+  display: grid;
+  grid-template-columns: minmax(0,1.15fr) minmax(360px,.85fr);
+  gap: 30px 44px;
+  padding: 38px;
+  color: #0b1830;
+  border: 1px solid #d4deea;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 14px 42px rgba(15,23,42,.065);
+}
+html[data-view="os"] #about .clean-about h2 { color: #0b1830; }
+html[data-view="os"] #about .clean-about p { color: #617086; }
+html[data-view="os"] #about .clean-about .kicker { color: #2563eb; }
+html[data-view="os"] #about .clean-about .actions {
+  grid-column: 1 / -1;
+  margin-top: 0;
+}
+html[data-view="os"] #about .clean-about .btn {
+  border-color: #d6dfeb;
+  background: #fff;
+  color: #344054;
+}
+html[data-view="os"] #about .clean-about .btn.primary {
+  border-color: #2563eb;
+  background: #2563eb;
+  color: #fff;
+}
+.origin-story {
+  display: grid;
+  align-content: start;
+  border: 1px solid #e0e7f0;
+  border-radius: 13px;
+  background: #f8fafc;
+}
+.origin-story > div {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 11px;
+  padding: 14px 16px;
+  border-bottom: 1px solid #e1e8f0;
+}
+.origin-story > div:last-child { border-bottom: 0; }
+.origin-story span {
+  grid-row: 1 / 3;
+  color: #9aa7b7;
+  font: 750 10px/1.3 Inter, ui-sans-serif, system-ui, sans-serif;
+}
+.origin-story strong {
+  color: #182b49;
+  font-size: 13px;
+}
+.origin-story small {
+  margin-top: 3px;
+  color: #738196;
+  font-size: 11px;
+}
+
+/* Softer labels and status metadata across project cards. */
+html[data-view="os"] .meta {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: .02em;
+}
+html[data-view="os"] .meta .status {
+  color: #53657d;
+  text-transform: none;
+}
+html[data-view="os"] .badge {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: .06em;
+}
+
+/* The old developer progress line is not part of the final brand. */
+html[data-view="os"] .scroll-progress {
+  height: 2px;
+  background: #2563eb;
+  opacity: .7;
+}
+
+@media (max-width: 1050px) {
+  .clean-case { grid-template-columns: 1fr; }
+  .clean-case-visuals { min-height: 360px; }
+  .clean-case-visuals img { min-height: 360px; }
+  html[data-view="os"] #about .clean-about { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  html[data-view="os"] .block-head { grid-template-columns: 1fr; gap: 8px; }
+  .clean-case-visuals {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .clean-case-visuals img {
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+  .clean-case-visuals img + img { display: none; }
+  .clean-case-body { padding: 22px; }
+  html[data-view="os"] #about .clean-about { padding: 24px; }
+}
