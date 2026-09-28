@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,follow"><meta name="theme-color" content="#0f172a">
+<title>MOTORWERK – KFZ-Werkstatt Demo | ABBES Digital</title>
+<meta name="description" content="Interaktive ABBES-Digital-Demo für freie KFZ-Werkstätten: Fahrzeuganfrage, Auftragsstatus, digitale Freigabe und Werkstatt-Cockpit.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="kfz.css"><script src="kfz.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#inhalt">Zum Inhalt</a>
+<div class="demo-bar"><span><b>ABBES DIGITAL DEMO</b> · Fiktiver Betrieb · Keine echten Termine</span><a href="/#kontakt">So eine Lösung anfragen ↗</a></div>
+<header class="top">
+<a class="brand" href="#start"><span class="mark">M</span><span><b>MOTORWERK</b><small>FREIE KFZ-WERKSTATT</small></span></a>
+<button class="menu" type="button" aria-expanded="false" aria-controls="nav">Menü ☰</button>
+<nav id="nav"><a href="#leistungen">Leistungen</a><a href="#termin">Termin</a><a href="#status">Auftragsstatus</a><button type="button" data-dashboard>Werkstattansicht</button></nav>
+<a class="head-cta" href="#termin">Termin anfragen</a>
+</header>
+<main id="inhalt">
+<section class="hero" id="start">
+<div class="hero-copy"><p class="eyebrow">FREIE WERKSTATT · DIREKTER SERVICE</p><h1>Ihr Auto.<br><em>Unser Auftrag.</em></h1>
+<p>Inspektion, Bremsen, Reifen, Klima und Diagnose – mit digitaler Terminanfrage, transparentem Auftragsstatus und Freigaben ohne Telefon-Pingpong.</p>
+<div class="actions"><a class="btn primary" href="#termin">Termin anfragen</a><a class="btn" href="#status">Auftragsstatus prüfen</a></div>
+<ul class="trust"><li><b>Direkt</b><span>ohne Hotline</span></li><li><b>Transparent</b><span>Status selbst prüfen</span></li><li><b>Digital</b><span>Zusatzarbeiten freigeben</span></li></ul></div>
+<div class="garage"><div class="garage-head"><span>HEBEBÜHNE 02</span><b>IN ARBEIT</b></div>
+<svg viewBox="0 0 720 310" aria-hidden="true"><path class="body" d="M96 205c13-36 43-58 87-65l54-8 57-65h177l83 67 66 15c33 7 52 29 52 59v28H64v-14c0-10 12-17 32-17Z"/><path class="glass" d="M271 126l43-49h139l62 51-244-2Z"/><circle class="wheel" cx="194" cy="226" r="48"/><circle class="wheel" cx="544" cy="226" r="48"/><circle class="hub" cx="194" cy="226" r="21"/><circle class="hub" cx="544" cy="226" r="21"/></svg>
+<div class="job"><span><small>AUFTRAG</small><b>A-1042</b></span><span><small>FAHRZEUG</small><b>BMW 320d</b></span><span><small>STATUS</small><b>Freigabe offen</b></span></div></div>
+</section>
+
+<section class="proof"><div><span>01</span><b>Termin digital anfragen</b><small>Fahrzeug + Anliegen strukturiert</small></div><div><span>02</span><b>Zusatzarbeit freigeben</b><small>ohne Rückruf-Marathon</small></div><div><span>03</span><b>Status selbst prüfen</b><small>weniger Telefon-Nachfragen</small></div><div><span>04</span><b>Werkstatt im Blick</b><small>Aufträge und Freigaben zentral</small></div></section>
+
+<section class="block" id="leistungen"><div class="wrap"><header class="section-head"><div><p class="eyebrow">LEISTUNGEN</p><h2>Alles, was Ihr Fahrzeug braucht.</h2></div><p>Eine freie Werkstatt mit klaren Leistungen – und einer Website, die Kunden schon vor dem ersten Anruf sinnvoll abholt.</p></header>
+<div class="services">
+<article><i>✓</i><h3>Inspektion &amp; Service</h3><p>Wartung, Ölwechsel und Sichtprüfung.</p><a href="#termin" data-service="Inspektion">Termin anfragen →</a></article>
+<article><i>◎</i><h3>Bremsen</h3><p>Beläge, Scheiben und Bremsanlage prüfen.</p><a href="#termin" data-service="Bremsen">Termin anfragen →</a></article>
+<article><i>◉</i><h3>Reifen &amp; Räder</h3><p>Wechsel, Einlagerung und Kontrolle.</p><a href="#termin" data-service="Reifen">Termin anfragen →</a></article>
+<article><i>❄</i><h3>Klima</h3><p>Klimaservice und Funktionsprüfung.</p><a href="#termin" data-service="Klima">Termin anfragen →</a></article>
+<article><i>⚙</i><h3>Diagnose</h3><p>Warnleuchten und Fehlersuche.</p><a href="#termin" data-service="Diagnose">Termin anfragen →</a></article>
+<article><i>HU</i><h3>HU / AU Vorbereitung</h3><p>Prüfung und Vorbereitung auf den Prüftermin.</p><a href="#termin" data-service="HU / AU">Termin anfragen →</a></article>
+</div></div></section>
+
+<section class="block soft" id="termin"><div class="wrap"><header class="section-head"><div><p class="eyebrow">TERMINANFRAGE</p><h2>Fahrzeug und Anliegen direkt richtig erfassen.</h2></div><p>Keine leere Kontaktbox: Die Werkstatt erhält direkt die Informationen, die sie für eine erste Einordnung braucht.</p></header>
+<div class="booking"><div class="steps"><span class="on">1 · Fahrzeug</span><span>2 · Anliegen</span><span>3 · Termin</span><span>4 · Kontakt</span></div>
+<form data-booking-form>
+<section data-step="0"><p class="kicker">SCHRITT 1 VON 4</p><h3>Welches Fahrzeug kommt zu uns?</h3><div class="grid"><label>Kennzeichen<input name="plate" value="SM-MW 320" required></label><label>Kilometerstand<input name="km" type="number" value="128430" required></label><label>Marke<input name="make" value="BMW" required></label><label>Modell<input name="model" value="320d" required></label></div><div class="form-actions"><span></span><button class="btn primary" type="button" data-next>Weiter</button></div></section>
+<section data-step="1" hidden><p class="kicker">SCHRITT 2 VON 4</p><h3>Worum geht es?</h3><div class="issues"><button type="button" data-value="Inspektion">Inspektion</button><button type="button" data-value="Bremsen">Bremsen</button><button type="button" data-value="Reifen">Reifen</button><button type="button" data-value="Klima">Klima</button><button type="button" data-value="Diagnose">Diagnose</button><button type="button" data-value="Sonstiges">Sonstiges</button></div><label>Beschreibung<textarea name="note" rows="4" placeholder="Was ist aufgefallen?"></textarea></label><div class="form-actions"><button class="linkbtn" type="button" data-back>← Zurück</button><button class="btn primary" type="button" data-next>Weiter</button></div></section>
+<section data-step="2" hidden><p class="kicker">SCHRITT 3 VON 4</p><h3>Wann passt es?</h3><div class="grid"><label>Wunschtermin<input name="date" type="date" required></label><label>Zeitfenster<select name="time"><option>Vormittags</option><option>Nachmittags</option><option>Flexibel</option></select></label></div><label>Mobilität<select name="mobility"><option>Kein Bedarf</option><option>Ersatzwagen anfragen</option><option>Hol- / Bringservice</option></select></label><div class="form-actions"><button class="linkbtn" type="button" data-back>← Zurück</button><button class="btn primary" type="button" data-next>Weiter</button></div></section>
+<section data-step="3" hidden><p class="kicker">SCHRITT 4 VON 4</p><h3>Wie erreichen wir Sie?</h3><div class="grid"><label>Name<input name="name" value="Max Mustermann" required></label><label>E-Mail<input name="email" type="email" value="max@example.com" required></label></div><label class="consent"><input name="consent" type="checkbox" required><span>Ich habe verstanden, dass dies eine Demo ist und nichts versendet wird.</span></label><p class="error" data-booking-error></p><div class="form-actions"><button class="linkbtn" type="button" data-back>← Zurück</button><button class="btn primary" type="submit">Demo-Anfrage erstellen</button></div></section>
+<section class="done" data-step="4" hidden><div class="check">✓</div><p class="kicker">DEMO-ANFRAGE ERSTELLT</p><h3>Die Werkstatt hätte jetzt alles Nötige.</h3><p>In einer echten Umsetzung könnte die Anfrage automatisch im Cockpit landen und einem Termin zugeordnet werden.</p><div class="summary" data-summary></div><div class="form-actions"><button class="btn" type="button" data-restart>Zurücksetzen</button><button class="btn primary" type="button" data-dashboard>Werkstattansicht öffnen</button></div></section>
+</form>
+<aside><p class="eyebrow">DAS LANDET IN DER WERKSTATT</p><h3>Strukturiert statt Freitext-Chaos.</h3><ul><li><b>Fahrzeug</b><span>Kennzeichen, Modell, Kilometerstand</span></li><li><b>Anliegen</b><span>Leistung und Beschreibung</span></li><li><b>Planung</b><span>Wunschdatum und Mobilität</span></li><li><b>Kontakt</b><span>direkt dem Vorgang zugeordnet</span></li></ul></aside></div>
+</div></section>
+
+<section class="block" id="status"><div class="wrap"><header class="section-head"><div><p class="eyebrow">AUFTRAGSSTATUS</p><h2>Weniger „Ist mein Auto schon fertig?“-Anrufe.</h2></div><p>Kunden sehen mit Auftragsnummer und PIN den aktuellen Stand – ohne Kundenkonto und ohne interne Daten offenzulegen.</p></header>
+<div class="status"><form data-status-form><h3>Status prüfen</h3><p>Demo-Daten sind vorausgefüllt.</p><label>Auftrag<input name="order" value="A-1042"></label><label>PIN<input name="pin" value="4812"></label><button class="btn primary" type="submit">Auftrag anzeigen</button><small>Alternative: A-1045 / 9911</small><p class="error" data-status-error></p></form>
+<div class="status-card" data-status-card><div class="status-head"><div><span>AUFTRAG A-1042</span><h3 data-vehicle>BMW 320d · SM-MW 320</h3></div><b data-badge>Wartet auf Freigabe</b></div>
+<ol class="timeline"><li class="done"><i>✓</i><b>Angenommen</b></li><li class="done"><i>✓</i><b>Diagnose</b></li><li class="active"><i>3</i><b>Freigabe</b></li><li><i>4</i><b>Reparatur</b></li><li><i>5</i><b>Abholbereit</b></li></ol>
+<article class="approval" data-approval><div><span>ZUSATZARBEIT</span><h4>Bremsscheiben &amp; Beläge vorne</h4><p>Verschleiß außerhalb der empfohlenen Toleranz.</p></div><strong>389,00 €</strong><div><button class="btn primary" type="button" data-approve>Arbeit freigeben</button><button class="btn" type="button" data-callback>Rückruf wünschen</button></div><small data-approval-note>Demo: Es wird nichts gespeichert.</small></article></div></div>
+</div></section>
+
+<section class="block tyres"><div class="wrap tyre-grid"><div><p class="eyebrow">OPTIONALE ERWEITERUNG</p><h2>Reifenhotel &amp; Service-Erinnerungen.</h2><p>Eingelagerte Radsätze, Profiltiefe, DOT und Lagerplatz verwalten – und Kunden rechtzeitig an Reifenwechsel, Service oder HU erinnern.</p></div><div class="tyre-card"><div><span>REIFENHOTEL</span><b>24 Sätze</b></div><p><b>SM-MW 320</b><span>Winter · 6,2 mm</span><em>R-03-B</em></p><p><b>WAK-GH 17</b><span>Sommer · 5,4 mm</span><em>R-06-A</em></p><p><b>SM-KL 882</b><span>Winter · 4,1 mm</span><em>R-02-C</em></p><button type="button" data-dashboard>Im Cockpit ansehen →</button></div></div></section>
+</main>
+<footer><span><b>MOTORWERK</b> · Fiktive ABBES-Digital-Demo</span><span><a href="/#beispiel">ABBES Digital</a> · <a href="/#kontakt">Projekt anfragen</a></span></footer>
+
+<dialog data-dialog><div class="cockpit"><header><div><span class="mark">M</span><div><b>MOTORWERK Cockpit</b><small>Interne Demo-Ansicht</small></div></div><button type="button" data-close>×</button></header><nav><button class="active" type="button" data-tab="today">Heute</button><button type="button" data-tab="requests">Anfragen <span data-count>3</span></button><button type="button" data-tab="tyres">Reifenhotel</button></nav><main>
+<section class="panel active" data-panel="today"><p class="kicker">WERKSTATT HEUTE</p><h2>7 Termine · 3 in Arbeit</h2><div class="kpis"><article><span>Termine</span><b>7</b></article><article><span>In Arbeit</span><b>3</b></article><article><span>Freigaben</span><b data-freigaben>2</b></article><article><span>Abholbereit</span><b>1</b></article></div><div class="jobs"><p><span>08:00</span><b>VW Golf VII</b><em>In Arbeit</em></p><p><span>08:30</span><b>BMW 320d</b><em data-jobstatus>Freigabe offen</em></p><p><span>10:00</span><b>Ford Transit</b><em>Wartet auf Teile</em></p><p><span>13:00</span><b>VW Golf VII</b><em>Abholbereit</em></p></div></section>
+<section class="panel" data-panel="requests"><p class="kicker">NEUE EINGÄNGE</p><h2>Terminanfragen</h2><div class="requests" data-requests><p><b>Anna Beispiel</b><span>Opel Astra · Diagnose</span></p><p><b>Thomas Muster</b><span>Mercedes Vito · Inspektion</span></p><p><b>Lisa Demo</b><span>Seat Leon · Reifen</span></p></div></section>
+<section class="panel" data-panel="tyres"><p class="kicker">LAGER</p><h2>Reifenhotel</h2><div class="table"><p><b>BMW 320d</b><span>Winter · 6,2 mm</span><em>R-03-B</em></p><p><b>VW Golf VII</b><span>Sommer · 5,4 mm</span><em>R-06-A</em></p><p><b>Škoda Octavia</b><span>Winter · 4,8 mm</span><em>R-01-D</em></p></div></section>
+</main><footer>Demo-Cockpit · Fiktive Daten · keine Speicherung</footer></div></dialog>
+<div class="toast" data-toast role="status" aria-live="polite"></div>
+</body></html>
