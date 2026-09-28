@@ -774,3 +774,82 @@
 
   apply(storedTheme() || currentTheme() || systemTheme(), false);
 })();
+
+
+(function () {
+  // ABBES mobile project disclosure: keep the first proof visible and let visitors
+  // opt into the deeper product portfolio instead of forcing a long mobile scroll.
+  var list = document.querySelector("[data-mobile-collapsible]");
+  var button = document.querySelector("[data-projects-toggle]");
+  if (!list || !button) return;
+
+  var label = button.querySelector("[data-projects-toggle-label]");
+  var section = document.getElementById("projects");
+
+  function sync(expanded) {
+    list.classList.toggle("is-expanded", expanded);
+    button.setAttribute("aria-expanded", expanded ? "true" : "false");
+    if (label) {
+      label.textContent = expanded
+        ? (button.getAttribute("data-label-open") || "Show fewer projects")
+        : (button.getAttribute("data-label-closed") || "Show more projects");
+    }
+  }
+
+  button.addEventListener("click", function () {
+    var expanded = !list.classList.contains("is-expanded");
+    sync(expanded);
+
+    if (!expanded && section && window.matchMedia("(max-width: 720px)").matches) {
+      var top = section.getBoundingClientRect().top;
+      if (top < 0) {
+        var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        section.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+      }
+    }
+  });
+
+  sync(false);
+})();
+
+(function () {
+  // Familiar, unobtrusive back-to-top control. Main pages provide the button in
+  // markup; legal pages get the same control automatically from this shared script.
+  var button = document.querySelector("[data-back-to-top]");
+  if (!button) {
+    button = document.createElement("button");
+    button.type = "button";
+    button.className = "back-to-top";
+    button.setAttribute("data-back-to-top", "");
+    button.setAttribute("aria-label", document.documentElement.lang === "de" ? "Nach oben" : "Back to top");
+    button.setAttribute("title", button.getAttribute("aria-label"));
+    button.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6.5 14.5 5.5-5.5 5.5 5.5"/></svg>';
+    document.body.appendChild(button);
+  }
+
+  var threshold = Math.max(460, Math.round(window.innerHeight * 0.65));
+  var ticking = false;
+
+  function sync() {
+    button.classList.toggle("is-visible", window.scrollY > threshold);
+    ticking = false;
+  }
+
+  window.addEventListener("scroll", function () {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(sync);
+  }, { passive: true });
+
+  window.addEventListener("resize", function () {
+    threshold = Math.max(460, Math.round(window.innerHeight * 0.65));
+    sync();
+  }, { passive: true });
+
+  button.addEventListener("click", function () {
+    var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
+  });
+
+  sync();
+})();
