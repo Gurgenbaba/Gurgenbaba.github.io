@@ -3,8 +3,6 @@
   <url>
     <loc>https://gurgenbaba.github.io/</loc>
     <lastmod>2026-09-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="de" href="https://gurgenbaba.github.io/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://gurgenbaba.github.io/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://gurgenbaba.github.io/"/>
@@ -12,17 +10,21 @@
   <url>
     <loc>https://gurgenbaba.github.io/en/</loc>
     <lastmod>2026-09-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="de" href="https://gurgenbaba.github.io/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://gurgenbaba.github.io/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://gurgenbaba.github.io/"/>
   </url>
   <url>
+    <loc>https://gurgenbaba.github.io/webdesign-breitungen/</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
+    <loc>https://gurgenbaba.github.io/kfz-werkstatt-digital/</loc>
+    <lastmod>2026-09-28</lastmod>
+  </url>
+  <url>
     <loc>https://gurgenbaba.github.io/case-study/genesis-colonies/</loc>
     <lastmod>2026-09-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="de" href="https://gurgenbaba.github.io/case-study/genesis-colonies/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://gurgenbaba.github.io/en/case-study/genesis-colonies/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://gurgenbaba.github.io/case-study/genesis-colonies/"/>
@@ -30,8 +32,6 @@
   <url>
     <loc>https://gurgenbaba.github.io/en/case-study/genesis-colonies/</loc>
     <lastmod>2026-09-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="de" href="https://gurgenbaba.github.io/case-study/genesis-colonies/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://gurgenbaba.github.io/en/case-study/genesis-colonies/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://gurgenbaba.github.io/case-study/genesis-colonies/"/>
