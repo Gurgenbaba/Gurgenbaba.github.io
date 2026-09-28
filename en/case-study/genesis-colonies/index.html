@@ -1,65 +1,74 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-view="os">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title>Genesis Colonies — Case Study // Gurgenbaba</title>
-  <meta name="description" content="Case study: how Genesis Colonies is built. A persistent browser strategy game on Flask, PostgreSQL and Railway, with 2,100+ commits, 5,000+ tests and a database migration in live operation.">
+  <title>Genesis Colonies — Case Study | ABBES Digital</title>
+  <meta name="description" content="ABBES Digital case study: architecture, persistence, databases, testing, migrations and live operations behind Genesis Colonies.">
   <link rel="canonical" href="https://gurgenbaba.github.io/en/case-study/genesis-colonies/">
   <link rel="alternate" hreflang="de" href="https://gurgenbaba.github.io/case-study/genesis-colonies/">
   <link rel="alternate" hreflang="en" href="https://gurgenbaba.github.io/en/case-study/genesis-colonies/">
   <link rel="alternate" hreflang="x-default" href="https://gurgenbaba.github.io/case-study/genesis-colonies/">
-  <meta name="theme-color" content="#05070a">
-  <link rel="preload" href="../../../assets/fonts/unbounded-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
-  <script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("fx")</script>
+  <meta name="theme-color" content="#f3f6fb">
+  <script>
+    (function () {
+      var theme = null;
+      try { theme = localStorage.getItem("abbes-theme"); } catch (e) {}
+      if (theme !== "light" && theme !== "dark") theme = "light";
+      document.documentElement.setAttribute("data-theme", theme);
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute("content", theme === "dark" ? "#09111f" : "#f3f6fb");
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("fx");
+    })();
+  </script>
   <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ABBES Digital">
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="Genesis Colonies — Case Study">
-  <meta property="og:description" content="A universe that never sleeps: architecture, numbers and solved problems behind a persistent browser strategy game.">
+  <meta property="og:description" content="Architecture, persistence and solved operational problems behind a continuously running browser strategy game.">
   <meta property="og:url" content="https://gurgenbaba.github.io/en/case-study/genesis-colonies/">
-  <meta property="og:image" content="https://gurgenbaba.github.io/assets/img/og/share.webp">
+  <meta property="og:image" content="https://gurgenbaba.github.io/assets/img/brand/abbes-og-1200x630.jpg?v=abbes-20260928-1">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../../../assets/img/brand/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="../../../assets/img/brand/favicon-32.png" sizes="32x32" type="image/png">
-  <link rel="apple-touch-icon" href="../../../assets/img/brand/apple-touch.png">
+    <link rel="apple-touch-icon" href="../../../assets/img/brand/abbes-mark.svg">
   <link rel="stylesheet" href="../../../assets/css/site.css">
 </head>
 <body>
   <header class="site-header">
     <div class="wrap header-inner">
-      <a class="brand" href="../../">
-        <span class="brand-mark" aria-hidden="true">G</span>
-        <span>
-          Gurgenbaba
-          <small>Games // Web // Systems</small>
-        </span>
+      <a class="brand abbes-brand" href="../../" aria-label="ABBES Digital – Home">
+        <img class="abbes-brand-mark" src="../../../assets/img/brand/abbes-mark.svg" width="38" height="38" alt="">
+        <span class="abbes-brand-type"><strong>ABBES<span>.</span></strong><small>DIGITAL · THURINGIA, GERMANY</small></span>
       </a>
       <nav class="nav" aria-label="Main navigation">
         <a href="../../">Portfolio</a>
         <a href="#architecture">Architecture</a>
-        <a href="#problems">Problems</a>
-        <a class="cta" href="../../#contact">Contact</a>
+        <a href="#problems">Solved problems</a>
+        <a class="cta" href="../../#contact">Start a project</a>
         <a class="lang" href="../../../case-study/genesis-colonies/" hreflang="de" lang="de" data-set-lang="de" aria-label="Auf Deutsch wechseln">DE</a>
+        <button class="theme-toggle" type="button" data-theme-toggle data-label-light="Switch to light mode" data-label-dark="Switch to dark mode" aria-label="Switch to dark mode" aria-pressed="false">
+          <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 15.3A8.5 8.5 0 0 1 8.7 3.5 8.5 8.5 0 1 0 20.5 15.3Z"/></svg>
+        </button>
       </nav>
     </div>
   </header>
 
   <main id="top">
-    <section class="hero">
-      <canvas class="starfield" aria-hidden="true"></canvas>
+    <section class="hero case-hero">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <p class="kicker">Case Study</p>
+          <p class="kicker">Case Study · Own product</p>
           <h1><span>Genesis</span><span>Colonies.</span></h1>
         </div>
         <figure class="hero-visual hero-frame">
           <img src="../../../assets/img/projects/genesis-colonies/empire.webp" width="1400" height="788" alt="Empire overview in Genesis Colonies" fetchpriority="high">
-          <figcaption class="hero-cap"><span>GENESIS NETWORK // LIVE</span><span>DEV + UNI 1</span></figcaption>
+          <figcaption class="hero-cap"><span>Persistent browser world</span><span>Live system</span></figcaption>
         </figure>
         <div class="hero-rest">
-          <p class="hero-lead"><strong>A universe that never sleeps.</strong> Genesis Colonies is a persistent browser strategy game: colonies, fleets, research and alliances keep running around the clock, even when nobody is logged in. Concept, code and operations: Gurgenbaba.</p>
+          <p class="hero-lead"><strong>A universe that never sleeps.</strong> Genesis Colonies is a persistent browser strategy game with accounts, long-running game state, economy, fleets, research and live operations. The project acts as an engineering benchmark for complex web systems at ABBES Digital.</p>
           <div class="hero-actions">
-            <a class="btn primary" href="https://dev.genesis-colonies.com/">Open DEV / Network</a>
+            <a class="btn primary" href="https://dev.genesis-colonies.com/">Open Genesis Colonies</a>
             <a class="btn" href="https://github.com/Gurgenbaba/genesis-colonies">View source</a>
           </div>
         </div>
@@ -69,28 +78,28 @@
     <section class="block" id="numbers" aria-labelledby="numbers-title">
       <div class="wrap">
         <header class="block-head reveal">
-          <p class="kicker">By the numbers</p>
-          <h2 id="numbers-title">Four months, a growing network.</h2>
-          <p>From the first commit on 25 May 2026 to today. As of 23 September 2026.</p>
+          <p class="kicker">Development &amp; operations</p>
+          <h2 id="numbers-title">Continuously developed since May 2026.</h2>
+          <p>From the first prototype to a running multi-environment system, the architecture, data model, testing and operations have been extended step by step.</p>
         </header>
         <div class="network-rail reveal" aria-label="Genesis Network architecture">
           <a class="network-node is-live" href="https://dev.genesis-colonies.com/">
-            <span class="network-kicker">DEV · AUTHORITY</span>
+            <span class="network-kicker">Development</span>
             <strong>dev.genesis-colonies.com</strong>
             <small>Central sign-in, accounts and continuous development</small>
             <em>LIVE</em>
           </a>
           <div class="network-node is-locked">
-            <span class="network-kicker">UNI 1 · ISOLATED</span>
+            <span class="network-kicker">Universe 1</span>
             <strong>uni1.genesis-colonies.com</strong>
-            <small>Independent game state · prelaunch maintenance</small>
-            <em>CLOSED</em>
+            <small>Separate game state and its own operating environment</small>
+            <em>PRELAUNCH</em>
           </div>
           <div class="network-node is-future">
-            <span class="network-kicker">UNI N · CONVENTION</span>
+            <span class="network-kicker">Future universes</span>
             <strong>uniN.genesis-colonies.com</strong>
-            <small>New universes are registered instead of hard-coded</small>
-            <em>READY</em>
+            <small>New worlds follow the same reusable structure</small>
+            <em>PREPARED</em>
           </div>
         </div>
         <div class="live-stats" data-stats-src="https://genesis-colonies.com/api/public/stats" data-min-players="10" data-locale="en-US" hidden>
@@ -104,12 +113,12 @@
           </dl>
         </div>
         <dl class="facts reveal">
-          <div><dt>Commits</dt><dd>2,129</dd></div>
-          <div><dt>Lines of game code</dt><dd>184k</dd></div>
-          <div><dt>Automated tests</dt><dd>5,158</dd></div>
-          <div><dt>Database migrations</dt><dd>175</dd></div>
-          <div><dt>In-game languages</dt><dd>8</dd></div>
-          <div><dt>CI workflows</dt><dd>17</dd></div>
+          <div><dt>Persistence</dt><dd>Accounts &amp; game state</dd></div>
+          <div><dt>Database</dt><dd>PostgreSQL</dd></div>
+          <div><dt>Quality</dt><dd>Automated tests</dd></div>
+          <div><dt>Schema</dt><dd>Versioned migrations</dd></div>
+          <div><dt>Localisation</dt><dd>8 languages</dd></div>
+          <div><dt>Operations</dt><dd>CI · monitoring · LiveOps</dd></div>
         </dl>
       </div>
     </section>
@@ -206,13 +215,13 @@
         <div class="systems reveal">
           <article>
             <p class="meta"><span>01</span><span class="status">Tests</span></p>
-            <h3>Over 5,000 tests</h3>
-            <p>Game rules, transactions and edge cases are covered automatically, including concurrent access.</p>
+            <h3>Automated tests</h3>
+            <p>Game rules, transactions and critical edge cases are checked automatically, including concurrent access.</p>
           </article>
           <article>
             <p class="meta"><span>02</span><span class="status">Migrations</span></p>
             <h3>Versioned schema</h3>
-            <p>175 migrations that run automatically on deploy. No manual edits to the production database.</p>
+            <p>Schema changes are versioned and reproducible alongside deployments rather than applied as ad-hoc production edits.</p>
           </article>
           <article>
             <p class="meta"><span>03</span><span class="status">Operations</span></p>
@@ -257,8 +266,8 @@
         <div class="contact reveal">
           <div class="contact-main">
             <p class="kicker">Your project</p>
-            <h2 id="contact-title">The same care for your idea.</h2>
-            <p>Shop, booking system or game: clean data, automated tests and operations that do not buckle under the first rush are my standard.</p>
+            <h2 id="contact-title">This experience carries into client work.</h2>
+            <p>From a business website to a custom system, data models, permissions, tests and operations are considered early so a project can grow sensibly later.</p>
             <div class="actions">
               <a class="btn primary" href="../../#contact">Start a project</a>
               <a class="btn" href="../../#services">See services</a>
@@ -281,9 +290,11 @@
 
   <footer class="site-footer">
     <div class="wrap footer-inner">
-      <span>© 2026 Gurgenbaba <button class="arcade-launch" type="button" data-arcade title="Start the hidden arcade game">▶ Arcade</button></span>
+      <span>© 2026 ABBES Digital · Robert Finn · Thuringia, Germany</span>
       <span>
         <a href="../../">Portfolio</a>
+        ·
+        <a href="../../../rechtliches.html" hreflang="de">Legal hub (DE)</a>
         ·
         <a href="../../../impressum.html" hreflang="de">Legal notice (DE)</a>
         ·
