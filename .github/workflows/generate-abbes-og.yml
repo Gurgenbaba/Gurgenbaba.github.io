@@ -34,7 +34,7 @@ jobs:
       - name: Commit generated asset
         shell: bash
         run: |
-          if git diff --quiet -- assets/img/brand/abbes-og-1200x630.jpg; then
+          if [ -z "$(git status --porcelain -- assets/img/brand/abbes-og-1200x630.jpg)" ]; then
             echo "No social-preview change."
             exit 0
           fi
