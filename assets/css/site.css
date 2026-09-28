@@ -4233,3 +4233,166 @@ body.legal .legal-actions .theme-toggle {
     flex-basis: 32px;
   }
 }
+
+
+/* 30 ABBES mobile comfort ---------------------------------------------- */
+.mobile-projects-toggle-wrap { display: none; }
+
+.back-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 34;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid #d5dfeb;
+  border-radius: 12px;
+  background: rgba(255,255,255,.94);
+  color: #1b2b44;
+  box-shadow: 0 10px 28px rgba(15,23,42,.13);
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  cursor: pointer;
+  transition: opacity .2s ease, transform .2s ease, background .18s ease, border-color .18s ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.back-to-top.is-visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.back-to-top:hover {
+  background: #fff;
+  border-color: #b9c8da;
+}
+.back-to-top svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+html[data-theme="dark"] .back-to-top {
+  border-color: #2b3e5a;
+  background: rgba(15,27,45,.94);
+  color: #dbe5f2;
+  box-shadow: 0 12px 32px rgba(0,0,0,.28);
+}
+html[data-theme="dark"] .back-to-top:hover {
+  background: #14233a;
+  border-color: #42618e;
+}
+
+/* The project expander only exists on phones. */
+.mobile-projects-toggle {
+  width: 100%;
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 16px;
+  border: 1px solid #ccd8e7;
+  border-radius: 10px;
+  background: #fff;
+  color: #28405f;
+  font: 750 12px/1 Inter,ui-sans-serif,system-ui,sans-serif;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(15,23,42,.045);
+}
+.mobile-projects-toggle svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform .2s ease;
+}
+.projects.is-expanded .mobile-projects-toggle svg { transform: rotate(180deg); }
+
+html[data-theme="dark"] .mobile-projects-toggle {
+  border-color: #2a3c57;
+  background: #0f1b2d;
+  color: #c9d5e4;
+  box-shadow: none;
+}
+
+@media (max-width: 720px) {
+  /* Give the hero reel breathing room inside the phone viewport. */
+  html[data-view="os"] .abbes-hero .hero-grid {
+    min-width: 0;
+  }
+  html[data-view="os"] .abbes-hero .hero-visual,
+  html[data-view="os"] .abbes-slider {
+    min-width: 0;
+    width: calc(100% - 14px) !important;
+    max-width: calc(100% - 14px);
+    margin: 10px auto 0 !important;
+  }
+  html[data-view="os"] .abbes-slider {
+    border-radius: 12px;
+    box-shadow: 0 12px 28px rgba(31,54,90,.14);
+  }
+  html[data-theme="dark"][data-view="os"] .abbes-slider {
+    box-shadow: 0 14px 30px rgba(0,0,0,.28);
+  }
+  .abbes-slider-controls {
+    left: 8px;
+    right: 8px;
+    bottom: 9px;
+  }
+
+  /* Project section: one strong case first, details on demand. */
+  #projects {
+    scroll-margin-top: 112px;
+  }
+  #projects .projects[data-mobile-collapsible] {
+    grid-template-columns: 1fr;
+  }
+  #projects .projects[data-mobile-collapsible]:not(.is-expanded) > article:nth-of-type(n+2) {
+    display: none;
+  }
+  .mobile-projects-toggle-wrap {
+    display: block;
+    grid-column: 1 / -1;
+    order: 20;
+  }
+  #projects .projects[data-mobile-collapsible] > article:nth-of-type(1) { order: 10; }
+  #projects .projects[data-mobile-collapsible] > article:nth-of-type(2) { order: 30; }
+  #projects .projects[data-mobile-collapsible] > article:nth-of-type(3) { order: 40; }
+  #projects .block-head {
+    margin-bottom: 18px;
+  }
+
+  /* Fixed arrow stays clear of the mobile enquiry bar. */
+  .back-to-top {
+    right: max(12px, env(safe-area-inset-right));
+    bottom: calc(74px + env(safe-area-inset-bottom));
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+  }
+}
+
+@media (max-width: 420px) {
+  html[data-view="os"] .abbes-hero .hero-visual,
+  html[data-view="os"] .abbes-slider {
+    width: calc(100% - 18px) !important;
+    max-width: calc(100% - 18px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top,
+  .mobile-projects-toggle svg { transition: none !important; }
+}
