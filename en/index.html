@@ -10,6 +10,19 @@
   <link rel="alternate" hreflang="en" href="https://gurgenbaba.github.io/en/">
   <link rel="alternate" hreflang="x-default" href="https://gurgenbaba.github.io/">
   <meta name="theme-color" content="#f3f6fb">
+  <script>
+    (function () {
+      var key = "abbes-theme";
+      var theme = null;
+      try { theme = localStorage.getItem(key); } catch (e) {}
+      if (theme !== "light" && theme !== "dark") {
+        theme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", theme);
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute("content", theme === "dark" ? "#09111f" : "#f3f6fb");
+    })();
+  </script>
   <link rel="preload" href="../assets/fonts/unbounded-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="ABBES Digital">
@@ -38,7 +51,7 @@
     "name": "ABBES Digital",
     "url": "https://gurgenbaba.github.io/en/",
     "description": "Websites, online shops, web apps and digital systems for businesses, directly with the developer in Thuringia, Germany.",
-    "image": "https://gurgenbaba.github.io/assets/img/og/share.webp",
+    "image": "https://gurgenbaba.github.io/assets/img/brand/abbes-og-1200x630.jpg?v=abbes-20260928-1",
     "logo": "https://gurgenbaba.github.io/assets/img/brand/abbes-mark.svg",
     "slogan": "Digital products built to work.",
     "founder": {"@type": "Person", "name": "Robert Finn"},
@@ -149,6 +162,10 @@
         <a class="cta" href="#contact">Start a project</a>
         <a class="ext" href="https://github.com/Gurgenbaba" rel="noreferrer">GitHub</a>
         <a class="lang" href="../" hreflang="de" lang="de" data-set-lang="de" aria-label="Auf Deutsch wechseln">DE</a>
+        <button class="theme-toggle" type="button" data-theme-toggle data-label-light="Switch to light mode" data-label-dark="Switch to dark mode" aria-label="Switch to dark mode" aria-pressed="false">
+          <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 15.3A8.5 8.5 0 0 1 8.7 3.5 8.5 8.5 0 1 0 20.5 15.3Z"/></svg>
+        </button>
       </nav>
     </div>
   </header>
