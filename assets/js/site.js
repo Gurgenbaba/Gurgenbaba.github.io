@@ -710,3 +710,67 @@
   updateMeta();
   schedule();
 })();
+
+
+(function () {
+  // ABBES persistent color theme. The first visit follows the operating-system
+  // preference; an explicit choice is saved locally and shared between DE/EN.
+  var key = "abbes-theme";
+  var buttons = Array.prototype.slice.call(document.querySelectorAll("[data-theme-toggle]"));
+  if (!buttons.length) return;
+
+  var root = document.documentElement;
+  var media = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+
+  function storedTheme() {
+    try { return localStorage.getItem(key); } catch (e) { return null; }
+  }
+
+  function systemTheme() {
+    return media && media.matches ? "dark" : "light";
+  }
+
+  function currentTheme() {
+    var value = root.getAttribute("data-theme");
+    return value === "dark" ? "dark" : "light";
+  }
+
+  function syncButton(button, theme) {
+    var dark = theme === "dark";
+    button.setAttribute("aria-pressed", dark ? "true" : "false");
+    button.setAttribute("aria-label", dark
+      ? (button.getAttribute("data-label-light") || "Switch to light mode")
+      : (button.getAttribute("data-label-dark") || "Switch to dark mode"));
+    button.setAttribute("title", button.getAttribute("aria-label"));
+  }
+
+  function apply(theme, remember) {
+    theme = theme === "dark" ? "dark" : "light";
+    root.setAttribute("data-theme", theme);
+
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", theme === "dark" ? "#09111f" : "#f3f6fb");
+
+    buttons.forEach(function (button) { syncButton(button, theme); });
+
+    if (remember) {
+      try { localStorage.setItem(key, theme); } catch (e) {}
+    }
+  }
+
+  buttons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      apply(currentTheme() === "dark" ? "light" : "dark", true);
+    });
+  });
+
+  if (media) {
+    var followSystem = function (event) {
+      if (!storedTheme()) apply(event.matches ? "dark" : "light", false);
+    };
+    if (media.addEventListener) media.addEventListener("change", followSystem);
+    else if (media.addListener) media.addListener(followSystem);
+  }
+
+  apply(storedTheme() || currentTheme() || systemTheme(), false);
+})();
