@@ -1,20 +1,22 @@
 /* ==========================================================================
-   Gurgenbaba — site.js
-   Plain script, no build step. Every module is a self-contained IIFE that
-   exits early when its markup is not on the page, so one file serves the home
-   pages, the case studies and the legal pages.
+   ABBES Digital // site.js
+   Shared progressive-enhancement script for the portfolio, case studies and
+   legal pages. Modules exit early when their markup is absent.
 
-    1 Language gate + DE/EN switch     8 Section label decode
-    2 Lightbox                         9 Hero rotator ("Ich baue ...")
-    3 Copy-to-clipboard buttons       10 Contact wizard (+ attachments, send)
-    4 Hero FX, reveal, spotlight,     11 Magnetic primary buttons
-      tech ticker                     12 Sticky mobile CTA
-    5 Live stats from Genesis         13 Genesis showcase monitor
-    6 Arcade triggers (lazy-loads arcade.js)
-    7 Scroll progress
+   Current responsibilities:
+   - language preference
+   - screenshot lightbox
+   - copy-to-clipboard
+   - Genesis live stats
+   - scroll progress / reveal helpers
+   - contact wizard and attachments
+   - mobile sticky CTA
+   - ABBES hero slideshow
+   - persistent light/dark theme
+   - mobile project disclosure
+   - back-to-top control
 
-   Motion only runs with html.fx, which <head> sets unless the visitor prefers
-   reduced motion. Public backend calls intentionally stay on genesis-colonies.com (/api/public/*); browser/game links use the canonical dev.genesis-colonies.com origin.
+   Public backend calls intentionally stay on the stable public API endpoints.
    ========================================================================== */
 
 (function () {
