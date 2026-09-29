@@ -4690,3 +4690,162 @@ html[data-theme="dark"] .seo-landing .seo-proof strong,html[data-theme="dark"] .
 html[data-theme="dark"] .seo-landing .seo-region span,html[data-theme="dark"] .seo-landing .seo-faq p{color:#93a5ba}
 @media(max-width:900px){.seo-landing .seo-hero-grid,.seo-landing .seo-head{grid-template-columns:1fr;gap:20px}.seo-landing .seo-grid{grid-template-columns:1fr 1fr}.seo-landing .seo-cta{align-items:flex-start;flex-direction:column}.seo-landing .seo-cta .actions{width:100%}}
 @media(max-width:650px){.seo-landing .seo-hero{padding:54px 0 44px}.seo-landing .seo-section{padding:48px 0}.seo-landing .seo-grid{grid-template-columns:1fr}.seo-landing .seo-cta{padding:22px}.seo-landing .seo-cta .actions{display:grid}.seo-landing .seo-cta .btn{width:100%}}
+
+
+/* 33 ABBES warm light palette ------------------------------------------
+   A softer, warm-neutral light theme for long reading sessions. Keeps ABBES
+   blue and contrast while avoiding large areas of clinical pure white. */
+html[data-view="os"]:not([data-theme="dark"]){
+  --bg: #f2f0ea;
+  --panel: #fbfaf7;
+  --ink: #0d1b31;
+  --muted: #647083;
+  --line: #ddd9d0;
+  --os-soft: #f6f4ef;
+  --os-blue-soft: #eef3fa;
+  background: #f2f0ea;
+}
+html[data-view="os"]:not([data-theme="dark"]) body{
+  background:
+    radial-gradient(circle at 82% 2%, rgba(37,99,235,.05), transparent 29rem),
+    linear-gradient(180deg,#f5f3ee 0,#f2f0ea 48rem,#efede7 100%);
+}
+html[data-view="os"]:not([data-theme="dark"]) .site-header{
+  border-bottom-color: rgba(210,205,196,.88);
+  background: rgba(250,249,246,.91);
+}
+html[data-view="os"]:not([data-theme="dark"]) .nav .ext,
+html[data-view="os"]:not([data-theme="dark"]) .nav .lang,
+html[data-view="os"]:not([data-theme="dark"]) .theme-toggle{
+  border-color: #ddd8cf;
+  background: #fbfaf7;
+}
+html[data-view="os"]:not([data-theme="dark"]) .abbes-hero{
+  border-bottom-color: #ddd8cf;
+  background:
+    radial-gradient(circle at 76% 28%, rgba(37,99,235,.14), transparent 30%),
+    radial-gradient(circle at 95% 10%, rgba(14,165,233,.07), transparent 23%),
+    linear-gradient(135deg,#f9f7f2 0%,#f3f1ec 50%,#edf0f2 100%);
+}
+html[data-view="os"]:not([data-theme="dark"]) .studio-trust-shell{
+  border-bottom-color: #ddd9d0;
+  background: #f7f5f0;
+}
+html[data-view="os"]:not([data-theme="dark"]) .studio-trust > div{
+  border-right-color: #ddd9d0;
+}
+html[data-view="os"]:not([data-theme="dark"]) .studio-trust b{
+  background: #e9eef6;
+}
+
+/* Alternating section rhythm without hard white bands. */
+html[data-view="os"]:not([data-theme="dark"]) #beispiel,
+html[data-view="os"]:not([data-theme="dark"]) #example,
+html[data-view="os"]:not([data-theme="dark"]) #systems,
+html[data-view="os"]:not([data-theme="dark"]) #ablauf,
+html[data-view="os"]:not([data-theme="dark"]) #process,
+html[data-view="os"]:not([data-theme="dark"]) #about{
+  border-color: #dedad2;
+  background:
+    radial-gradient(circle at 6% 0, rgba(37,99,235,.035), transparent 24rem),
+    #ecebe6;
+}
+html[data-view="os"]:not([data-theme="dark"]) #projects{
+  background: #f6f4ef;
+}
+html[data-view="os"]:not([data-theme="dark"]) #genesis{
+  border-color: #dedad2;
+  background:
+    radial-gradient(circle at 92% 8%, rgba(37,99,235,.10), transparent 27rem),
+    linear-gradient(135deg,#f8f6f1,#eef0ef);
+}
+html[data-view="os"]:not([data-theme="dark"]) #preise,
+html[data-view="os"]:not([data-theme="dark"]) #pricing{
+  background:
+    radial-gradient(circle at 91% 9%, rgba(37,99,235,.055), transparent 27rem),
+    #efede7;
+}
+
+/* Reading and content surfaces. */
+html[data-view="os"]:not([data-theme="dark"]) .services article,
+html[data-view="os"]:not([data-theme="dark"]) .card,
+html[data-view="os"]:not([data-theme="dark"]) .client,
+html[data-view="os"]:not([data-theme="dark"]) .systems article,
+html[data-view="os"]:not([data-theme="dark"]) .process li,
+html[data-view="os"]:not([data-theme="dark"]) .price,
+html[data-view="os"]:not([data-theme="dark"]) .faq details,
+html[data-view="os"]:not([data-theme="dark"]) .clean-case,
+html[data-view="os"]:not([data-theme="dark"]) .price-growth,
+html[data-view="os"]:not([data-theme="dark"]) .clean-about,
+html[data-view="os"]:not([data-theme="dark"]) .origin-story{
+  border-color: #ddd9d0;
+  background: #fbfaf7;
+}
+html[data-view="os"]:not([data-theme="dark"]) .static-stack > span,
+html[data-view="os"]:not([data-theme="dark"]) .price-detail{
+  border-color: #dfdbd3;
+  background: #f4f2ed;
+}
+html[data-view="os"]:not([data-theme="dark"]) .budget-note{
+  border-color: #d8d6cf;
+  background:
+    radial-gradient(circle at 92% 15%, rgba(37,99,235,.07), transparent 18rem),
+    linear-gradient(135deg,#f8f6f1,#f2f0ea);
+}
+html[data-view="os"]:not([data-theme="dark"]) #faq{
+  background: #efeee9;
+}
+html[data-view="os"]:not([data-theme="dark"]) .faq details[open]{
+  background: #fcfbf8;
+}
+html[data-view="os"]:not([data-theme="dark"]) #kontakt .contact,
+html[data-view="os"]:not([data-theme="dark"]) #contact .contact{
+  background: #fbfaf7;
+}
+html[data-view="os"]:not([data-theme="dark"]) .wizard,
+html[data-view="os"]:not([data-theme="dark"]) .contact-hints{
+  border-color: #ddd9d0;
+  background: #f5f3ee;
+}
+html[data-view="os"]:not([data-theme="dark"]) .pick button,
+html[data-view="os"]:not([data-theme="dark"]) .wiz-field input,
+html[data-view="os"]:not([data-theme="dark"]) .wiz-field textarea,
+html[data-view="os"]:not([data-theme="dark"]) .wiz-field select,
+html[data-view="os"]:not([data-theme="dark"]) .wiz-letter,
+html[data-view="os"]:not([data-theme="dark"]) .letter-paper,
+html[data-view="os"]:not([data-theme="dark"]) .drop{
+  border-color: #ddd9d0;
+  background: #fcfbf8;
+}
+html[data-view="os"]:not([data-theme="dark"]) .back-to-top{
+  border-color: #d9d5cc;
+  background: rgba(250,249,246,.95);
+}
+
+/* SEO/service landing pages share the same comfortable palette. */
+html[data-view="os"]:not([data-theme="dark"]) body.seo-landing{
+  background: #f2f0ea;
+}
+html[data-view="os"]:not([data-theme="dark"]) .seo-landing .seo-hero{
+  border-bottom-color: #ddd9d0;
+  background:
+    radial-gradient(circle at 82% 12%,rgba(37,99,235,.075),transparent 27rem),
+    #f8f6f1;
+}
+html[data-view="os"]:not([data-theme="dark"]) .seo-landing .seo-section.alt{
+  border-color: #ddd9d0;
+  background: #f7f5f0;
+}
+html[data-view="os"]:not([data-theme="dark"]) .seo-landing .seo-proof,
+html[data-view="os"]:not([data-theme="dark"]) .seo-landing .seo-grid article,
+html[data-view="os"]:not([data-theme="dark"]) .seo-landing .seo-region span,
+html[data-view="os"]:not([data-theme="dark"]) .seo-landing .seo-faq details{
+  border-color: #ddd9d0;
+  background: #fbfaf7;
+}
+
+/* Legal/case-study surfaces using the shared ABBES shell. */
+html[data-view="os"]:not([data-theme="dark"]) .error-card{
+  border-color: #ddd9d0;
+  background: #fbfaf7;
+}
