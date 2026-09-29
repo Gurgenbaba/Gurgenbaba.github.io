@@ -1,5 +1,5 @@
-const CACHE='abbes-wartungs-demo-v2';
-const ASSETS=['./','./index.html','./styles.css?v=2','./app.js?v=2','./manifest.webmanifest','./icon.svg'];
+const CACHE='abbes-wartungs-demo-v4';
+const ASSETS=['./','./index.html','./styles.css?v=4','./app.js?v=4','./protocol-viewer.js?v=4','./manifest.webmanifest','./icon.svg'];
 
 self.addEventListener('install',event=>{
   event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)));
