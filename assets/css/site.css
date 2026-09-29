@@ -5279,3 +5279,21 @@ html[data-view="os"] .price-growth{
     transition: none !important;
   }
 }
+
+
+/* Contrast hotfix: service CTA in warm/light OS portfolio */
+html[data-view="os"] .services-cta{
+  background:#fff;
+  color:var(--ink);
+}
+html[data-view="os"] .services-cta h3,
+html[data-view="os"] .services-cta p,
+html[data-view="os"] .services-cta h3 span{
+  color:var(--ink) !important;
+  opacity:1 !important;
+}
+html[data-view="os"] .services-cta .svc-ico{
+  color:#2563eb;
+  stroke:#2563eb;
+  opacity:1;
+}
