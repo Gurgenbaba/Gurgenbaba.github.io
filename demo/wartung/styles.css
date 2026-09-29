@@ -18,3 +18,76 @@ main{min-width:0;padding:0 36px 48px}.top{height:96px;display:flex;align-items:c
 @media(max-width:1050px){.shell{grid-template-columns:205px 1fr}main{padding:0 22px 40px}.hero{grid-template-columns:1fr}.machine{display:none}.hero-copy{padding:34px}.content{grid-template-columns:1fr}.templates{grid-template-columns:1fr 1fr}.inspect{grid-template-columns:1fr}.sticky{position:static;grid-template-columns:1fr 1fr}.sticky .full{grid-column:1/-1}}
 @media(max-width:720px){.shell{display:block}aside{display:none}main{padding:0 13px 28px}.top{height:66px;position:sticky;top:0;z-index:20;background:#f4f6f8ee;backdrop-filter:blur(9px)}.top>div:first-child{display:none}.mobile-brand{border:0;background:none;display:flex;align-items:center;gap:8px;color:var(--navy);font-weight:900;letter-spacing:.05em}.pill{height:31px}.pill b{display:none}.avatar{width:31px;height:31px}.reset{width:31px;height:31px}.notice{display:block;margin-top:7px}.notice small{display:block;margin-top:6px}.hero-grid{display:block}.today-panel{margin-top:13px}.hero-copy{padding:25px 20px}.hero h2{font-size:28px}.hero-actions{display:grid}.hero-actions button{width:100%}.panel{padding:17px}.protocol{grid-template-columns:40px 1fr auto}.pmeta{display:none}.page-head{align-items:flex-start;flex-direction:column}.templates{grid-template-columns:1fr}.search input{min-width:0;width:100%}.table-head,.trow{grid-template-columns:1.4fr 1fr .8fr}.table-head>*:nth-child(3),.table-head>*:nth-child(4),.trow>*:nth-child(3),.trow>*:nth-child(4){display:none}.workflow-shell{grid-template-rows:56px 55px 1fr 62px}.wf-head{padding:0 12px}.wf-brand span:last-child,.autosave{display:none}.steps>i{width:20px}.step span{display:none}.wf-content{padding:22px 12px 32px}.intro h2{font-size:24px}.formgrid{grid-template-columns:1fr}.rowintro{align-items:flex-start;flex-direction:column}.progressbox{width:100%}.checkrow{grid-template-columns:1fr}.statuses{display:grid;grid-template-columns:repeat(3,1fr)}.statuses button{min-width:0}.sticky{grid-template-columns:1fr}.issuegrid,.finish{grid-template-columns:1fr}.wf-foot{grid-template-columns:auto 1fr auto;padding:0 10px;gap:8px}.wf-foot span{display:none}.reportbar{padding:0 10px}.reportbar .secondary{display:none}.report{padding:27px 20px;margin:10px auto;min-height:0}.rinfo{grid-template-columns:1fr}.rsign{grid-template-columns:1fr;gap:28px}}
 @media print{body{background:#fff}.shell,.workflow,.reportbar,.toast{display:none!important}.reportoverlay{display:block!important;position:static;background:#fff;overflow:visible}.report{width:100%;min-height:0;margin:0;box-shadow:none;padding:18mm 16mm}@page{size:A4;margin:0}}
+
+/* v2 readability & field-use hotfix ------------------------------------- */
+body{font-size:16px;line-height:1.5}
+.eyebrow{font-size:11px;letter-spacing:.11em}
+.brand small{font-size:11px}.product{font-size:12px}.nav button{font-size:14px;min-height:46px}
+.sync b{font-size:13px}.sync span,.aside-foot{font-size:11px}
+.top h1{font-size:32px}.pill{height:40px;font-size:12px}.avatar,.reset{width:40px;height:40px}
+.notice{font-size:13px;line-height:1.45;padding:14px 16px}.notice small{font-size:11px}
+.hero h2{font-size:40px}.hero p{font-size:15px;line-height:1.6}
+.primary,.secondary{min-height:48px;padding:12px 18px;font-size:13px}.linkbtn{font-size:12px}
+.hero-meta{font-size:11px;line-height:1.4}
+.panel-head h3{font-size:20px}.stat b{font-size:28px}.stat small,.meter small{font-size:11px}.meter-row{font-size:12px}
+.protocol b{font-size:13px}.protocol span{font-size:11px}.pmeta{font-size:10px;line-height:1.45}.badge{font-size:10px;padding:7px 9px}
+.quick{min-height:62px}.quick b{font-size:13px}.quick small{font-size:10px}.quick>span:first-child{width:40px;height:40px}
+.page-head h2{font-size:34px}.page-head p{font-size:14px;line-height:1.55}.search input{height:46px;font-size:13px}
+.table-head{font-size:10px}.trow,.trow b{font-size:12px}.trow span{font-size:11px}
+.template h3{font-size:22px}.template p{font-size:14px;line-height:1.6}.template footer b,.template footer button{font-size:11px}
+.wf-head{min-height:68px}.wf-brand{font-size:14px}.autosave{font-size:11px}.close{width:42px;height:42px;font-size:24px}
+.steps{min-height:72px}.step{gap:9px}.step b{width:32px;height:32px;font-size:11px}.step span{font-size:12px}.steps>i{width:84px}
+.wf-content{padding-top:38px}
+.intro{margin-bottom:24px}.intro h2{font-size:36px;line-height:1.08}.intro p{font-size:14px;line-height:1.55}
+.formcard,.summary,.signature{padding:26px}
+.field span,.fulllabel>span{font-size:12px;margin-bottom:8px}
+.field input,.field select{height:50px;font-size:15px;padding:11px 13px}
+.fulllabel textarea{font-size:15px;line-height:1.5;padding:12px 13px}
+.hint{font-size:12px;line-height:1.5;padding:14px}
+.progressbox{min-width:200px;padding:12px 14px}.progressbox b{font-size:17px}.progressbox span{font-size:10px}
+.checksec h3{font-size:14px;padding:16px 18px}
+.checkrow{padding:15px 18px}.checkrow b{font-size:13px}.checkrow small{font-size:11px;line-height:1.45}
+.statuses button{min-width:76px;min-height:44px;font-size:11px;padding:0 12px}
+.assetbox{padding:20px}.assetbox b{font-size:28px}.assetbox span{font-size:13px}.assetbox small{font-size:11px;line-height:1.4}
+.issuecount{font-size:11px;padding:8px 11px}.empty{font-size:12px;line-height:1.5}
+.issue{padding:20px}.issuehead b{font-size:14px}.remove{width:40px;height:40px;font-size:20px}
+.issuegrid label>span{font-size:11px;margin-bottom:7px}.issuegrid textarea,.issuegrid select{font-size:14px;padding:11px;line-height:1.5}.issuegrid textarea{min-height:96px}
+.photo{min-height:90px}.photo span{font-size:12px}.addissue{min-height:52px;font-size:13px}
+.summary h3{font-size:24px}.summary>p{font-size:12px}.nums strong{font-size:26px}.nums span{font-size:10px}
+.signature .panel-head h3{font-size:20px}.sigwrap{height:210px}.sigwrap span{font-size:12px}
+.confirm{padding:14px}.confirm input{width:20px;height:20px}.confirm b{font-size:12px}.confirm small{font-size:10px;line-height:1.4}
+.wf-foot{min-height:78px}.wf-foot span{font-size:10px}.wf-foot .primary,.wf-foot .secondary{min-height:50px}
+.toast{font-size:12px;line-height:1.35;padding:12px 16px;max-width:min(520px,calc(100% - 24px));text-align:center}
+.reportbar{height:68px}.reportbar span{font-size:11px}.report{font-size:12px}
+.rlogo b{font-size:22px}.rlogo small{font-size:9px}.rtitle h1{font-size:22px}.rtitle span{font-size:10px}
+.rf span{font-size:9px}.rf b{font-size:12px}.rnums strong{font-size:21px}.rnums span{font-size:9px}
+.rsection h2{font-size:12px}.rcheck{font-size:10px;padding:8px 0}.rissue{font-size:10px;line-height:1.45}.rissue b{font-size:11px}.sigline{font-size:9px}.rfoot{font-size:8px}
+
+@media(max-width:720px){
+  main{padding:0 14px 32px}
+  .top{height:auto;min-height:72px;padding:10px 0}
+  .mobile-brand{font-size:15px}
+  .pill{height:38px}.avatar,.reset{width:38px;height:38px}
+  .notice{font-size:12px;padding:12px 13px;margin-top:8px;margin-bottom:12px}.notice small{font-size:10px;white-space:normal}
+  .hero{min-height:0}.hero-copy{padding:24px 18px 20px}.hero h2{font-size:30px;line-height:1.08}.hero p{font-size:14px;margin-bottom:18px}
+  .hero-actions{gap:9px}.hero-actions button{min-height:52px;font-size:14px}.hero-meta{font-size:10px;gap:8px 12px}
+  .panel{padding:18px}.panel-head h3{font-size:19px}.today{grid-template-columns:1fr}.stat{padding:15px}
+  .protocol{grid-template-columns:42px minmax(0,1fr);gap:11px}.protocol .badge{grid-column:2;justify-self:start}.protocol b{font-size:13px}.protocol span{font-size:11px}
+  .page-head h2{font-size:29px}.page-head p{font-size:13px}.search{width:100%}.search input{width:100%;font-size:13px}
+  .workflow-shell{grid-template-rows:64px 62px 1fr 76px}
+  .wf-head{padding:0 14px}.wf-brand{font-size:13px}.close{width:40px;height:40px}
+  .steps{padding:0 10px}.steps>i{width:22px}.step b{width:31px;height:31px}.step span{display:none}
+  .wf-content{padding:24px 14px 34px}.intro h2{font-size:28px}.intro p{font-size:13px}
+  .formcard,.summary,.signature{padding:18px}.formgrid{gap:14px}
+  .field span,.fulllabel>span{font-size:11px}.field input,.field select{height:50px;font-size:16px}.fulllabel textarea{font-size:16px}
+  .hint{font-size:11px}
+  .checksec h3{font-size:14px}.checkrow{padding:15px}.checkrow b{font-size:13px}.checkrow small{font-size:11px}
+  .statuses{gap:7px}.statuses button{min-height:48px;font-size:12px;padding:0 6px}
+  .assetbox b{font-size:25px}.assetbox span{font-size:12px}.assetbox small{font-size:10px}
+  .issue{padding:16px}.issuehead b{font-size:13px}.issuegrid textarea,.issuegrid select{font-size:16px}.photo{min-height:96px}
+  .finish{gap:12px}.summary h3{font-size:22px}.summary>p{font-size:11px}.nums strong{font-size:24px}.nums span{font-size:10px}
+  .sigwrap{height:190px}.confirm b{font-size:12px}.confirm small{font-size:10px}
+  .wf-foot{grid-template-columns:auto 1fr auto;padding:0 10px;gap:8px}.wf-foot .primary,.wf-foot .secondary{min-height:50px;font-size:12px;padding:10px 12px}.wf-foot .primary{max-width:230px}
+  .reportbar{height:auto;min-height:68px;padding:9px 10px}.reportbar>div:last-child{margin-left:auto}
+  .report{padding:28px 20px;margin:10px auto}.rtitle h1{font-size:19px}.rf b{font-size:12px}.rcheck{font-size:10px}
+}
