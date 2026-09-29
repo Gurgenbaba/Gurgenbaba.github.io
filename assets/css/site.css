@@ -4943,7 +4943,10 @@ html[data-view="os"] .btn:focus-visible,
 html[data-view="os"] .theme-toggle:focus-visible,
 html[data-view="os"] .back-to-top:focus-visible,
 html[data-view="os"] .mobile-projects-toggle:focus-visible,
-html[data-view="os"] .pick button:focus-visible{
+html[data-view="os"] .pick button:focus-visible,
+html[data-view="os"] .nav > a:focus-visible,
+html[data-view="os"] .services-cta:focus-visible,
+html[data-view="os"] a.demo-shot:focus-visible{
   outline: 0;
   box-shadow: 0 0 0 3px var(--ui-focus);
 }
@@ -5006,6 +5009,9 @@ html[data-view="os"] .nav > a{
   transition: background .16s ease, color .16s ease, border-color .16s ease;
 }
 html[data-view="os"] .nav > a:not(.cta):not(.ext):not(.lang):hover{
+  background: rgba(29,78,216,.065);
+}
+html[data-theme="dark"][data-view="os"] .nav > a:not(.cta):not(.ext):not(.lang):hover{
   background: rgba(255,255,255,.06);
 }
 html[data-view="os"] .nav .cta{
@@ -5044,7 +5050,8 @@ html[data-view="os"] .theme-toggle:hover{
 
 /* Small labels are compact pills; metadata stays metadata. */
 html[data-view="os"] .chip,
-html[data-view="os"] .badge{
+html[data-view="os"] .badge,
+html[data-view="os"] .price-badge{
   padding: 6px 9px;
   border-radius: var(--ui-pill-radius);
   font: 700 9px/1 Inter, ui-sans-serif, system-ui, sans-serif;
