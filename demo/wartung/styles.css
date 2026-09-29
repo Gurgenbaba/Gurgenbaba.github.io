@@ -91,3 +91,42 @@ body{font-size:16px;line-height:1.5}
   .reportbar{height:auto;min-height:68px;padding:9px 10px}.reportbar>div:last-child{margin-left:auto}
   .report{padding:28px 20px;margin:10px auto}.rtitle h1{font-size:19px}.rf b{font-size:12px}.rcheck{font-size:10px}
 }
+
+
+/* Isolated protocol viewer ---------------------------------------------- */
+.protocol-openable,
+.trow.protocol-openable{
+  cursor:pointer;
+  transition:background .16s ease,transform .16s ease,box-shadow .16s ease;
+}
+.protocol-openable:hover,
+.trow.protocol-openable:hover{
+  background:#f8faf7;
+}
+.protocol-openable:focus-visible,
+.trow.protocol-openable:focus-visible{
+  outline:3px solid rgba(198,240,74,.5);
+  outline-offset:-3px;
+}
+.open-protocol-hint{
+  display:inline-block;
+  margin-left:10px;
+  color:#465462!important;
+  font-size:11px!important;
+  font-weight:800;
+  white-space:nowrap;
+}
+.protocol-openable:hover .open-protocol-hint,
+.trow.protocol-openable:hover .open-protocol-hint{
+  color:var(--navy)!important;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+.protocol .pmeta .open-protocol-hint{display:block;margin:4px 0 0}
+@media(max-width:720px){
+  .open-protocol-hint{
+    display:block;
+    margin:5px 0 0;
+    font-size:12px!important;
+  }
+}
