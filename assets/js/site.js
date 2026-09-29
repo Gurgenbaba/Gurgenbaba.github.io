@@ -745,7 +745,7 @@
     root.setAttribute("data-theme", theme);
 
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", theme === "dark" ? "#09111f" : "#f3f6fb");
+    if (meta) meta.setAttribute("content", theme === "dark" ? "#09111f" : "#f2f0ea");
 
     buttons.forEach(function (button) { syncButton(button, theme); });
 
