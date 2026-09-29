@@ -15,6 +15,51 @@ const groups=[
 const total=groups.reduce((n,g)=>n+g[1].length,0);
 const fresh=()=>({customer:'Muster Logistik GmbH',location:'Logistikzentrum Eisenach',order:'WA-2026-0204',asset:'GF-204',type:'Gurtförderer',technician:'Max Mustermann',reason:'Regelmäßige Wartung gemäß Serviceintervall',note:'Anlage nach Wartung funktionsfähig übergeben. Hinweise siehe dokumentierte Mängel.',checks:{},issues:[],confirm:false,signature:''});
 const state={step:1,draft:fresh(),protocols:[...seed]};
+const clone=v=>JSON.parse(JSON.stringify(v));
+function protocolDetails(p){
+  if(p&&p.details) return clone(p.details);
+  const checks={};
+  groups.forEach(g=>g[1].forEach(i=>checks[i[0]]='ok'));
+  const candidates=['belt','tracking','motor','bearings','estop','sensors'];
+  const issues=[];
+  for(let i=0;i<Math.min(Number(p?.issues||0),candidates.length);i++){
+    const id=candidates[i],m=meta(id);
+    checks[id]='bad';
+    issues.push({id:'legacy-'+i,check:id,title:m?.[1]||'Auffälligkeit',desc:'Archivierte Demo-Auffälligkeit am Prüfpunkt „'+(m?.[1]||'Prüfung')+'“.',action:'Bei nächster Wartung prüfen.',priority:'Hinweis',photo:''});
+  }
+  return {
+    customer:p?.customer||'Musterkunde',
+    location:p?.location||'Musterstandort',
+    order:p?.id||'WA-DEMO',
+    asset:p?.asset||'ANLAGE',
+    type:p?.type||'Anlage',
+    technician:'Max Mustermann',
+    reason:'Archiviertes Wartungsprotokoll',
+    note:'Archivierter Demo-Eintrag. In der produktiven Version wird der vollständige Originalstand gespeichert.',
+    checks,
+    issues,
+    confirm:true,
+    signature:'',
+    completed:true,
+    completedDate:(p?.date||'').split(' · ')[0]||new Date().toLocaleDateString('de-DE')
+  };
+}
+function bindProtocolOpen(root=document){
+  $('[data-open-protocol]',root).forEach(el=>{
+    el.onclick=()=>openProtocol(el.dataset.openProtocol);
+    el.onkeydown=e=>{
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();openProtocol(el.dataset.openProtocol);}
+    };
+  });
+}
+function openProtocol(id){
+  const p=state.protocols.find(x=>x.id===id);
+  if(!p){toast('Protokoll nicht gefunden.');return;}
+  renderReport(protocolDetails(p));
+  const mode=$('#reportMode'); if(mode) mode.textContent='Gespeichertes Protokoll';
+  $('#reportoverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
 const $=(q,r=document)=>r.querySelector(q), $$=(q,r=document)=>[...r.querySelectorAll(q)];
 const esc=v=>String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 function load(){try{const x=JSON.parse(localStorage.getItem(S));if(x?.protocols)state.protocols=x.protocols;if(x?.draft)state.draft={...fresh(),...x.draft,checks:x.draft.checks||{},issues:x.draft.issues||[]};}catch{}}
@@ -22,8 +67,8 @@ function save(){localStorage.setItem(S,JSON.stringify({protocols:state.protocols
 function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('show'),2200);}
 function view(v){$$('.view').forEach(x=>x.classList.toggle('active',x.dataset.view===v));$$('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.go===v));if(v==='protocols')renderTable();window.scrollTo({top:0,behavior:'smooth'});}
 function badge(p){return p.issues?'<span class="badge issue">'+p.issues+' Mangel'+(p.issues>1?'e':'')+'</span>':'<span class="badge done">Abgeschlossen</span>';}
-function renderRecent(){const out=state.protocols.slice(0,3).map(p=>'<div class="protocol"><div class="ptype">'+(p.type.includes('Rollen')?'≋':p.type.includes('Teleskop')?'⇥':'⇆')+'</div><div><b>'+esc(p.asset)+' · '+esc(p.type)+'</b><span>'+esc(p.customer)+' · '+esc(p.location)+'</span></div><div class="pmeta">'+esc(p.id)+'<br>'+esc(p.date)+'</div>'+badge(p)+'</div>').join('');$('#recent').innerHTML=out;$('#count').textContent=state.protocols.length;}
-function renderTable(q=''){q=q.toLowerCase();const list=state.protocols.filter(p=>(p.id+p.customer+p.location+p.asset+p.type).toLowerCase().includes(q));$('#ptable').innerHTML='<div class="table-head"><span>Auftrag</span><span>Kunde / Standort</span><span>Anlage</span><span>Datum</span><span>Status</span></div>'+list.map(p=>'<div class="trow"><div><b>'+esc(p.id)+'</b></div><div><b>'+esc(p.customer)+'</b><br><span>'+esc(p.location)+'</span></div><div><b>'+esc(p.asset)+'</b><br><span>'+esc(p.type)+'</span></div><span>'+esc(p.date.split(' · ')[0])+'</span><span>'+badge(p)+'</span></div>').join('');}
+function renderRecent(){const out=state.protocols.slice(0,3).map(p=>'<div class="protocol protocol-open" data-open-protocol="'+esc(p.id)+'" role="button" tabindex="0" aria-label="Protokoll '+esc(p.id)+' öffnen"><div class="ptype">'+(p.type.includes('Rollen')?'≋':p.type.includes('Teleskop')?'⇥':'⇆')+'</div><div><b>'+esc(p.asset)+' · '+esc(p.type)+'</b><span>'+esc(p.customer)+' · '+esc(p.location)+'</span></div><div class="pmeta">'+esc(p.id)+'<br>'+esc(p.date)+'</div><div class="protocol-status">'+badge(p)+'<span class="openhint">Öffnen →</span></div></div>').join('');$('#recent').innerHTML=out;$('#count').textContent=state.protocols.length;bindProtocolOpen($('#recent'));}
+function renderTable(q=''){q=q.toLowerCase();const list=state.protocols.filter(p=>(p.id+p.customer+p.location+p.asset+p.type).toLowerCase().includes(q));$('#ptable').innerHTML='<div class="table-head"><span>Auftrag</span><span>Kunde / Standort</span><span>Anlage</span><span>Datum</span><span>Status / Aktion</span></div>'+list.map(p=>'<div class="trow trow-open" data-open-protocol="'+esc(p.id)+'" role="button" tabindex="0" aria-label="Protokoll '+esc(p.id)+' öffnen"><div><b>'+esc(p.id)+'</b></div><div><b>'+esc(p.customer)+'</b><br><span>'+esc(p.location)+'</span></div><div><b>'+esc(p.asset)+'</b><br><span>'+esc(p.type)+'</span></div><span>'+esc(p.date.split(' · ')[0])+'</span><div class="rowaction">'+badge(p)+'<span class="openhint">Öffnen →</span></div></div>').join('');bindProtocolOpen($('#ptable'));}
 function openFlow(type='Gurtförderer'){if(state.draft.completed){state.draft=fresh();}state.draft.type=type;syncForm();state.step=1;updateFlow();$('#workflow').classList.add('open');document.body.style.overflow='hidden';}
 function closeFlow(){readForm();save();$('#workflow').classList.remove('open');document.body.style.overflow='';}
 function syncForm(){const m={customer:'customer',location:'location',order:'order',asset:'asset',type:'type',technician:'tech',reason:'reason',note:'note'};Object.entries(m).forEach(([k,id])=>{const e=$('#'+id);if(e)e.value=state.draft[k]||'';});$('#confirm').checked=!!state.draft.confirm;}
@@ -41,10 +86,14 @@ function next(){if(!validate())return;if(state.step<4){state.step++;updateFlow()
 function finish(){readForm();
 state.draft.issues=state.draft.issues.filter(x=>x.check||x.desc.trim()||x.action.trim()||x.photo);
 state.draft.issues.forEach(x=>{if(!x.desc.trim())x.desc=x.check?'Auffälligkeit am Prüfpunkt „'+x.title+'“ festgestellt.':'Zusätzliche Auffälligkeit dokumentiert.';});
-const p={id:state.draft.order,customer:state.draft.customer,location:state.draft.location,asset:state.draft.asset,type:state.draft.type,date:new Date().toLocaleDateString('de-DE')+' · '+new Date().toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'}),issues:state.draft.issues.length};
-state.protocols=[p,...state.protocols.filter(x=>x.id!==p.id)];state.draft.completed=true;
-renderReport();renderRecent();save();closeFlow();$('#reportoverlay').classList.add('open');document.body.style.overflow='hidden';toast('Protokoll erfolgreich abgeschlossen und lokal gespeichert.');}
-function renderReport(){const d=state.draft,v=Object.values(d.checks),ok=v.filter(x=>x==='ok').length,bad=v.filter(x=>x==='bad').length,na=v.filter(x=>x==='na').length;const checkhtml=groups.map(g=>'<div class="rsection"><h2>'+g[0]+'</h2>'+g[1].map(i=>{const s=d.checks[i[0]]||'na',map={ok:['OK','rok'],bad:['Mangel','rbad'],na:['N/A','rna']},m=map[s];return '<div class="rcheck"><span>'+i[1]+'</span><span class="'+m[1]+'">'+m[0]+'</span></div>';}).join('')+'</div>').join('');const issues=d.issues.length?d.issues.map((x,n)=>'<div class="rissue"><b>'+String(n+1).padStart(2,'0')+' · '+esc(x.title)+' · '+esc(x.priority)+'</b><p>'+esc(x.desc)+'</p>'+(x.action?'<p><strong>Maßnahme:</strong> '+esc(x.action)+'</p>':'')+'</div>').join(''):'<p style="font-size:8px;color:#758091">Keine Mängel dokumentiert.</p>';$('#report').innerHTML='<div class="rhead"><div class="rlogo"><span class="mark" style="width:31px;height:31px"></span><div><b>ABBES</b><small>Digital · Konzeptdemo</small></div></div><div class="rtitle"><h1>Wartungsprotokoll</h1><span>'+esc(d.order)+'</span></div></div><div class="rinfo"><div class="rf"><span>Kunde</span><b>'+esc(d.customer)+'</b></div><div class="rf"><span>Standort</span><b>'+esc(d.location)+'</b></div><div class="rf"><span>Anlage</span><b>'+esc(d.asset)+' · '+esc(d.type)+'</b></div><div class="rf"><span>Monteur</span><b>'+esc(d.technician)+'</b></div><div class="rf"><span>Anlass</span><b>'+esc(d.reason)+'</b></div><div class="rf"><span>Datum</span><b>'+new Date().toLocaleDateString('de-DE')+'</b></div></div><div class="rnums"><div><strong>'+ok+'</strong><span>Prüfpunkte OK</span></div><div><strong>'+bad+'</strong><span>Mängel</span></div><div><strong>'+na+'</strong><span>N/A</span></div></div>'+checkhtml+'<div class="rsection"><h2>Festgestellte Mängel / Maßnahmen</h2>'+issues+'</div><div class="rsection"><h2>Abschließende Bemerkung</h2><div style="background:#f5f7f9;padding:10px;border-radius:8px;font-size:8px">'+esc(d.note||'–')+'</div></div><div class="rsign"><div class="sigline">'+(d.signature?'<img class="sigimg" src="'+d.signature+'" alt="Unterschrift">':'')+'Monteur · '+esc(d.technician)+'</div><div class="sigline">Kunde / Ansprechpartner '+(d.confirm?'· informiert':'· Demo ohne Gegenzeichnung')+'</div></div><div class="rfoot"><span>Digital erstellt · Konzeptdemo von ABBES</span><span>Unverbindliche ABBES-Konzeptdemo</span></div>';$('#reportnum').textContent=d.order;}
+const now=new Date();
+state.draft.completed=true;
+state.draft.completedDate=now.toLocaleDateString('de-DE');
+state.draft.completedTime=now.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'});
+const p={id:state.draft.order,customer:state.draft.customer,location:state.draft.location,asset:state.draft.asset,type:state.draft.type,date:state.draft.completedDate+' · '+state.draft.completedTime,issues:state.draft.issues.length,details:clone(state.draft)};
+state.protocols=[p,...state.protocols.filter(x=>x.id!==p.id)];
+renderReport(state.draft);const mode=$('#reportMode');if(mode)mode.textContent='Protokoll fertig';renderRecent();renderTable($('#search')?.value||'');save();closeFlow();$('#reportoverlay').classList.add('open');document.body.style.overflow='hidden';toast('Protokoll erfolgreich abgeschlossen und lokal gespeichert.');}
+function renderReport(d=state.draft){d=d||fresh();d.checks=d.checks||{};d.issues=Array.isArray(d.issues)?d.issues:[];const v=Object.values(d.checks),ok=v.filter(x=>x==='ok').length,bad=v.filter(x=>x==='bad').length,na=v.filter(x=>x==='na').length;const checkhtml=groups.map(g=>'<div class="rsection"><h2>'+g[0]+'</h2>'+g[1].map(i=>{const s=d.checks[i[0]]||'na',map={ok:['OK','rok'],bad:['Mangel','rbad'],na:['N/A','rna']},m=map[s];return '<div class="rcheck"><span>'+i[1]+'</span><span class="'+m[1]+'">'+m[0]+'</span></div>';}).join('')+'</div>').join('');const issues=d.issues.length?d.issues.map((x,n)=>'<div class="rissue"><b>'+String(n+1).padStart(2,'0')+' · '+esc(x.title)+' · '+esc(x.priority)+'</b><p>'+esc(x.desc)+'</p>'+(x.action?'<p><strong>Maßnahme:</strong> '+esc(x.action)+'</p>':'')+'</div>').join(''):'<p style="font-size:8px;color:#758091">Keine Mängel dokumentiert.</p>';$('#report').innerHTML='<div class="rhead"><div class="rlogo"><span class="mark" style="width:31px;height:31px"></span><div><b>ABBES</b><small>Digital · Konzeptdemo</small></div></div><div class="rtitle"><h1>Wartungsprotokoll</h1><span>'+esc(d.order)+'</span></div></div><div class="rinfo"><div class="rf"><span>Kunde</span><b>'+esc(d.customer)+'</b></div><div class="rf"><span>Standort</span><b>'+esc(d.location)+'</b></div><div class="rf"><span>Anlage</span><b>'+esc(d.asset)+' · '+esc(d.type)+'</b></div><div class="rf"><span>Monteur</span><b>'+esc(d.technician)+'</b></div><div class="rf"><span>Anlass</span><b>'+esc(d.reason)+'</b></div><div class="rf"><span>Datum</span><b>'+new Date().toLocaleDateString('de-DE')+'</b></div></div><div class="rnums"><div><strong>'+ok+'</strong><span>Prüfpunkte OK</span></div><div><strong>'+bad+'</strong><span>Mängel</span></div><div><strong>'+na+'</strong><span>N/A</span></div></div>'+checkhtml+'<div class="rsection"><h2>Festgestellte Mängel / Maßnahmen</h2>'+issues+'</div><div class="rsection"><h2>Abschließende Bemerkung</h2><div style="background:#f5f7f9;padding:10px;border-radius:8px;font-size:8px">'+esc(d.note||'–')+'</div></div><div class="rsign"><div class="sigline">'+(d.signature?'<img class="sigimg" src="'+d.signature+'" alt="Unterschrift">':'')+'Monteur · '+esc(d.technician)+'</div><div class="sigline">Kunde / Ansprechpartner '+(d.confirm?'· informiert':'· Demo ohne Gegenzeichnung')+'</div></div><div class="rfoot"><span>Digital erstellt · Konzeptdemo von ABBES</span><span>Unverbindliche ABBES-Konzeptdemo</span></div>';$('#reportnum').textContent=d.order;}
 function scan(){const p=[['GF-204','Gurtförderer'],['RB-118','Rollenbahn'],['TF-031','Teleskopförderer']][Math.floor(Math.random()*3)];state.draft.asset=p[0];state.draft.type=p[1];syncForm();toast(p[0]+' erkannt · '+p[1]);}
 function connection(){const on=navigator.onLine;$('#online').classList.toggle('offline',!on);$('#online b').textContent=on?'Online':'Offline';$('#syncb').textContent=on?'Bereit':'Offline-Modus';$('#syncs').textContent=on?'Daten lokal gespeichert':'Weiterarbeiten möglich';if(!on)toast('Offline-Modus aktiv – weiterarbeiten möglich.');}
 let ctx,drawing=false,last;
