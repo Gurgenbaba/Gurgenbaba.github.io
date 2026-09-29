@@ -4806,8 +4806,45 @@ html[data-view="os"]:not([data-theme="dark"]) .faq details[open]{
   background: #fcf8f0;
 }
 html[data-view="os"]:not([data-theme="dark"]) .price.featured{
-  background: #edf1f4;
-  box-shadow: inset 0 0 0 1px #cbd7e7;
+  color: var(--ink);
+  border-color: #c5d2e2;
+  background:
+    radial-gradient(circle at 100% 0, rgba(37,99,235,.075), transparent 42%),
+    linear-gradient(180deg,#edf2f7 0%,#f4f1e9 100%);
+  box-shadow: inset 0 0 0 1px rgba(145,164,190,.28);
+}
+/* The featured card used to be a dark inverse surface. Keep its light-theme
+   typography explicit so later palette changes cannot leave white text on
+   a pale background. */
+html[data-view="os"]:not([data-theme="dark"]) .price.featured h3,
+html[data-view="os"]:not([data-theme="dark"]) .price.featured .price-tag{
+  color: #0d1b31;
+}
+html[data-view="os"]:not([data-theme="dark"]) .price.featured .price-tag small,
+html[data-view="os"]:not([data-theme="dark"]) .price.featured p{
+  color: #5f6c80;
+}
+html[data-view="os"]:not([data-theme="dark"]) .price.featured li{
+  color: #26364f;
+}
+html[data-view="os"]:not([data-theme="dark"]) .price.featured .price-detail{
+  background: #e5eaf0;
+  color: #5f6c80 !important;
+}
+html[data-view="os"]:not([data-theme="dark"]) .price.featured .price-badge{
+  background: #1d4ed8;
+  color: #fff;
+  box-shadow: 0 7px 16px rgba(29,78,216,.18);
+}
+html[data-view="os"]:not([data-theme="dark"]) .price.featured .btn.primary{
+  border-color: #1d4ed8;
+  background: #1d4ed8;
+  color: #fff;
+}
+html[data-view="os"]:not([data-theme="dark"]) .price.featured .btn.primary:hover{
+  border-color: #1e40af;
+  background: #1e40af;
+  color: #fff;
 }
 html[data-view="os"]:not([data-theme="dark"]) .budget-note{
   border-color: #d4ccbd;
