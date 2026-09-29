@@ -4867,3 +4867,371 @@ html[data-view="os"]:not([data-theme="dark"]) .error-card{
   border-color: #d7cfbf;
   background: #faf6ed;
 }
+
+
+/* 34 ABBES component consolidation --------------------------------------
+   One control language across portfolio, SEO pages and case studies.
+   Keeps special surfaces, but normalises height, radius, typography,
+   hover/focus behaviour and spacing. */
+html[data-view="os"]{
+  --ui-control-h: 40px;
+  --ui-control-radius: 8px;
+  --ui-card-radius: 12px;
+  --ui-pill-radius: 999px;
+  --ui-blue: #1d4ed8;
+  --ui-blue-hover: #1e40af;
+  --ui-blue-soft: #edf3ff;
+  --ui-control-bg: #faf6ed;
+  --ui-control-bg-hover: #f5efe5;
+  --ui-control-border: #cec5b6;
+  --ui-control-border-hover: #aebbd0;
+  --ui-control-text: #2d3d54;
+  --ui-focus: rgba(37,99,235,.18);
+  --ui-shadow: 0 1px 2px rgba(15,23,42,.045);
+}
+html[data-theme="dark"][data-view="os"]{
+  --ui-blue: #3b82f6;
+  --ui-blue-hover: #2563eb;
+  --ui-blue-soft: #12284a;
+  --ui-control-bg: #101d30;
+  --ui-control-bg-hover: #15243a;
+  --ui-control-border: #30435f;
+  --ui-control-border-hover: #506d98;
+  --ui-control-text: #d8e2ef;
+  --ui-focus: rgba(96,165,250,.20);
+  --ui-shadow: none;
+}
+
+/* Core button: readable text, predictable target size, no legacy mono styling. */
+html[data-view="os"] .btn{
+  min-height: var(--ui-control-h);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 15px;
+  border: 1px solid var(--ui-control-border);
+  border-radius: var(--ui-control-radius);
+  background: var(--ui-control-bg);
+  color: var(--ui-control-text);
+  box-shadow: var(--ui-shadow);
+  font: 700 12px/1 Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: nowrap;
+  transition:
+    background .16s ease,
+    border-color .16s ease,
+    color .16s ease,
+    box-shadow .16s ease,
+    transform .16s ease;
+}
+html[data-view="os"] .btn:hover{
+  border-color: var(--ui-control-border-hover);
+  background: var(--ui-control-bg-hover);
+  color: #173b77;
+  box-shadow: var(--ui-shadow);
+  transform: translateY(-1px);
+}
+html[data-theme="dark"][data-view="os"] .btn:hover{
+  color: #fff;
+}
+html[data-view="os"] .btn:active{
+  transform: translateY(0);
+}
+html[data-view="os"] .btn:focus-visible,
+html[data-view="os"] .theme-toggle:focus-visible,
+html[data-view="os"] .back-to-top:focus-visible,
+html[data-view="os"] .mobile-projects-toggle:focus-visible,
+html[data-view="os"] .pick button:focus-visible{
+  outline: 0;
+  box-shadow: 0 0 0 3px var(--ui-focus);
+}
+html[data-view="os"] .btn.primary{
+  border-color: var(--ui-blue);
+  background: var(--ui-blue);
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(15,23,42,.10);
+}
+html[data-view="os"] .btn.primary:hover{
+  border-color: var(--ui-blue-hover);
+  background: var(--ui-blue-hover);
+  color: #fff;
+  box-shadow: 0 5px 14px rgba(29,78,216,.16);
+  transform: translateY(-1px);
+}
+html[data-view="os"] .btn.ghost{
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+html[data-view="os"] .btn.ghost:hover{
+  border-color: var(--ui-control-border);
+  background: var(--ui-control-bg-hover);
+}
+html[data-view="os"] .btn.copied{
+  border-color: #15803d;
+  color: #15803d;
+  background: rgba(21,128,61,.06);
+}
+html[data-theme="dark"][data-view="os"] .btn.copied{
+  border-color: #4ade80;
+  color: #86efac;
+  background: rgba(34,197,94,.08);
+}
+html[data-view="os"] .btn:disabled,
+html[data-view="os"] .btn[aria-disabled="true"]{
+  opacity: .5;
+  cursor: not-allowed;
+  transform: none;
+}
+html[data-view="os"] .actions,
+html[data-view="os"] .hero-actions,
+html[data-view="os"] .wiz-send{
+  gap: 10px;
+}
+
+/* Header controls behave like one family. */
+html[data-view="os"] .nav{
+  align-items: center;
+  gap: 8px;
+}
+html[data-view="os"] .nav > a{
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 7px;
+  border-radius: var(--ui-control-radius);
+  transition: background .16s ease, color .16s ease, border-color .16s ease;
+}
+html[data-view="os"] .nav > a:not(.cta):not(.ext):not(.lang):hover{
+  background: rgba(255,255,255,.06);
+}
+html[data-view="os"] .nav .cta{
+  padding: 0 12px;
+  border: 1px solid var(--ui-blue);
+  background: var(--ui-blue);
+  color: #fff;
+}
+html[data-view="os"] .nav .cta:hover{
+  border-color: #2563eb;
+  background: #2563eb;
+  color: #fff;
+}
+html[data-view="os"] .nav .ext,
+html[data-view="os"] .nav .lang{
+  min-height: 36px;
+  padding: 0 10px;
+  border-radius: var(--ui-control-radius);
+}
+html[data-view="os"] .theme-toggle{
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-color: var(--ui-control-border);
+  border-radius: var(--ui-control-radius);
+  background: var(--ui-control-bg);
+  color: var(--ui-control-text);
+  box-shadow: var(--ui-shadow);
+}
+html[data-view="os"] .theme-toggle:hover{
+  border-color: var(--ui-control-border-hover);
+  background: var(--ui-control-bg-hover);
+  color: var(--ink);
+  transform: none;
+}
+
+/* Small labels are compact pills; metadata stays metadata. */
+html[data-view="os"] .chip,
+html[data-view="os"] .badge{
+  padding: 6px 9px;
+  border-radius: var(--ui-pill-radius);
+  font: 700 9px/1 Inter, ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: .035em;
+  text-transform: uppercase;
+}
+
+/* Contact wizard uses exactly the same interaction language. */
+html[data-view="os"] .pick{
+  gap: 8px;
+}
+html[data-view="os"] .pick button{
+  min-height: 44px;
+  padding: 9px 13px;
+  border: 1px solid var(--ui-control-border);
+  border-radius: var(--ui-control-radius);
+  background: var(--ui-control-bg);
+  color: var(--ui-control-text);
+  font: 650 13px/1.25 Inter, ui-sans-serif, system-ui, sans-serif;
+  box-shadow: none;
+  transition: background .16s ease, border-color .16s ease, color .16s ease, transform .16s ease, box-shadow .16s ease;
+}
+html[data-view="os"] .pick button:hover{
+  border-color: #8eabd7;
+  background: var(--ui-blue-soft);
+  color: #1f57bd;
+}
+html[data-theme="dark"][data-view="os"] .pick button:hover{
+  border-color: #5276a8;
+  color: #c8dcff;
+}
+html[data-view="os"] .pick button:active{
+  transform: scale(.985);
+}
+html[data-view="os"] .pick button[aria-pressed="true"]{
+  border-color: var(--ui-blue);
+  background: var(--ui-blue-soft);
+  color: #1f57bd;
+  box-shadow: inset 0 0 0 1px rgba(37,99,235,.045);
+}
+html[data-theme="dark"][data-view="os"] .pick button[aria-pressed="true"]{
+  color: #b9d1ff;
+}
+html[data-view="os"] .pick[data-field="type"] button{
+  min-height: 52px;
+}
+html[data-view="os"] .wiz-back,
+html[data-view="os"] .wiz-skip{
+  min-height: 40px;
+  padding: 0 8px;
+  border-radius: 7px;
+  font: 700 11px/1 Inter, ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0;
+  text-transform: none;
+  transition: background .16s ease, color .16s ease;
+}
+html[data-view="os"] .wiz-back:hover,
+html[data-view="os"] .wiz-skip:hover{
+  background: rgba(37,99,235,.06);
+  color: var(--ui-blue);
+}
+html[data-view="os"] .wiz-field input,
+html[data-view="os"] .wiz-field textarea,
+html[data-view="os"] .wiz-field select,
+html[data-view="os"] .wiz-letter{
+  border-radius: var(--ui-control-radius);
+  transition: border-color .16s ease, box-shadow .16s ease, background .16s ease;
+}
+html[data-view="os"] .wiz-field input:focus,
+html[data-view="os"] .wiz-field textarea:focus,
+html[data-view="os"] .wiz-field select:focus,
+html[data-view="os"] .wiz-letter:focus{
+  outline: 0;
+  border-color: #6d98e8;
+  box-shadow: 0 0 0 3px var(--ui-focus);
+}
+html[data-view="os"] .drop{
+  border-radius: 10px;
+}
+html[data-view="os"] .file-list li button{
+  border-radius: 7px;
+}
+
+/* Floating/mobile controls follow the same geometry. */
+html[data-view="os"] .back-to-top{
+  width: 42px;
+  height: 42px;
+  border-color: var(--ui-control-border);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--ui-control-bg) 94%, transparent);
+  color: var(--ui-control-text);
+}
+html[data-view="os"] .back-to-top:hover{
+  border-color: var(--ui-control-border-hover);
+  background: var(--ui-control-bg-hover);
+}
+html[data-view="os"] .mobile-projects-toggle{
+  min-height: 44px;
+  border-color: var(--ui-control-border);
+  border-radius: var(--ui-control-radius);
+  background: var(--ui-control-bg);
+  color: var(--ui-control-text);
+  font: 700 12px/1 Inter, ui-sans-serif, system-ui, sans-serif;
+  box-shadow: var(--ui-shadow);
+}
+html[data-view="os"] .mobile-projects-toggle:hover{
+  border-color: var(--ui-control-border-hover);
+  background: var(--ui-control-bg-hover);
+}
+html[data-view="os"] .sticky-cta{
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: var(--ui-blue);
+  color: #fff;
+  font: 750 13px/1 Inter, ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0;
+  text-transform: none;
+  box-shadow: 0 8px 22px rgba(29,78,216,.22);
+}
+
+/* Special dark CTA surface keeps its contrast while sharing shape/type. */
+html[data-view="os"] .seo-landing .seo-cta .btn{
+  min-height: var(--ui-control-h);
+  border-radius: var(--ui-control-radius);
+  font: 700 12px/1 Inter, ui-sans-serif, system-ui, sans-serif;
+}
+html[data-view="os"] .seo-landing .seo-cta .btn.primary{
+  border-color: #fff;
+  background: #fff;
+  color: #0f1b30;
+}
+html[data-theme="dark"][data-view="os"] .seo-landing .seo-cta .btn.primary{
+  border-color: #e8eef7;
+  background: #e8eef7;
+  color: #0f1b30;
+}
+
+/* Bring the most visible container radii onto two deliberate levels. */
+html[data-view="os"] .services article,
+html[data-view="os"] .services-cta,
+html[data-view="os"] .card,
+html[data-view="os"] .client,
+html[data-view="os"] .clean-case,
+html[data-view="os"] .price,
+html[data-view="os"] .faq details,
+html[data-view="os"] .contact,
+html[data-view="os"] .seo-proof,
+html[data-view="os"] .seo-grid article,
+html[data-view="os"] .seo-faq details{
+  border-radius: var(--ui-card-radius);
+}
+html[data-view="os"] .wizard,
+html[data-view="os"] .letter-paper,
+html[data-view="os"] .budget-note,
+html[data-view="os"] .price-growth{
+  border-radius: 10px;
+}
+
+@media (max-width: 720px){
+  html[data-view="os"] .nav{
+    gap: 6px;
+  }
+  html[data-view="os"] .btn{
+    min-height: 42px;
+  }
+  html[data-view="os"] .hero-actions .btn,
+  html[data-view="os"] .wiz-send .btn{
+    flex: 1 1 auto;
+  }
+  html[data-view="os"] .theme-toggle{
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
+  }
+  html[data-view="os"] .back-to-top{
+    width: 42px;
+    height: 42px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  html[data-view="os"] .btn,
+  html[data-view="os"] .theme-toggle,
+  html[data-view="os"] .pick button,
+  html[data-view="os"] .mobile-projects-toggle{
+    transition: none !important;
+  }
+}
