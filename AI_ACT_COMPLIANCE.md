@@ -10,6 +10,14 @@
 
 ABBES Digital uses AI-assisted tools in development, analysis, prototyping, testing and parts of content production. Public website copy is reviewed and released under human editorial responsibility. The portfolio itself does not provide a direct AI conversation to visitors and does not deploy emotion recognition or biometric categorisation. Fictional demos are not presented as authentic real-world businesses.
 
+## Implemented evidence
+
+- Public DE transparency page: `/ki-transparenz.html`
+- Public EN transparency page: `/en/ai-transparency.html`
+- Linked from the portfolio footer and the central legal hub.
+- Portfolio visitors do not directly interact with an AI system; no interaction banner is therefore shown on ordinary portfolio pages.
+- Fictional demos remain explicitly presented as demos and are not represented as authentic businesses.
+
 ## Article 50 decision matrix
 
 | Scenario | Current project status | Required action |
