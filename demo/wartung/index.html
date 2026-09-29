@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101a3a">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Interaktive ABBES-Konzeptdemo für digitale Wartungs- und Serviceprotokolle.">
+<title>ABBES Wartungsprotokoll · Interaktive Demo</title>
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div class="shell">
+  <aside>
+    <div class="brand"><span class="mark"></span><div><b>ABBES</b><small>Digital · Service Tools</small></div></div>
+    <div class="product">● Wartungsprotokoll</div>
+    <nav class="nav">
+      <button class="active" data-go="dashboard"><i>⌂</i> Übersicht</button>
+      <button data-go="protocols"><i>▤</i> Protokolle <span id="count" style="margin-left:auto">3</span></button>
+      <button data-go="templates"><i>✓</i> Vorlagen</button>
+    </nav>
+    <div class="aside-spacer"></div>
+    <div class="sync"><em>↻</em><div><b id="syncb">Bereit</b><span id="syncs">Daten lokal gespeichert</span></div></div>
+    <div class="aside-foot">Konzeptdemo von <b>ABBES</b><br>Local-first · Frontend-only</div>
+  </aside>
+
+  <main>
+    <header class="top">
+      <button class="mobile-brand" data-go="dashboard"><span class="mini"></span>ABBES</button>
+      <div><span class="eyebrow">SERVICE · WARTUNG · DOKUMENTATION</span><h1>Digital statt Papierkram.</h1></div>
+      <div class="actions">
+        <div class="pill" id="online"><i></i><b>Online</b></div>
+        <button class="reset" id="reset" title="Demo zurücksetzen">↺</button>
+        <div class="avatar">MM</div>
+      </div>
+    </header>
+
+    <section class="view active" data-view="dashboard">
+      <div class="notice"><div><b>UNVERBINDLICHE KONZEPTDEMO ·</b> Wartung erfassen, Mängel fotografieren, unterschreiben und als fertigen Bericht ausgeben – auch ohne Netz.</div><small>Neutrale ABBES-Konzeptdemo</small></div>
+
+      <div class="hero-grid">
+        <section class="hero">
+          <div class="hero-copy">
+            <span class="eyebrow">NEUER SERVICE-EINSATZ</span>
+            <h2>In wenigen Minuten zum fertigen Wartungsprotokoll.</h2>
+            <p>Für Handy, Tablet und Notebook. Die Demo speichert den Fortschritt lokal auf diesem Gerät und benötigt keinen Server.</p>
+            <div class="hero-actions">
+              <button class="primary" id="start">＋ Neue Wartung</button>
+              <button class="secondary" id="scanstart">▦ Anlage scannen</button>
+            </div>
+            <div class="hero-meta"><span>✓ Offline-fähig</span><span>✓ Foto-Dokumentation</span><span>✓ Unterschrift</span><span>✓ PDF / Druck</span></div>
+          </div>
+          <div class="machine" aria-hidden="true">
+            <div class="glow"></div>
+            <div class="belt one"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="belt two"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="post p1"></div><div class="post p2"></div><div class="post p3"></div>
+            <div class="asset-tag"><b>GF-204</b><span>Gurtförderer</span></div>
+          </div>
+        </section>
+
+        <section class="panel today-panel">
+          <div class="panel-head"><div><span class="eyebrow">HEUTE</span><h3>Service-Status</h3></div><span class="badge done">Lokal</span></div>
+          <div class="today">
+            <div class="stat"><span class="circle ok">✓</span><div><b>2</b><small>abgeschlossen</small></div></div>
+            <div class="stat"><span class="circle warn">!</span><div><b>1</b><small>offener Mangel</small></div></div>
+            <div class="stat meter"><div class="meter-row"><span>Demo-Bereitschaft</span><b>100 %</b></div><div class="track"><i style="width:100%"></i></div><small>Keine Serververbindung erforderlich</small></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="content">
+        <section class="panel">
+          <div class="panel-head"><div><span class="eyebrow">VERLAUF</span><h3>Letzte Protokolle</h3></div><button class="linkbtn" data-go="protocols">Alle anzeigen →</button></div>
+          <div class="protocol-list" id="recent"></div>
+        </section>
+        <section class="panel">
+          <div class="panel-head"><div><span class="eyebrow">SCHNELLSTART</span><h3>Typische Anlagen</h3></div></div>
+          <button class="quick" data-template="Gurtförderer"><span>⇆</span><span><b>Gurtförderer</b><small>19 Prüfpunkte</small></span><span>→</span></button>
+          <button class="quick" data-template="Rollenbahn"><span>≋</span><span><b>Rollenbahn</b><small>Vorlage anpassbar</small></span><span>→</span></button>
+          <button class="quick" data-template="Teleskopförderer"><span>⇥</span><span><b>Teleskopförderer</b><small>Vorlage anpassbar</small></span><span>→</span></button>
+        </section>
+      </div>
+    </section>
+
+    <section class="view" data-view="protocols">
+      <div class="page-head">
+        <div><span class="eyebrow">DOKUMENTATION</span><h2>Wartungsprotokolle</h2><p>Alle Einträge dieser Demo liegen nur in diesem Browser. In Produktion kommen sie aus der Firmen-Infrastruktur.</p></div>
+        <button class="primary" data-template="Gurtförderer">＋ Neue Wartung</button>
+      </div>
+      <section class="panel table">
+        <div style="padding:16px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:15px"><label class="search">⌕ <input id="search" placeholder="Kunde, Anlage, Auftrag suchen …"></label><span class="badge done">Lokale Demo-Daten</span></div>
+        <div id="ptable"></div>
+      </section>
+    </section>
+
+    <section class="view" data-view="templates">
+      <div class="page-head"><div><span class="eyebrow">CHECKLISTEN</span><h2>Wartungsvorlagen</h2><p>Prüfpunkte können in der echten Version je Anlagentyp zentral gepflegt und versioniert werden.</p></div><span class="badge issue">Demo-Konfiguration</span></div>
+      <div class="templates">
+        <article class="template featured"><div class="ticon">⇆</div><h3>Gurtförderer</h3><p>Sichtprüfung, Bandlauf, Spannung, Antrieb, Lagerung, Elektrik und Sicherheit.</p><footer><b>19 Prüfpunkte</b><button data-template="Gurtförderer">Demo starten →</button></footer></article>
+        <article class="template"><div class="ticon">≋</div><h3>Rollenbahn</h3><p>Rollen, Antrieb, Sensorik, Übergänge, Befestigung und Schutzsysteme.</p><footer><b>anpassbar</b><button data-template="Rollenbahn">Demo starten →</button></footer></article>
+        <article class="template"><div class="ticon">⇥</div><h3>Teleskopförderer</h3><p>Teleskopsegmente, Führungen, Endlagen, Not-Halt und Kabelführung.</p><footer><b>anpassbar</b><button data-template="Teleskopförderer">Demo starten →</button></footer></article>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="workflow" id="workflow">
+  <div class="workflow-shell">
+    <header class="wf-head">
+      <div class="wf-brand"><span class="mini"></span><b>ABBES</b><span>Wartungsprotokoll</span></div>
+      <div class="wf-actions"><span class="autosave">● automatisch lokal gespeichert</span><button class="close" id="closeflow">×</button></div>
+    </header>
+
+    <div class="steps">
+      <div class="step active" data-n="1"><b>1</b><span>Auftrag</span></div><i></i>
+      <div class="step" data-n="2"><b>2</b><span>Prüfung</span></div><i></i>
+      <div class="step" data-n="3"><b>3</b><span>Mängel</span></div><i></i>
+      <div class="step" data-n="4"><b>4</b><span>Abschluss</span></div>
+    </div>
+
+    <div class="wf-content">
+      <section class="wfstep active" data-step="1">
+        <div class="intro"><span class="eyebrow">SCHRITT 1 VON 4</span><h2>Welcher Einsatz wird dokumentiert?</h2><p>Stammdaten könnten später automatisch aus ERP, Auftragssystem oder QR-Code übernommen werden.</p></div>
+        <div class="formcard">
+          <div class="formgrid">
+            <label class="field"><span>Kunde *</span><input id="customer" value="Muster Logistik GmbH"></label>
+            <label class="field"><span>Standort *</span><input id="location" value="Logistikzentrum Eisenach"></label>
+            <label class="field"><span>Auftragsnummer *</span><input id="order" value="WA-2026-0204"></label>
+            <label class="field"><span>Anlagennummer *</span><div style="display:flex"><input id="asset" value="GF-204" style="border-radius:9px 0 0 9px"><button class="secondary" id="scan" style="border-radius:0 9px 9px 0;padding:0 11px">▦ Scan</button></div></label>
+            <label class="field"><span>Anlagentyp</span><select id="type"><option>Gurtförderer</option><option>Rollenbahn</option><option>Teleskopförderer</option></select></label>
+            <label class="field"><span>Monteur</span><input id="tech" value="Max Mustermann"></label>
+          </div>
+          <label class="fulllabel"><span>Einsatz / Anlass</span><textarea id="reason" rows="3">Regelmäßige Wartung gemäß Serviceintervall</textarea></label>
+          <div class="hint"><b>Demo ohne Backend:</b> Diese Eingaben verlassen den Browser nicht. Für Produktion ist eine API-Anbindung an die eigene Infrastruktur vorgesehen.</div>
+        </div>
+      </section>
+
+      <section class="wfstep" data-step="2">
+        <div class="intro rowintro"><div><span class="eyebrow">SCHRITT 2 VON 4</span><h2>Wartung durchführen.</h2><p>Jeden Prüfpunkt mit OK, Mangel oder N/A dokumentieren.</p></div><div class="progressbox"><b id="progressText">0 / 19</b><span>geprüft</span><div><i id="progressBar"></i></div></div></div>
+        <div class="inspect">
+          <div id="checks"></div>
+          <div class="sticky">
+            <div class="assetbox"><span class="eyebrow">ANLAGE</span><b id="sideasset">GF-204</b><span id="sidetype">Gurtförderer</span><small id="sidecustomer">Muster Logistik GmbH</small></div>
+            <button class="secondary full" id="allok">✓ Demo: alle offenen OK setzen</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="wfstep" data-step="3">
+        <div class="intro rowintro"><div><span class="eyebrow">SCHRITT 3 VON 4</span><h2>Mängel & Maßnahmen.</h2><p>Auffälligkeiten mit Beschreibung, Maßnahme, Priorität und Foto dokumentieren.</p></div><span class="issuecount" id="issuecount">0 Mängel</span></div>
+        <div class="issues" id="issues"></div>
+        <button class="addissue" id="addissue">＋ Weiteren Mangel hinzufügen</button>
+      </section>
+
+      <section class="wfstep" data-step="4">
+        <div class="intro"><span class="eyebrow">SCHRITT 4 VON 4</span><h2>Prüfen, unterschreiben, fertig.</h2><p>Die Zusammenfassung ist direkt vor Ort sichtbar und anschließend als Bericht ausgebbar.</p></div>
+        <div class="finish">
+          <section class="summary">
+            <span class="eyebrow">ZUSAMMENFASSUNG</span>
+            <h3 id="sumtitle">GF-204 · Gurtförderer</h3><p id="summeta">Muster Logistik GmbH · Logistikzentrum Eisenach</p>
+            <div class="nums"><div><strong id="sumok">0</strong><span>OK</span></div><div><strong id="sumbad">0</strong><span>Mängel</span></div><div><strong id="sumna">0</strong><span>N/A</span></div></div>
+            <label class="fulllabel"><span>Abschließende Bemerkung</span><textarea id="note" rows="4">Anlage nach Wartung funktionsfähig übergeben. Hinweise siehe dokumentierte Mängel.</textarea></label>
+          </section>
+          <section class="signature">
+            <div class="panel-head"><div><span class="eyebrow">UNTERSCHRIFT</span><h3 style="margin:4px 0 0">Monteur</h3></div><button class="linkbtn" id="clearsig">Löschen</button></div>
+            <div class="sigwrap"><canvas id="sig" width="720" height="240"></canvas><span id="sigtext">Hier mit Finger oder Maus unterschreiben</span></div>
+            <label class="confirm"><input id="confirm" type="checkbox"><span><b>Kunde / Ansprechpartner informiert</b><small>Demo-Checkbox für die Übergabe vor Ort</small></span></label>
+          </section>
+        </div>
+      </section>
+    </div>
+
+    <footer class="wf-foot"><button class="secondary" id="back" disabled>← Zurück</button><span>Entwurf lokal gespeichert</span><button class="primary" id="next">Weiter zur Prüfung →</button></footer>
+  </div>
+</div>
+
+<div class="reportoverlay" id="reportoverlay">
+  <div class="reportbar">
+    <div><span class="mini"></span><b>Protokoll fertig</b><span id="reportnum">WA-2026-0204</span></div>
+    <div><button class="secondary" id="closeReport">Schließen</button><button class="primary" id="print">⇩ PDF / Drucken</button></div>
+  </div>
+  <article class="report" id="report"></article>
+</div>
+
+<div class="toast" id="toast">Gespeichert.</div>
+<script src="./app.js" defer></script>
+</body>
+</html>
