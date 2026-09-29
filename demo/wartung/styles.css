@@ -130,3 +130,477 @@ body{font-size:16px;line-height:1.5}
     font-size:12px!important;
   }
 }
+
+
+/* v5 ABBES portfolio pattern + mobile consolidation --------------------- */
+:root{
+  --navy:#0b1324;
+  --navy2:#17233a;
+  --ink:#101828;
+  --muted:#667085;
+  --line:#d8e0ea;
+  --paper:#f2f5f9;
+  --yellow:#245cff;
+  --yellow2:#3478ff;
+  --ok:#16845b;
+  --bad:#c43d45;
+  --shadow:0 1px 2px rgba(16,24,40,.04),0 12px 32px rgba(16,24,40,.08);
+}
+
+html,
+body{
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden;
+  background:
+    radial-gradient(circle at 15% 0,rgba(36,92,255,.07),transparent 30%),
+    linear-gradient(180deg,#f7f9fc 0,#f2f5f9 520px,#eef2f7 100%);
+}
+
+body,
+.shell,
+main,
+.view,
+.hero-grid,
+.hero,
+.hero-copy,
+.content,
+.panel,
+.page-head,
+.templates,
+.template,
+.workflow-shell,
+.wf-content,
+.wfstep,
+.formcard,
+.inspect,
+.checksec,
+.finish,
+.summary,
+.signature,
+.reportoverlay,
+.report{
+  min-width:0;
+  max-width:100%;
+}
+
+img,svg,canvas{max-width:100%}
+
+aside{
+  background:linear-gradient(180deg,#0b1324,#111c31 72%,#0b1324);
+  border-right:1px solid #22314b;
+}
+.brand{border-bottom-color:#26344c}
+.brand b{letter-spacing:.035em}
+.mark,.mini{
+  border-color:#3478ff;
+  box-shadow:0 0 0 4px rgba(52,120,255,.08);
+}
+.nav button.active{
+  background:linear-gradient(90deg,rgba(36,92,255,.18),rgba(36,92,255,.04));
+  box-shadow:inset 3px 0 #4f83ff;
+}
+.nav i{color:#7aa2ff}
+.sync em{background:rgba(36,92,255,.14);color:#7aa2ff}
+
+.top{
+  min-width:0;
+}
+.mobile-brand{
+  color:var(--navy);
+}
+.pill,.reset{
+  box-shadow:0 1px 2px rgba(16,24,40,.05);
+}
+.notice{
+  background:#edf4ff;
+  border-color:#bfd2ff;
+  border-left-color:#245cff;
+  color:#44516a;
+}
+.notice b{color:#163a91}
+
+.hero{
+  background:
+    radial-gradient(circle at 88% 10%,rgba(52,120,255,.27),transparent 35%),
+    radial-gradient(circle at 5% 100%,rgba(14,165,233,.12),transparent 30%),
+    linear-gradient(135deg,#0b1324,#142747);
+  border:1px solid #233a63;
+  box-shadow:0 18px 55px rgba(15,23,42,.16);
+}
+.hero .eyebrow{color:#9eb7e8}
+.hero p{color:#c5d1e6}
+.hero-meta{color:#b4c3dc}
+.primary{
+  background:#245cff;
+  color:#fff;
+  box-shadow:0 8px 22px rgba(36,92,255,.24);
+}
+.primary:hover{background:#1848d8}
+.hero .secondary{
+  background:rgba(255,255,255,.06);
+  border-color:rgba(255,255,255,.18);
+}
+.glow{background:radial-gradient(circle,rgba(52,120,255,.55),transparent 68%)}
+.post{background:#4f83ff}
+
+.panel,
+.formcard,
+.summary,
+.signature,
+.template{
+  border-color:#d7e0eb;
+  box-shadow:var(--shadow);
+}
+.panel,.formcard,.summary,.signature,.template{
+  background:rgba(255,255,255,.96);
+}
+.panel,
+.template,
+.formcard,
+.summary,
+.signature,
+.checksec{
+  border-radius:14px;
+}
+.template.featured:before{background:#245cff}
+.ticon{
+  background:#0b1324;
+  color:#7aa2ff;
+}
+.track i,.progressbox i{background:linear-gradient(90deg,#245cff,#6ea0ff)}
+.step.active b{
+  background:#245cff;
+  color:#fff;
+}
+.assetbox{
+  background:linear-gradient(145deg,#0b1324,#172a4a);
+}
+.wf-head,.reportbar{
+  background:#0b1324;
+}
+.open-protocol-hint,
+.openhint{color:#245cff!important}
+
+/* hard guard against any component forcing viewport wider */
+.top,
+.actions,
+.hero-actions,
+.hero-meta,
+.panel-head,
+.protocol,
+.quick,
+.table-head,
+.trow,
+.formgrid,
+.checkrow,
+.statuses,
+.issuegrid,
+.nums,
+.rhead,
+.rinfo,
+.rnums,
+.rsign,
+.wf-foot{
+  min-width:0;
+}
+.top *,
+.hero *,
+.panel *,
+.workflow *,
+.report *{
+  overflow-wrap:anywhere;
+}
+
+/* Mobile is intentionally rebuilt as a true single-column application. */
+@media(max-width:720px){
+  html,body{overflow-x:hidden!important}
+  .shell{width:100%;max-width:100%;overflow:hidden}
+  main{
+    width:100%;
+    max-width:100%;
+    padding:0 12px 28px;
+    overflow:hidden;
+  }
+
+  .top{
+    width:100%;
+    min-height:64px;
+    height:auto;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    gap:10px;
+    align-items:center;
+    padding:8px 0;
+  }
+
+  /* This was the overflow bug: desktop headline stayed visible beside mobile header. */
+  .top > div:nth-of-type(1){display:none!important}
+
+  .mobile-brand{
+    display:flex;
+    min-width:0;
+    align-items:center;
+    gap:9px;
+    font-size:14px;
+    font-weight:900;
+    letter-spacing:.04em;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  .actions{
+    display:flex;
+    flex:0 0 auto;
+    gap:6px;
+    justify-content:flex-end;
+  }
+  .pill{
+    width:36px;
+    min-width:36px;
+    height:36px;
+    padding:0;
+    justify-content:center;
+  }
+  .pill b{display:none}
+  .reset,.avatar{width:36px;height:36px;flex:0 0 36px}
+
+  .notice{
+    width:100%;
+    margin:6px 0 12px;
+    padding:11px 12px;
+    font-size:11px;
+    line-height:1.45;
+    border-radius:10px;
+  }
+  .notice small{font-size:9px}
+
+  .hero-grid,.content,.templates{display:block;width:100%}
+  .hero{
+    width:100%;
+    min-height:0;
+    border-radius:14px;
+  }
+  .hero-copy{
+    width:100%;
+    padding:22px 16px 18px;
+  }
+  .hero h2{
+    max-width:100%;
+    margin:8px 0 12px;
+    font-size:clamp(25px,7.5vw,31px);
+    line-height:1.08;
+    letter-spacing:-.045em;
+  }
+  .hero p{
+    max-width:100%;
+    margin-bottom:16px;
+    font-size:13px;
+    line-height:1.55;
+  }
+  .hero-actions{
+    display:grid;
+    grid-template-columns:1fr;
+    width:100%;
+    gap:8px;
+  }
+  .hero-actions button{
+    width:100%;
+    min-width:0;
+  }
+  .hero-meta{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    width:100%;
+    gap:7px 10px;
+    font-size:9px;
+  }
+
+  .today-panel,.content>.panel{margin-top:12px}
+  .panel{width:100%;padding:16px}
+  .panel-head{
+    flex-wrap:wrap;
+    align-items:flex-start;
+  }
+  .today{grid-template-columns:1fr}
+  .stat{width:100%}
+
+  .protocol{
+    width:100%;
+    grid-template-columns:38px minmax(0,1fr);
+    gap:10px;
+    align-items:start;
+  }
+  .protocol .ptype{grid-row:1/3}
+  .protocol .pmeta{display:none}
+  .protocol .badge,
+  .protocol-status{
+    grid-column:2;
+    justify-self:start;
+    min-width:0;
+  }
+
+  .page-head{
+    width:100%;
+    align-items:stretch;
+  }
+  .page-head .primary{width:100%}
+  .search{
+    width:100%;
+    min-width:0;
+  }
+  .search input{
+    width:100%;
+    min-width:0;
+  }
+  .table{
+    width:100%;
+    overflow:hidden;
+  }
+  .table>div:first-child{
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .table-head,.trow{
+    width:100%;
+    grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) minmax(92px,.75fr);
+    gap:8px;
+    padding:12px;
+  }
+
+  .template{width:100%;margin-bottom:12px}
+
+  .workflow,
+  .workflow-shell{
+    width:100vw;
+    max-width:100vw;
+    overflow:hidden;
+  }
+  .workflow-shell{
+    grid-template-rows:60px 58px minmax(0,1fr) auto;
+  }
+  .wf-head{padding:0 12px}
+  .wf-brand{
+    min-width:0;
+    overflow:hidden;
+    white-space:nowrap;
+  }
+  .wf-brand span:last-child{display:none}
+  .wf-actions{flex:0 0 auto}
+  .autosave{display:none}
+
+  .steps{
+    width:100%;
+    padding:0 12px;
+    justify-content:space-between;
+  }
+  .steps>i{
+    flex:1 1 auto;
+    width:auto;
+    min-width:12px;
+    max-width:34px;
+  }
+
+  .wf-content{
+    width:100%;
+    padding:20px 12px 26px;
+    overflow-x:hidden;
+  }
+  .wfstep,.formcard,.inspect,#checks,.checksec,.issues,.finish{
+    width:100%;
+  }
+  .intro h2{font-size:26px}
+  .intro p{font-size:12px}
+  .formgrid{grid-template-columns:1fr}
+  .field input,.field select,.fulllabel textarea{
+    width:100%;
+    min-width:0;
+    font-size:16px;
+  }
+  .field>div{min-width:0}
+  #asset{min-width:0}
+
+  .checkrow{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  .statuses{
+    width:100%;
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+  .statuses button{
+    width:100%;
+    min-width:0;
+    min-height:46px;
+    padding:0 4px;
+    font-size:11px;
+  }
+
+  .sticky{grid-template-columns:1fr}
+  .sticky .full{grid-column:auto}
+  .issuegrid,.finish{grid-template-columns:1fr}
+  .issuegrid textarea,.issuegrid select{width:100%}
+  .photo{width:100%}
+  .nums{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .sigwrap{width:100%;height:180px}
+
+  .wf-foot{
+    width:100%;
+    grid-template-columns:auto minmax(0,1fr);
+    gap:8px;
+    padding:8px 10px max(8px,env(safe-area-inset-bottom));
+  }
+  .wf-foot>span{display:none}
+  .wf-foot .secondary{
+    min-width:84px;
+  }
+  .wf-foot .primary{
+    width:100%;
+    max-width:none;
+    min-width:0;
+    white-space:normal;
+    line-height:1.2;
+  }
+
+  .reportoverlay{width:100vw;max-width:100vw;overflow-x:hidden}
+  .reportbar{
+    width:100%;
+    gap:8px;
+  }
+  .reportbar>div:first-child{
+    min-width:0;
+    overflow:hidden;
+  }
+  .reportbar>div:first-child span:last-child{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+  .report{
+    width:calc(100% - 16px);
+    max-width:calc(100% - 16px);
+    margin:8px auto;
+    padding:24px 16px;
+    overflow:hidden;
+  }
+  .rhead{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  .rtitle{text-align:left}
+  .rinfo,.rsign{grid-template-columns:1fr}
+  .rcheck{grid-template-columns:minmax(0,1fr) 68px}
+}
+
+@media(max-width:390px){
+  main{padding-inline:9px}
+  .hero-copy{padding-inline:14px}
+  .hero-meta{grid-template-columns:1fr}
+  .avatar{display:none}
+  .statuses button{font-size:10px}
+  .wf-foot .secondary{min-width:72px;padding-inline:9px}
+  .wf-foot .primary{font-size:11px;padding-inline:9px}
+}
