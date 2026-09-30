@@ -859,7 +859,7 @@
     document.body.appendChild(button);
   }
 
-  var threshold = Math.max(460, Math.round(window.innerHeight * 0.65));
+  var threshold = Math.max(280, Math.min(420, Math.round(window.innerHeight * 0.38)));
   var ticking = false;
 
   function sync() {
@@ -874,7 +874,7 @@
   }, { passive: true });
 
   window.addEventListener("resize", function () {
-    threshold = Math.max(460, Math.round(window.innerHeight * 0.65));
+    threshold = Math.max(280, Math.min(420, Math.round(window.innerHeight * 0.38)));
     sync();
   }, { passive: true });
 
