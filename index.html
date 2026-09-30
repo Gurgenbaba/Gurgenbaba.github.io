@@ -191,6 +191,7 @@
       <nav class="nav" aria-label="Hauptnavigation">
         <a href="#leistungen">Leistungen</a>
         <a href="#beispiel">Arbeiten</a>
+        <a href="#roi-rechner">ROI</a>
         <a href="#preise">Preise</a>
         <a href="#about">Über mich</a>
         <a class="cta" href="#kontakt">Projekt anfragen</a>
@@ -353,7 +354,7 @@
             <h3>ABBES Wartungsprotokoll</h3>
             <p>Eine neutrale Konzeptdemo für Unternehmen mit Wartungs- und Serviceeinsätzen: Auftragsdaten erfassen, Prüfpunkte abhaken, Mängel und Fotos dokumentieren, vor Ort unterschreiben und einen fertigen Bericht ausgeben. Die Demo funktioniert lokal im Browser und zeigt, wie sich Papierprozesse als installierbare Web-App abbilden lassen.</p>
             <div class="chips"><span class="chip">Offline / PWA</span><span class="chip">Checklisten</span><span class="chip">Mängelfotos</span><span class="chip">PDF / Druck</span></div>
-            <div class="actions"><a class="btn primary" href="demo/wartung/">Wartungs-Demo ausprobieren</a><a class="btn" href="#kontakt" data-pick-type="app">Ähnliche Lösung anfragen</a></div>
+            <div class="actions"><a class="btn primary" href="demo/wartung/">Wartungs-Demo ausprobieren</a><a class="btn" href="#roi-rechner">Nutzen berechnen</a><a class="btn" href="#kontakt" data-pick-type="app">Ähnliche Lösung anfragen</a></div>
           </div>
         </article>
         <article class="client demo-case reveal">
@@ -589,6 +590,133 @@
             <a class="btn" href="https://github.com/Gurgenbaba">GitHub ansehen</a>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="block roi-block" id="roi-rechner" aria-labelledby="roi-title">
+      <div class="wrap">
+        <header class="block-head reveal">
+          <p class="kicker">Wirtschaftlichkeit</p>
+          <h2 id="roi-title">Was kostet Sie Papier heute?</h2>
+          <p>Eine digitale Lösung muss sich nicht nur gut anfühlen, sondern wirtschaftlich begründbar sein. Mit dieser Modellrechnung können Sie in wenigen Sekunden abschätzen, wie viel Arbeitszeit in Dokumentation steckt und wann sich eine Investition rechnerisch amortisieren könnte.</p>
+        </header>
+
+        <div class="roi-shell reveal" data-roi-calculator>
+          <div class="roi-input-panel">
+            <div class="roi-panel-head">
+              <span class="roi-step">01 · Ihre Annahmen</span>
+              <strong>Mit echten Betriebszahlen wird aus Bauchgefühl eine Rechnung.</strong>
+              <p>Alle Werte bleiben lokal in Ihrem Browser und werden nicht übertragen.</p>
+            </div>
+
+            <div class="roi-fields">
+              <label class="roi-field">
+                <span>Monteure / Servicekräfte</span>
+                <span class="roi-input-wrap"><input type="number" min="1" max="5000" step="1" value="8" data-roi="techs"><em>Personen</em></span>
+              </label>
+              <label class="roi-field">
+                <span>Berichte je Monteur / Tag</span>
+                <span class="roi-input-wrap"><input type="number" min="0.1" max="50" step="0.1" value="2" data-roi="reports"><em>Berichte</em></span>
+              </label>
+              <label class="roi-field">
+                <span>Arbeitstage / Jahr</span>
+                <span class="roi-input-wrap"><input type="number" min="1" max="366" step="1" value="220" data-roi="days"><em>Tage</em></span>
+              </label>
+              <label class="roi-field">
+                <span>Dokumentation heute je Bericht</span>
+                <span class="roi-input-wrap"><input type="number" min="0" max="240" step="1" value="20" data-roi="docMinutes"><em>Min.</em></span>
+              </label>
+              <label class="roi-field">
+                <span>Davon digital einsparbar</span>
+                <span class="roi-input-wrap"><input type="number" min="0" max="240" step="1" value="15" data-roi="savedMinutes"><em>Min.</em></span>
+              </label>
+              <label class="roi-field">
+                <span>Kosten Monteurstunde</span>
+                <span class="roi-input-wrap"><input type="number" min="1" max="1000" step="1" value="45" data-roi="techRate"><em>€/h</em></span>
+              </label>
+              <label class="roi-field">
+                <span>Einsparbare Bürozeit je Bericht</span>
+                <span class="roi-input-wrap"><input type="number" min="0" max="240" step="1" value="5" data-roi="officeMinutes"><em>Min.</em></span>
+              </label>
+              <label class="roi-field">
+                <span>Kosten Bürostunde</span>
+                <span class="roi-input-wrap"><input type="number" min="1" max="1000" step="1" value="35" data-roi="officeRate"><em>€/h</em></span>
+              </label>
+            </div>
+
+            <label class="roi-project-cost">
+              <span><strong>Geplante Investition</strong><small>Für Ihre individuelle Break-even-Rechnung.</small></span>
+              <span class="roi-input-wrap"><input type="number" min="0" max="10000000" step="500" value="30000" data-roi="investment"><em>€</em></span>
+            </label>
+
+            <button class="roi-reset" type="button" data-roi-reset>Beispielwerte zurücksetzen</button>
+          </div>
+
+          <div class="roi-result-panel" aria-live="polite">
+            <div class="roi-result-head">
+              <span class="roi-step">02 · Modellrechnung</span>
+              <strong>So könnte sich der Prozess wirtschaftlich auswirken.</strong>
+            </div>
+
+            <div class="roi-kpis">
+              <article>
+                <span>Berichte / Jahr</span>
+                <strong data-roi-out="reportsYear">3.520</strong>
+                <small>auf Basis Ihrer Eingaben</small>
+              </article>
+              <article>
+                <span>Papieraufwand heute</span>
+                <strong data-roi-out="currentCost">61.600 €</strong>
+                <small>Monteur + Büro pro Jahr</small>
+              </article>
+              <article class="roi-kpi-accent">
+                <span>Mögliche Einsparung</span>
+                <strong data-roi-out="savingsYear">49.867 €</strong>
+                <small>pro Jahr</small>
+              </article>
+              <article>
+                <span>Gewonnene Arbeitszeit</span>
+                <strong data-roi-out="hoursSaved">1.173 h</strong>
+                <small>pro Jahr</small>
+              </article>
+            </div>
+
+            <div class="roi-break-even">
+              <div>
+                <span>Break-even bei <b data-roi-out="investmentLabel">30.000 €</b> Investition</span>
+                <strong><b data-roi-out="months">7,2</b> Monate</strong>
+                <small data-roi-out="paybackText">Danach übersteigt die modellierte Einsparung die Investition.</small>
+              </div>
+              <div class="roi-gauge" aria-hidden="true"><span data-roi-bar></span></div>
+            </div>
+
+            <div class="roi-horizon">
+              <span>Nach 3 Jahren</span>
+              <strong data-roi-out="threeYear">+119.600 €</strong>
+              <small>modellierter Nettoeffekt nach Abzug der eingegebenen Investition</small>
+            </div>
+
+            <div class="roi-scenarios" aria-label="Break-even bei unterschiedlichen Investitionen">
+              <article><span>10.000 € Projekt</span><strong data-roi-scenario="10000">2,4 Monate</strong></article>
+              <article><span>20.000 € Projekt</span><strong data-roi-scenario="20000">4,8 Monate</strong></article>
+              <article><span>30.000 € Projekt</span><strong data-roi-scenario="30000">7,2 Monate</strong></article>
+            </div>
+
+            <div class="roi-proof">
+              <strong>Die Formel ist bewusst einfach und nachvollziehbar:</strong>
+              <p><span>Berichte/Jahr</span> = Mitarbeiter × Berichte/Tag × Arbeitstage</p>
+              <p><span>Einsparung</span> = eingesparte Monteurzeit + eingesparte Bürozeit</p>
+              <p><span>Break-even</span> = Investition ÷ jährliche Einsparung × 12</p>
+            </div>
+
+            <div class="roi-actions">
+              <a class="btn primary" href="#kontakt" data-pick-type="app">Mit echten Zahlen besprechen</a>
+              <a class="btn" href="demo/wartung/">Wartungs-Demo öffnen</a>
+            </div>
+          </div>
+        </div>
+
+        <p class="roi-disclaimer reveal"><strong>Hinweis:</strong> Diese Berechnung ist eine unverbindliche Modellrechnung und keine Einspargarantie. Sie berücksichtigt ausschließlich die eingegebenen Zeit- und Personalkosten. Effekte wie schnellere Abrechnung, weniger Rückfragen, bessere Nachweisführung oder vermiedene Fehler sind bewusst nicht eingerechnet. Für eine belastbare Wirtschaftlichkeitsbetrachtung werden die tatsächlichen Prozesse und Zahlen des Unternehmens gemeinsam aufgenommen.</p>
       </div>
     </section>
 
