@@ -841,3 +841,140 @@
 
   sync();
 })();
+
+
+(function () {
+  // Business ROI calculator: transparent local-only model, no network requests.
+  var root = document.querySelector("[data-roi-calculator]");
+  if (!root) return;
+
+  var defaults = {
+    techs: 8,
+    reports: 2,
+    days: 220,
+    docMinutes: 20,
+    savedMinutes: 15,
+    techRate: 45,
+    officeMinutes: 5,
+    officeRate: 35,
+    investment: 30000
+  };
+
+  var inputs = {};
+  Object.keys(defaults).forEach(function (key) {
+    inputs[key] = root.querySelector('[data-roi="' + key + '"]');
+  });
+
+  var money = new Intl.NumberFormat("de-DE", {
+    style: "currency",
+    currency: "EUR",
+    maximumFractionDigits: 0
+  });
+  var whole = new Intl.NumberFormat("de-DE", { maximumFractionDigits: 0 });
+  var one = new Intl.NumberFormat("de-DE", {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1
+  });
+
+  function value(key) {
+    var el = inputs[key];
+    var n = el ? Number(String(el.value).replace(",", ".")) : defaults[key];
+    return Number.isFinite(n) && n >= 0 ? n : 0;
+  }
+
+  function out(name, text) {
+    var el = root.querySelector('[data-roi-out="' + name + '"]');
+    if (el) el.textContent = text;
+  }
+
+  function monthsFor(cost, annualSavings) {
+    if (!(annualSavings > 0)) return Infinity;
+    if (!(cost > 0)) return 0;
+    return cost / annualSavings * 12;
+  }
+
+  function formatMonths(months) {
+    if (!Number.isFinite(months)) return "—";
+    if (months <= 0) return "sofort";
+    if (months > 1200) return "> 100 Jahre";
+    return one.format(months) + " Monate";
+  }
+
+  function calculate() {
+    var techs = value("techs");
+    var reports = value("reports");
+    var days = value("days");
+    var docMinutes = value("docMinutes");
+    var savedMinutes = Math.min(value("savedMinutes"), docMinutes);
+    var techRate = value("techRate");
+    var officeMinutes = value("officeMinutes");
+    var officeRate = value("officeRate");
+    var investment = value("investment");
+
+    var reportsYear = techs * reports * days;
+    var currentTechCost = reportsYear * (docMinutes / 60) * techRate;
+    var currentOfficeCost = reportsYear * (officeMinutes / 60) * officeRate;
+    var currentCost = currentTechCost + currentOfficeCost;
+
+    var techSavings = reportsYear * (savedMinutes / 60) * techRate;
+    var officeSavings = reportsYear * (officeMinutes / 60) * officeRate;
+    var savingsYear = techSavings + officeSavings;
+    var hoursSaved = reportsYear * ((savedMinutes + officeMinutes) / 60);
+
+    var months = monthsFor(investment, savingsYear);
+    var threeYear = savingsYear * 3 - investment;
+
+    out("reportsYear", whole.format(Math.round(reportsYear)));
+    out("currentCost", money.format(currentCost));
+    out("savingsYear", money.format(savingsYear));
+    out("hoursSaved", whole.format(Math.round(hoursSaved)) + " h");
+    out("investmentLabel", money.format(investment));
+
+    var monthsEl = root.querySelector('[data-roi-out="months"]');
+    if (monthsEl) {
+      monthsEl.textContent = Number.isFinite(months) ? (months <= 0 ? "0" : one.format(months)) : "—";
+    }
+
+    var payback = root.querySelector('[data-roi-out="paybackText"]');
+    if (payback) {
+      if (!(savingsYear > 0)) {
+        payback.textContent = "Mit diesen Eingaben entsteht keine modellierte Einsparung.";
+      } else if (months <= 12) {
+        payback.textContent = "Die eingegebene Investition wäre in dieser Modellrechnung innerhalb eines Jahres amortisiert.";
+      } else {
+        payback.textContent = "Danach übersteigt die kumulierte modellierte Einsparung die Investition.";
+      }
+    }
+
+    out("threeYear", (threeYear >= 0 ? "+" : "−") + money.format(Math.abs(threeYear)));
+
+    root.querySelectorAll("[data-roi-scenario]").forEach(function (el) {
+      var cost = Number(el.getAttribute("data-roi-scenario")) || 0;
+      el.textContent = formatMonths(monthsFor(cost, savingsYear));
+    });
+
+    var bar = root.querySelector("[data-roi-bar]");
+    if (bar) {
+      var annualCoverage = investment > 0 ? savingsYear / investment : (savingsYear > 0 ? 1 : 0);
+      bar.style.width = Math.max(0, Math.min(100, annualCoverage * 100)) + "%";
+    }
+  }
+
+  Object.keys(inputs).forEach(function (key) {
+    if (!inputs[key]) return;
+    inputs[key].addEventListener("input", calculate);
+    inputs[key].addEventListener("change", calculate);
+  });
+
+  var reset = root.querySelector("[data-roi-reset]");
+  if (reset) {
+    reset.addEventListener("click", function () {
+      Object.keys(defaults).forEach(function (key) {
+        if (inputs[key]) inputs[key].value = defaults[key];
+      });
+      calculate();
+    });
+  }
+
+  calculate();
+})();
