@@ -253,7 +253,16 @@
   var typeBox = form.querySelector('.pick[data-field="type"]');
   var featBox = form.querySelector('.pick[data-field="features"]');
   var featQuestion = form.querySelector('[data-step="features"] .wiz-q');
+  var featHint = form.querySelector("[data-feature-hint]");
+  var featureContext = form.querySelector("[data-feature-context]");
+  var featureLabel = form.querySelector("[data-feature-label]");
+  var featureCopy = form.querySelector("[data-feature-copy]");
+  var budgetBox = form.querySelector('.pick[data-field="budget"]');
+  var budgetHint = form.querySelector("[data-budget-hint]");
   var defaultQuestion = featQuestion.textContent;
+  var defaultHint = featHint ? featHint.textContent : "";
+  var defaultBudgetHint = budgetHint ? budgetHint.textContent : "";
+  var defaultNotePlaceholder = note.getAttribute("data-default-placeholder") || note.getAttribute("placeholder") || "";
   var current = 0, edited = false, startedAt = 0, files = [];
   var email = form.querySelector('[data-input="email"]');
   var emailError = form.querySelector("[data-email-error]");
@@ -346,14 +355,19 @@
     updateSend();
   }
 
-  // Step 2 only offers what fits the project type from step 1.
+  // Step 2 only offers plain-language goals that fit the chosen project type.
   function syncFeatures() {
     var type = pressed("type")[0];
     var key = type ? type.getAttribute("data-key") : null;
     var n = 0;
     featBox.querySelectorAll("button").forEach(function (b) {
-      var show = !!key && b.getAttribute("data-for").split(" ").indexOf(key) !== -1;
-      if (!show) { b.hidden = true; b.setAttribute("aria-pressed", "false"); return; }
+      var scope = (b.getAttribute("data-for") || "").split(" ");
+      var show = !!key && scope.indexOf(key) !== -1;
+      if (!show) {
+        b.hidden = true;
+        b.setAttribute("aria-pressed", "false");
+        return;
+      }
       if (b.hidden) {
         b.hidden = false;
         b.style.setProperty("--i", n);
@@ -363,7 +377,33 @@
       }
       n++;
     });
-    featQuestion.textContent = type ? type.getAttribute("data-question") : defaultQuestion;
+
+    featQuestion.textContent = type ? (type.getAttribute("data-question") || defaultQuestion) : defaultQuestion;
+    if (featHint) featHint.textContent = type ? (type.getAttribute("data-hint") || defaultHint) : defaultHint;
+    if (featureContext) featureContext.hidden = !type;
+    if (featureLabel) featureLabel.textContent = type ? type.getAttribute("data-value") : "";
+    if (featureCopy) featureCopy.textContent = type ? (type.getAttribute("data-context") || "") : "";
+    note.placeholder = type ? (type.getAttribute("data-note-placeholder") || defaultNotePlaceholder) : defaultNotePlaceholder;
+  }
+
+  // Budget bands are deliberately project-specific. A compact website and
+  // an individual business application should not present the same ranges.
+  function syncBudget() {
+    if (!budgetBox) return;
+    var type = pressed("type")[0];
+    var key = type ? type.getAttribute("data-key") : null;
+    var buttons = Array.prototype.slice.call(budgetBox.querySelectorAll("button"));
+    var hasScopes = buttons.some(function (b) { return b.hasAttribute("data-for"); });
+    if (!hasScopes) return;
+
+    buttons.forEach(function (b) {
+      var scope = (b.getAttribute("data-for") || "").split(" ");
+      var show = !!key && scope.indexOf(key) !== -1;
+      b.hidden = !show;
+      if (!show) b.setAttribute("aria-pressed", "false");
+    });
+
+    if (budgetHint) budgetHint.textContent = defaultBudgetHint;
   }
 
   function show(index) {
@@ -371,6 +411,7 @@
     steps.forEach(function (step, i) { step.hidden = i !== current; });
     var step = steps[current];
     if (step.getAttribute("data-step") === "features") syncFeatures();
+    if (step.getAttribute("data-step") === "budget") syncBudget();
     if (step.getAttribute("data-step") === "done") refresh();
     bar.style.transform = "scaleX(" + Math.min(1, current / doneIndex) + ")";
     if (step.getAttribute("data-step") === "done") {
@@ -399,7 +440,10 @@
       btn.setAttribute("aria-pressed", on || auto ? "true" : "false");
       edited = false;
       touch();
-      if (box === typeBox) syncFeatures();
+      if (box === typeBox) {
+        syncFeatures();
+        syncBudget();
+      }
       refresh();
       if (auto) {
         var from = current;
