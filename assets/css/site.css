@@ -5926,3 +5926,188 @@ html[data-view="os"] .wiz-hint{
     padding:13px 40px 13px 13px;
   }
 }
+
+
+/* 34 Compact portfolio flow + stronger back-to-top ---------------------- */
+html[data-view="os"] .block{
+  padding:34px 0;
+}
+html[data-view="os"] .block-head{
+  margin-bottom:15px;
+}
+html[data-view="os"] .block-head h2{
+  line-height:1.04;
+}
+html[data-view="os"] .hero{
+  padding:42px 0 34px;
+}
+html[data-view="os"] .hero-actions{
+  margin-top:14px;
+}
+
+/* Keep proof, systems and profile substantial, but remove dead vertical air. */
+html[data-view="os"] .client{
+  min-height:220px;
+}
+html[data-view="os"] .demo-shot{
+  min-height:220px;
+}
+html[data-view="os"] .clean-case-visuals{
+  min-height:350px;
+}
+html[data-view="os"] .clean-case-visuals img{
+  min-height:350px;
+}
+html[data-view="os"] .clean-case-body{
+  padding:28px;
+}
+html[data-view="os"] .proof-list{
+  margin:16px 0 18px;
+}
+html[data-view="os"] .proof-list li{
+  padding:10px 0;
+}
+html[data-view="os"] .clean-systems article{
+  min-height:150px;
+  padding:20px;
+}
+html[data-view="os"] .clean-number{
+  margin-bottom:16px;
+}
+html[data-view="os"] .static-stack{
+  margin-top:13px;
+}
+html[data-view="os"] #about .clean-about{
+  gap:24px 36px;
+  padding:28px;
+}
+html[data-view="os"] .origin-story > div{
+  padding:11px 14px;
+}
+html[data-view="os"] .advantage-head{
+  margin-bottom:20px;
+}
+html[data-view="os"] .experience-rail{
+  margin-bottom:12px;
+}
+html[data-view="os"] .experience-rail > div{
+  min-height:76px;
+  padding:14px 17px;
+}
+html[data-view="os"] .advantage-grid article{
+  min-height:0;
+  padding:19px;
+}
+html[data-view="os"] .roi-input-panel,
+html[data-view="os"] .roi-result-panel{
+  padding:22px;
+}
+html[data-view="os"] .roi-panel-head,
+html[data-view="os"] .roi-result-head{
+  margin-bottom:17px;
+}
+html[data-view="os"] .roi-fields{
+  gap:10px;
+}
+html[data-view="os"] .roi-project-cost{
+  margin-top:13px;
+  padding:14px;
+}
+html[data-view="os"] .roi-kpis article{
+  padding:14px;
+}
+html[data-view="os"] .roi-break-even{
+  padding:17px;
+}
+html[data-view="os"] .contact-main{
+  padding:24px;
+}
+html[data-view="os"] .contact-hints{
+  padding:24px 20px;
+}
+html[data-view="os"] .wizard{
+  padding:16px;
+}
+
+/* Make the existing control obvious enough to be useful, but unobtrusive at top. */
+.back-to-top{
+  right:18px;
+  bottom:18px;
+  width:48px;
+  height:48px;
+  border-color:#1d4ed8;
+  border-radius:14px;
+  background:#245cff;
+  color:#fff;
+  box-shadow:0 14px 34px rgba(36,92,255,.28);
+  transform:translateY(14px) scale(.94);
+}
+.back-to-top.is-visible{
+  transform:translateY(0) scale(1);
+}
+.back-to-top:hover{
+  border-color:#1848d8;
+  background:#1848d8;
+  color:#fff;
+  box-shadow:0 16px 38px rgba(36,92,255,.34);
+  transform:translateY(-2px) scale(1);
+}
+.back-to-top:active{
+  transform:translateY(0) scale(.97);
+}
+.back-to-top svg{
+  width:22px;
+  height:22px;
+  stroke-width:2.25;
+}
+html[data-theme="dark"] .back-to-top{
+  border-color:#4f83ff;
+  background:#245cff;
+  color:#fff;
+  box-shadow:0 14px 34px rgba(0,0,0,.32);
+}
+html[data-theme="dark"] .back-to-top:hover{
+  border-color:#75a0ff;
+  background:#3478ff;
+}
+
+@media(max-width:980px){
+  html[data-view="os"] .block{
+    padding:31px 0;
+  }
+  html[data-view="os"] .clean-case-visuals,
+  html[data-view="os"] .clean-case-visuals img{
+    min-height:310px;
+  }
+}
+
+@media(max-width:720px){
+  html[data-view="os"] .block{
+    padding:27px 0;
+  }
+  html[data-view="os"] .block-head{
+    margin-bottom:13px;
+  }
+  html[data-view="os"] .hero{
+    padding:28px 0 25px;
+  }
+  html[data-view="os"] .clean-case-body{
+    padding:19px;
+  }
+  html[data-view="os"] #about .clean-about{
+    padding:20px;
+  }
+  html[data-view="os"] .contact-main,
+  html[data-view="os"] .contact-hints{
+    padding:18px 16px;
+  }
+  html[data-view="os"] .wizard{
+    padding:14px;
+  }
+  .back-to-top{
+    right:max(12px,env(safe-area-inset-right));
+    bottom:calc(68px + env(safe-area-inset-bottom));
+    width:46px;
+    height:46px;
+  }
+}
